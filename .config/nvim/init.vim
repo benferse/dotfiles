@@ -1,2 +1,1 @@
-set number
-source ./vim-benferse/plugins.vimrc
+runtime vim-benferse/plugins.vimrc
