@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2018-02-26 12:45:40" build="161206">
+		<key name=".Vanilla" modified="2018-02-26 14:53:43" build="161206">
 			<value name="UseCurrentSizePos" type="hex" data="01"/>
 			<value name="AutoSaveSizePos" type="hex" data="01"/>
 			<value name="Cascaded" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
 			<value name="WindowMode" type="dword" data="00000520"/>
-			<value name="ConWnd X" type="long" data="923"/>
-			<value name="ConWnd Y" type="long" data="123"/>
+			<value name="ConWnd X" type="long" data="1610"/>
+			<value name="ConWnd Y" type="long" data="0"/>
 			<value name="LastMonitor" type="string" data="0,0,3840,2114"/>
-			<value name="ConWnd Width" type="dword" data="0000008b"/>
-			<value name="ConWnd Height" type="dword" data="0000002b"/>
+			<value name="ConWnd Width" type="dword" data="0000006b"/>
+			<value name="ConWnd Height" type="dword" data="0000003b"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
@@ -19,22 +19,22 @@
 			<value name="StartTasksName" type="string" data="{Far}"/>
 			<value name="StartFarFolders" type="hex" data="00"/>
 			<value name="StartFarEditors" type="hex" data="00"/>
-			<value name="ColorTable00" type="dword" data="00181818"/>
-			<value name="ColorTable01" type="dword" data="00383838"/>
-			<value name="ColorTable02" type="dword" data="00d8d8d8"/>
-			<value name="ColorTable03" type="dword" data="004669a1"/>
-			<value name="ColorTable04" type="dword" data="005696dc"/>
-			<value name="ColorTable05" type="dword" data="00282828"/>
-			<value name="ColorTable06" type="dword" data="00b8b8b8"/>
-			<value name="ColorTable07" type="dword" data="00e8e8e8"/>
-			<value name="ColorTable08" type="dword" data="00585858"/>
-			<value name="ColorTable09" type="dword" data="00c2af7c"/>
-			<value name="ColorTable10" type="dword" data="006cb5a1"/>
-			<value name="ColorTable11" type="dword" data="00b9c186"/>
-			<value name="ColorTable12" type="dword" data="004246ab"/>
-			<value name="ColorTable13" type="dword" data="00af8bba"/>
-			<value name="ColorTable14" type="dword" data="0088caf7"/>
-			<value name="ColorTable15" type="dword" data="00f8f8f8"/>
+			<value name="ColorTable00" type="dword" data="00d5e8ee"/>
+			<value name="ColorTable01" type="dword" data="00e3f6fd"/>
+			<value name="ColorTable02" type="dword" data="00756e58"/>
+			<value name="ColorTable03" type="dword" data="00837b65"/>
+			<value name="ColorTable04" type="dword" data="00164bcb"/>
+			<value name="ColorTable05" type="dword" data="00c4716c"/>
+			<value name="ColorTable06" type="dword" data="00969483"/>
+			<value name="ColorTable07" type="dword" data="00423607"/>
+			<value name="ColorTable08" type="dword" data="00a1a193"/>
+			<value name="ColorTable09" type="dword" data="00d28b26"/>
+			<value name="ColorTable10" type="dword" data="00009985"/>
+			<value name="ColorTable11" type="dword" data="0098a12a"/>
+			<value name="ColorTable12" type="dword" data="002f32dc"/>
+			<value name="ColorTable13" type="dword" data="008236d3"/>
+			<value name="ColorTable14" type="dword" data="000089b5"/>
+			<value name="ColorTable15" type="dword" data="00362b00"/>
 			<value name="ColorTable16" type="dword" data="00000000"/>
 			<value name="ColorTable17" type="dword" data="00800000"/>
 			<value name="ColorTable18" type="dword" data="00008000"/>
@@ -70,7 +70,7 @@
 			<value name="FontSize" type="ulong" data="14"/>
 			<value name="StatusFontHeight" type="long" data="12"/>
 			<value name="TabFontHeight" type="long" data="13"/>
-			<key name="HotKeys" modified="2018-02-26 12:45:35" build="161206">
+			<key name="HotKeys" modified="2018-02-26 14:00:06" build="161206">
 				<value name="MinimizeRestore" type="dword" data="000011c0"/>
 				<value name="KeyMacroVersion" type="hex" data="02"/>
 				<value name="Multi.Modifier" type="dword" data="0000005b"/>
@@ -306,6 +306,7 @@
 			<value name="SaveCmdHistory" type="hex" data="01"/>
 			<value name="CmdLineHistory" type="multi">
 				<line data="{Build shells::intune-service}"/>
+				<line data="{Shells::cmd}"/>
 			</value>
 			<value name="ShowHelpTooltips" type="hex" data="01"/>
 			<value name="Multi" type="hex" data="01"/>
@@ -587,9 +588,9 @@
 			<value name="Update.DownloadPath" type="string" data="%TEMP%\ConEmu"/>
 			<value name="Update.LeavePackages" type="hex" data="00"/>
 			<value name="Update.PostUpdateCmd" type="string" data="echo Last successful update&gt;ConEmuUpdate.info &amp;&amp; date /t&gt;&gt;ConEmuUpdate.info &amp;&amp; time /t&gt;&gt;ConEmuUpdate.info"/>
-			<key name="Tasks" modified="2018-02-26 12:45:35" build="161206">
+			<key name="Tasks" modified="2018-02-26 14:00:06" build="161206">
 				<value name="Count" type="long" data="11"/>
-				<key name="Task1" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task1" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Far}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -598,7 +599,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task2" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task2" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Shells::cmd}"/>
 					<value name="Flags" type="dword" data="00000002"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -607,7 +608,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task3" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task3" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Shells::cmd (Admin)}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -616,7 +617,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task4" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task4" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Shells::cmd-32}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -625,7 +626,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task5" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task5" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Shells::cmd 64/32}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -635,7 +636,7 @@
 					<value name="Active" type="long" data="1"/>
 					<value name="Count" type="long" data="2"/>
 				</key>
-				<key name="Task6" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task6" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Shells::PowerShell}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -644,7 +645,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task7" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task7" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Shells::PowerShell (Admin)}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -653,7 +654,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task8" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task8" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Bash::Git bash}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -662,7 +663,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task9" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task9" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Helper::Show ANSI colors}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -671,7 +672,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task10" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task10" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Tools::Chocolatey (Admin)}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -680,7 +681,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task11" modified="2018-02-26 12:45:35" build="161206">
+				<key name="Task11" modified="2018-02-26 14:00:06" build="161206">
 					<value name="Name" type="string" data="{Build shells::intune-service}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -690,10 +691,10 @@
 					<value name="Count" type="long" data="1"/>
 				</key>
 			</key>
-			<key name="Apps" modified="2018-02-26 12:45:35" build="161206">
+			<key name="Apps" modified="2018-02-26 14:00:06" build="161206">
 				<value name="Count" type="long" data="0"/>
 			</key>
-			<key name="Colors" modified="2018-02-26 12:45:35" build="161206">
+			<key name="Colors" modified="2018-02-26 14:00:06" build="161206">
 				<value name="Count" type="long" data="0"/>
 			</key>
 		</key>
