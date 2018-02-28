@@ -5,7 +5,6 @@ else
 endif
 
 set number
-set cursorline
 set nowrap
 set showmatch
 
