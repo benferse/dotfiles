@@ -11,6 +11,8 @@ call plug#begin('~/nvim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
 
+    Plug 'easymotion/vim-easymotion'
+
     Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'icymind/neosolarized'
     Plug 'morhetz/gruvbox'
