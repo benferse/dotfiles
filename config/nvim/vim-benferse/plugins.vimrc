@@ -5,6 +5,7 @@ call plug#begin('~/nvim/plugged')
 
     Plug 'kana/vim-textobj-user'
     Plug 'kana/vim-textobj-entire'
+    Plug 'kana/vim-textobj-fold'
 
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
