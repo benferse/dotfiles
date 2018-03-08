@@ -35,3 +35,11 @@ endif
 
 filetype plugin indent on
 set autowrite
+
+syntax on
+set foldmethod=syntax
+
+"
+" xmledit settings
+"
+let g:xml_syntax_folding=1

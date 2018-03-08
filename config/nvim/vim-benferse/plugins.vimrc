@@ -12,6 +12,8 @@ call plug#begin('~/nvim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
 
+    Plug 'sukima/xmledit'
+
     Plug 'easymotion/vim-easymotion'
 
     Plug 'dracula/vim', { 'as': 'dracula' }
