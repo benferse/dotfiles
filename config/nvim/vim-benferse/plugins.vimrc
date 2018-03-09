@@ -15,6 +15,7 @@ call plug#begin('~/nvim/plugged')
     Plug 'sukima/xmledit'
 
     Plug 'easymotion/vim-easymotion'
+    Plug 'vim-airline/vim-airline'
 
     Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'icymind/neosolarized'

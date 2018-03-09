@@ -1,4 +1,4 @@
-if exists('g:loaded_benferse_settings') 
+if exists('g:loaded_benferse_settings')
     finish
 else
     let g:loaded_benferse_settings = 'yes'
