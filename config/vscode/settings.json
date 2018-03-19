@@ -1,0 +1,53 @@
+{
+    // Colors of the day
+    "workbench.colorTheme": "Solarized Dark",
+
+    /////////////////////////////////////////////////////
+    //
+    // Vim configuration
+    //
+    ///////////////////////////////////////////////////// 
+
+    // Use <space> as the leader, as it's easier to reach
+    // than backslash
+    "vim.leader": " ",
+
+    // vim-easymotion is amazing, and everyone should
+    // use it for everything <3
+    "vim.easymotion": true,
+
+    // vim-sneak is growing on me
+    "vim.sneak": true,
+
+    // I miss this little guy
+    "vim.cmdLineInitialColon": true,
+
+    // Use neovim for sweet sweet Ex command action
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "c:\\master\\tools\\neovim\\bin\\nvim.exe",
+
+    // Keybindings <3
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["Z", "Z"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                },
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                    "args": []
+                }
+            ]
+        }
+    ]
+}
