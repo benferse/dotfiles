@@ -1,6 +1,11 @@
 {
     // Colors of the day
     "workbench.colorTheme": "Solarized Dark",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.startupEditor": "newUntitledFile",
+
+    // Use cmd as the integrated terminal shell
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
 
     /////////////////////////////////////////////////////
     //
@@ -15,22 +20,95 @@
     // vim-easymotion is amazing, and everyone should
     // use it for everything <3
     "vim.easymotion": true,
-
+    
     // vim-sneak is growing on me
     "vim.sneak": true,
-
+    
     // I miss this little guy
     "vim.cmdLineInitialColon": true,
-
+    
     // Use neovim for sweet sweet Ex command action
     "vim.enableNeovim": true,
     "vim.neovimPath": "c:\\master\\tools\\neovim\\bin\\nvim.exe",
-
+    
     // Keybindings <3
     "vim.insertModeKeyBindings": [
         {
             "before": ["j", "j"],
             "after": ["<Esc>"]
+        }
+    ],
+    
+    "vim.otherModesKeyBindings": [
+        {
+            "before": ["]", "c"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbe",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["<leader>", "v", "d"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.view.debug",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["<leader>", "v", "e"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.files.action.focusFilesExplorer",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["<leader>", "v", "g"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.view.scm",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["<leader>", "v", "s"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.view.search",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["<leader>", "o"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.gotoSymbol",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["<leader>", "t"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.showAllSymbols",
+                    "args": []
+                }
+            ]
         }
     ],
 
@@ -44,10 +122,10 @@
                     "args": []
                 },
                 {
-                    "command": "workbench.action.closeActiveEditor",
+                    "command": "workbench.action.closeactiveeditor",
                     "args": []
                 }
             ]
         }
-    ]
+    ],
 }
