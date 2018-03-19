@@ -1,14 +1,11 @@
 call plug#begin('~/nvim/plugged')
     Plug 'ctrlpvim/ctrlp.vim', { 'as': 'ctrlp' }
     Plug 'scrooloose/nerdtree'
-    Plug 'scrooloose/syntastic'
     Plug 'xuyuanp/nerdtree-git-plugin'
 
     Plug 'kana/vim-textobj-user'
     Plug 'kana/vim-textobj-entire'
     Plug 'kana/vim-textobj-fold'
-
-    Plug 'tpope/vim-dispatch'
 
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
@@ -16,8 +13,6 @@ call plug#begin('~/nvim/plugged')
     Plug 'tpope/vim-unimpaired'
 
     Plug 'sukima/xmledit'
-
-    Plug 'omnisharp//omnisharp-vim'
 
     Plug 'easymotion/vim-easymotion'
     Plug 'vim-airline/vim-airline'
