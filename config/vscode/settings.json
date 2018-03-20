@@ -5,6 +5,7 @@
 
     "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
 
+    "editor.fontSize": 16,
 
     "vim.leader": " ",
     "vim.easymotion": true,
