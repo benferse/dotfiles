@@ -3,9 +3,14 @@
     "workbench.iconTheme": "vscode-icons",
     "workbench.startupEditor": "newUntitledFile",
 
+    "terminal.integrated.fontFamily": "Consolas",
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.fontWeight": "bold",
     "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
 
+    "editor.fontFamily": "Consolas",
     "editor.fontSize": 16,
+    "editor.fontWeight": "bold",
 
     "vim.leader": " ",
     "vim.easymotion": true,
