@@ -6,10 +6,8 @@
     "terminal.integrated.fontFamily": "Consolas",
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.fontWeight": "bold",
-    // "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
-
     "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
-    "terminal.integrated.shellArgs.windows": ["/k", "C:\\master\\tools\\cmder\\vscode_cmder.cmd"]
+    "terminal.integrated.shellArgs.windows": ["/k", "C:\\master\\tools\\cmder\\vscode_cmder.cmd"],
 
     "editor.fontFamily": "Consolas",
     "editor.fontSize": 16,
@@ -21,6 +19,12 @@
     "vim.cmdLineInitialColon": true,
     "vim.enableNeovim": true,
     "vim.neovimPath": "c:\\master\\tools\\neovim\\bin\\nvim.exe",
+
+    "vim.handleKeys": {
+        "<C-k>": false,
+        "<C-p>": true,
+        "<C-w>": true,
+    },
 
     "vim.insertModeKeyBindings": [
         {
