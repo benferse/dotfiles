@@ -23,7 +23,7 @@
     "vim.handleKeys": {
         "<C-k>": false,
         "<C-p>": true,
-        "<C-w>": true,
+        "<C-w>": true
     },
 
     "vim.insertModeKeyBindings": [
@@ -121,5 +121,5 @@
                 }
             ]
         }
-    ],
+    ]
 }
