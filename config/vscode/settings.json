@@ -9,9 +9,9 @@
     "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
     "terminal.integrated.shellArgs.windows": ["/k", "C:\\master\\tools\\cmder\\vscode_cmder.cmd"],
 
-    "editor.fontFamily": "Consolas",
+    "editor.fontFamily": "Source Code Pro",
     "editor.fontSize": 16,
-    "editor.fontWeight": "bold",
+    "editor.fontWeight": "normal",
 
     "vim.leader": " ",
     "vim.easymotion": true,
