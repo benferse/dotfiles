@@ -36,16 +36,6 @@
 
     "vim.otherModesKeyBindings": [
         {
-            "before": ["]", "c"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbe",
-                    "args": []
-                }
-            ]
-        },
-        {
             "before": ["<leader>", "v", "d"],
             "after": [],
             "commands": [
