@@ -3,11 +3,9 @@
     "workbench.iconTheme": "vscode-icons",
     "workbench.startupEditor": "newUntitledFile",
 
-    "terminal.integrated.fontFamily": "Consolas",
+    "terminal.integrated.fontFamily": "Fira Code Light",
     "terminal.integrated.fontSize": 16,
-    "terminal.integrated.fontWeight": "bold",
     "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
-    "terminal.integrated.shellArgs.windows": ["/k", "C:\\master\\tools\\cmder\\vscode_cmder.cmd"],
 
     "editor.fontFamily": "Fira Code Light",
     "editor.fontLigatures": true,
