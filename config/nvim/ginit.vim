@@ -1,1 +1,2 @@
-Guifont Consolas:h14:b
+Guifont Fira Code:h14
+colorscheme NeoSolarized

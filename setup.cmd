@@ -36,3 +36,5 @@ echo Linking settings for nvim...
 
 rd /q "%localappdata%\nvim" 2> nul:
 mklink /d "%localappdata%\nvim" "%ConfigRoot%\nvim"
+
+echo Done.
