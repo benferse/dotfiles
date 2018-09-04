@@ -119,7 +119,7 @@ function setup_custom_prompt()
     token_table["{p}"] = ps_char
     token_table["{g}"] = get_git_prompt_contents
 
-    local custom_prompt = "\n\x1b[1;39;40m{u}@{c} {d}\n\x1b[1;39;40m{p} \x1b[0m"
+    local custom_prompt = "\n\x1b[1;39;40m{u}@{c} {d} {g}\n\x1b[1;39;40m{p} \x1b[0m"
 
     for key, value in pairs(token_table) do
         custom_prompt = string.gsub(custom_prompt, key, value)
