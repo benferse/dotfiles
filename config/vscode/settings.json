@@ -1,7 +1,6 @@
 {
     "workbench.colorTheme": "Nord",
     "workbench.iconTheme": "vscode-icons",
-    "workbench.startupEditor": "newUntitledFile",
 
     "terminal.integrated.fontFamily": "Fira Code Light",
     "terminal.integrated.fontSize": 16,
@@ -15,7 +14,6 @@
     "vim.leader": " ",
     "vim.easymotion": true,
     "vim.sneak": true,
-    "vim.cmdLineInitialColon": true,
     "vim.enableNeovim": true,
     "vim.neovimPath": "c:\\master\\tools\\neovim\\bin\\nvim.exe",
 
@@ -32,7 +30,7 @@
         }
     ],
 
-    "vim.otherModesKeyBindings": [
+    "vim.normalModeKeyBindings": [
         {
             "before": ["<leader>", "v", "d"],
             "after": [],
@@ -95,22 +93,8 @@
         }
     ],
 
-    "vim.otherModesKeyBindingsNonRecursive": [
-        {
-            "before": ["Z", "Z"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.files.save",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.closeactiveeditor",
-                    "args": []
-                }
-            ]
-        }
-    ],
-
-    "vsicons.dontShowNewVersionMessage": true
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.sideBar.location": "right",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "boundary"
 }
