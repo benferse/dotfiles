@@ -8,8 +8,8 @@
 
     "editor.fontFamily": "Fira Code Light",
     "editor.fontLigatures": true,
-    "editor.fontSize": 18,
-    "editor.fontWeight": "bold",
+    "editor.fontSize": 20,
+    "editor.fontWeight": "normal",
 
     "vim.leader": " ",
     "vim.easymotion": true,
