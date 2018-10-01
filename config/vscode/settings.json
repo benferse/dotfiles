@@ -90,6 +90,16 @@
                     "args": []
                 }
             ]
+        },
+        {
+            "before": ["ctrl+j"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.togglePanel",
+                    "args": []
+                }
+            ]
         }
     ],
 
