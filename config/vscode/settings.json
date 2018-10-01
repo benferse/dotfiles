@@ -96,5 +96,6 @@
     "vsicons.dontShowNewVersionMessage": true,
     "workbench.sideBar.location": "right",
     "editor.minimap.enabled": false,
-    "editor.renderWhitespace": "boundary"
+    "editor.renderWhitespace": "boundary",
+    "window.zoomLevel": 2
 }
