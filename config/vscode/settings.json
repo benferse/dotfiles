@@ -9,11 +9,11 @@
     "editor.fontFamily": "Fira Code Light",
     "editor.fontLigatures": true,
     "editor.fontSize": 20,
-    "editor.fontWeight": "normal",
 
     "vim.leader": " ",
     "vim.easymotion": true,
     "vim.sneak": true,
+    "vim.sneakUseIgnorecaseAndSmartcase": true,
     "vim.enableNeovim": true,
     "vim.neovimPath": "c:\\master\\tools\\neovim\\bin\\nvim.exe",
 
