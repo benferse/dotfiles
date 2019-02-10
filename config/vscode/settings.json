@@ -2,7 +2,7 @@
     "workbench.colorTheme": "Nord",
     "workbench.iconTheme": "vscode-icons",
 
-    "terminal.integrated.fontFamily": "Fira Code Light",
+    "terminal.integrated.fontFamily": "Hasklig Light",
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
 
