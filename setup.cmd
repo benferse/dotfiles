@@ -37,4 +37,10 @@ echo Linking settings for nvim...
 rd /q "%localappdata%\nvim" 2> nul:
 mklink /d "%localappdata%\nvim" "%ConfigRoot%\nvim"
 
+:: gpg
+echo Linking settings for gnupg...
+
+del /f /q "%appdata%\gnupg\gpg.conf" 2> nul:
+mklink "%appdata%\gnupg\gpg.conf" "%ConfigRoot%\gnupg\gpg.conf"
+
 echo Done.
