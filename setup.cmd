@@ -4,7 +4,8 @@
 :: in the user profile
 ::
 :: Needs to run as an administrator, or you need the SeCreateSymbolicLink
-:: privilege, or you need to be on Windows 10 with developer mode enabled.
+:: privilege, or you need to be on Windows 10 with developer mode enabled
+:: (which confers the latter)
 
 @echo off
 
