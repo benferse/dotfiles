@@ -3,6 +3,10 @@ if os.execute("isadmin.exe") then
     ps_char = "#"
 end
 
+env_username = os.getenv("USERNAME"):lower()
+env_hostname = os.getenv("COMPUTERNAME"):lower()
+env_homepath = os.getenv("HOMEDRIVE") .. os.getenv("HOMEPATH")
+
 -- adapted from from clink-completions' git.lua
 local function get_git_dir(path)
 
@@ -109,13 +113,23 @@ local function get_git_prompt_contents()
     return ""
 end
 
+local function get_working_dir()
+
+    local dir = clink.get_cwd()
+
+    dir = dir:gsub(env_homepath, "~")
+
+    return dir
+
+end
+
 function setup_custom_prompt()
 
     local token_table = {}
 
-    token_table["{c}"] = os.getenv("COMPUTERNAME")
-    token_table["{u}"] = os.getenv("USERNAME")
-    token_table["{d}"] = clink.get_cwd
+    token_table["{c}"] = env_hostname
+    token_table["{u}"] = env_username
+    token_table["{d}"] = get_working_dir
     token_table["{p}"] = ps_char
     token_table["{g}"] = get_git_prompt_contents
 

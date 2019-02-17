@@ -107,5 +107,6 @@
     "workbench.sideBar.location": "right",
     "editor.minimap.enabled": false,
     "editor.renderWhitespace": "boundary",
-    "window.zoomLevel": 1
+    "window.zoomLevel": 0,
+    "editor.mouseWheelZoom": true
 }
