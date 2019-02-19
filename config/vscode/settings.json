@@ -1,12 +1,11 @@
 {
-    "workbench.colorTheme": "Nord",
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "material-icon-theme",
 
     "terminal.integrated.fontFamily": "Hasklig Light",
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
 
-    "editor.fontFamily": "Hasklig Light",
+    "editor.fontFamily": "Hasklig ExtraLight",
     "editor.fontLigatures": true,
     "editor.fontSize": 20,
 
@@ -103,10 +102,10 @@
         }
     ],
 
-    "vsicons.dontShowNewVersionMessage": true,
     "workbench.sideBar.location": "right",
     "editor.minimap.enabled": false,
     "editor.renderWhitespace": "boundary",
     "window.zoomLevel": 0,
-    "editor.mouseWheelZoom": true
+    "editor.mouseWheelZoom": true,
+    "workbench.colorTheme": "Nord"
 }
