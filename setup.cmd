@@ -41,7 +41,8 @@ mklink "%localappdata%\clink\clink-benferse.lua" "%ConfigRoot%\clink\clink-benfe
 echo Linking settings for hyper...
 
 del /f /q "%userprofile%\.hyper.js" 2> nul:
-mklink "%userprofile%\.hyper.js" "%ConfigRoot%\hyper\.hyper.js"
+del /f /q "%appdata%\Hyper\.hyper.js" 2> nul:
+mklink "%appdata%\Hyper\.hyper.js" "%ConfigRoot%\hyper\.hyper.js"
 
 :: nvim
 echo Linking settings for nvim...
