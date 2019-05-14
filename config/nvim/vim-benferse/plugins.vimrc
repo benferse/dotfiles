@@ -17,7 +17,5 @@ call plug#begin('~/nvim/plugged')
     Plug 'easymotion/vim-easymotion'
     Plug 'vim-airline/vim-airline'
 
-    Plug 'dracula/vim', { 'as': 'dracula' }
-    Plug 'icymind/neosolarized'
-    Plug 'morhetz/gruvbox'
+    Plug 'arcticicestudio/nord-vim'
 call plug#end()
