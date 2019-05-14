@@ -139,7 +139,7 @@ function setup_custom_prompt()
         custom_prompt = string.gsub(custom_prompt, key, value)
     end
 
-    clink.prompt.value = custom_prompt 
+    clink.prompt.value = custom_prompt
 end
 
 clink.prompt.register_filter(setup_custom_prompt, 1)
