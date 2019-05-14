@@ -20,6 +20,17 @@ mklink "%appdata%\Code\User\settings.json" "%ConfigRoot%\vscode\settings.json"
 del /f /q "%appdata%\Code\User\keybindings.json" 2> nul:
 mklink "%appdata%\Code\User\keybindings.json" "%ConfigRoot%\vscode\keybindings.json"
 
+:: vscode - insiders edition (if installed)
+if exist "%appdata%\Code - Insiders" 2> nul: (
+
+    del /f /q "%appdata%\Code - Insiders\User\settings.json" 2> nul:
+    mklink "%appdata%\Code - Insiders\User\settings.json" "%ConfigRoot%\vscode\settings.json"
+
+    del /f /q "%appdata%\Code - Insiders\User\keybindings.json" 2> nul:
+    mklink "%appdata%\Code - Insiders\User\keybindings.json" "%ConfigRoot%\vscode\keybindings.json"
+
+)
+
 :: clink
 echo Linking settings for clink...
 
