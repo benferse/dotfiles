@@ -1,2 +1,2 @@
-Guifont Fira Code:h14
+Guifont Hasklig:h14
 colorscheme nord
