@@ -38,3 +38,14 @@ set autowrite
 
 syntax on
 set foldmethod=syntax
+
+"
+" python integration settings
+"
+let g:python_host_prog='d:/master/python37/python.exe'
+let g:python3_host_prog='d:/master/python37/python.exe'
+
+"
+" deoplete settings
+"
+let g:deoplete#enable_at_startup=1
