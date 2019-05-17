@@ -19,6 +19,14 @@ call plug#begin('~/nvim/plugged')
     Plug 'omnisharp/omnisharp-vim'
     Plug 'sirver/ultisnips'
     Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'w0rp/ale'
 
     Plug 'arcticicestudio/nord-vim'
 call plug#end()
+
+"
+" deoplete
+"
+call deoplete#custom#option('sources', {
+    \ 'cs': ['omnisharp'],
+    \ })

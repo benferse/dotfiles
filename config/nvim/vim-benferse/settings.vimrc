@@ -49,3 +49,8 @@ let g:python3_host_prog='d:/master/python37/python.exe'
 " deoplete settings
 "
 let g:deoplete#enable_at_startup=1
+
+"
+" ctrlp settings
+"
+let g:OmniSharp_selector_ui = 'ctrlp'
