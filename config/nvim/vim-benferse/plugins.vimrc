@@ -14,6 +14,11 @@ call plug#begin('~/nvim/plugged')
 
     Plug 'easymotion/vim-easymotion'
     Plug 'vim-airline/vim-airline'
+    Plug 'justinmk/vim-sneak'
+
+    Plug 'omnisharp/omnisharp-vim'
+    Plug 'sirver/ultisnips'
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
     Plug 'arcticicestudio/nord-vim'
 call plug#end()
