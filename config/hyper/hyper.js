@@ -1,4 +1,4 @@
-// Future versions of Hyper may add additional config options,
+﻿// Future versions of Hyper may add additional config options,
 // which will not automatically be merged into this file.
 // See https://hyper.is#cfg for all currently supported options.
 
@@ -9,7 +9,7 @@ module.exports = {
     updateChannel: 'stable',
 
     // default font size in pixels for all tabs
-    fontSize: 12,
+    fontSize: 18,
 
     // font family with optional fallbacks
     fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
@@ -19,12 +19,6 @@ module.exports = {
 
     // font weight for bold characters: 'normal' or 'bold'
     fontWeightBold: 'bold',
-
-    // line height as a relative unit
-    lineHeight: 1,
-
-    // letter spacing as a relative unit
-    letterSpacing: 0,
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -67,7 +61,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (CSS format, i.e.: `top right bottom left`)
-    padding: '12px 14px',
+    padding: '12px 24px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -107,13 +101,13 @@ module.exports = {
 
     // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
     // by default `['--login']` will be used
-    shellArgs: ['--login'],
+    shellArgs: [''],
 
     // for environment variables
     env: {},
 
     // set to `false` for no bell
-    bell: 'SOUND',
+    bell: false,
 
     // if `true` (without backticks and without quotes), selected text will automatically be copied to the clipboard
     copyOnSelect: false,
@@ -123,19 +117,10 @@ module.exports = {
 
     // if `true` (without backticks and without quotes), on right click selected text will be copied or pasted if no
     // selection is present (`true` by default on Windows and disables the context menu feature)
-    quickEdit: false,
-
-    // choose either `'vertical'`, if you want the column mode when Option key is hold during selection (Default)
-    // or `'force'`, if you want to force selection regardless of whether the terminal is in mouse events mode
-    // (inside tmux or vim with mouse mode enabled for example).
-    macOptionSelectionMode: 'vertical',
+    // quickEdit: true,
 
     // URL to custom bell
     // bellSoundURL: 'http://example.com/bell.mp3',
-
-    // Whether to use the WebGL renderer. Set it to false to use canvas-based
-    // rendering (slower, but supports transparent backgrounds)
-    webGLRenderer: true,
 
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
@@ -146,7 +131,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [],
+  plugins: ["hyper-nord"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
@@ -156,5 +141,6 @@ module.exports = {
   keymaps: {
     // Example
     // 'window:devtools': 'cmd+alt+o',
+    'window:devtools': 'ctrl+alt+o',
   },
 };
