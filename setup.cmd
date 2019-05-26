@@ -42,7 +42,7 @@ echo Linking settings for hyper...
 
 del /f /q "%userprofile%\.hyper.js" 2> nul:
 del /f /q "%appdata%\Hyper\.hyper.js" 2> nul:
-mklink "%appdata%\Hyper\.hyper.js" "%ConfigRoot%\hyper\.hyper.js"
+mklink "%appdata%\Hyper\.hyper.js" "%ConfigRoot%\hyper\hyper.js"
 
 :: nvim
 echo Linking settings for nvim...
