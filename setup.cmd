@@ -68,4 +68,10 @@ echo Linking settings for alacritty...
 del /f /q "%appdata%\Alacritty\alacritty.yml" 2> nul:
 mklink "%appdata%\Alacritty\alacritty.yml" "%ConfigRoot%\alacritty\alacritty.yml"
 
+:: Windows Terminal
+echo Linking settings for Windows Terminal...
+
+del /f /q "%localappdata%\Packages\WindowsTerminalDev_8wekyb3d8bbwe\RoamingState\profiles.json" 2> nul:
+copy "%ConfigRoot%\cascadia\profiles.json" "%localappdata%\Packages\WindowsTerminalDev_8wekyb3d8bbwe\RoamingState\profiles.json" 2> nul:
+
 echo Done.
