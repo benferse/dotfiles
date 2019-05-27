@@ -1,11 +1,11 @@
 {
     "workbench.iconTheme": "material-icon-theme",
 
-    "terminal.integrated.fontFamily": "Hasklig Light",
+    "terminal.integrated.fontFamily": "Hasklug NF",
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.shell.windows": "c:\\windows\\system32\\cmd.exe",
 
-    "editor.fontFamily": "Hasklig ExtraLight",
+    "editor.fontFamily": "Hasklug NF",
     "editor.fontLigatures": true,
     "editor.fontSize": 20,
 
