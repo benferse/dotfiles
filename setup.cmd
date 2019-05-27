@@ -56,4 +56,16 @@ echo Linking settings for gnupg...
 del /f /q "%appdata%\gnupg\gpg.conf" 2> nul:
 mklink "%appdata%\gnupg\gpg.conf" "%ConfigRoot%\gnupg\gpg.conf"
 
+:: terminus
+echo Linking settings for terminus...
+
+del /f /q "%appdata%\Terminus\config.yaml" 2> nul:
+mklink "%appdata%\Terminus\config.yaml" "%ConfigRoot%\terminus\config.yaml"
+
+:: alacritty
+echo Linking settings for alacritty...
+
+del /f /q "%appdata%\Alacritty\alacritty.yml" 2> nul:
+mklink "%appdata%\Alacritty\alacritty.yml" "%ConfigRoot%\alacritty\alacritty.yml"
+
 echo Done.
