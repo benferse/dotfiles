@@ -1,2 +1,2 @@
-Guifont Hasklig:h14
+Guifont Hasklug NF:h14
 colorscheme nord
