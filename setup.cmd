@@ -37,41 +37,10 @@ echo Linking settings for clink...
 del /f /q "%localappdata%\clink\clink-benferse.lua" 2> nul:
 mklink "%localappdata%\clink\clink-benferse.lua" "%ConfigRoot%\clink\clink-benferse.lua"
 
-:: hyper
-echo Linking settings for hyper...
-
-del /f /q "%userprofile%\.hyper.js" 2> nul:
-del /f /q "%appdata%\Hyper\.hyper.js" 2> nul:
-mklink "%appdata%\Hyper\.hyper.js" "%ConfigRoot%\hyper\hyper.js"
-
-:: nvim
-echo Linking settings for nvim...
-
-rd /q "%localappdata%\nvim" 2> nul:
-mklink /d "%localappdata%\nvim" "%ConfigRoot%\nvim"
-
-:: gpg
-echo Linking settings for gnupg...
-
-del /f /q "%appdata%\gnupg\gpg.conf" 2> nul:
-mklink "%appdata%\gnupg\gpg.conf" "%ConfigRoot%\gnupg\gpg.conf"
-
-:: terminus
-echo Linking settings for terminus...
-
-del /f /q "%appdata%\Terminus\config.yaml" 2> nul:
-mklink "%appdata%\Terminus\config.yaml" "%ConfigRoot%\terminus\config.yaml"
-
-:: alacritty
-echo Linking settings for alacritty...
-
-del /f /q "%appdata%\Alacritty\alacritty.yml" 2> nul:
-mklink "%appdata%\Alacritty\alacritty.yml" "%ConfigRoot%\alacritty\alacritty.yml"
-
 :: Windows Terminal
 echo Linking settings for Windows Terminal...
 
-del /f /q "%localappdata%\Packages\WindowsTerminalDev_8wekyb3d8bbwe\RoamingState\profiles.json" 2> nul:
-copy "%ConfigRoot%\cascadia\profiles.json" "%localappdata%\Packages\WindowsTerminalDev_8wekyb3d8bbwe\RoamingState\profiles.json" 2> nul:
+del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
+copy "%ConfigRoot%\cascadia\profiles.json" "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
 
 echo Done.
