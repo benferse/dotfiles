@@ -24,7 +24,7 @@
             "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
             "name": "cmd",
             "commandline": "cmd.exe",
-            "fontFace": "JetBrains Mono",
+            "fontFace": "Hasklug NF",
             "fontSize": 14,
             "colorScheme": "Nord",
             "hidden": false
@@ -40,7 +40,7 @@
         },
         {
             "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-            "fontFace": "JetBrains Mono",
+            "fontFace": "Hasklug NF",
             "fontSize": 14,
             "colorScheme": "Nord",
             "hidden": false,
