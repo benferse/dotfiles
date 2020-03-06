@@ -7,103 +7,11 @@
     "editor.fontLigatures": true,
     "editor.fontSize": 20,
 
-    "vim.leader": " ",
-    "vim.easymotion": true,
-    "vim.sneak": true,
-    "vim.sneakUseIgnorecaseAndSmartcase": true,
-    "vim.enableNeovim": true,
-    "vim.neovimPath": "c:\\users\\benferse\\scoop\\shims\\nvim.exe",
-
-    "vim.handleKeys": {
-        "<C-k>": false,
-        "<C-p>": true,
-        "<C-w>": true
-    },
-
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["j", "j"],
-            "after": ["<Esc>"]
-        }
-    ],
-
-    "vim.normalModeKeyBindings": [
-        {
-            "before": ["<leader>", "v", "d"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.view.debug",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": ["<leader>", "v", "e"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.files.action.focusFilesExplorer",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": ["<leader>", "v", "g"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.view.scm",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": ["<leader>", "v", "s"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.view.search",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": ["<leader>", "o"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.gotoSymbol",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": ["<leader>", "t"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.showAllSymbols",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": ["ctrl+j"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.togglePanel",
-                    "args": []
-                }
-            ]
-        }
-    ],
-
-    "workbench.sideBar.location": "right",
     "editor.minimap.enabled": false,
     "editor.renderWhitespace": "boundary",
     "window.zoomLevel": 0,
     "editor.mouseWheelZoom": true,
-    "workbench.colorTheme": "Nord"
+    "workbench.colorTheme": "Nord",
+
+    "vscode-neovim.neovimPath": "C:\\Users\\benferse\\scoop\\shims\\nvim.exe"
 }
