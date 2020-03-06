@@ -43,4 +43,10 @@ echo Linking settings for Windows Terminal...
 del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
 copy "%ConfigRoot%\cascadia\profiles.json" "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
 
+:: nvim
+echo Linking settings for nvim...
+
+rd /s /q "%localappdata%\nvim" 2> nul:
+mklink "%localappdata%\nvim" "%ConfigRoot%\nvim"
+
 echo Done.
