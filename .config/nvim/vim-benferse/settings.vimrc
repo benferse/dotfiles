@@ -4,6 +4,11 @@ else
     let g:loaded_benferse_settings = 'yes'
 endif
 
+" nvim is always nocompatible, but just in case
+if &compatible
+    set nocompatible
+endif
+
 set number
 set relativenumber
 set nowrap
