@@ -1,6 +1,15 @@
+"
+" Colorscheme and other pretty things
+"
+
 if (has("termguicolors"))
     set termguicolors
 endif
 
 set background=dark
-colorscheme nord
+
+try
+    colorscheme nord
+catch
+    colorscheme default
+endtry
