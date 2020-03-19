@@ -26,6 +26,8 @@ set laststatus=2
 set ruler
 set wildmenu
 
+let mapleader="\<space>"
+
 if !&scrolloff
     set scrolloff=1
 endif

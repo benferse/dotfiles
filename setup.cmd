@@ -3,13 +3,20 @@
 :: mostly linking individual files and directories to the right place
 :: in the user profile
 ::
+:: Wherever possible, standard XDG locations are used so Windows vs. *nix
+:: setups can "just work", as much as humanly possible
+::
 :: Needs to run as an administrator, or you need the SeCreateSymbolicLink
 :: privilege, or you need to be on Windows 10 with developer mode enabled
 :: (which confers the latter)
 
 @echo off
 
-set ConfigRoot=%~dp0config
+set ConfigRoot=%~dp0.config
+set XDG_CONFIG_HOME=%HOMEDRIVE%%HOMEPATH%\.config
+
+echo Setting XDG_CONFIG_HOME to %XDG_CONFIG_HOME%
+setx XDG_CONFIG_HOME %HOMEDRIVE%%HOMEPATH%\.config
 
 :: vscode
 echo Linking settings for vscode...
@@ -22,6 +29,8 @@ mklink "%appdata%\Code\User\keybindings.json" "%ConfigRoot%\vscode\keybindings.j
 
 :: vscode - insiders edition (if installed)
 if exist "%appdata%\Code - Insiders" 2> nul: (
+
+    echo Linking settings for vscode insiders edition...
 
     del /f /q "%appdata%\Code - Insiders\User\settings.json" 2> nul:
     mklink "%appdata%\Code - Insiders\User\settings.json" "%ConfigRoot%\vscode\settings.json"
@@ -46,7 +55,9 @@ copy "%ConfigRoot%\cascadia\profiles.json" "%localappdata%\Packages\Microsoft.Wi
 :: nvim
 echo Linking settings for nvim...
 
-rd /s /q "%localappdata%\nvim" 2> nul:
-mklink "%localappdata%\nvim" "%ConfigRoot%\nvim"
+del /f /q "%XDG_CONFIG_HOME%\nvim" 2> nul:
+mklink "%XDG_CONFIG_HOME%\nvim" "%ConfigRoot%\nvim"
 
 echo Done.
+
+exit /b 0
