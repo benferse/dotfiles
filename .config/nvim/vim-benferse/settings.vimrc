@@ -44,5 +44,4 @@ endif
 filetype plugin indent on
 set autowrite
 
-syntax on
 set foldmethod=syntax
