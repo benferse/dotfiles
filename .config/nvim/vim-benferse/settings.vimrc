@@ -13,6 +13,12 @@ set number
 set relativenumber
 set nowrap
 set showmatch
+set noshowmode
+set signcolumn=yes
+
+set cmdheight=1
+set noshowcmd
+set updatetime=100
 
 set hidden
 
@@ -27,9 +33,13 @@ set shiftwidth=4
 set smarttab
 set tabstop=4
 
+set nrformats-=octal
+
 set laststatus=2
 set ruler
 set wildmenu
+
+set shortmess+=cI
 
 let mapleader="\<space>"
 

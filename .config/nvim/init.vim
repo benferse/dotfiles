@@ -8,7 +8,8 @@ source $HOME/.config/nvim/vim-benferse/plugins.vimrc
 " Load plugin-specific settings
 source $HOME/.config/nvim/vim-benferse/plugin-settings.vimrc
 
-" My preferred non-plugin specific keymaps
+" My preferred non-plugin specific keymaps (see the plugin-settings files
+" for keymaps that drive individual plugins)
 source $HOME/.config/nvim/vim-benferse/keymaps.vimrc
 
 " Make it pretty!

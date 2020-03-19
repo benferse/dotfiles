@@ -18,8 +18,25 @@ if dein#load_state('~/.cache/dein')
     "
     " Managed plugins
     "
-    call dein#add('Shougo/defx')
-    call dein#add('Shougo/denite')
+    call dein#add('Shougo/defx.nvim')
+    call dein#add('Shougo/denite.nvim')
+
+    call dein#add('arcticicestudio/nord-vim')
+
+    call dein#add('kana/vim-textobj-user')
+    call dein#add('kana/vim-textobj-entire')
+
+    call dein#add('mhinz/vim-signify')
+    call dein#add('mhinz/vim-startify')
+
+    call dein#add('ryanoasis/vim-devicons')
+
+    call dein#add('tpope/vim-commentary')
+    call dein#add('tpope/vim-fugitive')
+    call dein#add('tpope/vim-surround')
+    call dein#add('tpope/vim-unimpaired')
+
+    call dein#add('vim-airline/vim-airline')
 
     if !has('nvim')
         call dein#add('roxma/nvim-yarp')
