@@ -24,6 +24,8 @@ if dein#load_state('~/.cache/dein')
 
     call dein#add('arcticicestudio/nord-vim')
 
+    call dein#add('jreybert/vimagit')
+
     call dein#add('justinmk/vim-sneak')
 
     call dein#add('kana/vim-textobj-user')

@@ -11,9 +11,14 @@ endif
 
 set number
 set relativenumber
+augroup benferse_numbering
+    autocmd!
+    autocmd InsertEnter * set norelativenumber
+    autocmd InsertLeave * set relativenumber
+augroup end
+
 set nowrap
 set showmatch
-set noshowmode
 set signcolumn=yes
 
 set cmdheight=1
@@ -25,6 +30,12 @@ set hidden
 set hlsearch
 set incsearch
 set ignorecase
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.dll
+
+if executable('ag')
+    set grepprg=ag\ --nocolor\ --nogroup\ --ignore-case\ --hidden
+endif
 
 set autoindent
 set backspace=indent,eol,start
@@ -36,6 +47,7 @@ set tabstop=4
 set nrformats-=octal
 
 set laststatus=2
+set noshowmode
 set ruler
 set wildmenu
 
