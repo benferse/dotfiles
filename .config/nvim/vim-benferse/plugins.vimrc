@@ -1,4 +1,5 @@
 "
+"
 " Configuration for plugin management using Shougo/dein.vim
 "
 
@@ -23,13 +24,16 @@ if dein#load_state('~/.cache/dein')
 
     call dein#add('arcticicestudio/nord-vim')
 
+    call dein#add('justinmk/vim-sneak')
+
     call dein#add('kana/vim-textobj-user')
     call dein#add('kana/vim-textobj-entire')
 
+    call dein#add('kristijanhusak/defx-icons')
+    call dein#add('kristijanhusak/defx-git')
+
     call dein#add('mhinz/vim-signify')
     call dein#add('mhinz/vim-startify')
-
-    call dein#add('ryanoasis/vim-devicons')
 
     call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-fugitive')
@@ -37,6 +41,11 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-unimpaired')
 
     call dein#add('vim-airline/vim-airline')
+
+    "
+    " This needs to be last, evidently. Because reasons
+    "
+    call dein#add('ryanoasis/vim-devicons')
 
     if !has('nvim')
         call dein#add('roxma/nvim-yarp')

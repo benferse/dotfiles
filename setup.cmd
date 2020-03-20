@@ -13,10 +13,14 @@
 @echo off
 
 set ConfigRoot=%~dp0.config
-set XDG_CONFIG_HOME=%HOMEDRIVE%%HOMEPATH%\.config
 
+set XDG_CONFIG_HOME=%HOMEDRIVE%%HOMEPATH%\.config
 echo Setting XDG_CONFIG_HOME to %XDG_CONFIG_HOME%
 setx XDG_CONFIG_HOME %HOMEDRIVE%%HOMEPATH%\.config
+
+set XDG_DATA_HOME=%HOMEDRIVE%%HOMEPATH%\.local\share
+echo Setting XDG_DATA_HOME to %XDG_DATA_HOME%
+setx XDG_DATA_HOME %HOMEDRIVE%%HOMEPATH%\.local\share
 
 :: vscode
 echo Linking settings for vscode...
