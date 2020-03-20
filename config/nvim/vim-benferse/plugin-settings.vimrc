@@ -136,6 +136,7 @@ try
     let g:airline_powerline_fonts = 1
 
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#fnamemod = ':t'
 catch
     echo 'vim-airline is not installed yet'
 endtry

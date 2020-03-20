@@ -12,7 +12,7 @@
 
 @echo off
 
-set ConfigRoot=%~dp0.config
+set ConfigRoot=%~dp0config
 
 set XDG_CONFIG_HOME=%HOMEDRIVE%%HOMEPATH%\.config
 echo Setting XDG_CONFIG_HOME to %XDG_CONFIG_HOME%
