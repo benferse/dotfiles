@@ -51,7 +51,7 @@ try
     "
     " General keybindings to activate defx
     "
-    nnoremap <silent><leader>e :Defx -toggle -split=vertical -winwidth=40 -direction=topleft<CR>
+    nnoremap <silent><leader>e :Defx -toggle -split=vertical -winwidth=40 -direction=botright<CR>
 
 catch
     echo 'Defx is not installed yet.'
