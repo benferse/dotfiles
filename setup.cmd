@@ -62,6 +62,12 @@ echo Linking settings for nvim...
 del /f /q "%XDG_CONFIG_HOME%\nvim" 2> nul:
 mklink "%XDG_CONFIG_HOME%\nvim" "%ConfigRoot%\nvim"
 
+:: Powershell Core profile
+echo Linking settings for pscore...
+
+del /f /q "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" 2> nul:
+mklink "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" "%ConfigRoot%\powershell\profile.ps1"
+
 echo Done.
 
 exit /b 0
