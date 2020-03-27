@@ -40,6 +40,9 @@ try
         nnoremap <silent><buffer><expr> C    defx#do_action('toggle_columns', 'mark:indent:icon:icons:filename')
         nnoremap <silent><buffer><expr> ,    defx#do_action('toggle_select')
 
+        nnoremap <silent><buffer><expr> F    defx#do_action('new_file')
+        nnoremap <silent><buffer><expr> D    defx#do_action('new_directory')
+
         nnoremap <silent><buffer><expr> h    defx#do_action('cd', ['..'])
         nnoremap <silent><buffer><expr> ~    defx#do_action('cd')
 
