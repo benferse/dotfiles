@@ -1,4 +1,6 @@
 imap jj <esc>
+imap jk <esc>
+imap kj <esc>
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
 " Courtesy of the inimitable tpope

@@ -2,10 +2,15 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "globals" : 
     {
-        "alwaysShowTabs" : true,
-        "defaultProfile" : "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "alwaysShowTabs" : false,
+        "showTabsInTitlebar" : false,
+        "showTerminalTitleInTitlebar" : true,
+        "launchMode": "maximized",
+
+        "defaultProfile" : "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
         "initialCols" : 120,
         "initialRows" : 30,
+
         "keybindings" : 
         [
             {
@@ -185,69 +190,49 @@
             }
         ],
         "requestedTheme" : "system",
-        "showTabsInTitlebar" : true,
-        "showTerminalTitleInTitlebar" : true,
         "wordDelimiters" : " ./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}~?\u2502"
     },
     "profiles" : 
-    [
+    { 
+        "defaults":
         {
-            "acrylicOpacity" : 0.5,
-            "closeOnExit" : true,
-            "colorScheme" : "Nord",
-            "commandline" : "pwsh.exe -nol",
-            "cursorColor" : "#FFFFFF",
-            "cursorShape" : "bar",
-            "fontFace" : "Hasklug NF",
-            "fontSize" : 14,
-            "guid" : "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-            "historySize" : 9001,
-            "icon" : "ms-appx:///ProfileIcons/{574e775e-4f2a-5b96-ac1e-a2962a402336}.png",
-            "name" : "PowerShell Core",
-            "padding" : "10, 10, 10, 10",
-            "snapOnInput" : true,
-            "startingDirectory" : "%USERPROFILE%",
-            "useAcrylic" : false
-        },
-        {
-            "acrylicOpacity" : 0.75,
-            "closeOnExit" : true,
-            "colorScheme" : "Nord",
-            "commandline" : "cmd.exe",
-            "cursorColor" : "#FFFFFF",
-            "cursorShape" : "bar",
-            "fontFace" : "Hasklug NF",
-            "fontSize" : 14,
-            "guid" : "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-            "historySize" : 9001,
-            "icon" : "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
-            "name" : "cmd",
-            "padding" : "10, 10, 10, 10",
-            "snapOnInput" : true,
-            "startingDirectory" : "c:\\src",
-            "useAcrylic" : false
-        },
-        {
-            "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-            "hidden": false,
-            "name": "Azure Cloud Shell",
-            "source": "Windows.Terminal.Azure",
+            "closeOnExit": "graceful",
             "colorScheme": "Nord",
             "fontFace": "Hasklug NF",
             "fontSize": 14,
-            "padding" : "10, 10, 10, 10"
+            "historySize": 9001,
+            "padding": "10, 10, 10, 10",
+            "snapOnInput": true,
+            "startingDirectory": "%USERPROFILE",
+            "useAcrylic": false 
         },
-        {
-            "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-            "hidden": false,
-            "name": "Ubuntu",
-            "source": "Windows.Terminal.Wsl",
-            "colorScheme": "Nord",
-            "fontFace": "Hasklug NF",
-            "fontSize": 14,
-            "padding" : "10, 10, 10, 10"
-        }
-    ],
+
+        "list": [
+            {
+                "commandline" : "pwsh.exe -nol",
+                "guid" : "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "icon" : "ms-appx:///ProfileIcons/{574e775e-4f2a-5b96-ac1e-a2962a402336}.png",
+                "name" : "PowerShell Core"
+            },
+            {
+                "commandline" : "cmd.exe",
+                "guid" : "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "icon" : "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
+                "name" : "cmd"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "name": "Ubuntu",
+                "commandline": "wsl -d ubuntu",
+                "startingDirectory": "//wsl$/ubuntu/home/benferse"
+            }
+        ]
+    },
     "schemes" : 
     [
         {
