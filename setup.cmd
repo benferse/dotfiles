@@ -68,6 +68,12 @@ echo Linking settings for pscore...
 del /f /q "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" 2> nul:
 mklink "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" "%ConfigRoot%\powershell\profile.ps1"
 
+:: alacritty
+echo Linking settings for alacritty...
+
+del /f /q "%appdata%\Alacritty\alacritty.yml" 2> nul:
+mklink "%appdata%\Alacritty\alacritty.yml" "%ConfigRoot%\alacritty\alacritty.yml"
+
 echo Done.
 
 exit /b 0
