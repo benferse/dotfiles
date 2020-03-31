@@ -1,0 +1,5 @@
+[character]
+use_symbol_for_status = true
+
+[hostname]
+ssh_only = false

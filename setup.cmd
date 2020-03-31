@@ -75,6 +75,12 @@ echo Linking settings for alacritty...
 del /f /q "%appdata%\Alacritty\alacritty.yml" 2> nul:
 mklink "%appdata%\Alacritty\alacritty.yml" "%ConfigRoot%\alacritty\alacritty.yml"
 
+:: starship
+echo Linking settings for starship...
+
+del /f /q "%XDG_CONFIG_HOME%\starship.toml" 2> nul:
+mklink "%XDG_CONFIG_HOME%\starship.toml" "%ConfigRoot%\starship\starship.toml"
+
 echo Done.
 
 exit /b 0
