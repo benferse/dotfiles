@@ -19,7 +19,7 @@ augroup end
 
 set nowrap
 set showmatch
-set signcolumn=yes
+set signcolumn=yes:2
 
 set cmdheight=1
 set noshowcmd
