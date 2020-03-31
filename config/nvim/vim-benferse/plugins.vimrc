@@ -37,6 +37,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('mhinz/vim-signify')
     call dein#add('mhinz/vim-startify')
 
+    call dein#add('neovim/nvim-lsp')
+
     call dein#add('pprovost/vim-ps1')
 
     call dein#add('tpope/vim-commentary')
