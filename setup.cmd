@@ -23,17 +23,18 @@ echo Setting XDG_DATA_HOME to %XDG_DATA_HOME%
 setx XDG_DATA_HOME %HOMEDRIVE%%HOMEPATH%\.local\share
 
 :: vscode
-echo Linking settings for vscode...
+if exist "%appdata%\Code" 2> nul: (
+    echo Linking settings for vscode...
 
-del /f /q "%appdata%\Code\User\settings.json" 2> nul:
-mklink "%appdata%\Code\User\settings.json" "%ConfigRoot%\vscode\settings.json"
+    del /f /q "%appdata%\Code\User\settings.json" 2> nul:
+    mklink "%appdata%\Code\User\settings.json" "%ConfigRoot%\vscode\settings.json"
 
-del /f /q "%appdata%\Code\User\keybindings.json" 2> nul:
-mklink "%appdata%\Code\User\keybindings.json" "%ConfigRoot%\vscode\keybindings.json"
+    del /f /q "%appdata%\Code\User\keybindings.json" 2> nul:
+    mklink "%appdata%\Code\User\keybindings.json" "%ConfigRoot%\vscode\keybindings.json"
+)
 
-:: vscode - insiders edition (if installed)
+:: vscode - insiders edition
 if exist "%appdata%\Code - Insiders" 2> nul: (
-
     echo Linking settings for vscode insiders edition...
 
     del /f /q "%appdata%\Code - Insiders\User\settings.json" 2> nul:
@@ -44,18 +45,14 @@ if exist "%appdata%\Code - Insiders" 2> nul: (
 
 )
 
-:: clink
-echo Linking settings for clink...
-
-del /f /q "%localappdata%\clink\clink-benferse.lua" 2> nul:
-mklink "%localappdata%\clink\clink-benferse.lua" "%ConfigRoot%\clink\clink-benferse.lua"
-
 :: Windows Terminal
-echo Linking settings for Windows Terminal...
+if exist "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe" 2> nul: (
+    echo Linking settings for Windows Terminal...
 
-del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
-:: copy "%ConfigRoot%\cascadia\profiles.json" "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
-mklink "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" "%ConfigRoot%\cascadia\profiles.json" 2> nul:
+    del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
+    :: copy "%ConfigRoot%\cascadia\profiles.json" "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
+    mklink "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" "%ConfigRoot%\cascadia\profiles.json" 2> nul:
+)
 
 :: nvim
 echo Linking settings for nvim...
@@ -70,10 +67,13 @@ del /f /q "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" 
 mklink "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" "%ConfigRoot%\powershell\profile.ps1"
 
 :: alacritty
-echo Linking settings for alacritty...
+if exist "%appdata%\Alacritty" 2> nul: (
+    echo Linking settings for alacritty...
 
-del /f /q "%appdata%\Alacritty\alacritty.yml" 2> nul:
-mklink "%appdata%\Alacritty\alacritty.yml" "%ConfigRoot%\alacritty\alacritty.yml"
+    del /f /q "%appdata%\Alacritty\alacritty.yml" 2> nul:
+    mklink "%appdata%\Alacritty\alacritty.yml" "%ConfigRoot%\alacritty\alacritty.yml"
+
+)
 
 :: starship
 echo Linking settings for starship...
