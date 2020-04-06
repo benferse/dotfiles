@@ -47,11 +47,17 @@ if exist "%appdata%\Code - Insiders" 2> nul: (
 
 :: Windows Terminal
 if exist "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe" 2> nul: (
-    echo Linking settings for Windows Terminal...
+    echo Linking settings for Windows Terminal from MS store...
 
     del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
-    :: copy "%ConfigRoot%\cascadia\profiles.json" "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
     mklink "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" "%ConfigRoot%\cascadia\profiles.json" 2> nul:
+)
+
+if exist "%localappdata%\Microsoft\Windows Terminal" 2> nul: (
+    echo Linking settings for Windows Terminal from scoop...
+
+    del /f /q "%localappdata%\Microsoft\Windows Terminal\profiles.json" 2> nul:
+    mklink "%localappdata%\Microsoft\Windows Terminal\profiles.json" "%ConfigRoot%\cascadia\profiles.json" 2> nul:
 )
 
 :: nvim
