@@ -1,63 +1,10 @@
-" 
-" Defx configuration
+"
+" NERDTree configuration
 "
 try
-    autocmd FileType defx call s:my_defx_settings()
-
-    call defx#custom#option('_', {
-        \ 'winwidth': 40,
-        \ 'columns': 'git:mark:indent:icon:icons:filename',
-        \ 'split': 'vertical',
-        \ 'direction': 'topleft',
-        \ 'show_ignored_files': 1,
-        \ 'buffer_name': '',
-        \ 'toggle': 1,
-        \ 'resume': 1,
-        \ 'root_marker': ':'
-        \})
-
-    function! s:my_defx_settings() abort "{{{
-        setlocal nospell
-        setlocal nonumber
-        setlocal signcolumn=no
-        setlocal cursorline
-
-        nnoremap <silent><buffer><expr> <CR> defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('drop')
-        nnoremap <silent><buffer><expr> l    defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('drop')
-        nnoremap <silent><buffer><expr> P    defx#do_action('open', 'pedit')
-        nnoremap <silent><buffer><expr> E    defx#do_action('open', 'vsplit')
-
-        nnoremap <silent><buffer><expr> o    defx#do_action('open_or_close_tree')
-
-        nnoremap <silent><buffer><expr> c    defx#do_action('copy')
-        nnoremap <silent><buffer><expr> m    defx#do_action('move')
-        nnoremap <silent><buffer><expr> p    defx#do_action('paste')
-        nnoremap <silent><buffer><expr> d    defx#do_action('remove')
-        nnoremap <silent><buffer><expr> r    defx#do_action('rename')
-
-        nnoremap <silent><buffer><expr> yy   defx#do_action('yank_path')
-        nnoremap <silent><buffer><expr> .    defx#do_action('toggle_ignored_files')
-        nnoremap <silent><buffer><expr> C    defx#do_action('toggle_columns', 'mark:indent:icon:icons:filename')
-        nnoremap <silent><buffer><expr> ,    defx#do_action('toggle_select')
-
-        nnoremap <silent><buffer><expr> F    defx#do_action('new_file')
-        nnoremap <silent><buffer><expr> D    defx#do_action('new_directory')
-
-        nnoremap <silent><buffer><expr> h    defx#do_action('cd', ['..'])
-        nnoremap <silent><buffer><expr> ~    defx#do_action('cd')
-
-        nnoremap <silent><buffer><expr> j    line('.') == line('$') ? 'gg' : 'j'
-        nnoremap <silent><buffer><expr> k    line('.') == 1 ? 'G' : 'k'
-
-    endfunction "}}}
-
-    "
-    " General keybindings to activate defx
-    "
-    nnoremap <silent><leader>e :Defx -toggle -split=vertical -winwidth=40 -direction=botright<CR>
-
+    let NERDTreeWinPos='right'
 catch
-    echo 'Defx is not installed yet.'
+    echo "Error configuring NERDTree - is it installed?"
 endtry
 
 "
@@ -129,7 +76,7 @@ try
     nnoremap <silent><leader>f :Denite file/rec<CR>
 
 catch
-    echo 'Denite is not installed yet'
+    echo 'Error configuring Denite - is it installed?'
 endtry
 
 "
@@ -152,7 +99,7 @@ try
     let g:startify_files_number = 5
     let g:startify_fortune_use_unicode = 1
 catch
-    echo 'vim-startify is not installed yet'
+    echo 'Error configuring Startify - is it installed?'
 endtry
 
 "
@@ -161,7 +108,7 @@ endtry
 try
     let g:sneak#s_next = 1
 catch
-    echo 'vim-sneak is not installed yet'
+    echo 'Error configuring sneak - is it installed?'
 endtry
 
 " vim:ai fdm=marker

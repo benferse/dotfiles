@@ -1,9 +1,6 @@
 [submodule "config/nvim/pack/vim-benferse/start/nord-vim"]
 	path = config/nvim/pack/vim-benferse/start/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim
-[submodule "config/nvim/pack/vim-benferse/start/defx.nvim"]
-	path = config/nvim/pack/vim-benferse/start/defx.nvim
-	url = https://github.com/Shougo/defx.nvim
 [submodule "config/nvim/pack/vim-benferse/start/denite.nvim"]
 	path = config/nvim/pack/vim-benferse/start/denite.nvim
 	url = https://github.com/Shougo/denite.nvim
@@ -16,12 +13,6 @@
 [submodule "config/nvim/pack/vim-benferse/start/vim-textobj-entire"]
 	path = config/nvim/pack/vim-benferse/start/vim-textobj-entire
 	url = https://github.com/kana/vim-textobj-entire
-[submodule "config/nvim/pack/vim-benferse/start/defx-icons"]
-	path = config/nvim/pack/vim-benferse/start/defx-icons
-	url = https://github.com/kristijanhusak/defx-icons
-[submodule "config/nvim/pack/vim-benferse/start/defx-git"]
-	path = config/nvim/pack/vim-benferse/start/defx-git
-	url = https://github.com/kristijanhusak/defx-git
 [submodule "config/nvim/pack/vim-benferse/start/vim-signify"]
 	path = config/nvim/pack/vim-benferse/start/vim-signify
 	url = https://github.com/mhinz/vim-signify
@@ -49,3 +40,9 @@
 [submodule "config/nvim/pack/vim-benferse/start/vim-devicons"]
 	path = config/nvim/pack/vim-benferse/start/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
+[submodule ".\\config\\nvim\\pack\\vim-benferse\\start\\nerdtree"]
+	path = .\\config\\nvim\\pack\\vim-benferse\\start\\nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule ".\\config\\nvim\\pack\\vim-benferse\\start\\nerdtree-git-plugin"]
+	path = .\\config\\nvim\\pack\\vim-benferse\\start\\nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin
