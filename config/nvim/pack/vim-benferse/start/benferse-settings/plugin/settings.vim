@@ -53,8 +53,6 @@ set wildmenu
 
 set shortmess+=cI
 
-let mapleader="\<space>"
-
 if !&scrolloff
     set scrolloff=1
 endif
