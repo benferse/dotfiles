@@ -40,9 +40,18 @@
 [submodule "config/nvim/pack/vim-benferse/start/vim-devicons"]
 	path = config/nvim/pack/vim-benferse/start/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
-[submodule ".\\config\\nvim\\pack\\vim-benferse\\start\\nerdtree"]
-	path = .\\config\\nvim\\pack\\vim-benferse\\start\\nerdtree
+[submodule "config/nvim/pack/vim-benferse/start/nerdtree"]
+	path = config/nvim/pack/vim-benferse/start/nerdtree
 	url = https://github.com/preservim/nerdtree
-[submodule ".\\config\\nvim\\pack\\vim-benferse\\start\\nerdtree-git-plugin"]
-	path = .\\config\\nvim\\pack\\vim-benferse\\start\\nerdtree-git-plugin
-	url = https://github.com/Xuyuanp/nerdtree-git-plugin
+[submodule "config/nvim/pack/vim-benferse/start/fzf"]
+	path = config/nvim/pack/vim-benferse/start/fzf
+	url = https://github.com/junegunn/fzf
+[submodule "config/nvim/pack/vim-benferse/start/fzf.vim"]
+	path = config/nvim/pack/vim-benferse/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "config/nvim/pack/vim-benferse/start/omnisharp-vim"]
+	path = config/nvim/pack/vim-benferse/start/omnisharp-vim
+	url = https://github.com/omnisharp/omnisharp-vim
+[submodule "config/nvim/pack/vim-benferse/start/asynccomplete.vim"]
+	path = config/nvim/pack/vim-benferse/start/asynccomplete.vim
+	url = https://github.com/prabirshrestha/asyncomplete.vim

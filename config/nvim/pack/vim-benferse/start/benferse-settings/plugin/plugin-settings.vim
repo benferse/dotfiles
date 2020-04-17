@@ -3,6 +3,15 @@
 "
 try
     let NERDTreeWinPos='right'
+
+    "
+    " Keybindings for the NERDTree window
+    "
+    autocmd FileType nerdtree call s:my_nerdtree_settings()
+
+    function s:my_nerdtree_settings() abort "{{{
+        nnoremap <silent><buffer><CR> o:NERDTreeClose<CR>
+    endfunction "}}}
 catch
     echo "Error configuring NERDTree - is it installed?"
 endtry
