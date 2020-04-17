@@ -5,7 +5,7 @@ imap kj <esc>
 " Use <C-L> to clear the highlighting of :set hlsearch.
 " Courtesy of the inimitable tpope
 if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+  nnoremap <silent><C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif 
 
 "
@@ -26,6 +26,13 @@ nnoremap <silent><leader>ww <C-W>w
 nnoremap <silent><leader>wt <C-W>t
 nnoremap <silent><leader>wb <C-W>b
 nnoremap <silent><leader>wr <C-W>r
+
+"
+" Use TAB and CR for completion activities and popup navigation
+"
+inoremap <expr><Tab>    pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<Tab>"
+inoremap <expr><CR>     pumvisible() ? "\<C-y>" : "\<CR>"
 
 "
 " Determines if there is an active window displaying the help buffer

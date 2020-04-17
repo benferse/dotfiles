@@ -1,9 +1,6 @@
 [submodule "config/nvim/pack/vim-benferse/start/nord-vim"]
 	path = config/nvim/pack/vim-benferse/start/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim
-[submodule "config/nvim/pack/vim-benferse/start/denite.nvim"]
-	path = config/nvim/pack/vim-benferse/start/denite.nvim
-	url = https://github.com/Shougo/denite.nvim
 [submodule "config/nvim/pack/vim-benferse/start/vim-sneak"]
 	path = config/nvim/pack/vim-benferse/start/vim-sneak
 	url = https://github.com/justinmk/vim-sneak
