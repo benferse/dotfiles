@@ -19,6 +19,14 @@ endtry
 "
 " fzf configuration
 "
+try
+    let g:fzf_layout = { 'window': { 'height': 0.6, 'width': 0.9 } }
+
+    nnoremap <silent><leader>bb :call fzf#vim#buffers({})<CR>
+    nnoremap <silent><leader>ff :call fzf#vim#files(getcwd(), { 'options': ['--layout=reverse', '--info=inline', '--preview', 'bat {}'] })<CR>
+catch
+    echo "Error configuring fzf - is it installed?"
+endtry
 
 "
 " airline configuration

@@ -1,9 +1,14 @@
+"
+" Escape back to normal mode without having to stretch
+"
 imap jj <esc>
 imap jk <esc>
 imap kj <esc>
 
+"
 " Use <C-L> to clear the highlighting of :set hlsearch.
 " Courtesy of the inimitable tpope
+"
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent><C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif 
@@ -28,22 +33,17 @@ nnoremap <silent><leader>wb <C-W>b
 nnoremap <silent><leader>wr <C-W>r
 
 "
+" Buffer navigation
+"
+nnoremap <silent><leader>bn :bnext<CR>
+nnoremap <silent><leader>bp :bprevious<CR>
+nnoremap <silent><leader>bd :bdelete<CR>
+
+"
 " Use TAB and CR for completion activities and popup navigation
 "
 inoremap <expr><Tab>    pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<Tab>"
 inoremap <expr><CR>     pumvisible() ? "\<C-y>" : "\<CR>"
 
-"
-" Determines if there is an active window displaying the help buffer
-"
-function IsHelpOpen()
-    for buf in getbufinfo({"buflisted": 0, "bufloaded": 1, "bufmodified": 0})
-        if getbufvar(buf.bufnr, '&buftype') == 'help' && !buf.hidden
-            return 1
-        endif
-    endfor
-    return 0
-endfunction
-
-nnoremap <silent><expr><leader>h IsHelpOpen() ? ':helpclose<cr>' : ':help<cr>'
+nnoremap <expr><leader>h benferse#utils#IsHelpOpen() ? ':helpclose<cr>' : ':help '
