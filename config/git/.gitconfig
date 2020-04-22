@@ -1,0 +1,24 @@
+[alias]
+   tree = log --color --graph --pretty=format:'%Cred%h%Creset (%G?) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[credential]
+	helper = manager
+
+[diff]
+	tool = bc3
+
+[difftool]
+	prompt = false
+
+[gpg]
+	program = C:\\users\\benferse\\scoop\\apps\\gpg\\current\\bin\\gpg.exe
+
+[merge]
+	tool = bc3
+
+[mergetool]
+	prompt = false
+
+[user]
+	email = ben@bu.edu
+	name = Ben Fersenheim
