@@ -87,6 +87,12 @@ echo Linking settings for starship...
 del /f /q "%XDG_CONFIG_HOME%\starship.toml" 2> nul:
 mklink "%XDG_CONFIG_HOME%\starship.toml" "%ConfigRoot%\starship\starship.toml"
 
+:: git
+echo Linking settings for git...
+
+del /f /q "%USERPROFILE%\.gitconfig" 2> nul:
+mklink "%USERPROFILE%\.gitconfig" "%ConfigRoot%\git\.gitconfig"
+
 echo Done.
 
 exit /b 0
