@@ -52,3 +52,6 @@
 [submodule "config/nvim/pack/vim-benferse/start/asynccomplete.vim"]
 	path = config/nvim/pack/vim-benferse/start/asynccomplete.vim
 	url = https://github.com/prabirshrestha/asyncomplete.vim
+[submodule "config/nvim/pack/vim-benferse/start/supertab"]
+	path = config/nvim/pack/vim-benferse/start/supertab
+	url = gh:ervandew/supertab
