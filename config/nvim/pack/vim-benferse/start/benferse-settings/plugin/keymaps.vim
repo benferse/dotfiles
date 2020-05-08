@@ -40,10 +40,6 @@ nnoremap <silent><leader>bp :bprevious<CR>
 nnoremap <silent><leader>bd :bdelete<CR>
 
 "
-" Use TAB and CR for completion activities and popup navigation
+" Toggle the help window
 "
-inoremap <expr><Tab>    pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<Tab>"
-inoremap <expr><CR>     pumvisible() ? "\<C-y>" : "\<CR>"
-
 nnoremap <expr><leader>h benferse#utils#IsHelpOpen() ? ':helpclose<cr>' : ':help '
