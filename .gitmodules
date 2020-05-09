@@ -55,3 +55,6 @@
 [submodule "config/nvim/pack/vim-benferse/start/supertab"]
 	path = config/nvim/pack/vim-benferse/start/supertab
 	url = gh:ervandew/supertab
+[submodule "config/nvim/pack/vim-benferse/start/vim-ps1"]
+	path = config/nvim/pack/vim-benferse/start/vim-ps1
+	url = gh:pprovost/vim-ps1
