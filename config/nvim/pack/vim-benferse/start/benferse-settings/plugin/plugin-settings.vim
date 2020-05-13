@@ -60,4 +60,17 @@ catch
     echo 'Error configuring sneak - is it installed?'
 endtry
 
+"
+" OmniSharp configuration
+"
+try
+    " Use my own custom proxy that manages standard stream pipes properly
+    if has("win32")
+        let g:OmniSharp_server_stdio = 1
+        let g:OmniSharp_server_path = '~/.local/bin/stdioproxy.exe'
+    endif
+catch
+    echo 'Error configuring OmniSharp - is it installed?'
+endtry
+
 " vim:ai fdm=marker
