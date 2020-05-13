@@ -58,11 +58,6 @@ nnoremap <silent><leader>bp :bprevious<CR>
 nnoremap <silent><leader>bd :bdelete<CR>
 
 "
-" bring up the fugitive window
-"
-nnoremap <silent><leader>g :Git<CR>
-
-"
 " Toggle the help window
 "
 nnoremap <expr><leader>h benferse#utils#IsHelpOpen() ? ':helpclose<cr>' : ':help '
