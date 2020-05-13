@@ -33,6 +33,24 @@ nnoremap <silent><leader>wb <C-W>b
 nnoremap <silent><leader>wr <C-W>r
 
 "
+" Use ALT+[h,j,k,l] to move between windows regardless of current mode
+"
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+
+"
 " Buffer navigation
 "
 nnoremap <silent><leader>bn :bnext<CR>
