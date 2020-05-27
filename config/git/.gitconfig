@@ -10,9 +10,6 @@
 [difftool]
     prompt = false
 
-[gpg]
-    program = C:\\users\\benferse\\scoop\\apps\\gpg\\current\\bin\\gpg.exe
-
 [merge]
     tool = bc3
 
