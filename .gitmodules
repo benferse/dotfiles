@@ -51,10 +51,10 @@
 	url = https://github.com/prabirshrestha/asyncomplete.vim
 [submodule "config/nvim/pack/vim-benferse/start/supertab"]
 	path = config/nvim/pack/vim-benferse/start/supertab
-	url = gh:ervandew/supertab
+	url = https://github.com/ervandew/supertab
 [submodule "config/nvim/pack/vim-benferse/start/vim-ps1"]
 	path = config/nvim/pack/vim-benferse/start/vim-ps1
-	url = gh:pprovost/vim-ps1
-[submodule ".\\config\\nvim\\pack\\vim-benferse\\start\\vim-textobj-entire"]
-	path = .\\config\\nvim\\pack\\vim-benferse\\start\\vim-textobj-entire
+	url = https://github.com/pprovost/vim-ps1
+[submodule "config/nvim/pack/vim-benferse/start/vim-textobj-entire"]
+	path = config/nvim/pack/vim-benferse/start/vim-textobj-entire
 	url = https://github.com/benferse/vim-textobj-entire
