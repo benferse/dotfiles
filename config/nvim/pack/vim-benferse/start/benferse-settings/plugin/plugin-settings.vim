@@ -23,7 +23,7 @@ try
     let g:fzf_layout = { 'window': { 'height': 0.6, 'width': 0.9 } }
 
     nnoremap <silent><leader>bb :call fzf#vim#buffers({})<CR>
-    nnoremap <silent><leader>ff :call fzf#vim#files(getcwd(), { 'options': ['--layout=reverse', '--info=inline', '--preview', 'bat {}'] })<CR>
+    nnoremap <silent><leader>ff :call fzf#vim#files(getcwd(), { 'options': ['--layout=reverse', '--preview', 'bat {}'] })<CR>
 catch
     echo "Error configuring fzf - is it installed?"
 endtry
@@ -71,6 +71,15 @@ try
     endif
 catch
     echo 'Error configuring OmniSharp - is it installed?'
+endtry
+
+"
+" SuperTab configuration
+"
+try
+    let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+catch
+    echo 'Error configuring SuperTab - is it installed?'
 endtry
 
 " vim:ai fdm=marker
