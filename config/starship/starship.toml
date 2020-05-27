@@ -1,5 +1,23 @@
 [character]
 use_symbol_for_status = true
+style_success = "bold fg:#a3be8c"
+style_failure = "bold fg:#bf616a"
+
+[cmd_duration]
+style = "fg:#ebcb8e"
+
+[directory]
+style = "bold fg:#81a1c1"
+
+[git_branch]
+style = "bold fg:#b48ead"
+
+[git_state]
+style = "bold fg:#ebcb8b"
+
+[git_status]
+style = "bold fg:#bf616a"
 
 [hostname]
 ssh_only = false
+style = "bold dimmed fg:#5e81ac"
