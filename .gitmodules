@@ -13,9 +13,6 @@
 [submodule "config/nvim/pack/vim-benferse/start/vim-startify"]
 	path = config/nvim/pack/vim-benferse/start/vim-startify
 	url = https://github.com/mhinz/vim-startify
-[submodule "config/nvim/pack/vim-benferse/start/nvim-lsp"]
-	path = config/nvim/pack/vim-benferse/start/nvim-lsp
-	url = https://github.com/neovim/nvim-lsp
 [submodule "config/nvim/pack/vim-benferse/start/vim-commentary"]
 	path = config/nvim/pack/vim-benferse/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
@@ -43,18 +40,12 @@
 [submodule "config/nvim/pack/vim-benferse/start/fzf.vim"]
 	path = config/nvim/pack/vim-benferse/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
-[submodule "config/nvim/pack/vim-benferse/start/omnisharp-vim"]
-	path = config/nvim/pack/vim-benferse/start/omnisharp-vim
-	url = https://github.com/omnisharp/omnisharp-vim
-[submodule "config/nvim/pack/vim-benferse/start/asynccomplete.vim"]
-	path = config/nvim/pack/vim-benferse/start/asynccomplete.vim
-	url = https://github.com/prabirshrestha/asyncomplete.vim
-[submodule "config/nvim/pack/vim-benferse/start/supertab"]
-	path = config/nvim/pack/vim-benferse/start/supertab
-	url = https://github.com/ervandew/supertab
 [submodule "config/nvim/pack/vim-benferse/start/vim-ps1"]
 	path = config/nvim/pack/vim-benferse/start/vim-ps1
 	url = https://github.com/pprovost/vim-ps1
 [submodule "config/nvim/pack/vim-benferse/start/vim-textobj-entire"]
 	path = config/nvim/pack/vim-benferse/start/vim-textobj-entire
 	url = https://github.com/benferse/vim-textobj-entire
+[submodule "config/nvim/pack/vim-benferse/start/coc.nvim"]
+	path = config/nvim/pack/vim-benferse/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim

@@ -74,12 +74,71 @@ catch
 endtry
 
 "
-" SuperTab configuration
+" Coc configuration
 "
 try
-    let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+    " SuperTab-like completion using <tab> for everything -
+    " triggering completion, navigating, etc.
+    inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1] =~# '\s'
+    endfunction
+
+    " Use Ctrl-Space to trigger completion
+    inoremap <silent><expr> <C-Space> coc#refresh()
+
+    " Use <CR> to confirm completion
+    if exists('*complete_info')
+        inoremap <expr><cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+    else
+        inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    endif
+
+    " Use ]g and [g to navigate diagnostics
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+    " Code navigation
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    " Use K to show documentation in the preview window
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    function! s:show_documentation()
+        if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
+
+    " Format selected code
+    nmap <leader>= <Plug>(coc-format-selected)
+    xmap <leader>= <Plug>(coc-format-selected)
+
+    " Declare the function and class text objects
+    xmap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    xmap ic <Plug>(coc-classobj-i)
+    xmap ac <Plug>(coc-classobj-a)
+    nmap if <Plug>(coc-funcobj-i)
+    nmap af <Plug>(coc-funcobj-a)
+    nmap ic <Plug>(coc-classobj-i)
+    nmap ac <Plug>(coc-classobj-a)
+
+    " Try to highlight symbol and references on hover
+    autocmd CursorHold * silent call CocActionAsync('highlight')
 catch
-    echo 'Error configuring SuperTab - is it installed?'
+    echo 'Error configuring CoC - is it installed?'
 endtry
 
 " vim:ai fdm=marker
