@@ -26,6 +26,8 @@ set noshowcmd
 set updatetime=100
 
 set hidden
+set nobackup
+set nowritebackup
 
 set hlsearch
 set incsearch
