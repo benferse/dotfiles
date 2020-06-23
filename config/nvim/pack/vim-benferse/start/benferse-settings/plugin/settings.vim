@@ -67,3 +67,15 @@ filetype plugin indent on
 set autowrite
 
 set foldmethod=syntax
+
+"
+" File type detection doesn't do a great job of telling the different between
+" json and jsonc (just json, but allows comments). So just highlight comments
+" anywhere and assume I'm smart enough to know where they're actually
+" supported :|
+"
+augroup benferse_jsonc
+    autocmd FileType json syntax match Comment +\/\/.\+$+
+augroup end
+
+

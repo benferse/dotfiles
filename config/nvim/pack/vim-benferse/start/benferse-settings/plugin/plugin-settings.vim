@@ -8,15 +8,6 @@ catch
 endtry
 
 "
-" Asynccomplete configuration
-"
-try
-    let g:asyncomplete_auto_popup = 1
-catch
-    echo "Error configuring asyncomplete - is it installed?"
-endtry
-
-"
 " fzf configuration
 "
 try
@@ -56,27 +47,24 @@ endtry
 "
 try
     let g:sneak#s_next = 1
+    let g:sneak#use_ic_scs = 1
+    let g:sneak#prompt = 'sneak>'
 catch
     echo 'Error configuring sneak - is it installed?'
-endtry
-
-"
-" OmniSharp configuration
-"
-try
-    " Use my own custom proxy that manages standard stream pipes properly
-    if has("win32")
-        let g:OmniSharp_server_stdio = 1
-        let g:OmniSharp_server_path = '~/.local/bin/stdioproxy.exe'
-    endif
-catch
-    echo 'Error configuring OmniSharp - is it installed?'
 endtry
 
 "
 " Coc configuration
 "
 try
+    " Force install of the extensions we require
+    let g:coc_global_extensions = [
+                \ 'coc-json',
+                \ 'coc-lists',
+                \ 'coc-rust-analyzer',
+                \ 'coc-vimlsp'
+                \ ]
+
     " SuperTab-like completion using <tab> for everything -
     " triggering completion, navigating, etc.
     inoremap <silent><expr> <TAB>
@@ -134,6 +122,9 @@ try
     nmap af <Plug>(coc-funcobj-a)
     nmap ic <Plug>(coc-classobj-i)
     nmap ac <Plug>(coc-classobj-a)
+
+    " Code refactoring actions
+    nmap <leader>rn <Plug>(coc-rename)
 
     " Try to highlight symbol and references on hover
     autocmd CursorHold * silent call CocActionAsync('highlight')
