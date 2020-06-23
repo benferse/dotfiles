@@ -64,7 +64,7 @@ if exist "%localappdata%\Microsoft\Windows Terminal" 2> nul: (
 echo Linking settings for nvim...
 
 del /f /q "%XDG_CONFIG_HOME%\nvim" 2> nul:
-mklink "%XDG_CONFIG_HOME%\nvim" "%ConfigRoot%\nvim"
+mklink /d "%XDG_CONFIG_HOME%\nvim" "%ConfigRoot%\nvim"
 
 :: Powershell Core profile
 echo Linking settings for pscore...
@@ -92,6 +92,9 @@ echo Linking settings for git...
 
 del /f /q "%USERPROFILE%\.gitconfig" 2> nul:
 mklink "%USERPROFILE%\.gitconfig" "%ConfigRoot%\git\.gitconfig"
+
+del /f /q "%XDG_CONFIG_HOME%\git\config" 2> nul:
+mklink "%XDG_CONFIG_HOME%\git\config" "%ConfigRoot%\git\.gitconfig.windows"
 
 echo Done.
 
