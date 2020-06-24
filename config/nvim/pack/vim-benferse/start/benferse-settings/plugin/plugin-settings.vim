@@ -133,10 +133,10 @@ try
     xmap af <Plug>(coc-funcobj-a)
     xmap ic <Plug>(coc-classobj-i)
     xmap ac <Plug>(coc-classobj-a)
-    nmap if <Plug>(coc-funcobj-i)
-    nmap af <Plug>(coc-funcobj-a)
-    nmap ic <Plug>(coc-classobj-i)
-    nmap ac <Plug>(coc-classobj-a)
+    omap if <Plug>(coc-funcobj-i)
+    omap af <Plug>(coc-funcobj-a)
+    omap ic <Plug>(coc-classobj-i)
+    omap ac <Plug>(coc-classobj-a)
 
     " Code refactoring actions
     nmap <leader>rn <Plug>(coc-rename)
