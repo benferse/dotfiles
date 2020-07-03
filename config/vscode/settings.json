@@ -13,5 +13,7 @@
     "editor.mouseWheelZoom": true,
     "workbench.colorTheme": "Nord",
 
-    "vscode-neovim.neovimPath": "C:\\Users\\benferse\\scoop\\shims\\nvim.exe"
+    "vscode-neovim.neovimPath": "C:\\Users\\benferse\\scoop\\apps\\neovim-nightly\\current\\bin\\nvim.exe",
+    "vscode-neovim.neovimInitPath": "C:\\Users\\benferse\\.config\\nvim\\init.vim",
+    "editor.lineNumbers": "relative"
 }
