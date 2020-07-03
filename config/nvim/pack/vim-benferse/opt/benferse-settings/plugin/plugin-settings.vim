@@ -1,3 +1,5 @@
+if !exists('g:vscode')
+
 "
 " NERDTree configuration
 "
@@ -146,5 +148,7 @@ try
 catch
     echo 'Error configuring CoC - is it installed?'
 endtry
+
+endif
 
 " vim:ai fdm=marker

@@ -10,12 +10,16 @@ if &compatible
 endif
 
 set number
-set relativenumber
-augroup benferse_numbering
-    autocmd!
-    autocmd InsertEnter * set norelativenumber
-    autocmd InsertLeave * set relativenumber
-augroup end
+
+" vscode-neovim really freaks out if you try to do this
+if !exists('g:vscode')
+    set relativenumber
+    augroup benferse_numbering
+        autocmd!
+        autocmd InsertEnter * set norelativenumber
+        autocmd InsertLeave * set relativenumber
+    augroup end
+endif
 
 set nowrap
 set showmatch
