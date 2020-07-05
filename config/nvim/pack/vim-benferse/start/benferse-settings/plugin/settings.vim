@@ -66,8 +66,6 @@ endif
 filetype plugin indent on
 set autowrite
 
-set foldmethod=syntax
-
 "
 " File type detection doesn't do a great job of telling the different between
 " json and jsonc (just json, but allows comments). So just highlight comments
@@ -78,4 +76,11 @@ augroup benferse_jsonc
     autocmd FileType json syntax match Comment +\/\/.\+$+
 augroup end
 
-
+"
+" I like having folks available, but I generally want a newly opened file
+" to have all folds opened, so let's do that
+"
+augroup benferse_syntax
+    autocmd Syntax c,cpp,vim,xml,html,xhtml,rust,js setlocal foldmethod=syntax
+    autocmd Syntax c,cpp,vim,xml,html,xhtml,rust,js normal zR
+augroup end
