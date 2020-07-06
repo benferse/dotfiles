@@ -141,9 +141,6 @@ try
 
     " Code refactoring actions
     nmap <leader>rn <Plug>(coc-rename)
-
-    " Try to highlight symbol and references on hover
-    autocmd CursorHold * silent call CocActionAsync('highlight')
 catch
     echo 'Error configuring CoC - is it installed?'
 endtry
