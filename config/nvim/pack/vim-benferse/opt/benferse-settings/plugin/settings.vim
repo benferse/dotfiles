@@ -9,13 +9,18 @@ if &compatible
     set nocompatible
 endif
 
-set number
-set relativenumber
-augroup benferse_numbering
-    autocmd!
-    autocmd InsertEnter * set norelativenumber
-    autocmd InsertLeave * set relativenumber
-augroup end
+" vscode-neovim really hates the following, and vscode can do it
+" by itself anyway
+
+if !exists('g:vscode')
+    set number
+    set relativenumber
+    augroup benferse_numbering
+        autocmd!
+        autocmd InsertEnter * set norelativenumber
+        autocmd InsertLeave * set relativenumber
+    augroup end
+endif
 
 set nowrap
 set showmatch
