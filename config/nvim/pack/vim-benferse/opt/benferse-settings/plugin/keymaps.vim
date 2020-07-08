@@ -39,9 +39,18 @@ tnoremap <A-l> <C-\><C-N><C-w>l
 "
 " Buffer navigation
 "
-nnoremap <silent><leader>bn :bnext<CR>
-nnoremap <silent><leader>bp :bprevious<CR>
-nnoremap <silent><leader>bd :bdelete<CR>
+nnoremap <silent><leader>bn :<C-u> call benferse#buffers#next()<cr>
+nnoremap <silent><leader>bp :<C-u> call benferse#buffers#previous()<cr>
+nnoremap <silent><leader>bd :<C-u> call benferse#buffers#delete()<cr>
+
+"
+" vim-unimpaired sets these, but we want them to go through our smarts instead
+" for vscode support
+"
+nnoremap <silent>]b :<C-u> call benferse#buffers#next()<cr>
+nnoremap <silent>[b :<C-u> call benferse#buffers#previous()<cr>
+nnoremap <silent>]B :<C-u> call benferse#buffers#last()<cr>
+nnoremap <silent>[B :<C-u> call benferse#buffers#first()<cr>
 
 "
 " Toggle the help window
