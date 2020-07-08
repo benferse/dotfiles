@@ -5,6 +5,7 @@ if !exists('g:vscode')
 "
 try
     let NERDTreeWinPos='right'
+    nnoremap <silent><leader>e :NERDTreeToggle<CR>
 catch
     echo "Error configuring NERDTree - is it installed?"
 endtry

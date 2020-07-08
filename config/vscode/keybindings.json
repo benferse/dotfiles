@@ -14,5 +14,5 @@
     {
         "key": "ctrl+shift+k",
         "command": "workbench.action.terminal.focusPrevious"
-    },
+    }
 ]
