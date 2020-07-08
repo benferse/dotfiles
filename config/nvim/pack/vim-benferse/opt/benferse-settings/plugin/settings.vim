@@ -9,10 +9,10 @@ if &compatible
     set nocompatible
 endif
 
-set number
-
-" vscode-neovim really freaks out if you try to do this
+" vscode-neovim really hates the following, and vscode can do it
+" by itself anyway
 if !exists('g:vscode')
+    set number
     set relativenumber
     augroup benferse_numbering
         autocmd!

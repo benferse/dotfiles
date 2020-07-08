@@ -14,5 +14,17 @@
     {
         "key": "ctrl+shift+k",
         "command": "workbench.action.terminal.focusPrevious"
+    },
+    {
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "j",
+        "when": "editorTextFocus && !neovim.recording && neovim.mode == insert",
+        "args": "j"
+    },
+    {
+        "command": "vscode-neovim.compositeEscape2",
+        "key": "k",
+        "when": "editorTextFocus && !neovim.recording && neovim.mode == insert",
+        "args": "k"
     }
 ]
