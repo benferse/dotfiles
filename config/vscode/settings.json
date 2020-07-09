@@ -1,7 +1,7 @@
 {
     "terminal.integrated.fontFamily": "Hasklug NF",
     "terminal.integrated.fontSize": 16,
-    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    "terminal.integrated.shell.windows": "pwsh.exe",
 
     "editor.fontFamily": "Hasklug NF",
     "editor.fontLigatures": true,
