@@ -15,5 +15,17 @@
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Nord",
 
-    "vscode-neovim.neovimPath": "C:\\Users\\benferse\\scoop\\apps\\neovim-nightly\\current\\bin\\nvim.exe"
+    "vscode-neovim.neovimPath": "C:\\Users\\benferse\\scoop\\apps\\neovim-nightly\\current\\bin\\nvim.exe",
+    "workbench.preferredDarkColorTheme": "Nord",
+    "workbench.preferredHighContrastColorTheme": "Nord",
+    "workbench.preferredLightColorTheme": "Nord",
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.highlightModifiedTabs": true,
+    "window.enableMenuBarMnemonics": false,
+    "terminal.integrated.confirmOnExit": true,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.lineHeight": 1.1,
+    "csharp.semanticHighlighting.enabled": true,
+    "omnisharp.enableRoslynAnalyzers": true
 }

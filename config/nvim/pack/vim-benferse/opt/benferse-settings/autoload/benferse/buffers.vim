@@ -1,6 +1,13 @@
+function benferse#buffers#any_listed()
+    let s:buffs = getbufinfo({'buflisted': 1})
+    return !empty(s:buffs)
+endfunction 
+
 function benferse#buffers#next()
     if !exists('g:vscode')
-        bnext
+        if benferse#buffers#any_listed()
+            bnext
+        endif
     else
         Tabnext
     endif
@@ -8,9 +15,31 @@ endfunction
 
 function benferse#buffers#previous()
     if !exists('g:vscode')
-        bprev
+        if benferse#buffers#any_listed()
+            bprev
+        endif
     else
         Tabprevious
+    endif
+endfunction
+
+function benferse#buffers#first()
+    if !exists('g:vscode')
+        if benferse#buffers#any_listed()
+            bfirst
+        endif
+    else
+        Tabfirst
+    endif
+endfunction
+
+function benferse#buffers#last()
+    if !exists('g:vscode')
+        if benferse#buffers#any_listed()
+            blast
+        endif
+    else
+        Tablast
     endif
 endfunction
 
@@ -19,21 +48,5 @@ function benferse#buffers#delete()
         bdelete
     else
         Tabclose
-    endif
-endfunction
-
-function benferse#buffers#first()
-    if !exists('g:vscode')
-        bfirst
-    else
-        Tabfirst
-    endif
-endfunction
-
-function benferse#buffers#last()
-    if !exists('g:vscode')
-        blast
-    else
-        Tablast
     endif
 endfunction

@@ -43,16 +43,25 @@ nnoremap <silent><leader>bn :<C-u> call benferse#buffers#next()<cr>
 nnoremap <silent><leader>bp :<C-u> call benferse#buffers#previous()<cr>
 nnoremap <silent><leader>bd :<C-u> call benferse#buffers#delete()<cr>
 
-"
 " vim-unimpaired sets these, but we want them to go through our smarts instead
 " for vscode support
-"
 nnoremap <silent>]b :<C-u> call benferse#buffers#next()<cr>
 nnoremap <silent>[b :<C-u> call benferse#buffers#previous()<cr>
 nnoremap <silent>]B :<C-u> call benferse#buffers#last()<cr>
 nnoremap <silent>[B :<C-u> call benferse#buffers#first()<cr>
 
 "
+" Fuzzy finder integration
+"
+nnoremap <silent><leader>bb :<C-u> call benferse#fuzzy#find_buffers()<cr>
+nnoremap <silent><leader>ff :<C-u> call benferse#fuzzy#find_files()<cr>
+
+"
+" Explorer/tree interaction
+"
+nnoremap <silent><leader>e :<C-u> call benferse#explorer#toggle()<cr>
+
+"
 " Toggle the help window
 "
-nnoremap <expr><leader>h benferse#utils#IsHelpOpen() ? ':helpclose<cr>' : ':help '
+nnoremap <expr><leader>h benferse#help#is_open() ? ':helpclose<cr>' : ':help '
