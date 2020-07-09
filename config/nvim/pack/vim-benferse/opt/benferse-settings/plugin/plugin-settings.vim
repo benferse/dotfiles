@@ -5,7 +5,6 @@ if !exists('g:vscode')
 "
 try
     let NERDTreeWinPos='right'
-    nnoremap <silent><leader>e :NERDTreeToggle<CR>
 catch
     echo "Error configuring NERDTree - is it installed?"
 endtry
@@ -14,14 +13,13 @@ endtry
 " fzf configuration
 "
 try
-    let g:fzf_layout = { 'window': { 'height': 0.6, 'width': 0.9 } }
-
     function! s:build_quickfix_list(lines)
         call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
         copen
         cc
     endfunction
 
+    let g:fzf_layout = { 'window': { 'height': 0.6, 'width': 0.9 } }
     let g:fzf_action = {
                 \ 'ctrl-t': 'tab split',
                 \ 'ctrl-x': 'split',
@@ -29,8 +27,6 @@ try
                 \ 'ctrl-q': function('s:build_quickfix_list')
                 \ }
 
-    nnoremap <silent><leader>bb :call fzf#vim#buffers({ 'options': '--layout=reverse' })<CR>
-    nnoremap <silent><leader>ff :call fzf#vim#files(getcwd(), { 'options': '--layout=reverse --preview="bat {}"'})<CR>
     nnoremap <leader>gg :Ag <C-R><C-W><CR>
     nnoremap <leader>g  :Ag
 catch
