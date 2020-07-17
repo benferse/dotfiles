@@ -1,14 +1,14 @@
 :: Initialization script for Windows. There is less of a convention
 :: for where dotfiles and such are placed on Windows, so this is
 :: mostly linking individual files and directories to the right place
-:: in the user profile
+:: in the user profile.
 ::
 :: Wherever possible, standard XDG locations are used so Windows vs. *nix
-:: setups can "just work", as much as humanly possible
+:: setups can "just work", as much as humanly possible.
 ::
 :: Needs to run as an administrator, or you need the SeCreateSymbolicLink
 :: privilege, or you need to be on Windows 10 with developer mode enabled
-:: (which confers the latter)
+:: (which confers the latter).
 
 @echo off
 
