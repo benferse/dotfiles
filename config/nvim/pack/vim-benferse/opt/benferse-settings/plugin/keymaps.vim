@@ -6,6 +6,11 @@ imap jk <esc>
 imap kj <esc>
 
 "
+" This is honestly life changing
+"
+nnoremap ; :<C-u>w<CR>
+
+"
 " Use <C-L> to clear the highlighting of :set hlsearch.
 " Courtesy of the inimitable tpope
 "
@@ -65,3 +70,23 @@ nnoremap <silent><leader>e :<C-u> call benferse#explorer#toggle()<cr>
 " Toggle the help window
 "
 nnoremap <expr><leader>h benferse#help#is_open() ? ':helpclose<cr>' : ':help '
+
+"
+" Sneaky sneaky
+"
+if exists('g:sneak#s_next')
+    nmap f <Plug>Sneak_f
+    nmap F <Plug>Sneak_F
+    nmap t <Plug>Sneak_t
+    nmap T <Plug>Sneak_T
+
+    xmap f <Plug>Sneak_f
+    xmap F <Plug>Sneak_F
+    xmap t <Plug>Sneak_t
+    xmap T <Plug>Sneak_T
+
+    omap f <Plug>Sneak_f
+    omap F <Plug>Sneak_F
+    omap t <Plug>Sneak_t
+    omap T <Plug>Sneak_T
+endif

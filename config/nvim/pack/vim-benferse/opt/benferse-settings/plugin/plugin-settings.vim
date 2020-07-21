@@ -1,3 +1,14 @@
+"
+" Sneak configuration
+"
+try
+    let g:sneak#s_next = 1
+    let g:sneak#use_ic_scs = 1
+    let g:sneak#prompt = 'sneak>'
+catch
+    echo 'Error configuring sneak - is it installed?'
+endtry
+
 if !exists('g:vscode')
 
 "
@@ -54,17 +65,6 @@ try
     let g:startify_fortune_use_unicode = 1
 catch
     echo 'Error configuring Startify - is it installed?'
-endtry
-
-"
-" Sneak configuration
-"
-try
-    let g:sneak#s_next = 1
-    let g:sneak#use_ic_scs = 1
-    let g:sneak#prompt = 'sneak>'
-catch
-    echo 'Error configuring sneak - is it installed?'
 endtry
 
 "
