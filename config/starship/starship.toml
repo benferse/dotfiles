@@ -20,4 +20,4 @@ style = "bold fg:#bf616a"
 
 [hostname]
 ssh_only = false
-style = "bold dimmed fg:#5e81ac"
+style = "bold fg:#5e81ac"
