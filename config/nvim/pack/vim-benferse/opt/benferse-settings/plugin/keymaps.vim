@@ -11,12 +11,10 @@ imap kj <esc>
 nnoremap ; :<C-u>w<CR>
 
 "
-" Use <C-L> to clear the highlighting of :set hlsearch.
-" Courtesy of the inimitable tpope
+" Use <A-l> to clear the highlighting of :set hlsearch.
+" Courtesy of the inimitable tpope, modified for tmux
 "
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent><C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-endif 
+nnoremap <silent><A-l> :nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>
 
 "
 " Window management. Having to hit Ctrl-W makes me sad
@@ -24,22 +22,27 @@ endif
 nnoremap <silent><leader>w <C-W>
 
 "
-" Use ALT+[h,j,k,l] to move between windows regardless of current mode
+" Use CTRL+[h,j,k,l] to move between windows regardless of current mode
+" We don't allow tmux-navigator to set the normal mode mappings so they
+" can be set here all in the same place
 "
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <silent><C-h> :<C-u>TmuxNavigateLeft<CR>
+nnoremap <silent><C-j> :<C-u>TmuxNavigateDown<CR>
+nnoremap <silent><C-k> :<C-u>TmuxNavigateUp<CR>
+nnoremap <silent><C-l> :<C-u>TmuxNavigateRight<CR>
+nnoremap <silent><C-/> :<C-u>TmuxNavigatePrevious<CR>
 
-inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-j> <C-\><C-N><C-w>j
-inoremap <A-k> <C-\><C-N><C-w>k
-inoremap <A-l> <C-\><C-N><C-w>l
+inoremap <silent><C-h> <C-\><C-N>:<C-u>TmuxNavigateLeft<CR>
+inoremap <silent><C-j> <C-\><C-N>:<C-u>TmuxNavigateDown<CR>
+inoremap <silent><C-k> <C-\><C-N>:<C-u>TmuxNavigateUp<CR>
+inoremap <silent><C-l> <C-\><C-N>:<C-u>TmuxNavigateRight<CR>
+inoremap <silent><C-/> <C-\><C-N>:<C-u>TmuxNavigatePrevious<CR>
 
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
+tnoremap <silent><C-h> <C-\><C-N>:<C-u>TmuxNavigateLeft<CR>
+tnoremap <silent><C-j> <C-\><C-N>:<C-u>TmuxNavigateDown<CR>
+tnoremap <silent><C-k> <C-\><C-N>:<C-u>TmuxNavigateUp<CR>
+tnoremap <silent><C-l> <C-\><C-N>:<C-u>TmuxNavigateRight<CR>
+tnoremap <silent><C-/> <C-\><C-N>:<C-u>TmuxNavigatePrevious<CR>
 
 "
 " Buffer navigation

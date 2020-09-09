@@ -12,6 +12,24 @@ endtry
 if !exists('g:vscode')
 
 "
+" tmux-navigator configuration
+"
+try
+    " Don't let the plugin set normal mode mappings so they
+    " can be kept with other mappings in our keymaps file
+    let g:tmux_navigator_no_mappings = 1
+
+    " :update the current buffer when navigating away from a
+    " vim window
+    let g:tmux_navigator_save_on_switch = 1
+
+    " Disable tmux-navigator when zooming in a vim pane
+    let g:tmux_navigator_disable_when_zoomed = 1
+catch
+    echo "Error configuring tmux-navigator - is it installed?"
+endtry
+
+"
 " NERDTree configuration
 "
 try
