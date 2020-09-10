@@ -51,10 +51,14 @@ if !exists('g:vscode')
             nmap <silent><leader>vz :<C-u>VimuxZoomRunner<cr>
 
             " Using the existence of vimux to map vimux-cargo as well
-            nmap <silent><leader>rc :<C-u>CargoRun<cr>
-            nmap <silent><leader>rt :<C-u>CargoTestAll<cr>
-            nmap <silent><leader>rf :<C-u>CargoUnitTestCurrentFile<cr>
-            nmap <silent><leader>r. :<C-u>CargoUnitTestFocused<cr>
+            " Switch the runner split to the directory of the loaded
+            " buffer first
+            nmap <silent><leader>rb :<C-u>update <Bar> execute VimuxRunCommand("cd " . expand("%:p:h")) <Bar> CargoBuild<cr>
+            nmap <silent><leader>rg :<C-u>update <Bar> execute VimuxRunCommand("cd " . expand("%:p:h")) <Bar> CargoRun<cr>
+            nmap <silent><leader>ra :<C-u>update <Bar> execute VimuxRunCommand("cd " . expand("%:p:h")) <Bar> CargoPromptArgs<cr>
+            nmap <silent><leader>rt :<C-u>update <Bar> execute VimuxRunCommand("cd " . expand("%:p:h")) <Bar> CargoTestAll<cr>
+            nmap <silent><leader>rf :<C-u>update <Bar> execute VimuxRunCommand("cd " . expand("%:p:h")) <Bar> CargoUnitTestCurrentFile<cr>
+            nmap <silent><leader>r. :<C-u>update <Bar> execute VimuxRunCommand("cd " . expand("%:p:h")) <Bar> CargoUnitTestFocused<cr>
 
         endif
     endif
