@@ -30,6 +30,34 @@ catch
 endtry
 
 "
+" vimux (and plugins)
+"
+if exists('g:loaded_vimux')
+
+    " Configure the position and appearance of the runner split
+    " and the command line prompt
+    let g:VimuxHeight = 40
+    let g:VimuxOrientation = "h"
+    let g:VimuxPromptString = "$ "
+    let g:VimuxRunnerType = "pane"
+
+    nmap <silent><leader>vp :<C-u>VimuxPromptCommand<cr>
+    nmap <silent><leader>vl :<C-u>VimuxRunLastCommand<cr>
+    nmap <silent><leader>vi :<C-u>VimuxInspectRunner<cr>
+    nmap <silent><leader>vq :<C-u>VimuxCloseRunner<cr>
+    nmap <silent><leader>vs :<C-u>VimuxInterruptRunner<cr>
+    nmap <silent><leader>vt :<C-u>VimuxTogglePane<cr>
+    nmap <silent><leader>vz :<C-u>VimuxZoomRunner<cr>
+
+    " Using the existence of vimux to map vimux-cargo as well
+    nmap <silent><leader>rc :<C-u>CargoRun<cr>
+    nmap <silent><leader>rt :<C-u>CargoTestAll<cr>
+    nmap <silent><leader>rf :<C-u>CargoUnitTestCurrentFile<cr>
+    nmap <silent><leader>r. :<C-u>CargoUnitTestFocused<cr>
+
+endif
+
+"
 " NERDTree configuration
 "
 try

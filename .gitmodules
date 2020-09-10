@@ -52,3 +52,9 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-tmux-navigator"]
 	path = config/nvim/pack/vim-benferse/opt/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "config/nvim/pack/vim-benferse/opt/vimux"]
+	path = config/nvim/pack/vim-benferse/opt/vimux
+	url = https://github.com/benmills/vimux
+[submodule "config/nvim/pack/vim-benferse/opt/vimux-cargo"]
+	path = config/nvim/pack/vim-benferse/opt/vimux-cargo
+	url = https://github.com/jtdowney/vimux-cargo
