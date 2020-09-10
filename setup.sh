@@ -33,4 +33,9 @@ ln -svf $ConfigRoot/bash/.bash_logout ~/.bash_logout
 rm -vf ~/.bash_profile
 
 echo Linking settings for dircolors...
+rm -vf ~/.dircolors
 ln -svf $ConfigRoot/dircolors/nord.dircolors ~/.dircolors
+
+echo Linking settings for readline...
+rm -vf ~/.inputrc
+ln -svf $ConfigRoot/readline/.inputrc ~/.inputrc
