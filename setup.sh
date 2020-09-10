@@ -20,3 +20,17 @@ echo Linking settings for tmux...
 rm -rvf ~/.config/tmux
 rm -rvf ~/.tmux.conf
 ln -svf $ConfigRoot/tmux/tmux.conf ~/.tmux.conf
+
+echo Linking settings for bash...
+[ -f ~/.bashrc ] && mv -vf ~/.bashrc ~/.bashrc.orig
+[ -f ~/.profile ] && mv -vf ~/.profile ~/.profile.orig
+[ -f ~/.bash_profile ] && mv -vf ~/.bash_profile ~/.bash_profile.orig
+[ -f ~/.bash_logout ] && mv -vf ~/.bash_logout ~/.bash_logout.orig
+
+ln -svf $ConfigRoot/bash/.bashrc ~/.bashrc
+ln -svf $ConfigRoot/bash/.profile ~/.profile
+ln -svf $ConfigRoot/bash/.bash_logout ~/.bash_logout
+rm -vf ~/.bash_profile
+
+echo Linking settings for dircolors...
+ln -svf $ConfigRoot/dircolors/nord.dircolors ~/.dircolors
