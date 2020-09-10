@@ -31,7 +31,11 @@ if !exists('g:vscode')
     packadd vim-ps1
     packadd vim-signify
     packadd vim-startify
-    packadd vim-tmux-navigator
-    packadd vimux
-    packadd vimux-cargo
+
+    " No tmux on windows
+    if !has('win32')
+        packadd vim-tmux-navigator
+        packadd vimux
+        packadd vimux-cargo
+    endif
 endif
