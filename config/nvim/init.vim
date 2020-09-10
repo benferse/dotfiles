@@ -32,4 +32,6 @@ if !exists('g:vscode')
     packadd vim-signify
     packadd vim-startify
     packadd vim-tmux-navigator
+    packadd vimux
+    packadd vimux-cargo
 endif
