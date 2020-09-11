@@ -57,6 +57,8 @@ set noshowmode
 set ruler
 set wildmenu
 
+set mouse=nvi
+
 set shortmess+=cI
 
 if !&scrolloff
@@ -86,5 +88,5 @@ augroup end
 "
 augroup benferse_syntax
     autocmd Syntax c,cpp,vim,xml,html,xhtml,rust,js setlocal foldmethod=syntax
-    autocmd Syntax c,cpp,vim,xml,html,xhtml,rust,js normal zR
+    autocmd BufWinEnter c,cpp,vim,xml,html,xhtml,rust,js normal zR
 augroup end
