@@ -8,7 +8,7 @@ imap kj <esc>
 "
 " This is honestly life changing
 "
-nnoremap ; :<C-u>w<CR>
+nnoremap ; :<C-u>up<CR>
 
 "
 " Use <A-l> to clear the highlighting of :set hlsearch.
@@ -26,23 +26,20 @@ nnoremap <silent><leader>w <C-W>
 " We don't allow tmux-navigator to set the normal mode mappings so they
 " can be set here all in the same place
 "
-nnoremap <silent><C-h> :<C-u>TmuxNavigateLeft<CR>
-nnoremap <silent><C-j> :<C-u>TmuxNavigateDown<CR>
-nnoremap <silent><C-k> :<C-u>TmuxNavigateUp<CR>
-nnoremap <silent><C-l> :<C-u>TmuxNavigateRight<CR>
-nnoremap <silent><C-/> :<C-u>TmuxNavigatePrevious<CR>
+nnoremap <silent><C-h> :<C-u> call benferse#windows#left()<cr>
+nnoremap <silent><C-j> :<C-u> call benferse#windows#down()<cr>
+nnoremap <silent><C-k> :<C-u> call benferse#windows#up()<cr>
+nnoremap <silent><C-l> :<C-u> call benferse#windows#right()<cr>
 
-inoremap <silent><C-h> <C-\><C-N>:<C-u>TmuxNavigateLeft<CR>
-inoremap <silent><C-j> <C-\><C-N>:<C-u>TmuxNavigateDown<CR>
-inoremap <silent><C-k> <C-\><C-N>:<C-u>TmuxNavigateUp<CR>
-inoremap <silent><C-l> <C-\><C-N>:<C-u>TmuxNavigateRight<CR>
-inoremap <silent><C-/> <C-\><C-N>:<C-u>TmuxNavigatePrevious<CR>
+inoremap <silent><C-h> <C-\><C-N>:<C-u> call benferse#windows#left()<cr>
+inoremap <silent><C-j> <C-\><C-N>:<C-u> call benferse#windows#down()<cr>
+inoremap <silent><C-k> <C-\><C-N>:<C-u> call benferse#windows#up()<cr>
+inoremap <silent><C-l> <C-\><C-N>:<C-u> call benferse#windows#right()<cr>
 
-tnoremap <silent><C-h> <C-\><C-N>:<C-u>TmuxNavigateLeft<CR>
-tnoremap <silent><C-j> <C-\><C-N>:<C-u>TmuxNavigateDown<CR>
-tnoremap <silent><C-k> <C-\><C-N>:<C-u>TmuxNavigateUp<CR>
-tnoremap <silent><C-l> <C-\><C-N>:<C-u>TmuxNavigateRight<CR>
-tnoremap <silent><C-/> <C-\><C-N>:<C-u>TmuxNavigatePrevious<CR>
+tnoremap <silent><C-h> <C-\><C-N>:<C-u> call benferse#windows#left()<cr> 
+tnoremap <silent><C-j> <C-\><C-N>:<C-u> call benferse#windows#down()<cr>
+tnoremap <silent><C-k> <C-\><C-N>:<C-u> call benferse#windows#up()<cr>
+tnoremap <silent><C-l> <C-\><C-N>:<C-u> call benferse#windows#right()<cr>
 
 "
 " Buffer navigation
