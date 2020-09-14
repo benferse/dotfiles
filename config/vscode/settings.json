@@ -1,31 +1,35 @@
 {
-    "terminal.integrated.fontFamily": "Hasklug NF",
+    "terminal.integrated.fontFamily": "'Hasklug Nerd Font', 'Hasklug NF', 'Consolas', 'Droid Sans Mono', 'monospace', 'Droid Sans Fallback'",
     "terminal.integrated.fontSize": 16,
+    "terminal.integrated.shell.linux": "bash",
     "terminal.integrated.shell.windows": "pwsh.exe",
+    "terminal.integrated.confirmOnExit": true,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.lineHeight": 1.1,
 
-    "editor.fontFamily": "Hasklug NF",
+
+    "editor.fontFamily": "'Hasklug Nerd Font', 'Hasklug NF', 'Consolas', 'Droid Sans Mono', 'monospace', 'Droid Sans Fallback'",
     "editor.fontLigatures": true,
     "editor.fontSize": 20,
-
     "editor.lineNumbers": "relative",
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
     "editor.renderWhitespace": "boundary",
 
+    "window.enableMenuBarMnemonics": false,
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Nord",
+    "vscode-neovim.neovimExecutablePaths.win32": "C:\\Users\\benferse\\scoop\\apps\\neovim-nightly\\current\\bin\\nvim.exe",
+    "vscode-neovim.neovimExecutablePaths.linux": "nvim",
 
-    "vscode-neovim.neovimPath": "C:\\Users\\benferse\\scoop\\apps\\neovim-nightly\\current\\bin\\nvim.exe",
+    "workbench.colorTheme": "Nord",
     "workbench.preferredDarkColorTheme": "Nord",
     "workbench.preferredHighContrastColorTheme": "Nord",
     "workbench.preferredLightColorTheme": "Nord",
+
     "workbench.editor.enablePreview": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.editor.highlightModifiedTabs": true,
-    "window.enableMenuBarMnemonics": false,
-    "terminal.integrated.confirmOnExit": true,
-    "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.lineHeight": 1.1,
+
     "csharp.semanticHighlighting.enabled": true,
-    "omnisharp.enableRoslynAnalyzers": true
+    "omnisharp.enableRoslynAnalyzers": true,
 }

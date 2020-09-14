@@ -7,6 +7,12 @@ echo Linking settings for nvim...
 rm -rvf ~/.config/nvim
 ln -svf $ConfigRoot/nvim ~/.config/nvim
 
+echo Linking settings for vscode...
+[ -f ~/.config/Code/User/settings.json ] && rm -vf ~/.config/Code/User/settings.json
+[ -f ~/.config/Code/User/keybindings.json ] && rm -vf ~/.config/Code/User/keybindings.json
+ln -svf $ConfigRoot/vscode/settings.json ~/.config/Code/User/settings.json
+ln -svf $ConfigRoot/vscode/keybindings.json ~/.config/Code/User/keybindings.json
+
 echo Linking settings for starship...
 rm -vf ~/.config/starship.toml
 ln -svf $ConfigRoot/starship/starship.toml ~/.config/starship.toml
