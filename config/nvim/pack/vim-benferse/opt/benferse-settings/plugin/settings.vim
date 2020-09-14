@@ -79,14 +79,15 @@ set autowrite
 " supported :|
 "
 augroup benferse_jsonc
+    autocmd!
     autocmd FileType json syntax match Comment +\/\/.\+$+
 augroup end
 
 "
 " I like having folks available, but I generally want a newly opened file
-" to have all folds opened, so let's do that
+" to have all folds opened, so let's do that. Note that these are explicitly
+" not in their own augroup to make sure they aren't clobbered by later
+" autocmds that reset syntax.
 "
-augroup benferse_syntax
-    autocmd Syntax c,cpp,vim,xml,html,xhtml,rust,js setlocal foldmethod=syntax
-    autocmd BufWinEnter c,cpp,vim,xml,html,xhtml,rust,js normal zR
-augroup end
+autocmd Syntax c,cpp,vim,xml,html,xhtml,rust,js setlocal foldmethod=syntax
+autocmd Syntax c,cpp,vim,xml,html,xhtml,rust,js normal zR
