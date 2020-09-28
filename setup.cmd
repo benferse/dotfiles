@@ -74,15 +74,6 @@ echo Linking settings for pscore...
 del /f /q "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" 2> nul:
 mklink "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" "%ConfigRoot%\powershell\profile.ps1"
 
-:: alacritty
-if exist "%appdata%\Alacritty" 2> nul: (
-    echo Linking settings for alacritty...
-
-    del /f /q "%appdata%\Alacritty\alacritty.yml" 2> nul:
-    mklink "%appdata%\Alacritty\alacritty.yml" "%ConfigRoot%\alacritty\alacritty.yml"
-
-)
-
 :: starship
 echo Linking settings for starship...
 
@@ -93,10 +84,10 @@ mklink "%XDG_CONFIG_HOME%\starship.toml" "%ConfigRoot%\starship\starship.toml"
 echo Linking settings for git...
 
 del /f /q "%USERPROFILE%\.gitconfig" 2> nul:
-mklink "%USERPROFILE%\.gitconfig" "%ConfigRoot%\git\.gitconfig"
+mklink "%USERPROFILE%\.gitconfig" "%ConfigRoot%\git\gitconfig"
 
 del /f /q "%XDG_CONFIG_HOME%\git\config" 2> nul:
-mklink "%XDG_CONFIG_HOME%\git\config" "%ConfigRoot%\git\.gitconfig.windows"
+mklink "%XDG_CONFIG_HOME%\git\config" "%ConfigRoot%\git\gitconfig.windows"
 
 echo Done.
 
