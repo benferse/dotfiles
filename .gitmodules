@@ -58,3 +58,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vimux-cargo"]
 	path = config/nvim/pack/vim-benferse/opt/vimux-cargo
 	url = https://github.com/jtdowney/vimux-cargo
+[submodule "config/nvim/pack/vim-benferse/opt/vim-beancount"]
+	path = config/nvim/pack/vim-benferse/opt/vim-beancount
+	url = https://github.com/nathangrigg/vim-beancount
