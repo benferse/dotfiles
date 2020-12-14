@@ -7,6 +7,7 @@ packadd benferse-settings
 
 " General purpose extensions that can be loaded no matter
 " what context we're running in
+packadd vim-beancount
 packadd vim-commentary
 packadd vim-sneak
 packadd vim-surround
