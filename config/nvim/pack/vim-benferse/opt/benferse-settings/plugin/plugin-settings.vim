@@ -129,6 +129,7 @@ if !exists('g:vscode')
                     \ 'coc-json',
                     \ 'coc-lists',
                     \ 'coc-rust-analyzer',
+                    \ 'coc-snippets',
                     \ 'coc-vimlsp'
                     \ ]
 
@@ -136,6 +137,7 @@ if !exists('g:vscode')
         " triggering completion, navigating, etc.
         inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
+            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
             \ <SID>check_back_space() ? "\<TAB>" :
             \ coc#refresh()
         inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
@@ -149,11 +151,12 @@ if !exists('g:vscode')
         inoremap <silent><expr> <C-Space> coc#refresh()
 
         " Use <CR> to confirm completion
-        if exists('*complete_info')
-            inoremap <expr><cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-        else
-            inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-        endif
+        "if exists('*complete_info')
+        "    inoremap <expr><cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+        "else
+            "inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+            inoremap <expr><cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
+        "endif
 
         " Use ]g and [g to navigate diagnostics
         nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -192,6 +195,9 @@ if !exists('g:vscode')
 
         " Code refactoring actions
         nmap <leader>rn <Plug>(coc-rename)
+
+        let g:coc_snippet_next = "<A-j>"
+        let g:coc_snippet_prev = "<A-k>"
 
         " Try to highlight symbol and references on hover
         autocmd CursorHold * silent call CocActionAsync('highlight')
