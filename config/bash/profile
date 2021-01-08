@@ -22,4 +22,4 @@ fi
 
 # set the glyph used in starship to something more platform
 # appropriate
-OS_GLYPH=""
+export OS_GLYPH=""
