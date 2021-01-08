@@ -10,7 +10,6 @@
     "showTabsInTitlebar" : false,
     "showTerminalTitleInTitlebar" : true,
 
-    "theme" : "nord",
     "wordDelimiters" : " ./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}~?\u2502",
 
     "keybindings" : [
@@ -29,7 +28,8 @@
             "padding": "10, 10, 10, 10",
             "snapOnInput": true,
             "startingDirectory": "%USERPROFILE",
-            "useAcrylic": false 
+            "useAcrylic": false,
+            "theme": "nord"
         },
 
         "list": [
