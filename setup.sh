@@ -7,6 +7,9 @@ echo Linking settings for nvim...
 rm -rvf ~/.config/nvim
 ln -svf $ConfigRoot/nvim ~/.config/nvim
 
+rm -rvf ~/.config/coc/ultisnips
+ln -svf $ConfigRoot/ultisnips ~/.config/coc/ultisnips
+
 echo Linking settings for vscode...
 [ -f ~/.config/Code/User/settings.json ] && rm -vf ~/.config/Code/User/settings.json
 [ -f ~/.config/Code/User/keybindings.json ] && rm -vf ~/.config/Code/User/keybindings.json
