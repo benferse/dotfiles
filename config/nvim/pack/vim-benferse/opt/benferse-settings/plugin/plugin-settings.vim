@@ -90,8 +90,8 @@ if !exists('g:vscode')
                     \ 'ctrl-q': function('s:build_quickfix_list')
                     \ }
 
-        nnoremap <leader>gg :Ag <C-R><C-W><CR>
-        nnoremap <leader>g  :Ag
+        nnoremap <leader>g. :Ag <C-R><C-W><CR>
+        nnoremap <leader>gg :Ag<CR>
     catch
         echo "Error configuring fzf - is it installed?"
     endtry
