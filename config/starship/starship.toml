@@ -1,9 +1,8 @@
 format = "$env_var$username$hostname$directory$git_branch$git_commit$git_state$git_status$package$dotnet$nodejs$rust$custom$cmd_duration$line_break$jobs$battery$time$status$character"
 
 [character]
-use_symbol_for_status = true
-style_success = "bold fg:#a3be8c"
-style_failure = "bold fg:#bf616a"
+success_symbol = "[➜](bold fg:#a3be8c) "
+error_symbol = "[✗](bold fg:#bf616a) "
 
 [cmd_duration]
 style = "fg:#ebcb8e"
