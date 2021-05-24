@@ -18,10 +18,8 @@
 
     "window.enableMenuBarMnemonics": false,
     "window.zoomLevel": 0,
-    "vscode-neovim.neovimExecutablePaths.win32": "C:\\Users\\benferse\\scoop\\apps\\neovim-nightly\\current\\bin\\nvim.exe",
+    "vscode-neovim.neovimExecutablePaths.win32": "nvim.exe",
     "vscode-neovim.neovimExecutablePaths.linux": "nvim",
-
-    "workbench.colorTheme": "Nord",
     "workbench.preferredDarkColorTheme": "Nord",
     "workbench.preferredHighContrastColorTheme": "Nord",
     "workbench.preferredLightColorTheme": "Nord",
@@ -32,4 +30,9 @@
 
     "csharp.semanticHighlighting.enabled": true,
     "omnisharp.enableRoslynAnalyzers": true,
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.colorTheme": "Nord",
+    "workbench.sideBar.location": "right",
+    "window.autoDetectColorScheme": true,
+    "window.menuBarVisibility": "toggle",
 }
