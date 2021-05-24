@@ -89,9 +89,6 @@ if !exists('g:vscode')
                     \ 'ctrl-v': 'vsplit',
                     \ 'ctrl-q': function('s:build_quickfix_list')
                     \ }
-
-        nnoremap <leader>g. :Ag <C-R><C-W><CR>
-        nnoremap <leader>gg :Ag<CR>
     catch
         echo "Error configuring fzf - is it installed?"
     endtry
@@ -169,7 +166,10 @@ if !exists('g:vscode')
         nmap <silent> gr <Plug>(coc-references)
 
         " Use K to show documentation in the preview window
-        nnoremap <silent> K :call <SID>show_documentation()<CR>
+        " vscode-vim and vscode-neovim also use gh for this, so may
+        " as well make it consistent
+        nnoremap <silent> K  :call <SID>show_documentation()<CR>
+        nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
         function! s:show_documentation()
             if (index(['vim','help'], &filetype) >= 0)

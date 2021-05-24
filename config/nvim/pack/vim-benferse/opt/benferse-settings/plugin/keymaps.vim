@@ -62,10 +62,15 @@ nnoremap <silent><leader>bb :<C-u> call benferse#fuzzy#find_buffers()<cr>
 nnoremap <silent><leader>ff :<C-u> call benferse#fuzzy#find_files()<cr>
 
 "
+" Traditional find-in-files integration
+"
+nnoremap <silent><leader>gg :<C-u> call benferse#search#find_in_files()<cr>
+nnoremap <silent><leader>g. :<C-u> call benferse#search#find_by_word("<C-R><C-W>")<cr>
+
+"
 " Explorer/tree interaction
 "
 nnoremap <silent><leader>e :<C-u> call benferse#explorer#toggle()<cr>
-
 "
 " Toggle the help window
 "

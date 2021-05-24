@@ -84,7 +84,7 @@ augroup benferse_jsonc
 augroup end
 
 "
-" I like having folks available, but I generally want a newly opened file
+" I like having folds available, but I generally want a newly opened file
 " to have all folds opened, so let's do that. Note that these are explicitly
 " not in their own augroup to make sure they aren't clobbered by later
 " autocmds that reset syntax.
