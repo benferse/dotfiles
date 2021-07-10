@@ -1,5 +1,5 @@
 [gpg]
-	program = C:\\users\\benferse\\scoop\\apps\\gpg\\current\\bin\\gpg.exe
+    program = "c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe"
 
 [core]
-        sshcommand = plink -agent
+    sshcommand = plink -agent

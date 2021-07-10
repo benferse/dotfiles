@@ -1,4 +1,5 @@
 format = "$env_var$username$hostname$directory$git_branch$git_commit$git_state$git_status$package$dotnet$nodejs$rust$custom$cmd_duration$line_break$jobs$battery$time$status$character"
+command_timeout = 1000
 
 [character]
 success_symbol = "[➜](bold fg:#a3be8c)"
