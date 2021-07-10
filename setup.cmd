@@ -33,18 +33,6 @@ if exist "%appdata%\Code" 2> nul: (
     mklink "%appdata%\Code\User\keybindings.json" "%ConfigRoot%\vscode\keybindings.json"
 )
 
-:: vscode - insiders edition
-if exist "%appdata%\Code - Insiders" 2> nul: (
-    echo Linking settings for vscode insiders edition...
-
-    del /f /q "%appdata%\Code - Insiders\User\settings.json" 2> nul:
-    mklink "%appdata%\Code - Insiders\User\settings.json" "%ConfigRoot%\vscode\settings.json"
-
-    del /f /q "%appdata%\Code - Insiders\User\keybindings.json" 2> nul:
-    mklink "%appdata%\Code - Insiders\User\keybindings.json" "%ConfigRoot%\vscode\keybindings.json"
-
-)
-
 :: Windows Terminal
 if exist "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe" 2> nul: (
     echo Linking settings for Windows Terminal from MS store...
@@ -52,23 +40,6 @@ if exist "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe" 2> nu
     del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
     del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" 2> nul:
     mklink "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" "%ConfigRoot%\cascadia\settings.json" 2> nul:
-)
-
-:: Windows Terminal - Preview
-if exist "%localappdata%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe" 2> nul: (
-    echo Linking settings for Windows Terminal Preview from MS store...
-
-    del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
-    del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" 2> nul:
-    mklink "%localappdata%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" "%ConfigRoot%\cascadia\settings.json" 2> nul:
-)
-
-if exist "%localappdata%\Microsoft\Windows Terminal" 2> nul: (
-    echo Linking settings for Windows Terminal from scoop...
-
-    del /f /q "%localappdata%\Microsoft\Windows Terminal\profiles.json" 2> nul:
-    del /f /q "%localappdata%\Microsoft\Windows Terminal\settings.json" 2> nul:
-    mklink "%localappdata%\Microsoft\Windows Terminal\settings.json" "%ConfigRoot%\cascadia\settings.json" 2> nul:
 )
 
 :: nvim
