@@ -208,6 +208,24 @@ if !exists('g:vscode')
         echo 'Error configuring CoC - is it installed?'
     endtry
 
+    "
+    " Vimspector
+    "
+    let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
+
+    nmap <F5>    <Plug>VimspectorContinue
+    nmap <S-F5>  <Plug>VimspectorStop
+    nmap <F9>    <Plug>VimspectorToggleBreakpoint
+    nmap <F10>   <Plug>VimspectorStepOver
+    nmap <F11>   <Plug>VimspectorStepOver
+    nmap <S-F11> <Plug>VimspectorStepOut
+
+    nmap <silent><leader>dd :<C-u>call vimspector#Launch()<cr>
+    nmap <silent><leader>dx :<C-u>VimspectorReset<cr>
+    nmap <silent><leader>de :<C-u>VimspectorEval<space>
+    nmap <silent><leader>dw :<C-u>VimspectorWatch<space>
+    nmap <silent><leader>do :<C-u>VimspectorShowOutput<space>
+
 endif " !exists('g:vscode')
 
 " vim:ai fdm=marker

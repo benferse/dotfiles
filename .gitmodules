@@ -61,3 +61,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-better-whitespace"]
 	path = config/nvim/pack/vim-benferse/opt/vim-better-whitespace
 	url = https://github.com/ntpeters/vim-better-whitespace
+[submodule "config/nvim/pack/vim-benferse/opt/vimspector"]
+	path = config/nvim/pack/vim-benferse/opt/vimspector
+	url = https://github.com/puremourning/vimspector
