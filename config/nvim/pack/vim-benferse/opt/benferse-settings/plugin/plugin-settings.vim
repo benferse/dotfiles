@@ -9,6 +9,16 @@ catch
     echo 'Error configuring sneak - is it installed?'
 endtry
 
+"
+" Vim better whitespace
+"
+let g:better_whitespace_enabled = 1
+let g:strip_whitelines_at_eof = 1
+let g:show_spaces_that_precede_tabs = 1
+
+nnoremap ]w :NextTrailingWhitespace<cr>
+nnoremap [w :PrevTrailingWhitespace<cr>
+
 if !exists('g:vscode')
 
     if !has('win32')
