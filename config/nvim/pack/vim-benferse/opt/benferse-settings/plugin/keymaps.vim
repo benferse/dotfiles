@@ -95,3 +95,13 @@ if exists('g:sneak#s_next')
     omap t <Plug>Sneak_t
     omap T <Plug>Sneak_T
 endif
+
+"
+" Recenter on incremental search results
+"
+nnoremap <silent> n  nzz
+nnoremap <silent> N  Nzz
+nnoremap <silent> *  *zz
+nnoremap <silent> #  #zz
+nnoremap <silent> g* g*zz
+nnoremap <silent> g# g#zz
