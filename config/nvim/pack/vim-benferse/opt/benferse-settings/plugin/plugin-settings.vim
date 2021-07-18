@@ -145,7 +145,11 @@ if !exists('g:vscode')
         endfunction
 
         " Use Ctrl-Space to trigger completion
-        inoremap <silent><expr> <C-Space> coc#refresh()
+        if has('nvim')
+            inoremap <silent><expr> <C-Space> coc#refresh()
+        else
+            inoremap <silent><expr> <C-@> coc#refresh()
+        endif
 
         " Use <CR> to confirm completion
         "if exists('*complete_info')
