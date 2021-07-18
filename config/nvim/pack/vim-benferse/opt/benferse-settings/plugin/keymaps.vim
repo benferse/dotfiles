@@ -36,7 +36,7 @@ inoremap <silent><C-j> <C-\><C-N>:<C-u> call benferse#windows#down()<cr>
 inoremap <silent><C-k> <C-\><C-N>:<C-u> call benferse#windows#up()<cr>
 inoremap <silent><C-l> <C-\><C-N>:<C-u> call benferse#windows#right()<cr>
 
-tnoremap <silent><C-h> <C-\><C-N>:<C-u> call benferse#windows#left()<cr> 
+tnoremap <silent><C-h> <C-\><C-N>:<C-u> call benferse#windows#left()<cr>
 tnoremap <silent><C-j> <C-\><C-N>:<C-u> call benferse#windows#down()<cr>
 tnoremap <silent><C-k> <C-\><C-N>:<C-u> call benferse#windows#up()<cr>
 tnoremap <silent><C-l> <C-\><C-N>:<C-u> call benferse#windows#right()<cr>

@@ -74,15 +74,6 @@ if !exists('g:vscode')
     endif
 
     "
-    " NERDTree configuration
-    "
-    try
-        let NERDTreeWinPos='right'
-    catch
-        echo "Error configuring NERDTree - is it installed?"
-    endtry
-
-    "
     " fzf configuration
     "
     try
@@ -133,6 +124,7 @@ if !exists('g:vscode')
     try
         " Force install of the extensions we require
         let g:coc_global_extensions = [
+                    \ 'coc-explorer',
                     \ 'coc-json',
                     \ 'coc-lists',
                     \ 'coc-rust-analyzer',
@@ -162,12 +154,7 @@ if !exists('g:vscode')
         endif
 
         " Use <CR> to confirm completion
-        "if exists('*complete_info')
-        "    inoremap <expr><cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-        "else
-            "inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-            inoremap <expr><cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
-        "endif
+        inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
 
         " Use ]g and [g to navigate diagnostics
         nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -188,8 +175,10 @@ if !exists('g:vscode')
         function! s:show_documentation()
             if (index(['vim','help'], &filetype) >= 0)
                 execute 'h '.expand('<cword>')
+            elseif (coc#rpc#ready())
+                call CocActionAsync('doHover')
             else
-                call CocAction('doHover')
+                execute '!' . &keywordprg . " " . expand('<cword>')
             endif
         endfunction
 
