@@ -61,3 +61,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-beancount"]
 	path = config/nvim/pack/vim-benferse/opt/vim-beancount
 	url = https://github.com/nathangrigg/vim-beancount
+[submodule "config/nvim/pack/vim-benferse/opt/vim-better-whitespace"]
+	path = config/nvim/pack/vim-benferse/opt/vim-better-whitespace
+	url = https://github.com/ntpeters/vim-better-whitespace
