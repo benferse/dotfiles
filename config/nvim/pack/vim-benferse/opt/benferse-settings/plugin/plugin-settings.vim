@@ -12,9 +12,13 @@ endtry
 "
 " Vim better whitespace
 "
-let g:better_whitespace_enabled = 1
-let g:strip_whitelines_at_eof = 1
-let g:show_spaces_that_precede_tabs = 1
+try
+    let g:better_whitespace_enabled = 1
+    let g:strip_whitelines_at_eof = 1
+    let g:show_spaces_that_precede_tabs = 1
+catch
+    echo 'Error configuring better-whitespace - is it installed?'
+endtry
 
 nnoremap ]w :NextTrailingWhitespace<cr>
 nnoremap [w :PrevTrailingWhitespace<cr>
@@ -51,6 +55,7 @@ if !exists('g:vscode')
             let g:VimuxOrientation = "h"
             let g:VimuxPromptString = "$ "
             let g:VimuxRunnerType = "pane"
+            let g:VimuxCloseOnExit = 1
 
             nmap <silent><leader>vp :<C-u>VimuxPromptCommand<cr>
             nmap <silent><leader>vl :<C-u>VimuxRunLastCommand<cr>
@@ -207,6 +212,24 @@ if !exists('g:vscode')
     catch
         echo 'Error configuring CoC - is it installed?'
     endtry
+
+    "
+    " Vimspector
+    "
+    let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
+
+    nmap <F5>    <Plug>VimspectorContinue
+    nmap <S-F5>  <Plug>VimspectorStop
+    nmap <F9>    <Plug>VimspectorToggleBreakpoint
+    nmap <F10>   <Plug>VimspectorStepOver
+    nmap <F11>   <Plug>VimspectorStepInto
+    nmap <S-F11> <Plug>VimspectorStepOut
+
+    nmap <leader>dd :<C-u>call vimspector#Launch()<cr>
+    nmap <leader>dx :<C-u>VimspectorReset<cr>
+    nmap <leader>de :<C-u>VimspectorEval<space>
+    nmap <leader>dw :<C-u>VimspectorWatch<space>
+    nmap <leader>do :<C-u>VimspectorShowOutput<space>
 
 endif " !exists('g:vscode')
 

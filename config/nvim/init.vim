@@ -32,6 +32,7 @@ if !exists('g:vscode')
     packadd vim-ps1
     packadd vim-signify
     packadd vim-startify
+    packadd vimspector
 
     " No tmux on windows
     if !has('win32')
