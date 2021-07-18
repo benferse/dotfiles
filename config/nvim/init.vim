@@ -25,7 +25,6 @@ if !exists('g:vscode')
     packadd coc.nvim
     packadd fzf
     packadd fzf.vim
-    packadd nerdtree
     packadd nord-vim
     packadd vim-airline
     packadd vim-devicons

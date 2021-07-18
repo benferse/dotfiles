@@ -1,6 +1,6 @@
 function benferse#explorer#toggle()
     if !exists('g:vscode')
-        NERDTreeToggle
+        CocCommand explorer --toggle --position right
     else
         call VSCodeNotify('workbench.action.toggleSidebarVisibility')
     endif
