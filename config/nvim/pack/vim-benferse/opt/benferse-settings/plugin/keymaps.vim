@@ -47,6 +47,7 @@ tnoremap <silent><C-l> <C-\><C-N>:<C-u> call benferse#windows#right()<cr>
 nnoremap <silent><leader>bn :<C-u> call benferse#buffers#next()<cr>
 nnoremap <silent><leader>bp :<C-u> call benferse#buffers#previous()<cr>
 nnoremap <silent><leader>bd :<C-u> call benferse#buffers#delete()<cr>
+nnoremap <silent><leader>bx :<C-u> call benferse#buffers#really_delete()<cr>
 
 " vim-unimpaired sets these, but we want them to go through our smarts instead
 " for vscode support
