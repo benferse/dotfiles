@@ -1,7 +1,7 @@
 function benferse#buffers#any_listed()
     let s:buffs = getbufinfo({'buflisted': 1})
     return !empty(s:buffs)
-endfunction 
+endfunction
 
 function benferse#buffers#next()
     if !exists('g:vscode')
@@ -43,9 +43,17 @@ function benferse#buffers#last()
     endif
 endfunction
 
-function benferse#buffers#delete()
+function benferse#buffers#delete() abort
     if !exists('g:vscode')
         bdelete
+    else
+        Tabclose
+    endif
+endfunction
+
+function benferse#buffers#really_delete() abort
+    if !exists('g:vscode')
+        bd!
     else
         Tabclose
     endif

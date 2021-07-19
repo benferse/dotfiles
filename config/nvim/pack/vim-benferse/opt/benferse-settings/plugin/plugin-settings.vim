@@ -117,8 +117,22 @@ if !exists('g:vscode')
     "
     try
         let g:startify_change_to_vcs_root = 1
-        let g:startify_files_number = 5
+        let g:startify_files_number = 7
         let g:startify_fortune_use_unicode = 1
+        let g:startify_update_oldfiles = 1
+
+        let g:startify_lists = [
+            \ { 'type': 'files',     'header': ['   MRU'] },
+            \ { 'type': 'dir',       'header': ['   MRU ' . getcwd()] },
+            \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] },
+            \ ]
+
+        let g:startify_bookmarks = [
+            \ { 'vr': '~/.config/nvim/init.vim' },
+            \ { 'ic': '~/.config/intune/config.toml' },
+            \ ]
+
+        nmap <silent><leader>s :<C-u>Startify<cr>
     catch
         echo 'Error configuring Startify - is it installed?'
     endtry
