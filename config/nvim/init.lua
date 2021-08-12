@@ -6,7 +6,6 @@ vim.g.mapleader = " "
 if vim.fn.exists('g:vscode') == 0 then
     vim.cmd([[
         packadd vim-airline
-        packadd vim-devicons
         packadd vim-signify
         packadd vim-startify
         packadd vim-tmux-navigator
