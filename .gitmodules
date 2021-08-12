@@ -11,7 +11,7 @@
 	path = config/nvim/pack/vim-benferse/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule "config/nvim/pack/vim-benferse/opt/vim-devicons"]
-	path = config/nvim/pack/vim-benferse/opt/vim-devicons
+	path = config/nvim/pack/vim-benferse/start/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
 [submodule "config/nvim/pack/vim-benferse/opt/vim-signify"]
 	path = config/nvim/pack/vim-benferse/opt/vim-signify
