@@ -31,9 +31,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-devicons"]
 	path = config/nvim/pack/vim-benferse/opt/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
-[submodule "config/nvim/pack/vim-benferse/opt/fzf.vim"]
-	path = config/nvim/pack/vim-benferse/opt/fzf.vim
-	url = https://github.com/junegunn/fzf.vim
 [submodule "config/nvim/pack/vim-benferse/opt/vim-ps1"]
 	path = config/nvim/pack/vim-benferse/opt/vim-ps1
 	url = https://github.com/pprovost/vim-ps1
