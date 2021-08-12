@@ -1,5 +1,5 @@
 [submodule "config/nvim/pack/vim-benferse/opt/nord-vim"]
-	path = config/nvim/pack/vim-benferse/opt/nord-vim
+	path = config/nvim/pack/vim-benferse/start/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim
 [submodule "config/nvim/pack/vim-benferse/opt/vim-airline"]
 	path = config/nvim/pack/vim-benferse/opt/vim-airline
