@@ -43,9 +43,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-textobj-entire"]
 	path = config/nvim/pack/vim-benferse/opt/vim-textobj-entire
 	url = https://github.com/benferse/vim-textobj-entire
-[submodule "config/nvim/pack/vim-benferse/opt/coc.nvim"]
-	path = config/nvim/pack/vim-benferse/opt/coc.nvim
-	url = https://github.com/neoclide/coc.nvim
 [submodule "config/nvim/pack/vim-benferse/opt/vim-tmux-navigator"]
 	path = config/nvim/pack/vim-benferse/opt/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
