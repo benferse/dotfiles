@@ -40,3 +40,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vimux-cargo"]
 	path = config/nvim/pack/vim-benferse/opt/vimux-cargo
 	url = https://github.com/jtdowney/vimux-cargo
+[submodule "config/nvim/pack/vim-benferse/opt/gitsigns.nvim"]
+	path = config/nvim/pack/vim-benferse/opt/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim
