@@ -1,3 +1,3 @@
 function host#explorer#toggle()
-    echo "Should open explorer"
+    lua require('telescope.builtin').file_browser()
 endfunction
