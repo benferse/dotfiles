@@ -3,6 +3,9 @@
 -- the vimscript bridge accessible across modules
 --
 
+local api = vim.api
+local cmd = vim.cmd
+
 --
 -- Creates a key mapping. This is a convenience for calling ':help nvim_set_keymap'.
 -- Only global mappings can be set this way - buffer-local mappings use
@@ -34,8 +37,40 @@ local function map(modes, lhs, rhs, opts)
 
     -- Call the bridge function to create a mapping for each mode
     for _, mode in ipairs(modes) do
-        vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
+        api.nvim_set_keymap(mode, lhs, rhs, opts)
     end
 end
 
-return { map = map }
+--
+-- Registers a set of auto-commands and assigns them to a group. This
+-- is a convenience wrapper for invoking ':help augroup' and ':help autocmd'
+-- until the vimscript bridge has first class support for this
+--
+-- name - The name of the group to associate the commands with
+-- commands - One (as a string) or more (as a table of strings) commands to
+--            register. These are passed as-is to ':help autocmd'
+local function augroup(name, commands, delete)
+    -- Deleting existing commands is optional, and by default we will not
+    delete = delete == nil and false or delete
+
+    -- Expand a single command to a table
+    if type(commands) == 'string' then
+        commands = { commands }
+    end
+
+    -- Start the group, and then clear it if requested
+    cmd('augroup ' .. name)
+    if clear then
+        cmd([[autocmd!]])
+    end
+
+    -- Add each of the requested commands
+    for _, command in ipairs(commands) do
+        cmd('autocmd ' .. command)
+    end
+
+    -- Restore the default group for subsequent auto commands
+    cmd([[augroup END]])
+end
+
+return { augroup = augroup, map = map }

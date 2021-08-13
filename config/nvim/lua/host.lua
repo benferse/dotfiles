@@ -1,3 +1,8 @@
+--
+-- Loads optional plugins from our config package that contain
+-- host and platform specific support
+--
+
 local cmd = vim.cmd
 local fn = vim.fn
 

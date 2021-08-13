@@ -1,3 +1,7 @@
+--
+-- Colors / fonts / pretty things
+--
+
 local cmd = vim.cmd
 local set = vim.opt
 
