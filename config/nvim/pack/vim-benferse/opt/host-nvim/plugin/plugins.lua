@@ -1,6 +1,7 @@
 -- Load extensions that are only useful when running directly
 -- in the nvim host
 vim.cmd([[
+    packadd nord-vim
     packadd vim-airline
     packadd vim-signify
     packadd vim-startify
