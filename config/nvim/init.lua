@@ -9,6 +9,6 @@ else
 end
 
 require('settings').setup()
+require('plugin-settings').setup()
 require('keymaps').setup()
 require('theme').setup()
-
