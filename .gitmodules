@@ -13,6 +13,9 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-devicons"]
 	path = config/nvim/pack/vim-benferse/start/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
+[submodule "config/nvim/pack/vim-benferse/opt/plenary.nvim"]
+	path = config/nvim/pack/vim-benferse/opt/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
 [submodule "config/nvim/pack/vim-benferse/opt/vim-signify"]
 	path = config/nvim/pack/vim-benferse/opt/vim-signify
 	url = https://github.com/mhinz/vim-signify
@@ -28,6 +31,9 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-tmux-navigator"]
 	path = config/nvim/pack/vim-benferse/opt/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "config/nvim/pack/vim-benferse/opt/telescope.nvim"]
+	path = config/nvim/pack/vim-benferse/opt/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim
 [submodule "config/nvim/pack/vim-benferse/opt/vim-unimpaired"]
 	path = config/nvim/pack/vim-benferse/start/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired

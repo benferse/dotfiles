@@ -1,7 +1,10 @@
 -- Load extensions that are only useful when running directly
 -- in the nvim host
 vim.cmd([[
+    packadd plenary.nvim
+
     packadd nord-vim
+    packadd telescope.nvim
     packadd vim-airline
     packadd vim-signify
     packadd vim-startify
