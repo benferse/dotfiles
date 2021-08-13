@@ -23,6 +23,7 @@ local function setup()
 
     --
     -- Tmux navigator configuration
+    -- TODO: Platform support plugin, similar to host support?
     --
     if has('win32') == 0 then
         g.tmux_navigator_no_mappings = 1
