@@ -1,18 +1,17 @@
 -- mapleader needs to be set before anything uses it
 vim.g.mapleader = " "
 
--- Selectively load optional extensions based on which features
--- are available
-if vim.fn.exists('g:vscode') == 0 then
-    vim.cmd([[
-        packadd vim-airline
-        packadd vim-signify
-        packadd vim-startify
-        packadd vim-tmux-navigator
-    ]])
+vim.cmd[[let g:airline#extensions#tabline#enabled = 1]]
+vim.cmd[[let g:airline_theme = 'nord']]
 
-    if vim.fn.has('win32') == 0 then
-        vim.cmd('packadd vimux')
-        vim.cmd('packadd vimux-cargo')
-    end
+-- Host-specific configuration
+if vim.fn.exists('g:vscode') == 1 then
+    vim.cmd('packadd host-vscode')
+else
+    vim.cmd('packadd host-nvim')
 end
+
+require('keymaps').setup()
+require('theme').setup()
+
+vim.cmd('set termguicolors')
