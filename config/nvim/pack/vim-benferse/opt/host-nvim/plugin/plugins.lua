@@ -6,7 +6,6 @@ vim.cmd([[
     packadd nord-vim
     packadd telescope.nvim
     packadd vim-airline
-    packadd vim-signify
     packadd vim-startify
     packadd vim-tmux-navigator
 ]])
