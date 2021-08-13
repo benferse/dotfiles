@@ -1,6 +1,7 @@
 --
 -- Standard keymaps that don't directly depend on any third-party plugins
 --
+
 local map = require('utils').map
 
 local function setup()
@@ -16,7 +17,7 @@ local function setup()
     --
     -- This is honestly life changing
     --
-    map('n', ';', ':<C-u>up<cr>')
+    map('n', ';', ':<C-u>up<cr>', silent)
 
     --
     -- Use alt-L to clear the highlighting of hlsearch
@@ -33,7 +34,7 @@ local function setup()
     -- Use ctrl+[h,j,k,l] to move between windows regardless of current mode.
     --
     map('n', '<C-h>', [[:<C-u>call host#windows#left()<cr>]], silent)
-    map('n', '<C-j>', [[:<C-u>call host#windows#down()<cr>]])
+    map('n', '<C-j>', [[:<C-u>call host#windows#down()<cr>]], silent)
     map('n', '<C-k>', [[:<C-u>call host#windows#up()<cr>]], silent)
     map('n', '<C-l>', [[:<C-u>call host#windows#right()<cr>]], silent)
 
@@ -92,4 +93,4 @@ local function setup()
     map('n', 'g#', 'g#zz', silent)
 end
 
-return {setup = setup}
+return { setup = setup }

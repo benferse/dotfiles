@@ -1,7 +1,19 @@
+--
+-- Global nvim options that aren't dependent on anything
+-- outside of the core nvim distribution
+--
+
 local set = vim.opt
 local cmd = vim.cmd
 
 local function setup()
+    --
+    -- Note that the lua bridge only exposes a single boolean for each
+    -- value, instead of separate X and noX values. So instead of setting
+    -- noX, you set X = false.
+    --
+    -- See ':help option-list' for an index to individual options
+    --
     set.wrap = false
     set.showmatch = true
     set.signcolumn = 'yes:2'
