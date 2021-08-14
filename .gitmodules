@@ -43,3 +43,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/gitsigns.nvim"]
 	path = config/nvim/pack/vim-benferse/opt/gitsigns.nvim
 	url = https://github.com/lewis6991/gitsigns.nvim
+[submodule "config/nvim/pack/vim-benferse/opt/nvim-lspconfig"]
+	path = config/nvim/pack/vim-benferse/opt/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig
