@@ -6,6 +6,7 @@ local cmd = vim.cmd
 local g = vim.g
 local has = vim.fn.has
 local map = require('utils').map
+local set = vim.opt
 local silent = { silent = true }
 
 --
@@ -22,6 +23,11 @@ vim.cmd([[
 --
 vim.cmd([[packadd vim-airline]])
 
+g.airline_powerline_fonts = 1
+g['airline#extensions#tabline#enabled'] = 1
+g['airline#extensions#tabline#tab_nr_type'] = 1
+g['airline#extensions#tabline#fnamemod'] = ':t'
+
 --
 -- Gitsigns
 --
@@ -36,11 +42,6 @@ require('gitsigns').setup {
         changedelete = { hl = 'GitGutterChange', text = '~' },
     },
 }
-
-g.airline_powerline_fonts = 1
-g['airline#extensions#tabline#enabled'] = 1
-g['airline#extensions#tabline#tab_nr_type'] = 1
-g['airline#extensions#tabline#fnamemod'] = ':t'
 
 --
 -- Startify
@@ -69,6 +70,28 @@ g.tmux_navigator_disable_when_zoomed = 1
 if has('win32') == 0 then
     g.tmux_navigator_no_mappings = 1
 end
+
+--
+-- Native neovim LSP configuration.
+--
+vim.cmd([[packadd nvim-lspconfig]])
+
+local lspconfig = require('lspconfig')
+local on_attach = function(_, bufnum)
+    vim.api.nvim_buf_set_option(bufnum, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', silent)
+    vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', silent)
+    vim.api.nvim_buf_set_keymap(bufnum, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<cr>', silent)
+    vim.api.nvim_buf_set_keymap(bufnum, 'n', '<LocalLeader>k', '<cmd>lua vim.lsp.buf.signature_help()<cr>', silent)
+
+    vim.api.nvim_buf_set_keymap(bufnum, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', silent)
+end
+
+lspconfig['rust_analyzer'].setup {
+    on_attach = on_attach,
+}
+
+set.completeopt = 'menuone,noselect'
 
 --
 -- Plugins for places where tmux is likelier to exist
