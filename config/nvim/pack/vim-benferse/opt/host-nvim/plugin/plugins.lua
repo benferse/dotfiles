@@ -138,8 +138,22 @@ end
 
 map({'i', 's'}, '<Tab>', 'v:lua.tab_complete()', { expr = true })
 map({'i', 's'}, '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-map('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
 map('i', '<C-Space>', 'compe#complete()', { expr = true })
+
+--
+-- nvim-autopairs
+--
+vim.cmd([[packadd nvim-autopairs]])
+
+require('nvim-autopairs').setup {
+    disable_filetype = { 'TelescopePrompt' },
+}
+
+require('nvim-autopairs.completion.compe').setup {
+    map_cr = true,
+    map_complete = true,
+    auto_seelct = false,
+}
 
 --
 -- Plugins for places where tmux is likelier to exist
