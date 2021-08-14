@@ -94,6 +94,54 @@ lspconfig['rust_analyzer'].setup {
 set.completeopt = 'menuone,noselect'
 
 --
+-- nvim-compe for completion
+--
+vim.cmd([[packadd nvim-compe]])
+
+require('compe').setup {
+    documentation = {
+        border = 'rounded',
+    };
+    source = {
+        path = true,
+        buffer = true,
+        nvim_lsp = true,
+    };
+}
+
+local function check_back_space()
+    local col = vim.fn.col '.' - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' then
+        return true
+    else
+        return false
+    end
+end
+
+_G.tab_complete = function()
+    if vim.fn.pumvisible() == 1 then
+        return vim.api.nvim_replace_termcodes('<C-n>', true, true, true)
+    elseif check_back_space() then
+        return vim.api.nvim_replace_termcodes('<Tab>', true, true, true)
+    else
+        return vim.fn['compe#complete']()
+    end
+end
+
+_G.s_tab_complete = function()
+    if vim.fn.pumvisible() == 1 then
+        return vim.api.nvim_replace_termcodes('<C-p>', true, true, true)
+    else
+        return vim.api.nvim_replace_termcodes('<S-Tab>', true, true, true)
+    end
+end
+
+map({'i', 's'}, '<Tab>', 'v:lua.tab_complete()', { expr = true })
+map({'i', 's'}, '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+map('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
+map('i', '<C-Space>', 'compe#complete()', { expr = true })
+
+--
 -- Plugins for places where tmux is likelier to exist
 --
 if has('unix') == 1 or has('mac') then
