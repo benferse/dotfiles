@@ -64,9 +64,6 @@ local actions = require('telescope.actions')
 
 require('telescope').setup {
     defaults = {
-        path_display = {
-            'shorten',
-        },
         prompt_prefix = " ",
         selection_caret = " ",
         winblend = 10,
@@ -82,6 +79,15 @@ require('telescope').setup {
         },
     },
 }
+
+function find_nvim_config()
+    require("telescope.builtin").find_files {
+        cwd = "~/.config/nvim",
+        prompt_title = "nvim config",
+    }
+end
+
+map('n', '<leader>vf', '<cmd>lua find_nvim_config()<cr>')
 
 --
 -- Tmux navigator
