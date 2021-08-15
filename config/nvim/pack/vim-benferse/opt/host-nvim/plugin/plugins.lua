@@ -101,7 +101,9 @@ if has('win32') == 0 then
 end
 
 --
--- Native neovim LSP configuration.
+-- Native neovim LSP configuration. Explicitly not starting the
+-- rust_analyzer plugin, as rust-tools.nvim will do that for us
+-- (with our overrides)
 --
 vim.cmd([[packadd nvim-lspconfig]])
 
@@ -120,8 +122,17 @@ end
 map('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', silent)
 map('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', silent)
 
-lspconfig['rust_analyzer'].setup {
-    on_attach = on_attach,
+vim.cmd([[packadd rust-tools.nvim]])
+
+require('rust-tools').setup {
+    tools = {
+        hover_actions = {
+            border = 'rounded',
+        },
+    },
+    server = {
+        on_attach = on_attach,
+    },
 }
 
 set.completeopt = 'menuone,noinsert,noselect'
@@ -151,7 +162,7 @@ local function check_back_space()
     end
 end
 
-_G.tab_complete = function()
+function tab_complete()
     if vim.fn.pumvisible() == 1 then
         return vim.api.nvim_replace_termcodes('<C-n>', true, true, true)
     elseif check_back_space() then
@@ -161,7 +172,7 @@ _G.tab_complete = function()
     end
 end
 
-_G.s_tab_complete = function()
+function s_tab_complete()
     if vim.fn.pumvisible() == 1 then
         return vim.api.nvim_replace_termcodes('<C-p>', true, true, true)
     else
