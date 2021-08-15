@@ -144,7 +144,6 @@ require('rust-tools').setup {
     },
     server = {
         on_attach = on_attach,
-        -- capabilities = lsp_status.capabilities,
     },
 }
 
