@@ -110,17 +110,21 @@ local on_attach = function(_, bufnum)
     vim.api.nvim_buf_set_option(bufnum, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', silent)
     vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', silent)
+    vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', silent)
     vim.api.nvim_buf_set_keymap(bufnum, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<cr>', silent)
     vim.api.nvim_buf_set_keymap(bufnum, 'n', '<LocalLeader>k', '<cmd>lua vim.lsp.buf.signature_help()<cr>', silent)
 
     vim.api.nvim_buf_set_keymap(bufnum, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', silent)
 end
 
+map('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', silent)
+map('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', silent)
+
 lspconfig['rust_analyzer'].setup {
     on_attach = on_attach,
 }
 
-set.completeopt = 'menuone,noselect'
+set.completeopt = 'menuone,noinsert,noselect'
 
 --
 -- nvim-compe for completion
