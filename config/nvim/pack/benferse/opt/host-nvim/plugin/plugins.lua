@@ -16,6 +16,7 @@ local silent = { silent = true }
 cmd([[
     packadd plenary.nvim
     packadd nord-vim
+    packadd nvim-web-devicons
 ]])
 
 --
@@ -25,7 +26,6 @@ cmd([[packadd nvim-bufferline]])
 
 require('bufferline').setup {
     options = {
-        numbers = 'buffer_id',
         diagnostics = 'nvim_lsp',
     }
 }
