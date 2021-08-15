@@ -60,6 +60,29 @@ map('n', '<leader>s', [[:<C-u>Startify<cr>]], silent)
 --
 vim.cmd([[packadd telescope.nvim]])
 
+local actions = require('telescope.actions')
+
+require('telescope').setup {
+    defaults = {
+        path_display = {
+            'shorten',
+        },
+        prompt_prefix = " ",
+        selection_caret = " ",
+        winblend = 10,
+        mappings = {
+            i = {
+                ['<C-j>'] = actions.move_selection_next,
+                ['<C-k>'] = actions.move_selection_previous,
+                ['<esc>'] = actions.close,
+                ['jj'] = actions.close,
+                ['jk'] = actions.close,
+                ['kj'] = actions.close,
+            },
+        },
+    },
+}
+
 --
 -- Tmux navigator
 --
