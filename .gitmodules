@@ -55,3 +55,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/rust-tools.nvim"]
 	path = config/nvim/pack/vim-benferse/opt/rust-tools.nvim
 	url = https://github.com/simrat39/rust-tools.nvim
+[submodule "config/nvim/pack/vim-benferse/opt/lsp-status.nvim"]
+	path = config/nvim/pack/vim-benferse/opt/lsp-status.nvim
+	url = https://github.com/nvim-lua/lsp-status.nvim

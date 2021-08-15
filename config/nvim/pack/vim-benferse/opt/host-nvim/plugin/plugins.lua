@@ -24,6 +24,9 @@ vim.cmd([[
 vim.cmd([[packadd vim-airline]])
 
 g.airline_powerline_fonts = 1
+
+g['airline#extensions#nvimlsp#enabled'] = 1
+
 g['airline#extensions#tabline#enabled'] = 1
 g['airline#extensions#tabline#tab_nr_type'] = 1
 g['airline#extensions#tabline#fnamemod'] = ':t'
@@ -80,6 +83,9 @@ require('telescope').setup {
     },
 }
 
+--
+-- Cool, thanks @allizon!
+--
 function find_nvim_config()
     require("telescope.builtin").find_files {
         cwd = "~/.config/nvim",
@@ -108,7 +114,7 @@ end
 vim.cmd([[packadd nvim-lspconfig]])
 
 local lspconfig = require('lspconfig')
-local on_attach = function(_, bufnum)
+local on_attach = function(client, bufnum)
     vim.api.nvim_buf_set_option(bufnum, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', silent)
     vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', silent)
@@ -117,10 +123,17 @@ local on_attach = function(_, bufnum)
     vim.api.nvim_buf_set_keymap(bufnum, 'n', '<LocalLeader>k', '<cmd>lua vim.lsp.buf.signature_help()<cr>', silent)
 
     vim.api.nvim_buf_set_keymap(bufnum, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', silent)
+
+    --require('lsp-status').on_attach(client, bufnum)
 end
 
 map('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', silent)
 map('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', silent)
+
+-- vim.cmd([[packadd lsp-status.nvim]])
+
+-- local lsp_status = require('lsp-status')
+-- lsp_status.register_progress()
 
 vim.cmd([[packadd rust-tools.nvim]])
 
@@ -132,6 +145,7 @@ require('rust-tools').setup {
     },
     server = {
         on_attach = on_attach,
+        -- capabilities = lsp_status.capabilities,
     },
 }
 
