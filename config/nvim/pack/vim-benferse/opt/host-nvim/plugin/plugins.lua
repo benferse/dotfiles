@@ -13,28 +13,27 @@ local silent = { silent = true }
 -- Generally useful libraries, global stuff without dependencies, and
 -- so forth
 --
-vim.cmd([[
+cmd([[
     packadd plenary.nvim
     packadd nord-vim
 ]])
 
 --
--- Airline
+-- Buffer/tab line
 --
-vim.cmd([[packadd vim-airline]])
+cmd([[packadd nvim-bufferline]])
 
-g.airline_powerline_fonts = 1
-
-g['airline#extensions#nvimlsp#enabled'] = 1
-
-g['airline#extensions#tabline#enabled'] = 1
-g['airline#extensions#tabline#tab_nr_type'] = 1
-g['airline#extensions#tabline#fnamemod'] = ':t'
+require('bufferline').setup {
+    options = {
+        numbers = 'buffer_id',
+        diagnostics = 'nvim_lsp',
+    }
+}
 
 --
 -- Gitsigns
 --
-vim.cmd([[packadd gitsigns.nvim]])
+cmd([[packadd gitsigns.nvim]])
 
 require('gitsigns').setup {
     signs = {
@@ -49,7 +48,7 @@ require('gitsigns').setup {
 --
 -- Startify
 --
-vim.cmd([[packadd vim-startify]])
+cmd([[packadd vim-startify]])
 
 g.startify_change_to_vcs_root = 1
 g.startify_files_number = 7
@@ -61,7 +60,7 @@ map('n', '<leader>s', [[:<C-u>Startify<cr>]], silent)
 --
 -- Telescope
 --
-vim.cmd([[packadd telescope.nvim]])
+cmd([[packadd telescope.nvim]])
 
 local actions = require('telescope.actions')
 
@@ -98,7 +97,7 @@ map('n', '<leader>vf', '<cmd>lua find_nvim_config()<cr>')
 --
 -- Tmux navigator
 --
-vim.cmd([[packadd vim-tmux-navigator]])
+cmd([[packadd vim-tmux-navigator]])
 
 g.tmux_navigator_save_on_switch = 1
 g.tmux_navigator_disable_when_zoomed = 1
@@ -111,7 +110,7 @@ end
 -- rust_analyzer plugin, as rust-tools.nvim will do that for us
 -- (with our overrides)
 --
-vim.cmd([[packadd nvim-lspconfig]])
+cmd([[packadd nvim-lspconfig]])
 
 local lspconfig = require('lspconfig')
 local on_attach = function(client, bufnum)
@@ -124,18 +123,18 @@ local on_attach = function(client, bufnum)
 
     vim.api.nvim_buf_set_keymap(bufnum, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', silent)
 
-    --require('lsp-status').on_attach(client, bufnum)
+    require('lsp-status').on_attach(client, bufnum)
 end
 
 map('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', silent)
 map('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', silent)
 
--- vim.cmd([[packadd lsp-status.nvim]])
+cmd([[packadd lsp-status.nvim]])
 
--- local lsp_status = require('lsp-status')
--- lsp_status.register_progress()
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
 
-vim.cmd([[packadd rust-tools.nvim]])
+cmd([[packadd rust-tools.nvim]])
 
 require('rust-tools').setup {
     tools = {
@@ -151,10 +150,26 @@ require('rust-tools').setup {
 
 set.completeopt = 'menuone,noinsert,noselect'
 
+cmd([[packadd lualine.nvim]])
+local lualine = require('lualine')
+
+local function my_lsp_status()
+    return require('lsp-status').status()
+end
+
+lualine.setup {
+    options = {
+        theme = 'nord',
+    },
+    sections = {
+	    lualine_c = { 'filename', my_lsp_status },
+    },
+}
+
 --
 -- nvim-compe for completion
 --
-vim.cmd([[packadd nvim-compe]])
+cmd([[packadd nvim-compe]])
 
 require('compe').setup {
     documentation = {
@@ -201,7 +216,7 @@ map('i', '<C-Space>', 'compe#complete()', { expr = true })
 --
 -- nvim-autopairs
 --
-vim.cmd([[packadd nvim-autopairs]])
+cmd([[packadd nvim-autopairs]])
 
 require('nvim-autopairs').setup {
     disable_filetype = { 'TelescopePrompt' },
@@ -217,7 +232,7 @@ require('nvim-autopairs.completion.compe').setup {
 -- Plugins for places where tmux is likelier to exist
 --
 if has('unix') == 1 or has('mac') then
-    vim.cmd([[
+    cmd([[
         packadd vimux
         packadd vimux-cargo
     ]])
