@@ -7,9 +7,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-commentary"]
 	path = config/nvim/pack/benferse/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
-[submodule "config/nvim/pack/vim-benferse/opt/vim-devicons"]
-	path = config/nvim/pack/benferse/start/vim-devicons
-	url = https://github.com/ryanoasis/vim-devicons
 [submodule "config/nvim/pack/vim-benferse/opt/plenary.nvim"]
 	path = config/nvim/pack/benferse/opt/plenary.nvim
 	url = https://github.com/nvim-lua/plenary.nvim
@@ -61,3 +58,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/nvim-bufferline"]
 	path = config/nvim/pack/benferse/opt/nvim-bufferline
 	url = https://github.com/akinsho/nvim-bufferline.lua
+[submodule "config/nvim/pack/benferse/opt/nvim-web-devicons"]
+	path = config/nvim/pack/benferse/opt/nvim-web-devicons
+	url = https://github.com/kyazdani42/nvim-web-devicons
