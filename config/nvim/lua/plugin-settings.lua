@@ -10,13 +10,6 @@ local silent = { silent = true }
 
 local function setup()
     --
-    -- Sneak configuration
-    --
-    g['sneak#s_next'] = 1
-    g['sneak#use_ic_scs'] = 1
-    g['sneak#prompt'] = 'sneak> '
-
-    --
     -- Vim better whitespace
     --
     g.better_whitespace_enabled = 1
