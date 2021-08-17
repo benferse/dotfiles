@@ -33,6 +33,13 @@ require('bufferline').setup {
 }
 
 --
+-- Diffview
+--
+cmd([[packadd diffview.nvim]])
+
+require('diffview').setup {}
+
+--
 -- Gitsigns
 --
 cmd([[packadd gitsigns.nvim]])
@@ -52,7 +59,11 @@ require('gitsigns').setup {
 --
 cmd([[packadd neogit]])
 
-require('neogit').setup {}
+require('neogit').setup {
+    integrations = {
+        diffview = true,
+    },
+}
 
 --
 -- Startify
