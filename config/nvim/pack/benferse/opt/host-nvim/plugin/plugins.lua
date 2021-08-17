@@ -46,6 +46,13 @@ require('gitsigns').setup {
 }
 
 --
+-- Neogit
+--
+cmd([[packadd neogit]])
+
+require('neogit').setup {}
+
+--
 -- Startify
 --
 cmd([[packadd vim-startify]])
