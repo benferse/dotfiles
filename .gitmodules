@@ -64,3 +64,6 @@
 [submodule "config/nvim/pack/benferse/opt/neogit"]
 	path = config/nvim/pack/benferse/opt/neogit
 	url = https://github.com/timuntersberger/neogit
+[submodule "config/nvim/pack/benferse/opt/diffview.nvim"]
+	path = config/nvim/pack/benferse/opt/diffview.nvim
+	url = https://github.com/sindrets/diffview.nvim
