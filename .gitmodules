@@ -58,3 +58,6 @@
 [submodule "config/nvim/pack/benferse/opt/nvim-web-devicons"]
 	path = config/nvim/pack/benferse/opt/nvim-web-devicons
 	url = https://github.com/kyazdani42/nvim-web-devicons
+[submodule "config/nvim/pack/benferse/start/hop.nvim"]
+	path = config/nvim/pack/benferse/start/hop.nvim
+	url = https://github.com/phaazon/hop.nvim

@@ -10,6 +10,12 @@ local silent = { silent = true }
 
 local function setup()
     --
+    -- hop.nvim, like easymotion and sneak and friends all in one
+    -- pretty lua bundle
+    --
+    require('hop').setup()
+
+    --
     -- Vim better whitespace
     --
     g.better_whitespace_enabled = 1
