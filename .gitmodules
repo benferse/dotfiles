@@ -10,9 +10,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/plenary.nvim"]
 	path = config/nvim/pack/benferse/opt/plenary.nvim
 	url = https://github.com/nvim-lua/plenary.nvim
-[submodule "config/nvim/pack/vim-benferse/opt/vim-sneak"]
-	path = config/nvim/pack/benferse/start/vim-sneak
-	url = https://github.com/justinmk/vim-sneak
 [submodule "config/nvim/pack/vim-benferse/opt/vim-startify"]
 	path = config/nvim/pack/benferse/opt/vim-startify
 	url = https://github.com/mhinz/vim-startify
