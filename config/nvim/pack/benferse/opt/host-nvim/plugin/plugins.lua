@@ -142,7 +142,7 @@ cmd([[packadd rust-tools.nvim]])
 -- an explicit extension there
 --
 local ra_ext = ''
-if has('win32') then ra_ext = '.exe' end
+if has('win32') == 1 then ra_ext = '.exe' end
 
 require('rust-tools').setup {
     tools = {
