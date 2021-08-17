@@ -27,6 +27,7 @@ cmd([[packadd nvim-bufferline]])
 require('bufferline').setup {
     options = {
         diagnostics = 'nvim_lsp',
+        enforce_regular_tabs = true,
         separator_style = 'slant',
     }
 }
