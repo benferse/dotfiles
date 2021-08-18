@@ -1,66 +1,69 @@
 [submodule "config/nvim/pack/vim-benferse/opt/nord-vim"]
-	path = config/nvim/pack/vim-benferse/opt/nord-vim
+	path = config/nvim/pack/benferse/opt/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim
-[submodule "config/nvim/pack/vim-benferse/opt/vim-sneak"]
-	path = config/nvim/pack/vim-benferse/opt/vim-sneak
-	url = https://github.com/justinmk/vim-sneak
-[submodule "config/nvim/pack/vim-benferse/opt/vim-textobj-user"]
-	path = config/nvim/pack/vim-benferse/opt/vim-textobj-user
-	url = https://github.com/kana/vim-textobj-user
-[submodule "config/nvim/pack/vim-benferse/opt/vim-signify"]
-	path = config/nvim/pack/vim-benferse/opt/vim-signify
-	url = https://github.com/mhinz/vim-signify
-[submodule "config/nvim/pack/vim-benferse/opt/vim-startify"]
-	path = config/nvim/pack/vim-benferse/opt/vim-startify
-	url = https://github.com/mhinz/vim-startify
+[submodule "config/nvim/pack/vim-benferse/opt/vim-better-whitespace"]
+	path = config/nvim/pack/benferse/start/vim-better-whitespace
+	url = https://github.com/ntpeters/vim-better-whitespace
 [submodule "config/nvim/pack/vim-benferse/opt/vim-commentary"]
-	path = config/nvim/pack/vim-benferse/opt/vim-commentary
+	path = config/nvim/pack/benferse/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
-[submodule "config/nvim/pack/vim-benferse/opt/vim-fugitive"]
-	path = config/nvim/pack/vim-benferse/opt/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive
+[submodule "config/nvim/pack/vim-benferse/opt/plenary.nvim"]
+	path = config/nvim/pack/benferse/opt/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "config/nvim/pack/vim-benferse/opt/vim-startify"]
+	path = config/nvim/pack/benferse/opt/vim-startify
+	url = https://github.com/mhinz/vim-startify
 [submodule "config/nvim/pack/vim-benferse/opt/vim-surround"]
-	path = config/nvim/pack/vim-benferse/opt/vim-surround
+	path = config/nvim/pack/benferse/start/vim-surround
 	url = https://github.com/tpope/vim-surround
-[submodule "config/nvim/pack/vim-benferse/opt/vim-unimpaired"]
-	path = config/nvim/pack/vim-benferse/opt/vim-unimpaired
-	url = https://github.com/tpope/vim-unimpaired
-[submodule "config/nvim/pack/vim-benferse/opt/vim-airline"]
-	path = config/nvim/pack/vim-benferse/opt/vim-airline
-	url = https://github.com/vim-airline/vim-airline
-[submodule "config/nvim/pack/vim-benferse/opt/vim-devicons"]
-	path = config/nvim/pack/vim-benferse/opt/vim-devicons
-	url = https://github.com/ryanoasis/vim-devicons
-[submodule "config/nvim/pack/vim-benferse/opt/fzf"]
-	path = config/nvim/pack/vim-benferse/opt/fzf
-	url = https://github.com/junegunn/fzf
-[submodule "config/nvim/pack/vim-benferse/opt/fzf.vim"]
-	path = config/nvim/pack/vim-benferse/opt/fzf.vim
-	url = https://github.com/junegunn/fzf.vim
-[submodule "config/nvim/pack/vim-benferse/opt/vim-ps1"]
-	path = config/nvim/pack/vim-benferse/opt/vim-ps1
-	url = https://github.com/pprovost/vim-ps1
-[submodule "config/nvim/pack/vim-benferse/opt/vim-textobj-entire"]
-	path = config/nvim/pack/vim-benferse/opt/vim-textobj-entire
-	url = https://github.com/benferse/vim-textobj-entire
-[submodule "config/nvim/pack/vim-benferse/opt/coc.nvim"]
-	path = config/nvim/pack/vim-benferse/opt/coc.nvim
-	url = https://github.com/neoclide/coc.nvim
 [submodule "config/nvim/pack/vim-benferse/opt/vim-tmux-navigator"]
-	path = config/nvim/pack/vim-benferse/opt/vim-tmux-navigator
+	path = config/nvim/pack/benferse/opt/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "config/nvim/pack/vim-benferse/opt/telescope.nvim"]
+	path = config/nvim/pack/benferse/opt/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim
+[submodule "config/nvim/pack/vim-benferse/opt/vim-unimpaired"]
+	path = config/nvim/pack/benferse/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired
 [submodule "config/nvim/pack/vim-benferse/opt/vimux"]
-	path = config/nvim/pack/vim-benferse/opt/vimux
+	path = config/nvim/pack/benferse/opt/vimux
 	url = https://github.com/benmills/vimux
 [submodule "config/nvim/pack/vim-benferse/opt/vimux-cargo"]
-	path = config/nvim/pack/vim-benferse/opt/vimux-cargo
+	path = config/nvim/pack/benferse/opt/vimux-cargo
 	url = https://github.com/jtdowney/vimux-cargo
-[submodule "config/nvim/pack/vim-benferse/opt/vim-beancount"]
-	path = config/nvim/pack/vim-benferse/opt/vim-beancount
-	url = https://github.com/nathangrigg/vim-beancount
-[submodule "config/nvim/pack/vim-benferse/opt/vim-better-whitespace"]
-	path = config/nvim/pack/vim-benferse/opt/vim-better-whitespace
-	url = https://github.com/ntpeters/vim-better-whitespace
-[submodule "config/nvim/pack/vim-benferse/opt/vimspector"]
-	path = config/nvim/pack/vim-benferse/opt/vimspector
-	url = https://github.com/puremourning/vimspector
+[submodule "config/nvim/pack/vim-benferse/opt/gitsigns.nvim"]
+	path = config/nvim/pack/benferse/opt/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim
+[submodule "config/nvim/pack/vim-benferse/opt/nvim-lspconfig"]
+	path = config/nvim/pack/benferse/opt/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig
+[submodule "config/nvim/pack/vim-benferse/opt/nvim-compe"]
+	path = config/nvim/pack/benferse/opt/nvim-compe
+	url = https://github.com/hrsh7th/nvim-compe
+[submodule "config/nvim/pack/vim-benferse/opt/nvim-autopairs"]
+	path = config/nvim/pack/benferse/opt/nvim-autopairs
+	url = https://github.com/windwp/nvim-autopairs
+[submodule "config/nvim/pack/vim-benferse/opt/rust-tools.nvim"]
+	path = config/nvim/pack/benferse/opt/rust-tools.nvim
+	url = https://github.com/simrat39/rust-tools.nvim
+[submodule "config/nvim/pack/vim-benferse/opt/lsp-status.nvim"]
+	path = config/nvim/pack/benferse/opt/lsp-status.nvim
+	url = https://github.com/nvim-lua/lsp-status.nvim
+[submodule "config/nvim/pack/vim-benferse/opt/lualine.nvim"]
+	path = config/nvim/pack/benferse/opt/lualine.nvim
+	url = https://github.com/shadmansaleh/lualine.nvim
+[submodule "config/nvim/pack/vim-benferse/opt/nvim-bufferline"]
+	path = config/nvim/pack/benferse/opt/nvim-bufferline
+	url = https://github.com/akinsho/nvim-bufferline.lua
+[submodule "config/nvim/pack/benferse/opt/nvim-web-devicons"]
+	path = config/nvim/pack/benferse/opt/nvim-web-devicons
+	url = https://github.com/kyazdani42/nvim-web-devicons
+[submodule "config/nvim/pack/benferse/start/hop.nvim"]
+	path = config/nvim/pack/benferse/start/hop.nvim
+	url = https://github.com/phaazon/hop.nvim
+[submodule "config/nvim/pack/benferse/opt/neogit"]
+	path = config/nvim/pack/benferse/opt/neogit
+	url = https://github.com/timuntersberger/neogit
+[submodule "config/nvim/pack/benferse/opt/diffview.nvim"]
+	path = config/nvim/pack/benferse/opt/diffview.nvim
+	url = https://github.com/sindrets/diffview.nvim
