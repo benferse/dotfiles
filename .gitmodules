@@ -4,9 +4,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-better-whitespace"]
 	path = config/nvim/pack/benferse/start/vim-better-whitespace
 	url = https://github.com/ntpeters/vim-better-whitespace
-[submodule "config/nvim/pack/vim-benferse/opt/vim-commentary"]
-	path = config/nvim/pack/benferse/start/vim-commentary
-	url = https://github.com/tpope/vim-commentary
 [submodule "config/nvim/pack/vim-benferse/opt/plenary.nvim"]
 	path = config/nvim/pack/benferse/opt/plenary.nvim
 	url = https://github.com/nvim-lua/plenary.nvim
@@ -70,3 +67,6 @@
 [submodule "config/nvim/pack/benferse/opt/nvim-tree.lua"]
 	path = config/nvim/pack/benferse/opt/nvim-tree.lua
 	url = https://github.com/kyazdani42/nvim-tree.lua
+[submodule "config/nvim/pack/benferse/start/nvim-comment"]
+	path = config/nvim/pack/benferse/start/nvim-comment
+	url = https://github.com/terrortylor/nvim-comment
