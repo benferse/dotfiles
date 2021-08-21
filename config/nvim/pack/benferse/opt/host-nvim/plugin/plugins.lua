@@ -252,6 +252,13 @@ map({'i', 's'}, '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 map('i', '<C-Space>', 'compe#complete()', { expr = true })
 
 --
+-- nvim-comment
+--
+cmd([[packadd nvim-comment]])
+
+require('nvim_comment').setup()
+
+--
 -- nvim-autopairs
 --
 cmd([[packadd nvim-autopairs]])
