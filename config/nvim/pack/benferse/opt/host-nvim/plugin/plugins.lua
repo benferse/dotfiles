@@ -78,6 +78,16 @@ g.startify_update_oldfiles = 1
 map('n', '<leader>s', [[:<C-u>Startify<cr>]], silent)
 
 --
+-- nvim-tree
+--
+cmd ([[packadd nvim-tree.lua]])
+
+g.nvim_tree_side = 'right'
+g.nvim_tree_width = 40
+g.nvim_tree_gitignore = 1
+g.nvim_tree_auto_close = 1
+
+--
 -- Telescope
 --
 cmd([[packadd telescope.nvim]])
