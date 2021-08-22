@@ -19,27 +19,30 @@ local function on_attach(client, bufnum)
 end
 
 local function setup_lua()
-    require('lspconfig')['lua'].setup {
-        on_attach = on_attach,
-        settings = {
-            Lua = {
-                diagnostics = {
-                    globals = { 'vim' },
+    local lspconfig = require('lspconfig')
+    if lspconfig['lua'] then
+        lspconfig['lua'].setup {
+            on_attach = on_attach,
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { 'vim' },
+                    },
                 },
             },
-        },
-    }
+        }
+    end
 end
 
 local function setup_rust()
-    -- However nvim-lsp tries to start the language server does not use
-    -- standard executable resolution on Windows, so make sure we include
-    -- an explicit extension there
-    local ra_ext = ''
-    if vim.fn.has('win32') == 1 then ra_ext = '.exe' end
-
-    local server_path = require('lspinstall/util').install_path('rust')
-    local cmd = server_path .. '/rust-analyzer' .. ra_ext
+    -- nvim-lspinstall does not support Windows, and it doesn't look like
+    -- the author ever will. So for now just assume I've gone through the
+    -- work to install rust-analyzer myself there :(
+    local cmd = 'rust-analyzer.exe'
+    if vim.fn.has('win32') == 0 then
+        local server_path = require('lspinstall/util').install_path('rust')
+        cmd = server_path .. '/rust-analyzer'
+    end
 
     require('rust-tools').setup {
         tools = {
