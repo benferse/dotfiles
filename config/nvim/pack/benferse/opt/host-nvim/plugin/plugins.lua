@@ -166,6 +166,10 @@ lsp_status.register_progress()
 
 cmd([[packadd rust-tools.nvim]])
 
+cmd([[packadd nvim-lspinstall]])
+
+require('lspinstall').setup {}
+
 --
 -- However nvim-lsp tries to start the language server does not use
 -- standard executable resolution on Windows, so make sure we include
@@ -174,6 +178,8 @@ cmd([[packadd rust-tools.nvim]])
 local ra_ext = ''
 if has('win32') == 1 then ra_ext = '.exe' end
 
+local server_path = require('lspinstall/util').install_path('rust')
+
 require('rust-tools').setup {
     tools = {
         hover_actions = {
@@ -181,7 +187,7 @@ require('rust-tools').setup {
         },
     },
     server = {
-        cmd = { 'rust-analyzer' .. ra_ext },
+        cmd = { server_path .. '/rust-analyzer' .. ra_ext },
         on_attach = on_attach,
     },
 }
