@@ -70,3 +70,6 @@
 [submodule "config/nvim/pack/benferse/opt/popup.nvim"]
 	path = config/nvim/pack/benferse/opt/popup.nvim
 	url = https://github.com/nvim-lua/popup.nvim
+[submodule "config/nvim/pack/benferse/opt/toggleterm.nvim"]
+	path = config/nvim/pack/benferse/opt/toggleterm.nvim
+	url = https://github.com/akinsho/toggleterm.nvim
