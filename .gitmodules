@@ -73,3 +73,6 @@
 [submodule "config/nvim/pack/benferse/opt/nvim-lspinstall"]
 	path = config/nvim/pack/benferse/opt/nvim-lspinstall
 	url = https://github.com/kabouzeid/nvim-lspinstall
+[submodule "config/nvim/pack/benferse/opt/popup.nvim"]
+	path = config/nvim/pack/benferse/opt/popup.nvim
+	url = https://github.com/nvim-lua/popup.nvim
