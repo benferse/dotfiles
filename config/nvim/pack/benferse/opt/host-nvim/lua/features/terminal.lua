@@ -18,7 +18,7 @@ local function setup(args)
         hide_numbers = true,
         shade_terminals = true,
         start_in_insert = true,
-        insert_mappings = false,
+        insert_mappings = true,
         persist_size = true,
         direction = 'vertical',
         size = function(term)
