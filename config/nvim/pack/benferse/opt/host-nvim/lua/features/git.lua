@@ -1,9 +1,7 @@
 -- Source control, diff and merge tools, and surfacing git
 -- information in the ui
 
-local M = {}
-
-M.setup = function(args)
+local function setup(args)
     vim.cmd([[
         packadd diffview.nvim
         packadd gitsigns.nvim
@@ -29,4 +27,4 @@ M.setup = function(args)
     }
 end
 
-return M
+return { setup = setup }

@@ -3,9 +3,7 @@
 
 local map = require('utils').map
 
-local M = {}
-
-M.setup = function(args)
+local function setup(args)
     vim.cmd([[
         packadd telescope.nvim
         packadd nvim-tree.lua
@@ -49,4 +47,4 @@ M.setup = function(args)
     vim.g.nvim_tree_auto_close = 1
 end
 
-return M
+return { setup = setup }

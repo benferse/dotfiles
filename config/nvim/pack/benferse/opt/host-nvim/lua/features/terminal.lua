@@ -1,9 +1,7 @@
 -- Integration between nvim, integrated terminals, and any
 -- terminal emulators that it's running in
 
-local M = {}
-
-M.setup = function(args)
+local function setup(args)
     vim.cmd([[
         packadd vim-tmux-navigator
     ]])
@@ -15,4 +13,4 @@ M.setup = function(args)
     end
 end
 
-return M
+return { setup = setup }

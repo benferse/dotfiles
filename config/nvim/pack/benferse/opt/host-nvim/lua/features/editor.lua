@@ -31,9 +31,7 @@ function s_tab_complete()
     end
 end
 
-local M = {}
-
-M.setup = function(args)
+local function setup(args)
     vim.cmd([[
         packadd nvim-compe
         packadd nvim-autopairs
@@ -71,4 +69,4 @@ M.setup = function(args)
 
 end
 
-return M
+return { setup = setup }
