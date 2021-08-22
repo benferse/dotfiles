@@ -20,7 +20,14 @@ end
 
 local function setup_lua()
     require('lspconfig')['lua'].setup {
-        on_attach = on_attach
+        on_attach = on_attach,
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { 'vim' },
+                },
+            },
+        },
     }
 end
 
@@ -41,7 +48,7 @@ local function setup_rust()
             },
         },
         server = {
-            cmd = { server_path .. '/rust-analyzer' .. ra_ext },
+            cmd = { cmd },
             on_attach = on_attach,
         },
     }
@@ -66,8 +73,6 @@ local function setup(args)
     require('lspinstall').setup {}
 
     -- Setup individual language support
-    -- if M.setup_rust then M.setup_rust() end
-    -- if V.setup_lua then V.setup_lua() end
     setup_rust()
     setup_lua()
 
