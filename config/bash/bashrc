@@ -115,7 +115,7 @@ fi
 # Use the gpg-agent to serve up auth keys, but if this looks like WSL
 # then try to tunnel to Window's agent (since we can't access the
 # YubiKey directly)
-if [ -f /proc/sys/kernel/osrelease ] && grep -q -s -i wsl /proc/sys/kernel/osrelease; then
+if [ -f /proc/sys/kernel/osrelease ] && grep -q -s -i -e 'wsl\|microsoft' /proc/sys/kernel/osrelease; then
     # Remove the standard SSH socket, and replace it with a tunnel to pageant
     export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
     ss -a | grep -q $SSH_AUTH_SOCK
