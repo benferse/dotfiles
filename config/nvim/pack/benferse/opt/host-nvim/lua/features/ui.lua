@@ -3,9 +3,7 @@
 
 local map = require('utils').map
 
-local M = {}
-
-M.setup = function(args)
+local function setup(args)
     vim.cmd([[
         packadd nord-vim
         packadd nvim-web-devicons
@@ -40,7 +38,7 @@ M.setup = function(args)
     vim.g.startify_fortune_use_unicode = 1
     vim.g.startify_update_oldfiles = 1
 
-    map('n', '<leader>s', [[:<C-u>Startify<cr>]], silent)
+    map('n', '<leader>s', [[:<C-u>Startify<cr>]], { silent = true })
 end
 
-return M
+return { setup = setup }

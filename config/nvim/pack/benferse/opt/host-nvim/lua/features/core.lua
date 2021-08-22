@@ -1,13 +1,11 @@
 -- Core plugins and functionality the other features may
 -- rely on
 
-local M = {}
-
-M.setup = function(args)
+local function setup(args)
     vim.cmd([[
         packadd plenary.nvim
         packadd popup.nvim
     ]])
 end
 
-return M
+return { setup = setup }
