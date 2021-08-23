@@ -7,3 +7,4 @@ require('features/editor').setup {}
 require('features/picker').setup {}
 require('features/lsp').setup {}
 require('features/terminal').setup {}
+

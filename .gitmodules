@@ -73,3 +73,6 @@
 [submodule "config/nvim/pack/benferse/opt/toggleterm.nvim"]
 	path = config/nvim/pack/benferse/opt/toggleterm.nvim
 	url = https://github.com/akinsho/toggleterm.nvim
+[submodule "config/nvim/pack/benferse/opt/which-key.nvim"]
+	path = config/nvim/pack/benferse/opt/which-key.nvim
+	url = https://github.com/folke/which-key.nvim

@@ -5,11 +5,12 @@ local map = require('utils').map
 
 local function setup(args)
     vim.cmd([[
+        packadd lualine.nvim
         packadd nord-vim
         packadd nvim-web-devicons
         packadd nvim-bufferline
         packadd vim-startify
-        packadd lualine.nvim
+        packadd which-key.nvim
     ]])
 
     require('bufferline').setup {
@@ -39,6 +40,18 @@ local function setup(args)
     vim.g.startify_update_oldfiles = 1
 
     map('n', '<leader>s', [[:<C-u>Startify<cr>]], { silent = true })
+
+    require('which-key').setup {
+        window = {
+            border = 'none',
+            position = 'bottom',
+        },
+        triggers = 'auto',
+        triggers_blacklist = {
+            i = { 'j', 'k' },
+            v = { 'j', 'k' },
+        },
+    }
 end
 
 return { setup = setup }
