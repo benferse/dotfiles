@@ -57,7 +57,7 @@ local function setup()
     map('n', '<leader>bn', [[<cmd>call host#buffers#next()<cr>]])
     map('n', '<leader>bp', [[<cmd>call host#buffers#previous()<cr>]])
     map('n', '<leader>bd', [[<cmd>call host#buffers#delete()<cr>]])
-    map('n', '<leader>bx', [[<cmd>all host#buffers#really_delete()<cr>]])
+    map('n', '<leader>bx', [[<cmd>call host#buffers#really_delete()<cr>]])
 
     --
     -- vim-unimpaired sets these, but we want them to go through our smarts instead
