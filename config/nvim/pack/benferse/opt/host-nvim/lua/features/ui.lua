@@ -5,13 +5,24 @@ local map = require('utils').map
 
 local function setup(args)
     vim.cmd([[
+        packadd dashboard-nvim
         packadd lualine.nvim
         packadd nord-vim
         packadd nvim-web-devicons
         packadd nvim-bufferline
-        packadd vim-startify
         packadd which-key.nvim
     ]])
+
+    vim.g.dashboard_executive = 'telescope'
+    vim.g.dashboard_custom_footer = {}
+    vim.g.dashboard_custom_header = {
+        '███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+        '████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+        '██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+        '██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+        '██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+        '╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+    }
 
     require('bufferline').setup {
         options = {
@@ -34,14 +45,8 @@ local function setup(args)
         },
     }
 
-    vim.g.startify_change_to_vcs_root = 1
-    vim.g.startify_files_number = 7
-    vim.g.startify_fortune_use_unicode = 1
-    vim.g.startify_update_oldfiles = 1
-
-    map('n', '<leader>s', [[:<C-u>Startify<cr>]], { silent = true })
-
-    require('which-key').setup {
+    local which_key = require('which-key')
+    which_key.setup {
         window = {
             border = 'none',
             position = 'bottom',
@@ -50,6 +55,16 @@ local function setup(args)
         triggers_blacklist = {
             i = { 'j', 'k' },
             v = { 'j', 'k' },
+        },
+    }
+
+    which_key.register  {
+        ["<leader>b"] = {
+            name = "Buffers",
+            n = "Next",
+            p = "Previous",
+            d = "Hide",
+            x = "Wipeout",
         },
     }
 end
