@@ -14,7 +14,7 @@ local function setup(args)
     end
 
     require('toggleterm').setup {
-        open_mapping = [[<leader>`]],
+        open_mapping = [[g<cr>]],
         hide_numbers = true,
         shade_terminals = true,
         start_in_insert = true,
