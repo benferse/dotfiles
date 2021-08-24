@@ -42,6 +42,15 @@ if exist "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe" 2> nu
     mklink "%localappdata%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" "%ConfigRoot%\cascadia\settings.json" 2> nul:
 )
 
+:: Windows Terminal Preview
+if exist "%localappdata%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe" 2> nul: (
+    echo Linking settings for Windows Terminal Preview from MS store...
+
+    del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\profiles.json" 2> nul:
+    del /f /q "%localappdata%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" 2> nul:
+    mklink "%localappdata%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" "%ConfigRoot%\cascadia\settings-preview.json" 2> nul:
+)
+
 :: nvim
 echo Linking settings for nvim...
 
