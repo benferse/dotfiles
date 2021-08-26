@@ -13,7 +13,7 @@ local function check_back_space()
     end
 end
 
-function tab_complete()
+function _G.tab_complete()
     if vim.fn.pumvisible() == 1 then
         return vim.api.nvim_replace_termcodes('<C-n>', true, true, true)
     elseif check_back_space() then
@@ -23,7 +23,7 @@ function tab_complete()
     end
 end
 
-function s_tab_complete()
+function _G.s_tab_complete()
     if vim.fn.pumvisible() == 1 then
         return vim.api.nvim_replace_termcodes('<C-p>', true, true, true)
     else
@@ -38,7 +38,10 @@ local function setup(args)
         packadd nvim-comment
     ]])
 
-    require('nvim_comment').setup {}
+    require('nvim_comment').setup {
+        marker_padding = true,
+        comment_empty = true,
+    }
 
     require('compe').setup {
         documentation = {
