@@ -14,7 +14,7 @@ local function setup(args)
     ]])
 
     vim.g.dashboard_executive = 'telescope'
-    vim.g.dashboard_custom_footer = {}
+    vim.g.dashboard_custom_footer = { 'https://github.com/benferse' }
     vim.g.dashboard_custom_header = {
         '███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
         '████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
@@ -22,6 +22,20 @@ local function setup(args)
         '██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
         '██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
         '╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+    }
+    vim.g.dashboard_custom_section = {
+        section_0 = {
+            description = { '*  Recent sessions        *' },
+            command = 'Telescope projects',
+        },
+        section_1 = {
+            description = { '*  Find a file            *' },
+            command = 'Telescope find_files',
+        },
+        section_2 = {
+            description = { '*  Recent files           *' },
+            command = 'Telescope oldfiles',
+        },
     }
 
     require('bufferline').setup {
