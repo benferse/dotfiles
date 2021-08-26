@@ -25,5 +25,6 @@
 [user]
     email = ben@bu.edu
     name = Ben Fersenheim
+
 [init]
-	defaultBranch = main
+	defaultBranch = main 
