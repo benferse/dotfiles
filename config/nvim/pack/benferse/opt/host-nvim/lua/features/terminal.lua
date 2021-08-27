@@ -1,6 +1,10 @@
 -- Integration between nvim, integrated terminals, and any
 -- terminal emulators that it's running in
 
+local map = require('utils').map;
+
+local git_window = {}
+
 local function setup(args)
     vim.cmd([[
         packadd vim-tmux-navigator
@@ -30,6 +34,22 @@ local function setup(args)
         end,
         close_on_exit = true,
     }
+
+    git_window = require('toggleterm.terminal').Terminal:new({
+        cmd = 'lazygit',
+        dir = 'git_dir',
+        direction = 'float',
+        float_opts = {
+            border = 'double',
+        },
+    })
+
+    map('n', '<leader>x', '<cmd>lua toggle_git_window()<cr>')
+
+end
+
+function _G.toggle_git_window()
+    git_window:toggle()
 end
 
 return { setup = setup }
