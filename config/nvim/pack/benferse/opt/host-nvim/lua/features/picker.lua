@@ -9,9 +9,10 @@ local function setup(args)
         packadd nvim-tree.lua
     ]])
 
+    local telescope = require('telescope')
     local actions = require('telescope.actions')
 
-    require('telescope').setup {
+    telescope.setup {
         defaults = {
             prompt_prefix = " ",
             selection_caret = " ",
@@ -29,9 +30,9 @@ local function setup(args)
         },
     }
 
-    --
+    telescope.load_extension('projects')
+
     -- Cool, thanks @allizon!
-    --
     local function find_nvim_config()
         require("telescope.builtin").find_files {
             cwd = "~/.config/nvim",
@@ -45,6 +46,8 @@ local function setup(args)
     vim.g.nvim_tree_width = 40
     vim.g.nvim_tree_gitignore = 1
     vim.g.nvim_tree_auto_close = 1
+    vim.g.nvim_tree_update_cwd = 1
+    vim.g.nvim_tree_respect_buf_cwd = 1
 end
 
 return { setup = setup }

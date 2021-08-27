@@ -7,10 +7,8 @@ local function setup(args)
     vim.cmd([[
         packadd dashboard-nvim
         packadd lualine.nvim
-        packadd nord-vim
-        packadd nvim-web-devicons
         packadd nvim-bufferline
-        packadd which-key.nvim
+        packadd project.nvim
     ]])
 
     vim.g.dashboard_executive = 'telescope'
@@ -59,28 +57,7 @@ local function setup(args)
         },
     }
 
-    local which_key = require('which-key')
-    which_key.setup {
-        window = {
-            border = 'none',
-            position = 'bottom',
-        },
-        triggers = 'auto',
-        triggers_blacklist = {
-            i = { 'j', 'k' },
-            v = { 'j', 'k' },
-        },
-    }
-
-    which_key.register  {
-        ["<leader>b"] = {
-            name = "Buffers",
-            n = "Next",
-            p = "Previous",
-            d = "Hide",
-            x = "Wipeout",
-        },
-    }
+    require('project_nvim').setup {}
 end
 
 return { setup = setup }
