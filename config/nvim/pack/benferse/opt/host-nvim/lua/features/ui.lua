@@ -25,15 +25,15 @@ local function setup(args)
     }
     vim.g.dashboard_custom_section = {
         section_0 = {
-            description = { '*  Recent sessions        *' },
+            description = { ' Recent sessions        *' },
             command = 'Telescope projects',
         },
         section_1 = {
-            description = { '*  Find a file            *' },
+            description = { ' Find a file            *' },
             command = 'Telescope find_files',
         },
         section_2 = {
-            description = { '*  Recent files           *' },
+            description = { ' Recent files           *' },
             command = 'Telescope oldfiles',
         },
     }
