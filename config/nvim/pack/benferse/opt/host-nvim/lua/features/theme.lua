@@ -2,6 +2,7 @@
 
 local function setup(args)
     vim.cmd([[
+        packadd lspkind-nvim
         packadd nord-vim
         packadd nvim-web-devicons
     ]])
@@ -15,6 +16,8 @@ local function setup(args)
     vim.g.nord_underline = 1
 
     vim.cmd([[colorscheme nord]])
+
+    require('lspkind').init {}
 end
 
 return { setup = setup }
