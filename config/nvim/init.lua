@@ -34,5 +34,5 @@ require('host').setup()
 -- independent
 --
 require('settings').setup()
-require('plugin-settings').setup()
+require('plugins').setup()
 require('keymaps').setup()
