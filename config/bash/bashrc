@@ -132,7 +132,11 @@ if [ -f /proc/sys/kernel/osrelease ] && grep -q -s -i -e 'wsl\|microsoft' /proc/
         setsid nohup socat UNIX-LISTEN:$GPG_AGENT_SOCK,fork EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent" &>/dev/null &
     fi
 else
-    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+    # Only set the agent socket if something hasn't already done it,
+    # say for example an ssh server.
+    if [[ "$SSH_AUTH_SOCK" != *dropbear* ]]; then
+        export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+    fi
 fi
 
 # use vi mode for readline
