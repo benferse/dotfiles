@@ -139,4 +139,4 @@ fi
 set -o vi
 
 # blast off
-eval "$(starship init bash)"
+eval "$(~/.local/bin/starship init bash)"

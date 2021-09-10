@@ -12,17 +12,21 @@ style = "fg:#ebcb8e"
 style = "bold fg:#81a1c1"
 
 [git_branch]
-style = "bold fg:#b48ead"
+style = "fg:#b48ead"
 
 [git_state]
-style = "bold fg:#ebcb8b"
+style = "fg:#ebcb8b"
 
 [git_status]
-style = "bold fg:#bf616a"
+style = "fg:#bf616a"
 
 [hostname]
 ssh_only = false
 style = "bold fg:#5e81ac"
+
+[username]
+style_root = "bold fg:#bf616a"
+format = "[$user]($style)@"
 
 [env_var]
 variable = "OS_GLYPH"
