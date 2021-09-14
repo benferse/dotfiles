@@ -134,7 +134,7 @@ if [ -f /proc/sys/kernel/osrelease ] && grep -q -s -i -e 'wsl\|microsoft' /proc/
 else
     # Only set the agent socket if something hasn't already done it,
     # say for example an ssh server.
-    if [[ "$SSH_AUTH_SOCK" != *dropbear* ]]; then
+    if [[ "x$SSH_AUTH_SOCK" == x ]]; then
         export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
     fi
 fi
