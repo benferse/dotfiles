@@ -34,6 +34,10 @@ local function setup(args)
             description = { ' Recent files           *' },
             command = 'Telescope oldfiles',
         },
+        section_3 = {
+            description = { ' Empty buffer           *' },
+            command = 'DashboardNewFile',
+        }
     }
 
     require('bufferline').setup {
