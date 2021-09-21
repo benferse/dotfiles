@@ -1,14 +1,18 @@
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
+    "actions": 
     [
         {
-            "command":
+            "command": 
             {
                 "action": "copy",
                 "singleLine": false
             },
             "keys": "ctrl+c"
+        },
+        {
+            "command": "unbound",
+            "keys": "f11"
         },
         {
             "command": "find",
@@ -19,11 +23,7 @@
             "keys": "ctrl+v"
         },
         {
-            "command": null,
-            "keys": "f11"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -35,14 +35,20 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-    "profiles":
+    "profiles": 
     {
-        "defaults": {},
-        "list":
+        "defaults": 
+        {
+            "intenseTextStyle": "all"
+        },
+        "list": 
         [
             {
                 "colorScheme": "Nord",
-                "fontFace": "Hasklug NF",
+                "font": 
+                {
+                    "face": "Hasklug NF"
+                },
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "pwsh",
@@ -50,7 +56,10 @@
             },
             {
                 "colorScheme": "Nord",
-                "fontFace": "Hasklug NF",
+                "font": 
+                {
+                    "face": "Hasklug NF"
+                },
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "name": "ubuntu",
@@ -61,7 +70,10 @@
                 "colorScheme": "Nord",
                 "commandline": "cmd.exe",
                 "experimental.retroTerminalEffect": false,
-                "fontFace": "Hasklug NF",
+                "font": 
+                {
+                    "face": "Hasklug NF"
+                },
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "cmd"
@@ -80,7 +92,7 @@
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#0C0C0C",
