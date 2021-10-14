@@ -41,6 +41,9 @@ ln -svf $ConfigRoot/bash/profile ~/.profile
 ln -svf $ConfigRoot/bash/bash_logout ~/.bash_logout
 rm -vf ~/.bash_profile
 
+mkdir -p ~/.wslprofile.d
+ln -svf $ConfigRoot/bash/wslprofile ~/.wslprofile.d/wslprofile
+
 echo Linking settings for dircolors...
 rm -vf ~/.dircolors
 ln -svf $ConfigRoot/dircolors/nord.dircolors ~/.dircolors

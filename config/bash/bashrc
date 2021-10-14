@@ -112,36 +112,9 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# Use the gpg-agent to serve up auth keys, but if this looks like WSL
-# then try to tunnel to Window's agent (since we can't access the
-# YubiKey directly)
-if [ -f /proc/sys/kernel/osrelease ] && grep -q -s -i -e 'wsl\|microsoft' /proc/sys/kernel/osrelease; then
-    # Remove the standard SSH socket, and replace it with a tunnel to pageant
-    export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-    ss -a | grep -q $SSH_AUTH_SOCK
-    if [ $? -ne 0 ]; then
-        rm -f $SSH_AUTH_SOCK
-        setsid nohup socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:$HOME/.ssh/wsl2-ssh-pageant.exe &>/dev/null &
-    fi
-
-    # Remove the standard GPG socket, and replace it with a tunnel to pageant
-    export GPG_AGENT_SOCK=$HOME/.gnupg/S.gpg-agent
-    ss -a | grep -q $GPG_AGENT_SOCK
-    if [ $? -ne 0 ]; then
-        rm -f ~/.gnupg/S.gpg-agent ~/.gnupg/S.gpg-agent.extra
-        setsid nohup socat UNIX-LISTEN:$HOME/.gnupg/S.gpg-agent,fork       EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent" &>/dev/null &
-        setsid nohup socat UNIX-LISTEN:$HOME/.gnupg/S.gpg-agent.extra,fork EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent.extra" &>/dev/null &
-    fi
-else
-    # Only set the agent socket if something hasn't already done it,
-    # say for example an ssh server.
-    if [[ "x$SSH_AUTH_SOCK" == x ]]; then
-        export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-    fi
-fi
-
 # use vi mode for readline
 set -o vi
 
 # blast off
 eval "$(~/.local/bin/starship init bash)"
+. "$HOME/.cargo/env"
