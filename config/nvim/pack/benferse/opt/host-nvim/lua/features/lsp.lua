@@ -62,6 +62,7 @@ local function setup(args)
         packadd lsp-status.nvim
         packadd nvim-lspconfig
         packadd nvim-lspinstall
+        packadd rust.vim
         packadd rust-tools.nvim
     ]])
 

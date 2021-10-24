@@ -85,3 +85,6 @@
 [submodule "config/nvim/pack/benferse/opt/lspkind-nvim"]
 	path = config/nvim/pack/benferse/opt/lspkind-nvim
 	url = https://github.com/onsails/lspkind-nvim
+[submodule "config/nvim/pack/benferse/opt/rust.vim"]
+	path = config/nvim/pack/benferse/opt/rust.vim
+	url = https://github.com/rust-lang/rust.vim
