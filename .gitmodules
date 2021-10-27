@@ -42,7 +42,7 @@
 	url = https://github.com/nvim-lua/lsp-status.nvim
 [submodule "config/nvim/pack/vim-benferse/opt/lualine.nvim"]
 	path = config/nvim/pack/benferse/opt/lualine.nvim
-	url = https://github.com/shadmansaleh/lualine.nvim
+	url = https://github.com/nvim-lualine/lualine.nvim
 [submodule "config/nvim/pack/vim-benferse/opt/nvim-bufferline"]
 	path = config/nvim/pack/benferse/opt/nvim-bufferline
 	url = https://github.com/akinsho/nvim-bufferline.lua
