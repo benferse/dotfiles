@@ -42,11 +42,20 @@ local function setup(args)
 
     map('n', '<leader>vf', '<cmd>lua find_nvim_config()<cr>')
 
-    vim.g.nvim_tree_side = 'right'
-    vim.g.nvim_tree_width = 40
+    local tree = require('nvim-tree');
+    tree.setup {
+        auto_close = true,
+        view = {
+            side = 'right',
+            width = 40,
+        },
+        update_focused_file = {
+            enable = true,
+            update_cwd = true,
+        },
+    }
+
     vim.g.nvim_tree_gitignore = 1
-    vim.g.nvim_tree_auto_close = 1
-    vim.g.nvim_tree_update_cwd = 1
     vim.g.nvim_tree_respect_buf_cwd = 1
 end
 
