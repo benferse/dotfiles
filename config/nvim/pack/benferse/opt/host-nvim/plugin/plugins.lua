@@ -2,11 +2,11 @@
 -- in the nvim host
 require('features/core').setup {}
 
-require('features/theme').setup {}
-require('features/ui').setup {}
+require('features/ui').setup()
 require('features/git').setup {}
 require('features/editor').setup {}
 require('features/picker').setup {}
-require('features/lsp').setup {}
+require('features/lsp').setup()
 require('features/terminal').setup {}
 require('features/navigation').setup {}
+require('features/theme').setup()

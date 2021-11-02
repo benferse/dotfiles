@@ -42,6 +42,39 @@ local function map(modes, lhs, rhs, opts)
 end
 
 --
+-- Creates a key mapping. This is a convenience for calling ':help nvim_buf_set_keymap'.
+--
+-- The arguments are mostly the same as those of nvim_buf_set_keymap, with some
+-- conveniences thrown in.
+--
+-- bufnum - Which buffer to add local mappings for
+-- modes - Which mapmode(s) should the mapping be set for. This can either
+--         be a single string (e.g. 'n'), or a table to set multiple modes at once
+--         (e.g. {'n', 'v', 'o'})
+-- lhs - The keysequence to map. Keycodes (':help keycodes') are expanded as expected.
+-- rhs - The resulting keysequence. Keycodes (':help keycodes') are expanded as expected.
+-- opts - Any map arguments to include, except for <buffer>. See ':help map-arguments'
+--
+local function bufmap(bufnum, modes, lhs, rhs, opts)
+    -- Options are, indeed, optional
+    opts = opts or {}
+
+    -- Default to a noremap mapping, since that's 99% of what I end up doing anyway.
+    -- You can always pass { noremap = false } in the other 1%
+    opts.noremap = opts.noremap == nil and true or opts.noremap
+
+    -- Expand a single argument mode to a table
+    if type(modes) == 'string' then
+        modes = {modes}
+    end
+
+    -- Call the bridge function to create a mapping for each mode
+    for _, mode in ipairs(modes) do
+        api.nvim_buf_set_keymap(bufnum, mode, lhs, rhs, opts)
+    end
+end
+
+--
 -- Registers a set of auto-commands and assigns them to a group. This
 -- is a convenience wrapper for invoking ':help augroup' and ':help autocmd'
 -- until the vimscript bridge has first class support for this
@@ -73,4 +106,4 @@ local function augroup(name, commands, delete)
     cmd([[augroup END]])
 end
 
-return { augroup = augroup, map = map }
+return { augroup = augroup, map = map, bufmap = bufmap }
