@@ -2,18 +2,23 @@
 -- make it feel like magic
 
 local map = require('utils').map
+local bufmap = require('utils').bufmap
 
 local function on_attach(client, bufnum)
     vim.api.nvim_buf_set_option(bufnum, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     local silent = { silent = true }
-    vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', silent)
-    vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', silent)
-    vim.api.nvim_buf_set_keymap(bufnum, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', silent)
-    vim.api.nvim_buf_set_keymap(bufnum, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<cr>', silent)
-    vim.api.nvim_buf_set_keymap(bufnum, 'n', '<LocalLeader>k', '<cmd>lua vim.lsp.buf.signature_help()<cr>', silent)
 
-    vim.api.nvim_buf_set_keymap(bufnum, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', silent)
+    bufmap(bufnum, 'n', 'gd', '<cmd>Lspsaga preview_definition<cr>', silent)
+    bufmap(bufnum, 'n', 'gh', '<cmd>Lspsaga lsp_finder<cr>', silent)
+    bufmap(bufnum, 'n', 'gs', '<cmd>Lspsaga signature_help<cr>', silent)
+    bufmap(bufnum, 'n', 'K',  '<cmd>Lspsaga hover_doc<cr>', silent)
+
+    bufmap(bufnum, 'n', '<Leader>ca', '<cmd>Lspsaga code_action<cr>', silent)
+    bufmap(bufnum, 'x', '<Leader>ca', '<cmd>Lspsaga range_code_action<cr>', silent)
+    bufmap(bufnum, 'n', '<Leader>cd', '<cmd>Lspsaga show_line_diagnostics<cr>', silent)
+
+    bufmap(bufnum, 'n', '<Leader>rn', '<cmd>Lspsaga rename<cr>', silent)
 
     require('lsp-status').on_attach(client, bufnum)
 end
@@ -57,8 +62,9 @@ local function setup_rust()
     }
 end
 
-local function setup(args)
+local function setup()
     vim.cmd([[
+        packadd lspsaga.nvim
         packadd lsp-status.nvim
         packadd nvim-lspconfig
         packadd nvim-lspinstall
@@ -76,13 +82,22 @@ local function setup(args)
     -- the server paths ourselves using their exported functions.
     require('lspinstall').setup {}
 
+    -- Setup lspsaga for general LSP functionality
+    require('lspsaga').setup {
+        border_style = 'round',
+    }
+
     -- Setup individual language support
     setup_rust()
     setup_lua()
 
     local silent = { silent = true }
-    map('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', silent)
-    map('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', silent)
+    map('n', ']g', '<cmd>Lspsaga diagnostic_jump_next<cr>', silent)
+    map('n', '[g', '<cmd>Lspsaga diagnostic_jump_prev<cr>', silent)
+
+    -- Rename forward / backwards to use smart scrolling that is lspsaga aware
+    map('n', '<C-f>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<cr>', silent)
+    map('n', '<C-b>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<cr>', silent)
 end
 
 return { setup = setup }

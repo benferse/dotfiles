@@ -1,9 +1,7 @@
 -- User interface elements that drive the overall display,
 -- appearance, and layout
 
-local map = require('utils').map
-
-local function setup(args)
+local function setup()
     vim.cmd([[
         packadd dashboard-nvim
         packadd lualine.nvim

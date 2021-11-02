@@ -88,3 +88,6 @@
 [submodule "config/nvim/pack/benferse/opt/rust.vim"]
 	path = config/nvim/pack/benferse/opt/rust.vim
 	url = https://github.com/rust-lang/rust.vim
+[submodule "config/nvim/pack/benferse/opt/lspsaga.nvim"]
+	path = config/nvim/pack/benferse/opt/lspsaga.nvim
+	url = https://github.com/tami5/lspsaga.nvim
