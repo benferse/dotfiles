@@ -1,4 +1,5 @@
 --
+--
 -- Global nvim options that aren't dependent on anything
 -- outside of the core nvim distribution
 --
