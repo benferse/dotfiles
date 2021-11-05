@@ -85,6 +85,11 @@ local function setup()
     -- Setup lspsaga for general LSP functionality
     require('lspsaga').setup {
         border_style = 'round',
+        finder_action_keys = {
+            open = '<CR>',
+        },
+        finder_definition_icon = ' ',
+        finder_reference_icon = ' ',
     }
 
     -- Setup individual language support
