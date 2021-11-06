@@ -19,6 +19,7 @@ end
 local function setup()
     vim.cmd([[
         packadd dashboard-nvim
+        packadd lualine-lsp-progress
         packadd lualine.nvim
         packadd nvim-bufferline
         packadd project.nvim
@@ -36,20 +37,28 @@ local function setup()
     }
     vim.g.dashboard_custom_section = {
         section_0 = {
-            description = { ' Recent sessions        *' },
+            description = { ' Recent sessions        <SPC> f s' },
             command = 'Telescope projects',
         },
         section_1 = {
-            description = { ' Find a file            *' },
+            description = { ' Find a file            <SPC> f f' },
             command = 'Telescope find_files',
         },
         section_2 = {
-            description = { ' Recent files           *' },
+            description = { ' Recent files           <SPC> f r' },
             command = 'Telescope oldfiles',
         },
         section_3 = {
-            description = { ' Empty buffer           *' },
+            description = { ' Empty buffer           <SPC> b e' },
             command = 'DashboardNewFile',
+        },
+        section_4 = {
+            description = { ' Source control         :!lazygit' },
+            command = 'lua toggle_git_window()',
+        },
+        section_5 = {
+            description = { ' Quit                   :qall<cr>'},
+            command = 'qall!'
         }
     }
 
@@ -61,10 +70,6 @@ local function setup()
         }
     }
 
-    local function my_lsp_status()
-        return require('lsp-status').status()
-    end
-
     require('lualine').setup {
         extensions = {
             'nvim-tree', 'quickfix', 'toggleterm',
@@ -73,12 +78,25 @@ local function setup()
             theme = 'nord',
         },
         sections = {
-            lualine_a = { window_number },
+            lualine_a = { window_number, 'mode', },
             lualine_b = {
+
                 { 'b:gitsigns_head', icon = '', },
-                { 'diff', source = diff_source },
+                { 'diff', source = diff_source, icon = '' },
+                { 'diagnostics' },
             },
-            lualine_c = { 'filename', my_lsp_status },
+            lualine_c = {
+                {
+                    'filename', icon = '',
+                },
+                {
+                    'lsp_progress',
+                    icon = '理',
+                    fmt = function(data) return string.sub(data, 1, vim.o.columns / 2) end,
+                    display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' }},
+                    spinner_symbols = { '', '', '', '', '', '', '', '', },
+                },
+            },
         },
     }
 

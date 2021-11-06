@@ -52,9 +52,6 @@
 [submodule "config/nvim/pack/benferse/start/hop.nvim"]
 	path = config/nvim/pack/benferse/start/hop.nvim
 	url = https://github.com/phaazon/hop.nvim
-[submodule "config/nvim/pack/benferse/opt/neogit"]
-	path = config/nvim/pack/benferse/opt/neogit
-	url = https://github.com/timuntersberger/neogit
 [submodule "config/nvim/pack/benferse/opt/diffview.nvim"]
 	path = config/nvim/pack/benferse/opt/diffview.nvim
 	url = https://github.com/sindrets/diffview.nvim
@@ -91,3 +88,6 @@
 [submodule "config/nvim/pack/benferse/opt/lspsaga.nvim"]
 	path = config/nvim/pack/benferse/opt/lspsaga.nvim
 	url = https://github.com/benferse/lspsaga.nvim
+[submodule "config/nvim/pack/benferse/opt/lualine-lsp-progress"]
+	path = config/nvim/pack/benferse/opt/lualine-lsp-progress
+	url = https://github.com/arkav/lualine-lsp-progress
