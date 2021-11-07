@@ -49,9 +49,6 @@
 [submodule "config/nvim/pack/benferse/opt/nvim-tree.lua"]
 	path = config/nvim/pack/benferse/opt/nvim-tree.lua
 	url = https://github.com/kyazdani42/nvim-tree.lua
-[submodule "config/nvim/pack/benferse/start/nvim-comment"]
-	path = config/nvim/pack/benferse/start/nvim-comment
-	url = https://github.com/terrortylor/nvim-comment
 [submodule "config/nvim/pack/benferse/opt/nvim-lspinstall"]
 	path = config/nvim/pack/benferse/opt/nvim-lspinstall
 	url = https://github.com/kabouzeid/nvim-lspinstall
