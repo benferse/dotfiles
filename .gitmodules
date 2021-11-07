@@ -55,9 +55,6 @@
 [submodule "config/nvim/pack/benferse/opt/which-key.nvim"]
 	path = config/nvim/pack/benferse/opt/which-key.nvim
 	url = https://github.com/folke/which-key.nvim
-[submodule "config/nvim/pack/benferse/opt/dashboard-nvim"]
-	path = config/nvim/pack/benferse/opt/dashboard-nvim
-	url = https://github.com/glepnir/dashboard-nvim
 [submodule "config/nvim/pack/benferse/opt/project.nvim"]
 	path = config/nvim/pack/benferse/opt/project.nvim
 	url = https://github.com/ahmedkhalf/project.nvim
