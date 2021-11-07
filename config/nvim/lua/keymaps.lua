@@ -54,7 +54,7 @@ local function setup()
     --
     -- Buffer navigation
     --
-    map('n', '<leader>be', [[<cmd>enew<cr>]])
+    map('n', '<leader>be', [[<cmd>call host#buffers#new()<cr>]])
     map('n', '<leader>bn', [[<cmd>call host#buffers#next()<cr>]])
     map('n', '<leader>bp', [[<cmd>call host#buffers#previous()<cr>]])
     map('n', '<leader>bd', [[<cmd>call host#buffers#delete()<cr>]])
