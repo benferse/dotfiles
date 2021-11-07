@@ -5,6 +5,8 @@ local map = require('utils').map
 
 local function setup()
     vim.cmd([[
+        packadd nvim-cmp
+        packadd cmp-nvim-lsp
         packadd telescope.nvim
         packadd nvim-tree.lua
     ]])
@@ -57,6 +59,17 @@ local function setup()
 
     vim.g.nvim_tree_gitignore = 1
     vim.g.nvim_tree_respect_buf_cwd = 1
+
+    -- Autocompletion
+    local cmp = require('cmp')
+    cmp.setup {
+        sources = cmp.config.sources {
+            { name = 'nvim_lsp' },
+        },
+        mapping = {
+            ['<cr>'] = cmp.mapping.confirm({ select = true }),
+        }
+    }
 end
 
 return { setup = setup }
