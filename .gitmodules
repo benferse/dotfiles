@@ -1,9 +1,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/nord-vim"]
 	path = config/nvim/pack/benferse/opt/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim
-[submodule "config/nvim/pack/vim-benferse/opt/vim-better-whitespace"]
-	path = config/nvim/pack/benferse/start/vim-better-whitespace
-	url = https://github.com/ntpeters/vim-better-whitespace
 [submodule "config/nvim/pack/vim-benferse/opt/plenary.nvim"]
 	path = config/nvim/pack/benferse/opt/plenary.nvim
 	url = https://github.com/nvim-lua/plenary.nvim
