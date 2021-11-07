@@ -33,7 +33,6 @@ end
 
 local function setup()
     vim.cmd([[
-        packadd nvim-compe
         packadd nvim-autopairs
         packadd nvim-comment
     ]])
@@ -43,32 +42,21 @@ local function setup()
         comment_empty = true,
     }
 
-    require('compe').setup {
-        documentation = {
-            border = 'rounded',
-        };
-        source = {
-            path = true,
-            buffer = true,
-            nvim_lsp = true,
-        };
-    }
-
     vim.opt.completeopt = 'menuone,noinsert,noselect'
 
-    map({'i', 's'}, '<Tab>', 'v:lua.tab_complete()', { expr = true })
-    map({'i', 's'}, '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-    map('i', '<C-Space>', 'compe#complete()', { expr = true })
+    -- map({'i', 's'}, '<Tab>', 'v:lua.tab_complete()', { expr = true })
+    -- map({'i', 's'}, '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+    -- map('i', '<C-Space>', 'compe#complete()', { expr = true })
 
     require('nvim-autopairs').setup {
         disable_filetype = { 'TelescopePrompt' },
     }
 
-    require('nvim-autopairs.completion.compe').setup {
-        map_cr = true,
-        map_complete = true,
-        auto_seelct = false,
-    }
+    -- require('nvim-autopairs.completion.compe').setup {
+        -- map_cr = true,
+        -- map_complete = true,
+        -- auto_seelct = false,
+    -- }
 
 end
 
