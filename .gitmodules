@@ -37,9 +37,6 @@
 [submodule "config/nvim/pack/benferse/opt/nvim-web-devicons"]
 	path = config/nvim/pack/benferse/opt/nvim-web-devicons
 	url = https://github.com/kyazdani42/nvim-web-devicons
-[submodule "config/nvim/pack/benferse/opt/diffview.nvim"]
-	path = config/nvim/pack/benferse/opt/diffview.nvim
-	url = https://github.com/sindrets/diffview.nvim
 [submodule "config/nvim/pack/benferse/opt/nvim-tree.lua"]
 	path = config/nvim/pack/benferse/opt/nvim-tree.lua
 	url = https://github.com/kyazdani42/nvim-tree.lua
