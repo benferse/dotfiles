@@ -10,9 +10,6 @@
 [submodule "config/nvim/pack/vim-benferse/opt/vim-startify"]
 	path = config/nvim/pack/benferse/opt/vim-startify
 	url = https://github.com/mhinz/vim-startify
-[submodule "config/nvim/pack/vim-benferse/opt/vim-surround"]
-	path = config/nvim/pack/benferse/start/vim-surround
-	url = https://github.com/tpope/vim-surround
 [submodule "config/nvim/pack/vim-benferse/opt/vim-tmux-navigator"]
 	path = config/nvim/pack/benferse/opt/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
