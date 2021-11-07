@@ -1,0 +1,793 @@
+*bufferline.nvim*   For Neovim version 0.5+   Last change: 2021 August 20
+
+A snazzy bufferline for neovim written in lua
+
+Author: Akin Sowemimo
+
+==============================================================================
+CONTENTS                                      *bufferline*
+*bufferline-contents*
+
+Introduction...........................: |bufferline-introduction|
+Usage..................................: |bufferline-usage|
+Settings...............................: |bufferline-settings|
+Styling................................: |bufferline-styling|
+Numbers................................: |bufferline-numbers|
+LSP Diagnostics........................: |bufferline-diagnostics|
+Groups.................................: |bufferline-groups|
+Sorting................................: |bufferline-sorting|
+Filtering..............................: |bufferline-filtering|
+Commands...............................: |bufferline-commands|
+Custom functions.......................: |bufferline-exec|
+Pick...................................: |bufferline-pick|
+Mappings...............................: |bufferline-mapping|
+Highlights.............................: |bufferline-highlights|
+Mouse actions..........................: |bufferline-mouse-actions|
+Issues.................................: |bufferline-issues|
+
+
+==============================================================================
+INTRODUCTION				        *bufferline-introduction*
+
+A _snazzy_ 💅 buffer line (with minimal tab integration) for Neovim built
+using `lua`.
+
+This plugin shamelessly attempts to emulate the aesthetics of GUI text
+editors/Doom Emacs. It was inspired by a screenshot of DOOM Emacs using
+centaur tabs (https://github.com/ema2159/centaur-tabs). I don't intend to copy
+all of it's functionality though.
+
+==============================================================================
+USAGE						        *bufferline-usage*
+You need to be using `termguicolors` for this plugin to work, as it reads the
+hex `gui` color values of various highlight groups. >
+
+    set termguicolors
+    " In your init.vim or init.lua
+    lua require"bufferline".setup{}
+<
+==============================================================================
+SETTINGS					     *bufferline-settings*
+
+The available settings are: >
+
+    require"bufferline".setup{
+        options = {
+            numbers = "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
+            --- @deprecated, please specify numbers as a function to customize the styling
+            number_style = "superscript" | "" | { "none", "subscript" }, -- buffer_id at index 1, ordinal at index 2
+            mappings = true | false,
+            close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
+            right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+            left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
+            middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
+            buffer_close_icon= "",
+            modified_icon = "●",
+            close_icon = "",
+            left_trunc_marker = "",
+            right_trunc_marker = "",
+            --- name_formatter can be used to change the buffer's label in the bufferline.
+            --- Please note some names can/will break the
+            --- bufferline so use this at your discretion knowing that it has
+            --- some limitations that will NOT be fixed.
+            name_formatter = function(buf)  -- buf contains a "name", "path" and "bufnr"
+              -- remove extension from markdown files for example
+              if buf.name:match('%.md') then
+                return vim.fn.fnamemodify(buf.name, ':t:r')
+              end
+            end,
+            max_name_length = 18,
+            max_prefix_length = 15, -- prefix used when a buffer is deduplicated
+            tab_size = 18,
+            diagnostics = false | "nvim_lsp" | "coc"
+            diagnostics_indicator = function(count, level)
+              return "("..count..")"
+            end
+            groups = {} -- see :h bufferline-groups for details
+            show_buffer_icons = true | false,
+            show_buffer_close_icons = true | false,
+            show_close_icon = true | false,
+            show_tab_indicators = true | false
+            persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+            -- can also be a table containing 2 custom separators
+            -- [focused and unfocused]. eg: { "|", "|" }
+            separator_style = "slant" | "padded_slant" | "thick" | "thin" | { "any", "any" },
+            enforce_regular_tabs = false | true,
+            always_show_bufferline = true | false,
+            offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center" | "right" | "left"}},
+            sort_by = "id" | "extension" | "relative_directory" | "directory" | "tabs" | function(buffer_a, buffer_b)
+            -- add custom logic
+                return buffer_a.modified > buffer_b.modified
+            end
+        }
+    }
+<
+==============================================================================
+STYLING                                                  *bufferline-styling*
+
+You can change the appearance of the bufferline separators by setting the
+`separator_style`. The available options are:
+* `slant` - Use slanted/triangular separators
+* `padded_slant` - Same as `slant` but with extra padding which some terminals require.
+  If `slant` does not render correctly for you try padded this instead.
+* `thick` - Increase the thickness of the separator characters
+* `thin` - (default) Use thin separator characters
+* finally you can pass in a custom list containing 2 characters which will be
+  used as the separators e.g. `{"|", "|"}`, the first is the left and the
+  second is the right separator
+
+
+==============================================================================
+NUMBERS                                                    *bufferline-numbers*
+
+You can prefix buffer names with either the `ordinal` or `buffer id`, using
+the `numbers` option. Currently this can be specified as either a string of
+`buffer_id` | `ordinal` or a function This function allows maximum flexibility
+in determining the appearance of this section.
+
+It is passed a table with the following keys:
+  * `raise` - a helper function to convert the passed number to superscript e.g. `raise(id)`.
+  * `lower` - a helper function to convert the passed number to subscript e.g. `lower(id)`.
+  * `ordinal` - The buffer ordinal number.
+  * `id` - The buffer ID.
+>
+  -- For ⁸·₂
+  numbers = function(opts)
+    return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
+  end,
+
+  -- For ₈.₂
+  numbers = function(opts)
+    return string.format('%s.%s', opts.lower(opts.id), opts.lower(opts.ordinal))
+  end,
+
+  -- For 2.)8.) - change he order of arguments to change the order in the string
+  numbers = function(opts)
+    return string.format('%s.)%s.)', opts.ordinal, opts.id)
+  end,
+
+  -- For 8|² -
+  numbers = function(opts)
+    return string.format('%s|%s.)', opts.id, opts.raise(opts.ordinal))
+  end,
+<
+
+==============================================================================
+LSP DIAGNOSTICS                                         *bufferline-diagnostics*
+
+By setting `diagnostics = "nvim_lsp" | "coc"` you will get an indicator in the
+bufferline for a given tab if it has any errors This will allow you to
+tell at a glance if a particular buffer has errors. Currently only the
+native neovim lsp is supported, mainly because it has the easiest API for
+fetching all errors for all buffers (with an attached lsp client) This
+feature is _WIP_ so beware and report any issues if you find any.
+
+In order to customise the appearance of the diagnostic count you can pass
+a custom function in your setup.
+
+>
+    -- rest of config ...
+
+    --- count is an integer representing total count of errors
+    --- level is a string "error" | "warning"
+    --- this should return a string
+    --- Don't get too fancy as this function will be executed a lot
+    diagnostics_indicator = function(count, level)
+        local icon = level:match("error") and " " or ""
+        return " " .. icon .. count
+    end
+<
+
+The highlighting for the filename if there is an error can be changed by
+replacing the highlights for `error`, `error_visible`, `error_selected`,
+`warning`, `warning_visible`, `warning_selected`.
+
+==============================================================================
+GROUPS                                                      *bufferline-groups*
+
+The buffers this plugin shows can be grouped based on a users configuration.
+Groups are a way of allowing a user to visualize related buffers in clusters as
+well as operating on them together e.g. by clicking the group indicator all
+grouped buffers can be hidden. They are partially inspired by google chrome's,
+tabs as well as centaur tab's groups.
+
+In order to group buffers specify a list of groups in your config e.g.
+>
+  groups = {
+    options = {
+      toggle_hidden_on_enter = true -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+    },
+    items = {
+      {
+        name = "Tests", -- Mandatory
+        highlight = {gui = "underline", guisp = "blue"}, -- Optional
+        priority = 2, -- determines where it will appear relative to other groups (Optional)
+        icon = "", -- Optional
+        matcher = function(buf) -- Mandatory
+          return buf.filename:match('%_test') or buf.filename:match('%_spec')
+        end,
+      }
+      {
+        name = "Docs"
+        highlight = {gui = "undercurl", guisp = "green"},
+        auto_close = false,  -- whether or not close this group if it doesn't contain the current buffer
+        matcher = function(buf)
+          return buf.filename:match('%.md') or buf.filename:match('%.txt')
+        end,
+        separator = { -- Optional
+          style = require('bufferline.groups').separator.tab
+        },
+      }
+    }
+  }
+<
+
+==============================================================================
+ORDERING GROUPS                                   *bufferline-ordering-groups*
+
+Groups are ordered by their position in the `items` list, the first group shows
+at the start of the bufferline and so on. You might want to order groups
+around the un-grouped buffers e.g.
+>
+    | group 1 | buf 1 (ungrouped) | buf 2 (ungrouped) | group 2 |
+<
+In this case built-in groups are provided (for now just the `ungrouped`)
+built-in so you can achieve the order above using
+
+>
+  local groups = require('bufferline.groups')
+  groups = {
+    items = {
+      {name = "group 1", ... },
+      groups.builtin.ungrouped, -- the ungrouped buffers will be in the middle of the grouped ones
+      {name = "group 2", ...},
+    }
+  }
+<
+
+==============================================================================
+GROUP COMMANDS                                     *bufferline-group-commands*
+
+Grouped buffers can also be interacted with using a few commands namely
+* `:BufferLineGroupClose` <tab> - which will close all buffers in this group
+* `:BufferLineGroupToggle` <tab> - which will hide or show a group
+
+Other group related functionality can be implemented using the
+`require('bufferline').group_action` API.
+
+e.g.
+>
+    function _G.__group_open()
+        require('bufferline').group_action(<GROUP_NAME>, function(buf)
+            vim.cmd('vsplit '..buf.path)
+        end)
+    end
+<
+==============================================================================
+REGULAR TAB SIZES                                  *bufferline-regular-tabs*
+
+Generally this plugin enforces a minimum tab size so that the buffer line
+appears consistent. Where a tab is smaller than the tab size it is padded.
+If it is larger than the tab size it is allowed to grow up to the max name
+length specified (+ the other indicators). If you set
+`enforce_regular_tabs = true` tabs will be prevented from extending beyond
+the tab size and all tabs will be the same length
+
+NOTE: when this option is set to `true`. It will disable the ability to
+deduplicate buffers.
+
+==============================================================================
+SORTING					               *bufferline-sorting*
+
+Bufferline allows you to sort the visible buffers by `extension` or `directory`: >
+
+    " Using vim commands
+    :BufferLineSortByExtension
+    :BufferLineSortByDirectory
+    :BufferLineSortByTabs
+
+    -- Or using lua functions
+    :lua require'bufferline'.sort_buffers_by('extension')`
+    :lua require'bufferline'.sort_buffers_by('directory')`
+    :lua require'bufferline'.sort_buffers_by('tabs')`
+
+By default bufferline will sort by buffer number which is an integer value
+provided by vim to identify a buffer that increases as new buffers are opened
+this means that new buffers are placed at the end of the bufferline.
+
+For more advanced usage you can provide a custom compare function which
+will receive two buffers to compare. You can see what fields
+are available to use using >
+
+    sort_by = function(buffer_a, buffer_b)
+        print(vim.inspect(buffer_a))
+        -- add custom logic
+        return buffer_a.modified > buffer_b.modified
+    end
+<
+
+When using a sorted bufferline it's advisable that you use the
+`BufferLineCycleNext` and `BufferLineCyclePrev` commands since these will
+traverse the bufferline bufferlist in order whereas `bnext` and `bprev` will
+cycle buffers according to the buffer numbers given by vim.
+
+==============================================================================
+FILTERING                                           *bufferline-filtering*
+
+Bufferline can be configured to take a custom filtering function via the
+`custom_filter` option. This value must be a lua function that will receive
+each buffer number that is going to be used for the bufferline, as well as all the others.
+A user can then check whatever they would like and return `true` if they would like it to
+appear and `false` if not.
+For example: >
+    custom_filter = function(buf, buf_nums)
+        -- dont show help buffers in the bufferline
+        return not vim.bo[buf].filetype == "help" then
+
+        -- you can use more custom logic for example
+        -- don't show files matching a pattern
+        return not vim.fn.bufname(buf):match('test')
+
+        -- show only certain filetypes in certain tabs e.g. js in one, css in
+        another etc.
+        local tab_num = vim.fn.tabpagenr()
+        if tab_num == 1 and vim.bo[buf].filetype == "javascript" then
+            return true
+        elseif tab_num == 2 and vim.bo[buf].filetype == "css" then
+            return true
+        else
+            return false
+        end
+
+
+        -- My personal example:
+        -- Don't show output log buffers in the same tab as my other code.
+        -- 1. Check if there are any log buffers in the full list of buffers
+        -- if not don't do any filtering
+        local logs =
+            vim.tbl_filter(
+                function(b)
+                    return vim.bo[b].filetype == "log"
+                end,
+                buf_nums
+            )
+        if vim.tbl_isempty(logs) then
+            return true
+        end
+        -- 2. if there are log buffers then only show the log buffer
+        local tab_num = vim.fn.tabpagenr()
+        local is_log = vim.bo[buf].filetype == "log"
+        -- only show log buffers in secondary tabs
+        return (tab_num == 2 and is_log) or (tab_num ~= 2 and not is_log)
+    end
+<
+
+==============================================================================
+COMMANDS                                               *bufferline-commands*
+
+Bufferline includes a few commands to allow deleting buffers. These commands
+are:
+
+* `BufferLineCloseRight` - close all visible buffers to the right of the
+  current buffer
+* `BufferLineCloseLeft` - close all visible buffers to the left of the current
+  buffer
+
+==============================================================================
+CUSTOM-FUNCTIONS                                     *bufferline-functions*
+
+A user can also execute arbitrary functions against a buffer using the
+`buf_exec` function. For example
+
+>
+    require('bufferline').buf_exec(
+        4, -- the forth visible buffer from the left
+        user_function -- an arbitrary user function which gets passed the buffer
+    )
+
+    -- e.g.
+    function _G.bdel(num)
+        require('bufferline').buf_exec(num, function(buf, visible_buffers)
+            vim.cmd('bdelete '..buf.id)
+        end
+    end
+
+    vim.cmd [[
+        command -count Bdel <Cmd>lua _G.bdel(<count>)<CR>
+    ]]
+
+
+==============================================================================
+SIDEBAR OFFSET                                           *bufferline-offset*
+
+You can prevent the bufferline drawing above a *vertical* sidebar split such as a file explorer.
+To do this you must set the `offsets` configuration option to a list of tables
+containing the details of the window to avoid. *NOTE:* this is only relevant
+for left or right aligned sidebar windows such as `NvimTree`, `NERDTree` or
+`Vista`
+>
+    offsets = {{filetype = "NvimTree", text = "File Explorer", highlight = "Directory"}}
+<
+The `filetype` is used to check whether a particular window is a match, the
+`text` is *optional* and will show above the window if specified.
+`text` can be either a string or a function which should also return a string.
+See the example below.
+>
+  offsets = {
+    {
+      filetype = "NvimTree",
+      text = function()
+        return vim.fn.getcwd()
+      end,
+      highlight = "Directory",
+      text_align = "left"
+    }
+  }
+
+
+If it is too long it will be truncated. The highlight controls what highlight
+is shown above the window.
+
+You can also change the alignment of the text in the offset section using
+`text_align` which can be set to `left`, `right` or `center`.
+
+Lastly you can specify a `padding` option as well which will increase the
+amount the bufferline is offset beyond just the window width, this isn't
+something that is generally required though.
+
+==============================================================================
+BUFFERLINE PICK                                            *bufferline-pick*
+
+Using the `BufferLinePick` command will allow for easy selection of a buffer
+in view. Trigger the command, using `:BufferLinePick` or better still map this
+to a key, e.g. >
+
+    nnoremap <silent> gb :BufferLinePick<CR>
+<
+then pick a buffer by typing the character for that specific buffer that
+appears
+
+This functionality can also be used to close a buffer using
+`BufferLinePickClose` by triggering this command the same selection UI will
+appear but on selecting a buffer it will be closed.
+
+this can also be mapped to something like
+>
+  nnoremap <silent> gD :BufferLinePickClose<CR>
+>
+
+==============================================================================
+MOUSE ACTIONS                                     *bufferline-mouse-actions*
+
+You can configure different type of mouse clicks to behave differently. The
+current mouse click types are
+
+* Left - `left_mouse_command`
+* Right - `right_mouse_command`
+* Middle - `middle_mouse_command`
+* Close - `close_command`
+
+Currently left mouse opens the selected buffer but the command can be tweaked
+using `left_mouse_command` which can be specified as either a lua function or
+string which uses lua's printf style string formatting (https://www.lua.org/pil/20.html)
+e.g. `buffer %d`
+
+You can do things like open a vertical split on right clicking the buffer name
+for example using.
+>
+    right_mouse_command = "vertical sbuffer %d"
+<
+
+Or you can set the value to a function and handle the click action however you
+please for example you can use another plugin such as `bufdelete.nvim`
+(https://github.com/famiu/bufdelete.nvim) to handle closing the buffer using
+the `close_command`.
+>
+    left_mouse_command = function(bufnum)
+        require('bufdelete').bufdelete(bufnum, true)
+    end
+<
+
+==============================================================================
+MAPPINGS                                               *bufferline-mappings*
+
+`BufferLineGoToBuffer`
+
+You can select a buffer by it's visible position in the bufferline using the `BufferLineGoToBuffer`
+command. This means that if you have 60 buffers open but only 7 visible in the bufferline
+then using `BufferLineGoToBuffer 4` will go to the 4th visible buffer not necessarily the 5 in the
+absolute list of open buffers.
+>
+
+  <- (30) | buf31 | buf32 | buf33 | buf34 | buf35 | buf36 | buf37 (24) ->
+<
+
+Using `BufferLineGoToBuffer 4` will open `buf34` as it is the 4th visible buffer.
+
+This can then be mapped using
+
+>
+  nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+  nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+  nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+  nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+  nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+  nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+  nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+  nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+  nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
+<
+
+If you'd rather map these yourself, use:
+
+`vim nnoremap mymap :lua require"bufferline".go_to_buffer(num)<CR>`
+
+You can close buffers by clicking the close icon or by right clicking the tab anywhere
+
+
+A few of this plugins commands can be mapped for ease of use. >
+
+    " These commands will navigate through buffers in order
+    " regardless of which mode you are using  e.g. if you change
+    " the order of buffers :bnext and :bprevious will not respect the custom ordering
+    nnoremap <silent>[b :BufferLineCycleNext<CR>
+    nnoremap <silent>b] :BufferLineCyclePrev<CR>
+
+    " These commands will move the current buffer backwards or forwards in the bufferline
+    nnoremap <silent><mymap> :BufferLineMoveNext<CR>
+    nnoremap <silent><mymap> :BufferLineMovePrev<CR>
+
+    " These commands will sort buffers by directory, language, or a custom criteria
+    nnoremap <silent>be :BufferLineSortByExtension<CR>
+    nnoremap <silent>bd :BufferLineSortByDirectory<CR>
+    nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
+<
+==============================================================================
+HIGHLIGHTS                                           *bufferline-highlights*
+
+This plugin is designed to work automatically, deriving colours from the
+user's theme, you can change highlight groups by overriding the section you'd
+like to change.
+
+Keep in mind that despite my best efforts not to change these they might
+require the occasional tweak (if you don't customise these too much you should
+be fine 🤞).
+
+Highlight values can also be specified as tables with a key of the highlight
+name e.g. `Normal` and the attribute which is one of `fg`, `bg`. See the
+`{what}` argument of `:h synIDAttr` for details, but only these 2 have been
+tested
+
+for example: >
+    highlights = {
+        fill = {
+            guibg = {
+                attribute = "fg",
+                highlight = "Pmenu"
+            }
+        }
+    }
+<
+This will automatically pull the value of `Pmenu` fg color and use it
+Any improperly specified tables will be set to `nil` and overriden with the
+default value for that key.
+
+NOTE: you can specify colors the same way you specify `gui` colors for the
+highlight command. See `:h highlight` .
+    >
+    lua require'bufferline'.setup{
+        highlights = {
+            fill = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>',
+            },
+            background = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            tab = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            tab_selected = {
+                guifg = tabline_sel_bg,
+                guibg = '<color-value-here>'
+            },
+            tab_close = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            close_button = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            close_button_visible = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            close_button_selected = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            buffer_visible = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            buffer_selected = {
+                guifg = normal_fg,
+                guibg = '<color-value-here>',
+                gui = "bold,italic"
+            },
+            diagnostic = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+            },
+            diagnostic_visible = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+            },
+            diagnostic_selected = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                gui = "bold,italic"
+            },
+            info = {
+                guifg = <color-value-here>,
+                guisp = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            info_visible = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            info_selected = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                gui = "bold,italic",
+                guisp = <color-value-here>
+            },
+            info_diagnostic = {
+                guifg = <color-value-here>,
+                guisp = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            info_diagnostic_visible = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            info_diagnostic_selected = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                gui = "bold,italic",
+                guisp = <color-value-here>
+            },
+            warning = {
+                guifg = <color-value-here>,
+                guisp = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            warning_visible = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            warning_selected = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                gui = "bold,italic",
+                guisp = <color-value-here>
+            },
+            warning_diagnostic = {
+                guifg = <color-value-here>,
+                guisp = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            warning_diagnostic_visible = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            warning_diagnostic_selected = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                gui = "bold,italic",
+                guisp = warning_diagnostic_fg
+            },
+            error = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                guisp = <color-value-here>
+            },
+            error_visible = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            error_selected = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                gui = "bold,italic",
+                guisp = <color-value-here>
+            },
+            error_diagnostic = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                guisp = <color-value-here>
+            },
+            error_diagnostic_visible = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>
+            },
+            error_diagnostic_selected = {
+                guifg = <color-value-here>,
+                guibg = <color-value-here>,
+                gui = "bold,italic",
+                guisp = <color-value-here>
+            },
+            modified = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            modified_visible = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            modified_selected = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            duplicate_selected = {
+                guifg = '<color-value-here>',
+                gui = "italic",
+                guibg = '<color-value-here>'
+            },
+            duplicate_visible = {
+                guifg = '<color-value-here>',
+                gui = "italic",
+                guibg = '<color-value-here>'
+            },
+            duplicate = {
+                guifg = '<color-value-here>',
+                gui = "italic",
+                guibg = '<color-value-here>'
+            },
+            separator_selected = {
+                guifg = '<color-value-here>,
+                guibg = '<color-value-here>'
+            },
+            separator_visible = {
+                guifg = '<color-value-here>,
+                guibg = '<color-value-here>'
+            },
+            separator = {
+                guifg = '<color-value-here>,
+                guibg = '<color-value-here>'
+            },
+            indicator_selected = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>'
+            },
+            pick_selected = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>',
+                gui = "bold,italic"
+            },
+            pick_visible = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>',
+                gui = "bold,italic"
+            },
+            pick = {
+                guifg = '<color-value-here>',
+                guibg = '<color-value-here>',
+                gui = "bold,italic"
+            }
+        };
+    }
+<
+
+==============================================================================
+ISSUES							*bufferline-issues*
+
+Please raise any issues you encounter whilst using this plugin at:
+https://github.com/akinsho/bufferline.lua/issues
+
+
+vim:tw=78:sw=4:ft=help:norl:
