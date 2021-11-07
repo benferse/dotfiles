@@ -5,7 +5,7 @@ local map = require('utils').map;
 
 local git_window = {}
 
-local function setup(args)
+local function setup()
     vim.cmd([[
         packadd vim-tmux-navigator
         packadd toggleterm.nvim
@@ -40,7 +40,7 @@ local function setup(args)
         dir = 'git_dir',
         direction = 'float',
         float_opts = {
-            border = 'double',
+            border = 'rounded',
         },
     })
 

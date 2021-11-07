@@ -54,6 +54,7 @@ local function setup()
     --
     -- Buffer navigation
     --
+    map('n', '<leader>be', [[<cmd>enew<cr>]])
     map('n', '<leader>bn', [[<cmd>call host#buffers#next()<cr>]])
     map('n', '<leader>bp', [[<cmd>call host#buffers#previous()<cr>]])
     map('n', '<leader>bd', [[<cmd>call host#buffers#delete()<cr>]])
@@ -77,8 +78,8 @@ local function setup()
     --
     -- Traditional find-in-files integration.
     --
-    map('n', '<leader>gg', [[<cmd>call host#search#find_in_files()<cr>]])
-    map('n', '<leader>g.', [[<cmd>call host#search#find_by_word()<cr>]])
+    map('n', '<leader>sf', [[<cmd>call host#search#find_in_files()<cr>]])
+    map('n', '<leader>s.', [[<cmd>call host#search#find_by_word()<cr>]])
 
     --
     -- Explorer/tree interaction
@@ -88,7 +89,7 @@ local function setup()
     --
     -- Toggle the help window
     --
-    map('n', '<leader>h', [[host#help#is_open() ? '<cmd>helpclose<cr>' : '<cmd>Telescope help_tags<cr>']], { silent = true, expr = true })
+    map('n', '<F1>', [[host#help#is_open() ? '<cmd>helpclose<cr>' : '<cmd>Telescope help_tags<cr>']], { silent = true, expr = true })
 
     --
     -- Recenter on incremental search results
