@@ -1,8 +1,6 @@
 -- File browsers, fuzzy finders, explorers, searching.
 -- All the fun stuff to find something to operate on.
 
-local map = require('utils').map
-
 local function has_words_before()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -68,6 +66,9 @@ local function setup()
 
     -- Autocompletion
     local cmp = require('cmp')
+
+    -- Something about this makes the lua lsp pretty upset
+    ---@diagnostic disable-next-line: redundant-parameter
     cmp.setup {
         sources = cmp.config.sources {
             { name = 'nvim_lsp' },

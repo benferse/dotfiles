@@ -16,14 +16,14 @@ local function on_attach(client, bufnum)
 
     nbufmap('K',  '<cmd>lua vim.lsp.buf.hover()<cr>')
 
-    nbufmap('[g', '<cmd>lua.vim.lsp.diagnostic.goto_prev()<cr>')
-    nbufmap(']g', '<cmd>lua.vim.lsp.diagnostic.goto_next()<cr>')
+    nbufmap('[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
+    nbufmap(']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>')
 
     nbufmap('<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     nbufmap('<Leader>cd', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>')
     nbufmap('<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
 
-    require('lsp-status').on_attach(client, bufnum)
+    require('lsp-status').on_attach(client)
 end
 
 local function setup_lua()
@@ -89,7 +89,7 @@ local function setup()
     -- its config to setup nvim-lsp directly, since we need to let
     -- rust-tools do that for rust-analyzer. Instead, we will manipulate
     -- the server paths ourselves using their exported functions.
-    require('lspinstall').setup {}
+    require('lspinstall').setup()
 
     -- Setup individual language support
     setup_rust()
