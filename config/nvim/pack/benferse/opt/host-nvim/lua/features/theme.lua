@@ -17,8 +17,6 @@ local function setup()
 
     vim.cmd([[colorscheme nord]])
 
-    local unused
-
     -- Link a few plugin specific highlight definitions to
     -- default groups that nord has kindly setup for us
     vim.cmd([[
