@@ -24,6 +24,8 @@ local function on_attach(client, bufnum)
 end
 
 local function setup_lua()
+    local vim_caps = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim_caps)
     local lspconfig = require('lspconfig')
     if lspconfig['lua'] then
         lspconfig['lua'].setup {
@@ -35,6 +37,7 @@ local function setup_lua()
                     },
                 },
             },
+            capabilities = capabilities,
         }
     end
 end
@@ -49,6 +52,9 @@ local function setup_rust()
         cmd = server_path .. '/rust-analyzer'
     end
 
+    local vim_caps = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim_caps)
+
     require('rust-tools').setup {
         tools = {
             hover_actions = {
@@ -58,6 +64,7 @@ local function setup_rust()
         server = {
             cmd = { cmd },
             on_attach = on_attach,
+            capabilities = capabilities,
         },
     }
 end
