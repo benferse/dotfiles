@@ -3,10 +3,7 @@
 -- and where we are running
 --
 local g = vim.g
-local has = vim.fn.has
 local map = require('utils').map
-
-local silent = { silent = true }
 
 local function setup()
     --
@@ -14,11 +11,16 @@ local function setup()
     -- pretty lua bundle
     --
     require('hop').setup()
+    map({'n', 'o'}, 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, })<cr>")
+    map({'n', 'o'}, 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, })<cr>")
+
+    map({'n', 'o'}, 's', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, })<cr>")
+    map({'n', 'o'}, 'S', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, })<cr>")
 
     --
     -- Vim better whitespace
     --
-    g.better_whitespace_enabled = 1
+    g.better_whitespace_enabled = 2
     g.strip_whitelines_at_eof = 1
     g.show_spaces_that_precede_tabs = 1
 

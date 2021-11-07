@@ -93,7 +93,7 @@ local function augroup(name, commands, delete)
 
     -- Start the group, and then clear it if requested
     cmd('augroup ' .. name)
-    if clear then
+    if delete then
         cmd([[autocmd!]])
     end
 
