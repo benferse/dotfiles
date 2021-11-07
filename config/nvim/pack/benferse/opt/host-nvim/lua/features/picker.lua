@@ -3,7 +3,7 @@
 
 local map = require('utils').map
 
-local function setup(args)
+local function setup()
     vim.cmd([[
         packadd telescope.nvim
         packadd nvim-tree.lua

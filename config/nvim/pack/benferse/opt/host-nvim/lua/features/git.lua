@@ -1,7 +1,7 @@
 -- Source control, diff and merge tools, and surfacing git
 -- information in the ui
 
-local function setup(args)
+local function setup()
     vim.cmd([[
         packadd diffview.nvim
         packadd gitsigns.nvim

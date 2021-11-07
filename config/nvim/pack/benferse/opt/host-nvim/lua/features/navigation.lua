@@ -1,7 +1,7 @@
 -- Navigation plugin configuration, keybind documentation,
 -- and other bits for jumping about
 
-local function setup(args)
+local function setup()
     vim.cmd([[
         packadd which-key.nvim
     ]])
