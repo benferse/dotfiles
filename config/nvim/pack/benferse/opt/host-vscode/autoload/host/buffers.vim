@@ -21,3 +21,7 @@ endfunction
 function host#buffers#really_delete() abort
     Tabclose
 endfunction
+
+function host#buffers#new() abort
+    Enew
+endfunction

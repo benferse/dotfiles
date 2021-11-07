@@ -34,3 +34,7 @@ endfunction
 function host#buffers#really_delete() abort
     bd!
 endfunction
+
+function host#buffers#new() abort
+    enew
+endfunction
