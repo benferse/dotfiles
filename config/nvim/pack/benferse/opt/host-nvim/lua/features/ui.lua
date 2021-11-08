@@ -80,15 +80,9 @@ local function setup()
         sections = {
             lualine_a = { window_number, 'mode', },
             lualine_b = {
-
-                { 'b:gitsigns_head', icon = '', },
-                { 'diff', source = diff_source, icon = '' },
-                { 'diagnostics' },
+                { 'filename', icon = '', },
             },
             lualine_c = {
-                {
-                    'filename', icon = '',
-                },
                 {
                     'lsp_progress',
                     icon = '理',
@@ -96,6 +90,12 @@ local function setup()
                     display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' }},
                     spinner_symbols = { '', '', '', '', '', '', '', '', },
                 },
+            },
+            lualine_x = {},
+            lualine_y = {
+                { 'b:gitsigns_head', icon = '', },
+                { 'diff', source = diff_source, icon = '' },
+                { 'diagnostics' },
             },
         },
     }
