@@ -46,6 +46,11 @@ local function setup()
 
     telescope.load_extension('projects')
 
+    local map = require('utils').map
+
+    map('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>')
+    map('n', '<leader>fs', '<cmd>Telescope projects<cr>')
+
     -- nvim-tree, because sometimes you just want a file explorer
 
     local tree = require('nvim-tree');
