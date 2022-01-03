@@ -25,4 +25,4 @@ fi
 export OS_GLYPH=""
 
 # always favor the gpg-agent's ssh socket
-export SSH_AUTH_SOCK=/run/user/`id -u`/gnupg/S.gpg-agent.ssh
+export SSH_AUTH_SOCK=`gpgconf --list-dirs agent-ssh-socket`
