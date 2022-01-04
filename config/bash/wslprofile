@@ -3,7 +3,7 @@
 # YubiKey directly)
 if [ -f /proc/sys/kernel/osrelease ] && grep -q -s -i -e 'wsl\|microsoft' /proc/sys/kernel/osrelease; then
     # Remove the standard SSH socket, and replace it with a tunnel to pageant
-    export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+    export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh}"
     ss -a | grep -q $SSH_AUTH_SOCK
     if [ $? -ne 0 ]; then
         rm -f $SSH_AUTH_SOCK
@@ -11,12 +11,13 @@ if [ -f /proc/sys/kernel/osrelease ] && grep -q -s -i -e 'wsl\|microsoft' /proc/
     fi
 
     # Remove the standard GPG socket, and replace it with a tunnel to pageant
-    export GPG_AGENT_SOCK=$HOME/.gnupg/S.gpg-agent
+    export GPG_AGENT_SOCK="${GPG_AGENT_SOCK:-$XDG_RUNTIME_DIR/gnupg/S.gpg-agent}"
+    export GPG_EXTRA_SOCK="${GPG_EXTRA_SOCK:-$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.extra}"
     ss -a | grep -q $GPG_AGENT_SOCK
     if [ $? -ne 0 ]; then
-        rm -f ~/.gnupg/S.gpg-agent ~/.gnupg/S.gpg-agent.extra
-        setsid nohup socat UNIX-LISTEN:$HOME/.gnupg/S.gpg-agent,fork       EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent" &>/dev/null &
-        setsid nohup socat UNIX-LISTEN:$HOME/.gnupg/S.gpg-agent.extra,fork EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent.extra" &>/dev/null &
+        rm -f $GPG_AGENT_SOCK $GPG_EXTRA_SOCK
+        setsid nohup socat UNIX-LISTEN:$GPG_AGENT_SOCK,fork       EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent" &>/dev/null &
+        setsid nohup socat UNIX-LISTEN:$GPG_EXTRA_SOCK,fork EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent.extra" &>/dev/null &
     fi
 fi
 
