@@ -152,6 +152,14 @@ function actions.preview_scrolling_down(prompt_bufnr)
   action_set.scroll_previewer(prompt_bufnr, 1)
 end
 
+function actions.results_scrolling_up(prompt_bufnr)
+  action_set.scroll_results(prompt_bufnr, -1)
+end
+
+function actions.results_scrolling_down(prompt_bufnr)
+  action_set.scroll_results(prompt_bufnr, 1)
+end
+
 function actions.center(_)
   vim.cmd ":normal! zz"
 end
@@ -235,19 +243,12 @@ actions._close = function(prompt_bufnr, keepinsert)
   local prompt_win = state.get_status(prompt_bufnr).prompt_win
   local original_win_id = picker.original_win_id
 
-  if picker.previewer then
-    for _, v in ipairs(picker.all_previewers) do
-      v:teardown()
-    end
-  end
-
   actions.close_pum(prompt_bufnr)
   if not keepinsert then
     vim.cmd [[stopinsert]]
   end
 
   vim.api.nvim_win_close(prompt_win, true)
-
   pcall(vim.cmd, string.format([[silent bdelete! %s]], prompt_bufnr))
   pcall(a.nvim_set_current_win, original_win_id)
 end
@@ -335,26 +336,6 @@ actions.paste_register = function(prompt_bufnr)
   end
 end
 
-actions.run_builtin = function(prompt_bufnr)
-  local selection = action_state.get_selected_entry()
-  if selection == nil then
-    print "[telescope] Nothing currently selected"
-    return
-  end
-
-  actions._close(prompt_bufnr, true)
-  if string.match(selection.text, " : ") then
-    -- Call appropriate function from extensions
-    local split_string = vim.split(selection.text, " : ")
-    local ext = split_string[1]
-    local func = split_string[2]
-    require("telescope").extensions[ext][func]()
-  else
-    -- Call appropriate telescope builtin
-    require("telescope.builtin")[selection.text]()
-  end
-end
-
 actions.insert_symbol = function(prompt_bufnr)
   local symbol = action_state.get_selected_entry().value[1]
   actions.close(prompt_bufnr)
@@ -368,6 +349,7 @@ actions.insert_symbol_i = function(prompt_bufnr)
   vim.api.nvim_buf_set_text(0, cursor[1] - 1, cursor[2], cursor[1] - 1, cursor[2], { symbol })
   vim.schedule(function()
     vim.api.nvim_win_set_cursor(0, { cursor[1], cursor[2] + #symbol })
+    vim.cmd [[startinsert!]]
   end)
 end
 
@@ -590,7 +572,7 @@ end
 
 actions.git_checkout_current_buffer = function(prompt_bufnr)
   local cwd = action_state.get_current_picker(prompt_bufnr).cwd
-  local selection = actions.get_selected_entry()
+  local selection = action_state.get_selected_entry()
   if selection == nil then
     print "[telescope] Nothing currently selected"
     return
@@ -831,7 +813,7 @@ end
 actions.delete_buffer = function(prompt_bufnr)
   local current_picker = action_state.get_current_picker(prompt_bufnr)
   current_picker:delete_selection(function(selection)
-    vim.api.nvim_buf_delete(selection.bufnr, { force = true })
+    vim.api.nvim_buf_delete(selection.bufnr, { force = false })
   end)
 end
 
@@ -866,7 +848,7 @@ end
 
 --- Display the keymaps of registered actions similar to which-key.nvim.<br>
 --- - Notes:
----   - The defaults can be overridden via |action_generate.toggle_registered_actions|.
+---   - The defaults can be overridden via |action_generate.which_key|.
 ---@param prompt_bufnr number: The prompt bufnr
 actions.which_key = function(prompt_bufnr, opts)
   opts = opts or {}
@@ -983,7 +965,7 @@ actions.which_key = function(prompt_bufnr, opts)
   local picker = action_state.get_current_picker(prompt_bufnr)
   local prompt_row = win_central_row(picker.prompt_win)
   local results_row = win_central_row(picker.results_win)
-  local preview_row = win_central_row(picker.preview_win)
+  local preview_row = picker.preview_win and win_central_row(picker.preview_win) or results_row
   local prompt_pos = prompt_row < 0.4 * vim.o.lines
     or prompt_row < 0.6 * vim.o.lines and results_row + preview_row < vim.o.lines
 
@@ -1011,6 +993,7 @@ actions.which_key = function(prompt_bufnr, opts)
   a.nvim_win_set_option(km_win_id, "winhl", "Normal:" .. opts.normal_hl)
   a.nvim_win_set_option(km_opts.border.win_id, "winhl", "Normal:" .. opts.border_hl)
   a.nvim_win_set_option(km_win_id, "winblend", opts.winblend)
+  a.nvim_win_set_option(km_win_id, "foldenable", false)
 
   vim.cmd(string.format(
     "autocmd BufLeave <buffer> ++once lua %s",

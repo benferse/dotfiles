@@ -16,71 +16,23 @@ lsp.references = function(opts)
   local params = vim.lsp.util.make_position_params()
   params.context = { includeDeclaration = true }
 
-  local results_lsp, err = vim.lsp.buf_request_sync(0, "textDocument/references", params, opts.timeout or 10000)
-  if err then
-    vim.api.nvim_err_writeln("Error when finding references: " .. err)
-    return
-  end
-
-  local locations = {}
-  for _, server_results in pairs(results_lsp) do
-    if server_results.result then
-      vim.list_extend(locations, vim.lsp.util.locations_to_items(server_results.result) or {})
+  vim.lsp.buf_request(0, "textDocument/references", params, function(err, result, _ctx, _config)
+    if err then
+      vim.api.nvim_err_writeln("Error when finding references: " .. err.message)
+      return
     end
-  end
 
-  if vim.tbl_isempty(locations) then
-    return
-  end
-
-  pickers.new(opts, {
-    prompt_title = "LSP References",
-    finder = finders.new_table {
-      results = locations,
-      entry_maker = opts.entry_maker or make_entry.gen_from_quickfix(opts),
-    },
-    previewer = conf.qflist_previewer(opts),
-    sorter = conf.generic_sorter(opts),
-  }):find()
-end
-
-local function list_or_jump(action, title, opts)
-  opts = opts or {}
-
-  local params = vim.lsp.util.make_position_params()
-  local result, err = vim.lsp.buf_request_sync(0, action, params, opts.timeout or 10000)
-  if err then
-    vim.api.nvim_err_writeln("Error when executing " .. action .. " : " .. err)
-    return
-  end
-  local flattened_results = {}
-  for _, server_results in pairs(result) do
-    if server_results.result then
-      -- textDocument/definition can return Location or Location[]
-      if not vim.tbl_islist(server_results.result) then
-        flattened_results = { server_results.result }
-        break
-      end
-
-      vim.list_extend(flattened_results, server_results.result)
+    local locations = {}
+    if result then
+      vim.list_extend(locations, vim.lsp.util.locations_to_items(result) or {})
     end
-  end
 
-  if #flattened_results == 0 then
-    return
-  elseif #flattened_results == 1 and opts.jump_type ~= "never" then
-    if opts.jump_type == "tab" then
-      vim.cmd "tabedit"
-    elseif opts.jump_type == "split" then
-      vim.cmd "new"
-    elseif opts.jump_type == "vsplit" then
-      vim.cmd "vnew"
+    if vim.tbl_isempty(locations) then
+      return
     end
-    vim.lsp.util.jump_to_location(flattened_results[1])
-  else
-    local locations = vim.lsp.util.locations_to_items(flattened_results)
+
     pickers.new(opts, {
-      prompt_title = title,
+      prompt_title = "LSP References",
       finder = finders.new_table {
         results = locations,
         entry_maker = opts.entry_maker or make_entry.gen_from_quickfix(opts),
@@ -88,7 +40,52 @@ local function list_or_jump(action, title, opts)
       previewer = conf.qflist_previewer(opts),
       sorter = conf.generic_sorter(opts),
     }):find()
-  end
+  end)
+end
+
+local function list_or_jump(action, title, opts)
+  opts = opts or {}
+
+  local params = vim.lsp.util.make_position_params()
+  vim.lsp.buf_request(0, action, params, function(err, result, _ctx, _config)
+    if err then
+      vim.api.nvim_err_writeln("Error when executing " .. action .. " : " .. err.message)
+      return
+    end
+    local flattened_results = {}
+    if result then
+      -- textDocument/definition can return Location or Location[]
+      if not vim.tbl_islist(result) then
+        flattened_results = { result }
+      end
+
+      vim.list_extend(flattened_results, result)
+    end
+
+    if #flattened_results == 0 then
+      return
+    elseif #flattened_results == 1 and opts.jump_type ~= "never" then
+      if opts.jump_type == "tab" then
+        vim.cmd "tabedit"
+      elseif opts.jump_type == "split" then
+        vim.cmd "new"
+      elseif opts.jump_type == "vsplit" then
+        vim.cmd "vnew"
+      end
+      vim.lsp.util.jump_to_location(flattened_results[1])
+    else
+      local locations = vim.lsp.util.locations_to_items(flattened_results)
+      pickers.new(opts, {
+        prompt_title = title,
+        finder = finders.new_table {
+          results = locations,
+          entry_maker = opts.entry_maker or make_entry.gen_from_quickfix(opts),
+        },
+        previewer = conf.qflist_previewer(opts),
+        sorter = conf.generic_sorter(opts),
+      }):find()
+    end
+  end)
 end
 
 lsp.definitions = function(opts)
@@ -104,46 +101,44 @@ lsp.implementations = function(opts)
 end
 
 lsp.document_symbols = function(opts)
+  local bufnr = vim.api.nvim_get_current_buf()
   local params = vim.lsp.util.make_position_params()
-  local results_lsp, err = vim.lsp.buf_request_sync(0, "textDocument/documentSymbol", params, opts.timeout or 10000)
-  if err then
-    vim.api.nvim_err_writeln("Error when finding document symbols: " .. err)
-    return
-  end
+  vim.lsp.buf_request(0, "textDocument/documentSymbol", params, function(err, result, _ctx, _config)
+    if err then
+      vim.api.nvim_err_writeln("Error when finding document symbols: " .. err.message)
+      return
+    end
 
-  if not results_lsp or vim.tbl_isempty(results_lsp) then
-    print "No results from textDocument/documentSymbol"
-    return
-  end
+    if not result or vim.tbl_isempty(result) then
+      print "No results from textDocument/documentSymbol"
+      return
+    end
 
-  local locations = {}
-  for _, server_results in pairs(results_lsp) do
-    vim.list_extend(locations, vim.lsp.util.symbols_to_items(server_results.result, 0) or {})
-  end
+    local locations = vim.lsp.util.symbols_to_items(result or {}, bufnr) or {}
+    locations = utils.filter_symbols(locations, opts)
+    if locations == nil then
+      -- error message already printed in `utils.filter_symbols`
+      return
+    end
 
-  locations = utils.filter_symbols(locations, opts)
-  if locations == nil then
-    -- error message already printed in `utils.filter_symbols`
-    return
-  end
+    if vim.tbl_isempty(locations) then
+      return
+    end
 
-  if vim.tbl_isempty(locations) then
-    return
-  end
-
-  opts.ignore_filename = opts.ignore_filename or true
-  pickers.new(opts, {
-    prompt_title = "LSP Document Symbols",
-    finder = finders.new_table {
-      results = locations,
-      entry_maker = opts.entry_maker or make_entry.gen_from_lsp_symbols(opts),
-    },
-    previewer = conf.qflist_previewer(opts),
-    sorter = conf.prefilter_sorter {
-      tag = "symbol_type",
-      sorter = conf.generic_sorter(opts),
-    },
-  }):find()
+    opts.ignore_filename = opts.ignore_filename or true
+    pickers.new(opts, {
+      prompt_title = "LSP Document Symbols",
+      finder = finders.new_table {
+        results = locations,
+        entry_maker = opts.entry_maker or make_entry.gen_from_lsp_symbols(opts),
+      },
+      previewer = conf.qflist_previewer(opts),
+      sorter = conf.prefilter_sorter {
+        tag = "symbol_type",
+        sorter = conf.generic_sorter(opts),
+      },
+    }):find()
+  end)
 end
 
 lsp.code_actions = function(opts)
@@ -258,16 +253,15 @@ lsp.code_actions = function(opts)
   local transform_action = opts.transform_action
     or function(action)
       -- Remove 0 -version from LSP codeaction request payload.
-      -- Is only run on lsp codeactions which contain a comand or a arguments field
+      -- Is only run on the "java.apply.workspaceEdit" codeaction.
       -- Fixed Java/jdtls compatibility with Telescope
       -- See fix_zero_version commentary for more information
-      if (action.command and action.command.arguments) or action.arguments then
-        if action.command.command then
-          action.edit = fix_zero_version(action.command.arguments[1])
-        else
-          action.edit = fix_zero_version(action.arguments[1])
-        end
+      local command = (action.command and action.command.command) or action.command
+      if not (command == "java.apply.workspaceEdit") then
+        return action
       end
+      local arguments = (action.command and action.command.arguments) or action.arguments
+      action.edit = fix_zero_version(arguments[1])
       return action
     end
 
@@ -337,52 +331,44 @@ lsp.range_code_actions = function(opts)
 end
 
 lsp.workspace_symbols = function(opts)
+  local bufnr = vim.api.nvim_get_current_buf()
   local params = { query = opts.query or "" }
-  local results_lsp, err = vim.lsp.buf_request_sync(0, "workspace/symbol", params, opts.timeout or 10000)
-  if err then
-    vim.api.nvim_err_writeln("Error when finding workspace symbols: " .. err)
-    return
-  end
-
-  local locations = {}
-
-  if results_lsp and not vim.tbl_isempty(results_lsp) then
-    for _, server_results in pairs(results_lsp) do
-      -- Some LSPs (like Clangd and intelephense) might return { { result = {} } }, so make sure we have result
-      if server_results and server_results.result and not vim.tbl_isempty(server_results.result) then
-        vim.list_extend(locations, vim.lsp.util.symbols_to_items(server_results.result, 0) or {})
-      end
+  vim.lsp.buf_request(0, "workspace/symbol", params, function(err, server_result, _ctx, _config)
+    if err then
+      vim.api.nvim_err_writeln("Error when finding workspace symbols: " .. err.message)
+      return
     end
-  end
 
-  locations = utils.filter_symbols(locations, opts)
-  if locations == nil then
-    -- error message already printed in `utils.filter_symbols`
-    return
-  end
+    local locations = vim.lsp.util.symbols_to_items(server_result or {}, bufnr) or {}
+    locations = utils.filter_symbols(locations, opts)
+    if locations == nil then
+      -- error message already printed in `utils.filter_symbols`
+      return
+    end
 
-  if vim.tbl_isempty(locations) then
-    print(
-      "No results from workspace/symbol. Maybe try a different query: "
-        .. "Telescope lsp_workspace_symbols query=example"
-    )
-    return
-  end
+    if vim.tbl_isempty(locations) then
+      print(
+        "No results from workspace/symbol. Maybe try a different query: "
+          .. "Telescope lsp_workspace_symbols query=example"
+      )
+      return
+    end
 
-  opts.ignore_filename = utils.get_default(opts.ignore_filename, false)
+    opts.ignore_filename = utils.get_default(opts.ignore_filename, false)
 
-  pickers.new(opts, {
-    prompt_title = "LSP Workspace Symbols",
-    finder = finders.new_table {
-      results = locations,
-      entry_maker = opts.entry_maker or make_entry.gen_from_lsp_symbols(opts),
-    },
-    previewer = conf.qflist_previewer(opts),
-    sorter = conf.prefilter_sorter {
-      tag = "symbol_type",
-      sorter = conf.generic_sorter(opts),
-    },
-  }):find()
+    pickers.new(opts, {
+      prompt_title = "LSP Workspace Symbols",
+      finder = finders.new_table {
+        results = locations,
+        entry_maker = opts.entry_maker or make_entry.gen_from_lsp_symbols(opts),
+      },
+      previewer = conf.qflist_previewer(opts),
+      sorter = conf.prefilter_sorter {
+        tag = "symbol_type",
+        sorter = conf.generic_sorter(opts),
+      },
+    }):find()
+  end)
 end
 
 local function get_workspace_symbols_requester(bufnr, opts)
@@ -394,16 +380,10 @@ local function get_workspace_symbols_requester(bufnr, opts)
     _, cancel = vim.lsp.buf_request(bufnr, "workspace/symbol", { query = prompt }, tx)
 
     -- Handle 0.5 / 0.5.1 handler situation
-    local err, res_1, res_2 = rx()
-    local results_lsp
-    if type(res_1) == "table" then
-      results_lsp = res_1
-    else
-      results_lsp = res_2
-    end
+    local err, res = rx()
     assert(not err, err)
 
-    local locations = vim.lsp.util.symbols_to_items(results_lsp or {}, bufnr) or {}
+    local locations = vim.lsp.util.symbols_to_items(res or {}, bufnr) or {}
     if not vim.tbl_isempty(locations) then
       locations = utils.filter_symbols(locations, opts) or {}
     end
@@ -423,37 +403,6 @@ lsp.dynamic_workspace_symbols = function(opts)
     previewer = conf.qflist_previewer(opts),
     sorter = conf.generic_sorter(opts),
   }):find()
-end
-
-lsp.diagnostics = function(opts)
-  local locations = utils.diagnostics_to_tbl(opts)
-
-  if vim.tbl_isempty(locations) then
-    print "No diagnostics found"
-    return
-  end
-
-  opts.path_display = utils.get_default(opts.path_display, "hidden")
-  pickers.new(opts, {
-    prompt_title = "LSP Document Diagnostics",
-    finder = finders.new_table {
-      results = locations,
-      entry_maker = opts.entry_maker or make_entry.gen_from_lsp_diagnostics(opts),
-    },
-    previewer = conf.qflist_previewer(opts),
-    sorter = conf.prefilter_sorter {
-      tag = "type",
-      sorter = conf.generic_sorter(opts),
-    },
-  }):find()
-end
-
-lsp.workspace_diagnostics = function(opts)
-  opts = utils.get_default(opts, {})
-  opts.path_display = utils.get_default(opts.path_display, {})
-  opts.prompt_title = "LSP Workspace Diagnostics"
-  opts.get_all = true
-  lsp.diagnostics(opts)
 end
 
 local function check_capabilities(feature)
