@@ -1,13 +1,13 @@
 -- Copyright (c) 2020-2021 hoob3rt
 -- MIT license, see LICENSE for more details.
-local lualine_require = require 'lualine_require'
-local modules = lualine_require.lazy_require {
+local lualine_require = require('lualine_require')
+local modules = lualine_require.lazy_require({
   default_config = 'lualine.components.diagnostics.config',
   sources = 'lualine.components.diagnostics.sources',
   highlight = 'lualine.highlight',
   utils = 'lualine.utils.utils',
   utils_notices = 'lualine.utils.notices',
-}
+})
 
 local M = lualine_require.require('lualine.component'):extend()
 
@@ -53,18 +53,20 @@ function M:init(options)
     }
   end
 
-  -- Error out no source
-  if #self.options.sources < 1 then
-    print 'no sources for diagnostics configured'
-    return ''
-  end
   -- Initialize variable to store last update so we can use it in insert
   -- mode for no update_in_insert
   self.last_diagnostics_count = {}
+
+  -- Error out no source
+  if #self.options.sources < 1 then
+    modules.utils_notices.add_notice(
+      '### diagnostics.sources\n\nno sources for diagnostics configured.\nPlease specify which diagnostics source you want lualine to use with `sources` option.\n'
+    )
+  end
 end
 
 function M:update_status()
-  local bufnr = vim.fn.bufnr()
+  local bufnr = vim.api.nvim_get_current_buf()
   local diagnostics_count
   local result = {}
   if self.options.update_in_insert or vim.api.nvim_get_mode().mode:sub(1, 1) ~= 'i' then

@@ -90,7 +90,7 @@ end
 
 -- Check if statusline is on focused window or not
 function M.is_focused()
-  return tonumber(vim.g.actual_curwin) == vim.fn.win_getid()
+  return tonumber(vim.g.actual_curwin) == vim.api.nvim_get_current_win()
 end
 
 --- Check what's the charecter at pos
@@ -99,6 +99,48 @@ end
 ---@return string charecter at position pos in string str
 function M.charAt(str, pos)
   return string.char(str:byte(pos))
+end
+
+-- deepcopy adapted from penlight
+-- https://github.com/lunarmodules/Penlight/blob/0653cdb05591454a9804a7fee8c873b8f06b0b8f/lua/pl/tablex.lua#L98-L122
+local function cycle_aware_copy(t, cache)
+  if type(t) ~= 'table' then
+    return t
+  end
+  if cache[t] then
+    return cache[t]
+  end
+  local res = {}
+  cache[t] = res
+  local mt = getmetatable(t)
+  for k, v in pairs(t) do
+    k = cycle_aware_copy(k, cache)
+    v = cycle_aware_copy(v, cache)
+    res[k] = v
+  end
+  setmetatable(res, mt)
+  return res
+end
+
+--- make a deep copy of a table, recursively copying all the keys and fields.
+-- This supports cycles in tables; cycles will be reproduced in the copy.
+-- This will also set the copied table's metatable to that of the original.
+-- @within Copying
+-- @tab t A table
+-- @return new table
+function M.deepcopy(t)
+  return cycle_aware_copy(t, {})
+end
+
+--- Check if comp is a lualine component
+--- @param comp any
+--- @return boolean
+function M.is_component(comp)
+  if type(comp) ~= 'table' then
+    return false
+  end
+  local mt = getmetatable(comp)
+  return mt and mt.__is_lualine_component == true
 end
 
 return M

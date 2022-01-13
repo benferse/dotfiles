@@ -30,7 +30,7 @@ end
 ---are notices available
 function M.notice_message_startup()
   if #notices > 0 or #persistent_notices then
-    vim.cmd 'command! -nargs=0 LualineNotices lua require"lualine.utils.notices".show_notices()'
+    vim.cmd('command! -nargs=0 LualineNotices lua require"lualine.utils.notices".show_notices()')
     vim.schedule(function()
       vim.notify(
         'lualine: There are some issues with your config. Run :LualineNotices for details',
@@ -43,9 +43,9 @@ end
 
 ---create notice view
 function M.show_notices()
-  vim.cmd 'silent! keepalt split'
+  vim.cmd('silent! keepalt split')
 
-  local winid = vim.fn.win_getid()
+  local winid = vim.api.nvim_get_current_win()
   local bufnr = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_win_set_buf(winid, bufnr)
 
@@ -62,14 +62,14 @@ function M.show_notices()
   local ok, _ = pcall(vim.api.nvim_buf_set_name, 0, 'Lualine Notices')
   if not ok then
     vim.notify('Lualine Notices is already open in another buffer', vim.log.levels.ERROR, {})
-    vim.cmd 'normal q'
+    vim.cmd('normal q')
     return
   end
   local notice = vim.tbl_flatten(persistent_notices)
   notice = vim.list_extend(notice, vim.tbl_flatten(notices))
   vim.fn.appendbufline(bufnr, 0, notice)
 
-  vim.fn.deletebufline(bufnr, #notice, vim.fn.line '$')
+  vim.fn.deletebufline(bufnr, #notice, vim.fn.line('$'))
   vim.api.nvim_win_set_cursor(winid, { 1, 0 })
   vim.bo[bufnr].modified = false
   vim.bo[bufnr].modifiable = false
