@@ -13,8 +13,8 @@ return function(opts)
   local cwd = opts.cwd
   local fn_command = assert(opts.fn_command, "Must pass `fn_command`")
 
-  local results = {}
-  local num_results = 0
+  local results = vim.F.if_nil(opts.results, {})
+  local num_results = #results
 
   local job_started = false
   local job_completed = false
@@ -55,6 +55,11 @@ return function(opts)
       end
 
       if not job_completed then
+        if not vim.tbl_isempty(results) then
+          for _, v in ipairs(results) do
+            process_result(v)
+          end
+        end
         for line in stdout:iter(false) do
           num_results = num_results + 1
 

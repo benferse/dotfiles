@@ -14,6 +14,10 @@ local conf = require("telescope.config").values
 local git = {}
 
 git.files = function(opts)
+  if opts.is_bare then
+    error "This operation must be run in a work tree"
+  end
+
   local show_untracked = utils.get_default(opts.show_untracked, true)
   local recurse_submodules = utils.get_default(opts.recurse_submodules, false)
   if show_untracked and recurse_submodules then
@@ -68,7 +72,8 @@ git.commits = function(opts)
 end
 
 git.stash = function(opts)
-  opts.entry_maker = vim.F.if_nil(opts.entry_maker, make_entry.gen_from_git_stash())
+  opts.show_branch = vim.F.if_nil(opts.show_branch, true)
+  opts.entry_maker = vim.F.if_nil(opts.entry_maker, make_entry.gen_from_git_stash(opts))
 
   pickers.new(opts, {
     prompt_title = "Git Stash",
@@ -294,6 +299,10 @@ git.branches = function(opts)
 end
 
 git.status = function(opts)
+  if opts.is_bare then
+    error "This operation must be run in a work tree"
+  end
+
   local gen_new_finder = function()
     local expand_dir = utils.if_nil(opts.expand_dir, true, opts.expand_dir)
     local git_cmd = { "git", "status", "-s", "--", "." }
@@ -351,9 +360,13 @@ local set_opts_cwd = function(opts)
   local use_git_root = utils.get_default(opts.use_git_root, true)
 
   if ret ~= 0 then
-    local output = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" }, opts.cwd)
-    if output[1] ~= "true" then
+    local in_worktree = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" }, opts.cwd)
+    local in_bare = utils.get_os_command_output({ "git", "rev-parse", "--is-bare-repository" }, opts.cwd)
+
+    if in_worktree[1] ~= "true" and in_bare[1] ~= "true" then
       error(opts.cwd .. " is not a git directory")
+    elseif in_worktree[1] ~= "true" and in_bare[1] == "true" then
+      opts.is_bare = true
     end
   else
     if use_git_root then

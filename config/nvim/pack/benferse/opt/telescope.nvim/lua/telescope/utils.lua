@@ -156,107 +156,6 @@ utils.filter_symbols = function(results, opts)
   -- only account for string|table as function otherwise already printed message and returned nil
   local symbols = type(opts.symbols) == "string" and opts.symbols or table.concat(opts.symbols, ", ")
   print(string.format("%s symbol(s) were not part of the query results", symbols))
-  return
-end
-
-local convert_diagnostic_type = function(severity)
-  -- convert from string to int
-  if type(severity) == "string" then
-    -- make sure that e.g. error is uppercased to Error
-    return vim.lsp.protocol.DiagnosticSeverity[severity:gsub("^%l", string.upper)]
-  end
-  -- otherwise keep original value, incl. nil
-  return severity
-end
-
-local filter_diag_severity = function(opts, severity)
-  if opts.severity ~= nil then
-    return opts.severity == severity
-  elseif opts.severity_limit ~= nil then
-    return severity <= opts.severity_limit
-  elseif opts.severity_bound ~= nil then
-    return severity >= opts.severity_bound
-  else
-    return true
-  end
-end
-
-utils.diagnostics_to_tbl = function(opts)
-  opts = opts or {}
-  local items = {}
-  local lsp_type_diagnostic = vim.lsp.protocol.DiagnosticSeverity
-  local current_buf = vim.api.nvim_get_current_buf()
-
-  opts.severity = convert_diagnostic_type(opts.severity)
-  opts.severity_limit = convert_diagnostic_type(opts.severity_limit)
-  opts.severity_bound = convert_diagnostic_type(opts.severity_bound)
-
-  local validate_severity = 0
-  for _, v in ipairs { opts.severity, opts.severity_limit, opts.severity_bound } do
-    if v ~= nil then
-      validate_severity = validate_severity + 1
-    end
-    if validate_severity > 1 then
-      print "Please pass valid severity parameters"
-      return {}
-    end
-  end
-
-  local preprocess_diag = function(diag, bufnr)
-    local filename = vim.api.nvim_buf_get_name(bufnr)
-    local start = diag.range["start"]
-    local finish = diag.range["end"]
-    local row = start.line
-    local col = start.character
-
-    local buffer_diag = {
-      bufnr = bufnr,
-      filename = filename,
-      lnum = row + 1,
-      col = col + 1,
-      start = start,
-      finish = finish,
-      -- remove line break to avoid display issues
-      text = vim.trim(diag.message:gsub("[\n]", "")),
-      type = lsp_type_diagnostic[diag.severity] or lsp_type_diagnostic[1],
-    }
-    return buffer_diag
-  end
-
-  local buffer_diags = opts.get_all and vim.lsp.diagnostic.get_all()
-    or { [current_buf] = vim.lsp.diagnostic.get(current_buf, opts.client_id) }
-  for bufnr, diags in pairs(buffer_diags) do
-    for _, diag in ipairs(diags) do
-      -- workspace diagnostics may include empty tables for unused bufnr
-      if not vim.tbl_isempty(diag) then
-        if filter_diag_severity(opts, diag.severity) then
-          table.insert(items, preprocess_diag(diag, bufnr))
-        end
-      end
-    end
-  end
-
-  -- sort results by bufnr (prioritize cur buf), severity, lnum
-  table.sort(items, function(a, b)
-    if a.bufnr == b.bufnr then
-      if a.type == b.type then
-        return a.lnum < b.lnum
-      else
-        return a.type < b.type
-      end
-    else
-      -- prioritize for current bufnr
-      if a.bufnr == current_buf then
-        return true
-      end
-      if b.bufnr == current_buf then
-        return false
-      end
-      return a.bufnr < b.bufnr
-    end
-  end)
-
-  return items
 end
 
 utils.path_smart = (function()
@@ -331,6 +230,9 @@ local calc_result_length = function(truncate_len)
 end
 
 utils.transform_path = function(opts, path)
+  if path == nil then
+    return
+  end
   if is_uri(path) then
     return path
   end
@@ -363,7 +265,12 @@ utils.transform_path = function(opts, path)
       end
 
       if vim.tbl_contains(path_display, "shorten") or path_display["shorten"] ~= nil then
-        transformed_path = Path:new(transformed_path):shorten(path_display["shorten"])
+        if type(path_display["shorten"]) == "table" then
+          local shorten = path_display["shorten"]
+          transformed_path = Path:new(transformed_path):shorten(shorten.len, shorten.exclude)
+        else
+          transformed_path = Path:new(transformed_path):shorten(path_display["shorten"])
+        end
       end
       if vim.tbl_contains(path_display, "truncate") or path_display.truncate then
         if opts.__length == nil then
@@ -430,6 +337,25 @@ function utils.buf_delete(bufnr)
 
   if start_report < 2 then
     vim.o.report = start_report
+  end
+end
+
+function utils.win_delete(name, win_id, force, bdelete)
+  if win_id == nil or not vim.api.nvim_win_is_valid(win_id) then
+    return
+  end
+
+  local bufnr = vim.api.nvim_win_get_buf(win_id)
+  if bdelete then
+    utils.buf_delete(bufnr)
+  end
+
+  if not vim.api.nvim_win_is_valid(win_id) then
+    return
+  end
+
+  if not pcall(vim.api.nvim_win_close, win_id, force) then
+    log.trace("Unable to close window: ", name, "/", win_id)
   end
 end
 
