@@ -85,6 +85,7 @@ function.
       update_cwd          = false,
       diagnostics         = {
         enable = false,
+        show_on_dirs = false,
         icons = {
           hint = "",
           info = "",
@@ -101,19 +102,30 @@ function.
         cmd  = nil,
         args = {}
       },
+      git = {
+        enable = true,
+        ignore = true,
+      },
       view = {
         width = 30,
         height = 30,
         side = 'left',
         auto_resize = false,
+        number = false,
+        relativenumber = false,
+	signcolumn = "yes"
         mappings = {
           custom_only = false,
           list = {}
         }
       },
       filters = {
-	dotfiles = false,
-	custom = {}
+        dotfiles = false,
+        custom = {}
+      },
+      trash = {
+        cmd = "trash",
+        require_confirm = true,
       }
     }
 <
@@ -220,6 +232,11 @@ Here is a list of the options available in the setup call:
       type: `boolean`
       default: `false`
 
+  - |diagnostics.show_on_dirs|: if the node with diagnostic is not visible,
+    then show diagnostic in the parent directory
+      type: `boolean`
+      default: `false`
+
   - |diagnostics.icons|: icons for diagnostic severity
       type: `table`
       default: `{ hint = "", info = "", warning = "", error = "" }`
@@ -230,6 +247,31 @@ Here is a list of the options available in the setup call:
     - `NvimTreeLspDiagnosticsWarning`
     - `NvimTreeLspDiagnosticsInformation`
     - `NvimTreeLspDiagnosticsHint`
+
+*nvim-tree.git*
+- |git|: git integration with icons and colors
+
+  - |git.enable|: enable / disable the feature
+    type: `boolean`
+    default: `true`
+
+  - |git.ignore|: ignore files based on `.gitignore`.
+    will add `ignored=matching` to the integration when `true`. Otherwise will
+    add `ignored=no` to the integration which can lead to better performance.
+
+  - |git.timeout|: kills the git process after some time if it takes too long
+    type: `number`
+    default: `400` (ms)
+
+  You will still need to configure `g:nvim_tree_show_icons.git` or
+  `g:nvim_tree_git_hl` to be able to see things in the tree. This will be
+  changed in the future versions.
+
+  The configurable timeout will kill the current process and so disable the
+  git integration for the project that takes too long.
+  The git integration is blocking, so if your timeout is too long (like not in
+  milliseconds but a few seconds), it will not render anything until the git
+  process returned the data.
 
 *nvim-tree.view*
 - |view|: window / buffer setup
@@ -258,6 +300,21 @@ Here is a list of the options available in the setup call:
       type: `boolean`
       default: false
 
+  - |view.number|: print the line number in front of each line.
+      type: `boolean`
+      default: false
+
+  - |view.relativenumber|: show the line number relative to the line with the
+    cursor in front of each line. If the option `view.number` is also `true`,
+    the number on the cursor line will be the line number instead of `0`.
+      type: `boolean`
+      default: false
+
+  - |view.signcolumn|: show diagnostic sign column. Value can be `"yes"`,
+    `"auto"`, `"no"`
+      type: `string`
+      default: `"yes"`
+
   - |view.mappings|: configuration options for keymaps
 
     - |view.mappings.custom_only|: will use only the provided user mappings and not the default
@@ -280,6 +337,16 @@ Here is a list of the options available in the setup call:
       type: `{string}`
       default: `{}`
 
+*nvim-tree.trash*
+|trash|: configuration options for trashing
+
+  - |trash.cmd|: the command used to trash items (must be installed on your system)
+      type: `string`
+      default: `"trash"`
+
+  - |trash.require_confirm|: show a prompt before trashing takes place.
+      type: `boolean`
+      default: `true`
 
 ==============================================================================
 OPTIONS				                  *nvim-tree-options*
@@ -296,16 +363,6 @@ width of the window, can be *width_in_columns* or *'width_in_percent%'*
 where the window will open (default to 'left')
 - 'left' or 'right'
 
-|g:nvim_tree_gitignore|				*g:nvim_tree_gitignore*
-
-Determines whether to include in g:nvim_tree_ignore
-files ignored by git.
-
-Must be:
-    0: not ignored
-    1: ignored files from `git ls-files --others --ignored --exclude-standard --directory`
-
->
 |g:nvim_tree_show_icons|			        *g:nvim_tree_show_icons*
 
 Dictionary, if your terminal or font doesn't support certain unicode
@@ -522,7 +579,6 @@ Defaults to:
       { key = ">",                            cb = tree_cb("next_sibling") },
       { key = "P",                            cb = tree_cb("parent_node") },
       { key = "<BS>",                         cb = tree_cb("close_node") },
-      { key = "<S-CR>",                       cb = tree_cb("close_node") },
       { key = "<Tab>",                        cb = tree_cb("preview") },
       { key = "K",                            cb = tree_cb("first_sibling") },
       { key = "J",                            cb = tree_cb("last_sibling") },
@@ -531,6 +587,7 @@ Defaults to:
       { key = "R",                            cb = tree_cb("refresh") },
       { key = "a",                            cb = tree_cb("create") },
       { key = "d",                            cb = tree_cb("remove") },
+      { key = "D",                            cb = tree_cb("trash") },
       { key = "r",                            cb = tree_cb("rename") },
       { key = "<C-r>",                        cb = tree_cb("full_rename") },
       { key = "x",                            cb = tree_cb("cut") },
