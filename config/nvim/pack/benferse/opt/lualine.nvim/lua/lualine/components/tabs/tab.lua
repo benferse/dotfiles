@@ -1,4 +1,4 @@
-local highlight = require 'lualine.highlight'
+local highlight = require('lualine.highlight')
 local Tab = require('lualine.utils.class'):extend()
 
 ---intialize a new tab from opts
@@ -17,7 +17,7 @@ function Tab:label()
   local buflist = vim.fn.tabpagebuflist(self.tabnr)
   local winnr = vim.fn.tabpagewinnr(self.tabnr)
   local bufnr = buflist[winnr]
-  local file = vim.fn.bufname(bufnr)
+  local file = vim.api.nvim_buf_get_name(bufnr)
   local buftype = vim.fn.getbufvar(bufnr, '&buftype')
   if buftype == 'help' then
     return 'help:' .. vim.fn.fnamemodify(file, ':t:r')
@@ -35,19 +35,23 @@ end
 ---returns rendered tab
 ---@return string
 function Tab:render()
-  local name
+  local name = self:label()
+  if self.options.fmt then
+    name = self.options.fmt(name or '')
+  end
   if self.ellipse then -- show elipsis
     name = '...'
   else
     -- different formats for different modes
     if self.options.mode == 0 then
-      name = string.format('%s%s ', (self.last or not self.first) and ' ' or '', tostring(self.tabnr))
+      name = tostring(self.tabnr)
     elseif self.options.mode == 1 then
-      name = string.format('%s%s ', (self.last or not self.first) and ' ' or '', self:label())
+      name = name
     else
-      name = string.format('%s%s %s ', (self.last or not self.first) and ' ' or '', tostring(self.tabnr), self:label())
+      name = string.format('%s %s', tostring(self.tabnr), name)
     end
   end
+  name = Tab.apply_padding(name, self.options.padding)
   self.len = vim.fn.strchars(name)
 
   -- setup for mouse clicks
@@ -86,6 +90,17 @@ function Tab:separator_after()
   else
     return self.options.component_separators.right
   end
+end
+
+---adds spaces to left and right
+function Tab.apply_padding(str, padding)
+  local l_padding, r_padding = 1, 1
+  if type(padding) == 'number' then
+    l_padding, r_padding = padding, padding
+  elseif type(padding) == 'table' then
+    l_padding, r_padding = padding.left or 0, padding.right or 0
+  end
+  return string.rep(' ', l_padding) .. str .. string.rep(' ', r_padding)
 end
 
 return Tab

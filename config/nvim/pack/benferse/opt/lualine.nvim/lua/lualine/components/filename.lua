@@ -3,7 +3,7 @@
 local M = require('lualine.component'):extend()
 
 local default_options = {
-  symbols = { modified = '[+]', readonly = '[-]' },
+  symbols = { modified = '[+]', readonly = '[-]', unnamed = '[No Name]' },
   file_status = true,
   path = 0,
   shorting_target = 40,
@@ -35,17 +35,17 @@ M.update_status = function(self)
   local data
   if self.options.path == 1 then
     -- relative path
-    data = vim.fn.expand '%:~:.'
+    data = vim.fn.expand('%:~:.')
   elseif self.options.path == 2 then
     -- absolute path
-    data = vim.fn.expand '%:p'
+    data = vim.fn.expand('%:p')
   else
     -- just filename
-    data = vim.fn.expand '%:t'
+    data = vim.fn.expand('%:t')
   end
 
   if data == '' then
-    data = '[No Name]'
+    data = self.options.symbols.unnamed
   end
 
   if self.options.shorting_target ~= 0 then
@@ -63,7 +63,8 @@ M.update_status = function(self)
   if self.options.file_status then
     if vim.bo.modified then
       data = data .. self.options.symbols.modified
-    elseif vim.bo.modifiable == false or vim.bo.readonly == true then
+    end
+    if vim.bo.modifiable == false or vim.bo.readonly == true then
       data = data .. self.options.symbols.readonly
     end
   end

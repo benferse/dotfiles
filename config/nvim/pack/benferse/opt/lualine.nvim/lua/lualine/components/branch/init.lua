@@ -2,7 +2,7 @@
 -- MIT license, see LICENSE for more details.
 local M = require('lualine.component'):extend()
 local require = require('lualine_require').require
-local git_branch = require 'lualine.components.branch.git_branch'
+local git_branch = require('lualine.components.branch.git_branch')
 
 -- Initilizer
 M.init = function(self, options)
@@ -14,7 +14,7 @@ M.init = function(self, options)
 end
 
 M.update_status = function(_, is_focused)
-  return git_branch.get_branch((not is_focused and vim.fn.bufnr()))
+  return git_branch.get_branch((not is_focused and vim.api.nvim_get_current_buf()))
 end
 
 return M

@@ -12,33 +12,33 @@ Table of Contents                                  *lualine-table-of-contents*
 ==============================================================================
 1. lualine.nvim                                         *lualine-lualine.nvim*
 
-A blazing fast and easy to configure Neovim statusline written in Lua
+A blazing fast and easy to configure Neovim statusline written in Lua.
 
-`lualine.nvim` requires neovim 0.5
+`lualine.nvim` requires Neovim >= 0.5.
 
 CONTRIBUTING                                            *lualine-contributing*
 
-Feel free to create an issue/pr if you want to see anything else implemented.
-If you have some question or need help with configuration start a discussion
+Feel free to create an issue/PR if you want to see anything else implemented.
+If you have some question or need help with configuration, start a discussion
 <https://github.com/nvim-lualine/lualine.nvim/discussions>.
 
-Please read CONTRIBUTING.md <./CONTRIBUTING.md> before opening a pr. You can
-also help with documentation in wiki
-<https://github.com/nvim-lualine/lualine.nvim/wiki>
+Please read CONTRIBUTING.md <./CONTRIBUTING.md> before opening a PR. You can
+also help with documentation in the wiki
+<https://github.com/nvim-lualine/lualine.nvim/wiki>.
 
 PERFORMANCE COMPARED TO OTHER PLUGINS*lualine-performance-compared-to-other-plugins*
 
-Unlike other statusline plugins lualine loads only defined components, nothing
-else.
+Unlike other statusline plugins, lualine loads only the components you specify,
+and nothing else.
 
 Startup time performance measured with an amazing plugin
 dstein64/vim-startuptime <https://github.com/dstein64/vim-startuptime>
 
-All times are measured with clean `init.vim` with only `vim-startuptime`,
+Times are measured with a clean `init.vim` with only `vim-startuptime`,
 `vim-plug` and given statusline plugin installed. In control just
 `vim-startuptime` and`vim-plug` is installed. And measured time is complete
-startuptime of vim not time spent on specific plugin. These numbers are average
-of 20 runs.
+startuptime of vim not time spent on specific plugin. These numbers are the
+average of 20 runs.
 
 │control │ lualine │lightline│ airline │
 │8.943 ms│10.140 ms│12.522 ms│38.850 ms│
@@ -62,12 +62,12 @@ PACKER.NVIM <HTTPS://GITHUB.COM/WBTHOMASON/PACKER.NVIM> ~
 >
     use {
       'nvim-lualine/lualine.nvim',
-      requires = {'kyazdani42/nvim-web-devicons', opt = true}
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
 <
 
 
-You’ll also have need to have a patched font if you want icons.
+You’ll also need to have a patched font if you want icons.
 
 USAGE AND CUSTOMIZATION                      *lualine-usage-and-customization*
 
@@ -80,26 +80,26 @@ Lualine has sections as shown below.
 <
 
 
-Each sections holds it’s components e.g. current vim’s mode.
+Each sections holds its components e.g. Vim’s current mode.
 
-Configuring lualine in init.vim
+CONFIGURING LUALINE IN INIT.VIM ~
 
-All the examples below are in lua. You can use the same examples in `.vim` file
-by wrapping them in lua heredoc like this:
+All the examples below are in lua. You can use the same examples in `.vim`
+files by wrapping them in lua heredoc like this:
 
 >
     lua << END
-    require'lualine'.setup()
+    require('lualine').setup()
     END
 <
 
 
-checkout `:help lua-heredoc`.
+For more information, check out `:help lua-heredoc`.
 
-Default config
+                                               *lualine-Default-configuration*
 
 >
-    require'lualine'.setup {
+    require('lualine').setup {
       options = {
         icons_enabled = true,
         theme = 'auto',
@@ -110,8 +110,7 @@ Default config
       },
       sections = {
         lualine_a = {'mode'},
-        lualine_b = {'branch', 'diff',
-                      {'diagnostics', sources={'nvim_lsp', 'coc'}}},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {'filename'},
         lualine_x = {'encoding', 'fileformat', 'filetype'},
         lualine_y = {'progress'},
@@ -131,10 +130,12 @@ Default config
 <
 
 
-If you want to get your current lualine config. you can do so with
+Default configuration                  If you want to get your current lualine
+                                       config, you can do so with:
+
 
 >
-    require'lualine'.get_config()
+    require('lualine').get_config()
 <
 
 
@@ -152,56 +153,63 @@ STARTING LUALINE ~
 SETTING A THEME ~
 
 >
-    options = {theme = 'gruvbox'}
+    options = { theme = 'gruvbox' }
 <
 
 
-All available themes are listed in THEMES.md <./THEMES.md>
+All available themes are listed in THEMES.md <./THEMES.md>.
 
-Please create a pr if you managed to port a popular theme before me, here is
+Please create a PR if you managed to port a popular theme before us, here is
 how to do it <./CONTRIBUTING.md>.
 
-Customizing themes
+                                                  *lualine-Customizing-themes*
 
 >
     local custom_gruvbox = require'lualine.themes.gruvbox'
+    
     -- Change the background of lualine_c section for normal mode
-    custom_gruvbox.normal.c.bg = '#112233' -- rgb colors are supported
-    require'lualine'.setup{
+    custom_gruvbox.normal.c.bg = '#112233'
+    
+    require('lualine').setup {
       options = { theme  = custom_gruvbox },
       ...
     }
 <
 
 
-Theme structure is available here <./CONTRIBUTING.md#adding-a-theme>
+Customizing themes                     Theme structure is available here
+                                       <https://github.com/nvim-lualine/lualine.nvim/wiki/Writing-a-theme>.
+
 
 ------------------------------------------------------------------------------
 
 SEPARATORS ~
 
-Lualine defines two kinds of separators:
+lualine defines two kinds of separators:
 
 
 - `section_separators` - separators between sections
-- `components_separators` - separators between components in sections
+- `components_separators` - separators between the different components in sections
 
+
+**Note**: if viewing this README in a browser, chances are the characters below
+will not be visible.
 
 >
     options = {
-      section_separators = { left = '', right = ''},
-      component_separators = { left = '', right = ''}
+      section_separators = { left = '', right = '' },
+      component_separators = { left = '', right = '' }
     }
 <
 
 
-Here left means it’ll be used for left sections (a, b, c) and right means
-it’ll be used for right sections (x, y, z).
+Here, left refers to the left-most sections (a, b, c), and right refers to the
+right-most sections (x, y, z).
 
-Disabling separators
+                                                *lualine-Disabling-separators*
 
 >
-    options = {section_separators = '', component_separators = ''}
+    options = { section_separators = '', component_separators = '' }
 <
 
 
@@ -214,12 +222,12 @@ CHANGING COMPONENTS IN LUALINE SECTIONS ~
 <
 
 
-Available components ~
+                                                *lualine-Available-components*
 
 
 - `branch` (git branch)
 - `buffers` (shows currently available buffers)
-- `diagnostics` (diagnostics count from your prefered source)
+- `diagnostics` (diagnostics count from your preferred source)
 - `diff` (git diff status)
 - `encoding` (file encoding)
 - `fileformat` (file format)
@@ -241,21 +249,21 @@ LUA FUNCTIONS AS LUALINE COMPONENT
     local function hello()
       return [[hello world]]
     end
-    sections = {lualine_a = {hello}}
+    sections = { lualine_a = { hello } }
 <
 
 
 VIM FUNCTIONS AS LUALINE COMPONENT
 
 >
-    sections = {lualine_a = {'FugitiveHead'}}
+    sections = { lualine_a = {'FugitiveHead'} }
 <
 
 
-                       *lualine-Vim’s-statusline-items-as-lualine-component*
+VIM’S STATUSLINE ITEMS AS LUALINE COMPONENT
 
 >
-    sections = {lualine_c = {'%=', '%t%m', '%3p'}}
+    sections = { lualine_c = {'%=', '%t%m', '%3p'} }
 <
 
 
@@ -268,17 +276,17 @@ See `:h lua-vim-variables` and `:h lua-vim-options` if you are not sure what to
 use.
 
 >
-    sections = {lualine_a = {'g:coc_status', 'bo:filetype'}}
+    sections = { lualine_a = { 'g:coc_status', 'bo:filetype' } }
 <
 
 
 LUA EXPRESSIONS AS LUALINE COMPONENT
 
-You can use any valid lua expression as a component including * oneliners *
-global variables * require statements
+You can use any valid lua expression as a component including: - oneliners -
+global variables - require statements
 
 >
-    sections = {lualine_c = {"os.date('%a')", 'data', "require'lsp-status'.status()"}}
+    sections = { lualine_c = { "os.date('%a')", 'data', "require'lsp-status'.status()" } }
 <
 
 
@@ -289,19 +297,23 @@ global variables * require statements
 COMPONENT OPTIONS ~
 
 Component options can change the way a component behave. There are two kinds of
-options: * global options affecting all components * local options affecting
-specific
+options:
+
+
+- global options affecting all components
+- local options affecting specific
+
 
 Global options can be used as local options (can be applied to specific
 components) but you cannot use local options as global. Global option used
 locally overwrites the global, for example:
 
 >
-        require'lualine'.setup {
-          options = {fmt = string.lower},
-          sections = {lualine_a = {
-            {'mode', fmt = function(str) return str:sub(1,1) end}},
-                      lualine_b = {'branch'}}
+        require('lualine').setup {
+          options = { fmt = string.lower },
+          sections = { lualine_a = {
+            { 'mode', fmt = function(str) return str:sub(1,1) end } },
+                      lualine_b = {'branch'} }
         }
 <
 
@@ -312,9 +324,9 @@ shown. On the other hand branch will be formatted with global formatter
 
                                                    *lualine-Available-options*
 
-Global options ~
+                                                      *lualine-Global-options*
 
-Available options                      These are `options` that are used in
+Global options                         These are `options` that are used in
                                        options table. They set behavior of
                                        lualine.
 
@@ -322,95 +334,130 @@ Available options                      These are `options` that are used in
 Values set here are treated as default for other options that work in component
 level.
 
-for example even though `icons_enabled` is a general component option. you can
+For example even though `icons_enabled` is a general component option. you can
 set `icons_enabled` to `false` and icons will be disabled on all component. You
 can still overwrite defaults set in option table by specifying the option value
 in component.
 
 >
     options = {
-      theme = 'auto',          -- lualine theme
-      component_separators = {left = '', right = ''},
-      section_separators = {left = '', right = ''},
-      disabled_filetypes = {},  -- filetypes to diable lualine on
-      always_divide_middle = true, -- When true left_sections (a,b,c) can't
-                                   -- take over entiee statusline even
-                                   -- when none of section x, y, z is present.
+      theme = 'auto', -- lualine theme
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
+      disabled_filetypes = {},     -- Filetypes to disable lualine for.
+      always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
+                                   -- can't take over the entire statusline even
+                                   -- if neither of 'x', 'y' or 'z' are present.
     }
 <
 
 
-General component options ~
+                                           *lualine-General-component-options*
 
-These are options that control behavior at component level and are available
-for all components.
+General component options              These are options that control behavior
+                                       at component level and are available for
+                                       all components.
+
 
 >
     sections = {
       lualine_a = {
         {
           'mode',
-          icons_enabled = true, -- displays icons in alongside component
-          icon = nil,      -- displays icon in front of the component
-          separator = nil, -- Determines what separator to use for the component.
-                           -- when a string is given it's treated as component_separator.
-                           -- When a table is given it's treated as section_separator.
-                           -- This options can be used to set colored separators
-                           -- arround component. Option need to be set like
-                           -- `separator = { left = '', right = ''}`.
-                           -- Where left will be placed in left side of component
-                           -- and right will be placed in right side of component
-                           -- Passing empty string disables that separator
-          cond = nil, -- condition function, component is loaded when function returns true
-          -- custom color for component in format
-          -- color = {fg = '#rrggbb', bg= '#rrggbb', gui='style'}
-          -- or highlight group
-          -- color = "WarningMsg"
-          color = nil,
-          -- Type option specifies what type a component is.
-          -- When type is omitted lualine will guess it.
-          -- Available types [format: type_name(example)]
-          -- mod(branch/filename), stl(%f/%m), var(g:coc_status/bo:modifiable),
-          -- lua_expr(lua expressions), vim_fun(viml function name)
-          -- lua_expr is short for lua-expression and vim_fun is short fror vim-function
+          icons_enabled = true, -- Enables the display of icons alongside the component.
+          icon = nil,           -- Defines the icon to be displayed in front of the component.
+    
+          separator = nil,      -- Determines what separator to use for the component.
+                                -- Note:
+                                --  When a string is provided it's treated as component_separator.
+                                --  When a table is provided it's treated as section_separator.
+                                --  Passing an empty string disables the separator.
+                                --
+                                -- These options can be used to set colored separators
+                                -- around a component. 
+                                --
+                                -- The options need to be set as such:
+                                --   separator = { left = '', right = ''}
+                                --
+                                -- Where left will be placed on left side of component,
+                                -- and right will be placed on its right.
+                                --
+    
+          cond = nil,           -- Condition function, the component is loaded when the function returns `true`.
+    
+          -- Defines a custom color for the component:
+          --
+          -- 'highlight_group_name' | { fg = '#rrggbb'|cterm_value(0-255)|'color_name(red)', bg= '#rrggbb', gui='style' }
+          -- Note:
+          --  '|' is synonymous with 'or', meaning a different acceptable format for that placeholder.
+          --
+          -- Examples:
+          --   color = { fg = '#ffaa88', bg = 'grey', gui='italic,bold' },
+          --   color = { fg = 204 }   -- When fg/bg are omitted, they default to the your theme's fg/bg.
+          --   color = 'WarningMsg'   -- Highlight groups can also be used.
+          --
+          color = nil, -- The default is your theme's color for that section and mode.
+    
+          -- Specify what type a component is, if omitted, lualine will guess it for you.
+          --
+          -- Available types are:
+          --   [format: type_name(example)], mod(branch/filename),
+          --   stl(%f/%m), var(g:coc_status/bo:modifiable),
+          --   lua_expr(lua expressions), vim_fun(viml function name)
+          --
+          -- Note:
+          -- lua_expr is short for lua-expression and vim_fun is short for vim-function.
           type = nil,
-          padding = 1, -- adds padding to the left and right of components
-                       -- padding can be specified to left or right separately like
-                       -- padding = { left = left_padding, right = right_padding }
-          fmt = nil,   -- format function, formats component's output
+    
+          padding = 1, -- Adds padding to the left and right of components.
+                       -- Padding can be specified to left or right independently, e.g.:
+                       --   padding = { left = left_padding, right = right_padding }
+    
+          fmt = nil,   -- Format function, formats the component's output.
         }
       }
     }
 <
 
 
-Component specific options ~
+                                          *lualine-Component-specific-options*
 
-These are options that are available on specific components. For example you
-have option on `diagnostics` component to specify what your diagnostic sources
-will be.
+Component specific options             These are options that are available on
+                                       specific components. For example you
+                                       have option on `diagnostics` component
+                                       to specify what your diagnostic sources
+                                       will be.
 
-                                           *lualine-buffers-component-options*
+
+                                         *lualine-`buffers`-component-options*
 
 >
     sections = {
       lualine_a = {
         {
           'buffers',
-          show_filename_only = true, -- shows shortened relative path when false
-          show_modified_status = true -- shows indicator then bufder is modified
-          max_length = vim.o.columns * 2 / 3, -- maximum width of buffers component
-                                              -- can also be a function that returns value of max_length dynamicaly 
+          show_filename_only = true,   -- Shows shortened relative path when set to false.
+          show_modified_status = true, -- Shows indicator when the buffer is modified.
+    
+          mode = 0, -- 0: Shows buffer name
+                    -- 1: Shows buffer index (bufnr)
+                    -- 2: Shows buffer name + buffer index (bufnr)
+    
+          max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+                                              -- it can also be a function that returns
+                                              -- the value of `max_length` dynamically.
           filetype_names = {
             TelescopePrompt = 'Telescope',
             dashboard = 'Dashboard',
             packer = 'Packer',
             fzf = 'FZF',
             alpha = 'Alpha'
-          }, -- shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+          }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+    
           buffers_color = {
-            active = nil,   -- color for active buffer
-            inactive = nil, -- color for inactive buffer
+            -- Same values as the general color option can be used here.
+            active = 'lualine_{section}_normal',     -- Color for active buffer.
+            inactive = 'lualine_{section}_inactive', -- Color for inactive buffer.
           },
         }
       }
@@ -418,63 +465,66 @@ will be.
 <
 
 
-                                       *lualine-diagnostics-component-options*
+                                     *lualine-`diagnostics`-component-options*
 
 >
     sections = {
       lualine_a = {
         {
           'diagnostics',
-          -- table of diagnostic sources, available sources:
-          -- 'nvim_lsp', 'nvim', 'coc', 'ale', 'vim_lsp'
-          -- Or a function that returns a table like
-          --   {error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt}
-          sources = {'nvim_lsp', 'coc'},
-          -- displays diagnostics from defined severity
-          sections = {'error', 'warn', 'info', 'hint'},
-          -- all colors are in format #rrggbb
+    
+          -- Table of diagnostic sources, available sources are:
+          --   'nvim_lsp', 'nvim_diagnostic', 'coc', 'ale', 'vim_lsp'.
+          -- or a function that returns a table as such:
+          --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+          sources = { 'nvim_diagnostic', 'coc' },
+    
+          -- Displays diagnostics for the defined severity types
+          sections = { 'error', 'warn', 'info', 'hint' },
+    
           diagnostics_color = {
-            error = nil, -- changes diagnostic's error color
-            warn = nil,  -- changes diagnostic's warn color
-            info = nil,  -- Changes diagnostic's info color
-            hint = nil,  -- Changes diagnostic's hint color
-          }
-          symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}
-          colored = true, -- displays diagnostics status in color if set to true
-          update_in_insert = false, -- Update diagnostics in insert mode
-          always_visible = false, -- Show diagnostics even if count is 0, boolean or function returning boolean
+            -- Same values as the general color option can be used here.
+            error = 'DiagnosticError', -- Changes diagnostics' error color.
+            warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
+            info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
+            hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
+          },
+          symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+          colored = true,           -- Displays diagnostics status in color if set to true.
+          update_in_insert = false, -- Update diagnostics in insert mode.
+          always_visible = false,   -- Show diagnostics even if there are none.
         }
       }
     }
 <
 
 
-                                              *lualine-diff-component-options*
+                                            *lualine-`diff`-component-options*
 
 >
     sections = {
       lualine_a = {
         {
           'diff',
-          colored = true, -- displays diff status in color if set to true
-          -- all colors are in format #rrggbb
+          colored = true, -- Displays a colored diff status if set to true
           diff_color = {
-            added = nil,    -- changes diff's added color
-            modified = nil, -- changes diff's modified color
-            removed = nil,  -- changes diff's removed color
-          }
-          symbols = {added = '+', modified = '~', removed = '-'} -- changes diff symbols
+            -- Same color values as the general color option can be used here.
+            added    = 'DiffAdd',    -- Changes the diff's added color
+            modified = 'DiffChange', -- Changes the diff's modified color
+            removed  = 'DiffDelete', -- Changes the diff's removed color you
+          },
+          symbols = {added = '+', modified = '~', removed = '-'}, -- Changes the symbols used by the diff.
           source = nil, -- A function that works as a data source for diff.
-                        -- it must return a table like
-                        -- {added = add_count, modified = modified_count, removed = removed_count }
-                        -- Or nil on failure. Count <= 0 won't be displayed.
+                        -- It must return a table as such:
+                        --   { added = add_count, modified = modified_count, removed = removed_count }
+                        -- or nil on failure. count <= 0 won't be displayed.
         }
       }
     }
 <
 
 
-                                        *lualine-fileformat-component-options*
+                                      *lualine-`fileformat`-component-options*
 
 >
     sections = {
@@ -483,8 +533,8 @@ will be.
           'fileformat',
           symbols = {
             unix = '', -- e712
-            dos = '', -- e70f
-            mac = '', -- e711
+            dos = '',  -- e70f
+            mac = '',  -- e711
           }
         }
       }
@@ -492,53 +542,65 @@ will be.
 <
 
 
-                                          *lualine-filename-component-options*
+                                        *lualine-`filename`-component-options*
 
 >
     sections = {
       lualine_a = {
         {
           'filename',
-          file_status = true,  -- displays file status (readonly status, modified status)
-          path = 0,            -- 0 = just filename, 1 = relative path, 2 = absolute path
-          shorting_target = 40 -- Shortens path to leave 40 space in the window
-                               -- for other components. Terrible name any suggestions?
+          file_status = true,      -- Displays file status (readonly status, modified status)
+          path = 0,                -- 0: Just the filename
+                                   -- 1: Relative path
+                                   -- 2: Absolute path
+    
+          shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+                                   -- for other components. (terrible name, any suggestions?)
+          symbols = {
+            modified = '[+]',      -- Text to show when the file is modified.
+            readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
+            unnamed = '[No Name]', -- Text to show for unnamed buffers.
+          }
         }
       }
     }
 <
 
 
-                                          *lualine-filetype-component-options*
+                                        *lualine-`filetype`-component-options*
 
 >
     sections = {
       lualine_a = {
         {
           'filetype',
-          colored = true, -- displays filetype icon in color if set to `true
-          icon_only = false -- Display only icon for filetype
+          colored = true,   -- Displays filetype icon in color if set to true
+          icon_only = false -- Display only an icon for filetype
         }
       }
     }
 <
 
 
-                                              *lualine-tabs-component-options*
+                                            *lualine-`tabs`-component-options*
 
 >
     sections = {
       lualine_a = {
         {
           'tabs',
-          max_length = vim.o.columns / 3, -- maximum width of tabs component
-                                          -- can also be a function that returns value of max_length dynamicaly 
-          mode = 0, -- 0  shows tab_nr
-                    -- 1  shows tab_name
-                    -- 2  shows tab_nr + tab_name
+          max_length = vim.o.columns / 3, -- Maximum width of tabs component.
+                                          -- Note:
+                                          -- It can also be a function that returns
+                                          -- the value of `max_length` dynamically.
+          mode = 0, -- 0: Shows tab_nr
+                    -- 1: Shows tab_name
+                    -- 2: Shows tab_nr + tab_name
+    
           tabs_color = {
-            active = nil,   -- color for active tab
-            inactive = nil, -- color for inactive tab
+            -- Same values as the general color option can be used here.
+            active = 'lualine_{section}_normal',     -- Color for active tab.
+            inactive = 'lualine_{section}_inactive', -- Color for inactive tab.
           },
         }
       }
@@ -551,7 +613,7 @@ will be.
 TABLINE ~
 
 You can use lualine to display components in tabline. The configuration for
-tabline sections is exactly the same as for statusline.
+tabline sections is exactly the same as that of the statusline.
 
 >
     tabline = {
@@ -565,10 +627,11 @@ tabline sections is exactly the same as for statusline.
 <
 
 
-This will show branch and filename component in top of neovim inside tabline.
+This will show the branch and filename components on top of neovim inside
+tabline.
 
-lualine also provides 2 components buffers & tabs that you can use to get more
-traditional tabline/bufferline.
+lualine also provides 2 components, buffers and tabs, that you can use to get a
+more traditional tabline/bufferline.
 
 >
     tabline = {
@@ -582,9 +645,9 @@ traditional tabline/bufferline.
 <
 
 
-You can also completely move your statusline to tabline by configuring
+You can also completely move your statusline to a tabline by configuring
 `lualine.tabline` and disabling `lualine.sections` and
-`lualine.inactive_sections`.
+`lualine.inactive_sections`:
 
 >
     tabline = {
@@ -596,21 +659,21 @@ You can also completely move your statusline to tabline by configuring
 
 
 If you want a more sophisticated tabline you can use other tabline plugins with
-lualine too. For example:
+lualine too, for example:
 
 
 - nvim-bufferline <https://github.com/akinsho/nvim-bufferline.lua>
 - tabline.nvim <https://github.com/kdheepak/tabline.nvim>
 
 
-tabline.nvim even uses lualines theme by default 🙌 You can find a bigger
-list here <https://github.com/rockerBOO/awesome-neovim#tabline>
+tabline.nvim even uses lualine’s theme by default 🙌 You can find a bigger
+list here <https://github.com/rockerBOO/awesome-neovim#tabline>.
 
 ------------------------------------------------------------------------------
 
 EXTENSIONS ~
 
-Lualine extensions change statusline appearance for a window/buffer with
+lualine extensions change statusline appearance for a window/buffer with
 specified filetypes.
 
 By default no extensions are loaded to improve performance. You can load
@@ -621,7 +684,7 @@ extensions with:
 <
 
 
-Available extensions ~
+                                                *lualine-Available-extensions*
 
 
 - chadtree
@@ -632,16 +695,19 @@ Available extensions ~
 - nvim-tree
 - quickfix
 - toggleterm
+- symbols-outline
 
 
-Custom extensions ~
+                                                   *lualine-Custom-extensions*
 
-You can define your own extensions. If you think an extension might be useful
-for others then please submit a pr.
+Custom extensions                      You can define your own extensions. If
+                                       you believe an extension may be useful
+                                       to others, then please submit a PR.
+
 
 >
-    local my_extension = {sections = {lualine_a = 'mode'}, filetypes = {'lua'}}
-    require'lualine'.setup {extensions = {my_extension}}
+    local my_extension = { sections = { lualine_a = {'mode'} }, filetypes = {'lua'} }
+    require('lualine').setup { extensions = { my_extension } }
 <
 
 
@@ -649,10 +715,10 @@ for others then please submit a pr.
 
 DISABLING LUALINE ~
 
-You can disable lualine for specific filetypes
+You can disable lualine for specific filetypes:
 
 >
-    options = {disabled_filetypes = {'lua'}}
+    options = { disabled_filetypes = {'lua'} }
 <
 
 
