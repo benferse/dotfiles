@@ -35,13 +35,14 @@ Telescope Wiki</sub>
 - [API](#api)
 - [Media](#media)
 - [Contributing](#contributing)
+- [Changelog](https://github.com/nvim-telescope/telescope.nvim/blob/master/doc/telescope_changelog.txt)
 
 ## Getting Started
 
 This section should guide you to run your first builtin pickers.
 
-[Neovim (v0.5.1)](https://github.com/neovim/neovim/releases/tag/v0.5.1) or the
-latest neovim nighly commit is required for `telescope.nvim` to work.
+[Neovim (v0.6.0)](https://github.com/neovim/neovim/releases/tag/v0.6.0) or the
+latest neovim nightly commit is required for `telescope.nvim` to work.
 
 ### Suggested dependencies
 
@@ -258,7 +259,6 @@ Built-in functions. Ready to be bound to any key you like.
 | `builtin.git_files`                 | Fuzzy search through the output of `git ls-files` command, respects .gitignore, optionally ignores untracked files                |
 | `builtin.grep_string`               | Searches for the string under your cursor in your current working directory                                                       |
 | `builtin.live_grep`                 | Search for a string in your current working directory and get results live as you type (respecting .gitignore)                    |
-| `builtin.file_browser`              | Lists files and folders in your current working directory, open files, navigate your filesystem, and create new files and folders |
 
 ### Vim Pickers
 
@@ -299,8 +299,7 @@ Built-in functions. Ready to be bound to any key you like.
 | `builtin.lsp_dynamic_workspace_symbols`     | Dynamically Lists LSP for all workspace symbols                                                                           |
 | `builtin.lsp_code_actions`                  | Lists any LSP actions for the word under the cursor, that can be triggered with `<cr>`                                    |
 | `builtin.lsp_range_code_actions`            | Lists any LSP actions for a given range, that can be triggered with `<cr>`                                                |
-| `builtin.lsp_document_diagnostics`          | Lists LSP diagnostics for the current buffer                                                                              |
-| `builtin.lsp_workspace_diagnostics`         | Lists LSP diagnostics for the current workspace if supported, otherwise searches in all open buffers                      |
+| `builtin.diagnostics`                       | Lists Diagnostics for all open buffers or a specific buffer. Use option `bufnr=0` for current buffer.                     |
 | `builtin.lsp_implementations`               | Goto the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope         |
 | `builtin.lsp_definitions`                   | Goto the definition of the word under the cursor, if there's only one, otherwise show all options in Telescope            |
 | `builtin.lsp_type_definitions`              | Goto the definition of the type of the word under the cursor, if there's only one, otherwise show all options in Telescope|

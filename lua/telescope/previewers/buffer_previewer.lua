@@ -374,6 +374,7 @@ previewers.new_buffer_previewer = function(opts)
       vim.api.nvim_win_set_option(status.preview_win, "signcolumn", "no")
       vim.api.nvim_win_set_option(status.preview_win, "foldlevel", 100)
       vim.api.nvim_win_set_option(status.preview_win, "wrap", false)
+      vim.api.nvim_win_set_option(status.preview_win, "scrollbind", false)
 
       self.state.winid = status.preview_win
       self.state.bufname = nil
@@ -562,7 +563,7 @@ previewers.builtin = defaulter(function(_)
     end,
 
     define_preview = function(self, entry, status)
-      local module_name = vim.fn.fnamemodify(entry.filename, ":t:r")
+      local module_name = vim.fn.fnamemodify(vim.fn.fnamemodify(entry.filename, ":h"), ":t")
       local text
       if entry.text:sub(1, #module_name) ~= module_name then
         text = module_name .. "." .. entry.text
@@ -637,19 +638,43 @@ previewers.git_branch_log = defaulter(function(opts)
       if hstart then
         local hend = hstart + 7
         if hend < #line then
-          vim.api.nvim_buf_add_highlight(bufnr, ns_previewer, "TelescopeResultsIdentifier", i - 1, hstart - 1, hend)
+          pcall(
+            vim.api.nvim_buf_add_highlight,
+            bufnr,
+            ns_previewer,
+            "TelescopeResultsIdentifier",
+            i - 1,
+            hstart - 1,
+            hend
+          )
         end
       end
       local _, cstart = line:find "- %("
       if cstart then
         local cend = string.find(line, "%) ")
         if cend then
-          vim.api.nvim_buf_add_highlight(bufnr, ns_previewer, "TelescopeResultsConstant", i - 1, cstart - 1, cend)
+          pcall(
+            vim.api.nvim_buf_add_highlight,
+            bufnr,
+            ns_previewer,
+            "TelescopeResultsConstant",
+            i - 1,
+            cstart - 1,
+            cend
+          )
         end
       end
       local dstart, _ = line:find " %(%d"
       if dstart then
-        vim.api.nvim_buf_add_highlight(bufnr, ns_previewer, "TelescopeResultsSpecialComment", i - 1, dstart, #line)
+        pcall(
+          vim.api.nvim_buf_add_highlight,
+          bufnr,
+          ns_previewer,
+          "TelescopeResultsSpecialComment",
+          i - 1,
+          dstart,
+          #line
+        )
       end
     end
   end

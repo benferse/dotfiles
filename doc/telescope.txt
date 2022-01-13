@@ -74,6 +74,20 @@ telescope.setup({opts})                                    *telescope.setup()*
         - "descending" (default)
         - "ascending"
 
+                                              *telescope.defaults.tiebreak*
+    tiebreak: ~
+        A function that determines how to break a tie when two entries have
+        the same score.
+        Having a function that always returns false would keep the entries in
+        the order they are found, so existing_entry before current_entry.
+        Vice versa always returning true would place the current_entry
+        before the existing_entry.
+
+        Signature: function(current_entry, existing_entry, prompt) -> boolean
+
+        Default: function that breaks the tie based on the length of the
+                 entry's ordinal
+
                                     *telescope.defaults.selection_strategy*
     selection_strategy: ~
         Determines how the cursor acts after each sort iteration.
@@ -115,13 +129,14 @@ telescope.setup({opts})                                    *telescope.setup()*
         Default: {
           bottom_pane = {
             height = 25,
+            preview_cutoff = 120,
             prompt_position = "top"
           },
           center = {
-            height = 0.9,
+            height = 0.4,
             preview_cutoff = 40,
             prompt_position = "top",
-            width = 0.8
+            width = 0.5
           },
           cursor = {
             height = 0.9,
@@ -141,6 +156,20 @@ telescope.setup({opts})                                    *telescope.setup()*
             width = 0.8
           }
         }
+
+
+                                     *telescope.defaults.cycle_layout_list*
+    cycle_layout_list: ~
+        Determines the layouts to cycle through when using `actions.cycle_layout_next`
+        and `actions.cycle_layout_prev`.
+        Should be a list of "layout setups".
+        Each "layout setup" can take one of two forms:
+        1. string <br>
+            This is interpreted as the name of a `layout_strategy`
+        2. table <br>
+            A table with possible keys `layout_strategy`, `layout_config` and `previewer`
+
+        Default: { "horizontal", "vertical" }
 
 
                                               *telescope.defaults.winblend*
@@ -168,6 +197,15 @@ telescope.setup({opts})                                    *telescope.setup()*
         Prefix in front of each result entry. Current selection not included.
 
         Default: '  '
+
+                                            *telescope.defaults.multi_icon*
+    multi_icon: ~
+        Symbol to add in front of a multi-selected result entry.
+        Replaces final character of |telescope.defaults.selection_caret| and
+        |telescope.defaults.entry_prefix| as appropriate.
+        To have no icon, set to the empty string.
+
+        Default: '+'
 
                                           *telescope.defaults.initial_mode*
     initial_mode: ~
@@ -206,6 +244,20 @@ telescope.setup({opts})                                    *telescope.setup()*
             `a/b/g/delta.txt`
           Similarly, `path_display.shorten = 2` will give a path like:
             `al/be/ga/delta.txt`
+
+        You can also further customise the shortening behaviour by
+        setting `path_display.shorten = { len = num, exclude = list }`,
+        where `len` acts as above, and `exclude` is a list of positions
+        that are not shortened. Negative numbers in the list are considered
+        relative to the end of the path.
+          e.g. for a path like
+            `alpha/beta/gamma/delta.txt`
+          setting `path_display.shorten = { len = 1, exclude = {1, -1} }`
+          will give a path like:
+            `alpha/b/g/delta.txt`
+          setting `path_display.shorten = { len = 2, exclude = {2, -2} }`
+          will give a path like:
+            `al/beta/gamma/de`
 
         path_display can also be set to 'hidden' string to hide file names
 
@@ -381,6 +433,9 @@ telescope.setup({opts})                                    *telescope.setup()*
                               Default: true
           - msg_bg_fillchar:  Character to fill background of unpreviewable buffers with
                               Default: "╱"
+          - hide_on_startup:  Hide previewer when picker starts. Previewer can be toggled
+                              with actions.toggle_preview.
+                              Default: false
 
 
                                      *telescope.defaults.vimgrep_arguments*
@@ -578,6 +633,8 @@ telescope.register_extension({mod})           *telescope.register_extension()*
 
 telescope.load_extension({name})                  *telescope.load_extension()*
     Load an extension.
+    - Notes:
+      - Loading triggers ext setup via the config passed in |telescope.setup|
 
 
     Parameters: ~
@@ -957,6 +1014,8 @@ builtin.git_stash({opts})                                *builtin.git_stash()*
         {cwd}          (string)   specify the path of the repo
         {use_git_root} (boolean)  if we should use git root as cwd or the cwd
                                   (important for submodule) (default: true)
+        {show_branch}  (boolean)  if we should display the branch name for git
+                                  stash entries (default: true)
 
 
 builtin.builtin({opts})                                    *builtin.builtin()*
@@ -967,7 +1026,6 @@ builtin.builtin({opts})                                    *builtin.builtin()*
         {opts} (table)  options to pass to the picker
 
     Options: ~
-        {ignore_filename}    (boolean)  dont show filenames (default: true)
         {include_extensions} (boolean)  if true will show the pickers of the
                                         installed extensions (default: false)
 
@@ -1351,7 +1409,9 @@ builtin.lsp_range_code_actions({opts})      *builtin.lsp_range_code_actions()*
 
     Options: ~
         {timeout}    (number)  timeout for the sync call (default: 10000)
-        {start_line} (number)  where the code action ends (default: handled by
+        {start_line} (number)  where the code action starts (default: handled
+                               by :'<,'>Telescope lsp_range_code_actions)
+        {end_line}   (number)  where the code action ends (default: handled by
                                :'<,'>Telescope lsp_range_code_actions)
 
 
@@ -1424,11 +1484,11 @@ builtin.lsp_dynamic_workspace_symbols({opts}) *builtin.lsp_dynamic_workspace_sym
                                             with hl_group
 
 
-builtin.lsp_document_diagnostics({opts})  *builtin.lsp_document_diagnostics()*
-    Lists LSP diagnostics for the current buffer
+builtin.diagnostics({opts})                            *builtin.diagnostics()*
+    Lists diagnostics for current or all open buffers
     - Fields:
       - `All severity flags can be passed as `string` or `number` as per
-        `:vim.lsp.protocol.DiagnosticSeverity:`
+        `:vim.diagnostic.severity:`
     - Default keymaps:
       - `<C-l>`: show autocompletion menu to prefilter your query with the
         diagnostic you want to see (i.e. `:warning:`)
@@ -1438,6 +1498,8 @@ builtin.lsp_document_diagnostics({opts})  *builtin.lsp_document_diagnostics()*
         {opts} (table)  options to pass to the picker
 
     Options: ~
+        {bufnr}          (string|number)  if nil get diagnostics for all open
+                                          buffers. Use 0 for current buffer
         {severity}       (string|number)  filter diagnostics by severity name
                                           (string) or id (number)
         {severity_limit} (string|number)  keep diagnostics equal or more
@@ -1446,39 +1508,12 @@ builtin.lsp_document_diagnostics({opts})  *builtin.lsp_document_diagnostics()*
         {severity_bound} (string|number)  keep diagnostics equal or less
                                           severe wrt severity name (string) or
                                           id (number)
-        {no_sign}        (boolean)        hide LspDiagnosticSigns from Results
+        {no_sign}        (boolean)        hide DiagnosticSigns from Results
                                           (default: false)
         {line_width}     (number)         set length of diagnostic entry text
                                           in Results
-
-
-builtin.lsp_workspace_diagnostics({opts}) *builtin.lsp_workspace_diagnostics()*
-    Lists LSP diagnostics for the current workspace if supported, otherwise
-    searches in all open buffers
-    - Fields:
-      - `All severity flags can be passed as `string` or `number` as per
-        `:vim.lsp.protocol.DiagnosticSeverity:`
-    - Default keymaps:
-      - `<C-l>`: show autocompletion menu to prefilter your query with the
-        diagnostic you want to see (i.e. `:warning:`)
-
-
-    Parameters: ~
-        {opts} (table)  options to pass to the picker
-
-    Options: ~
-        {severity}       (string|number)  filter diagnostics by severity name
-                                          (string) or id (number)
-        {severity_limit} (string|number)  keep diagnostics equal or more
-                                          severe wrt severity name (string) or
-                                          id (number)
-        {severity_bound} (string|number)  keep diagnostics equal or less
-                                          severe wrt severity name (string) or
-                                          id (number)
-        {no_sign}        (boolean)        hide LspDiagnosticSigns from Results
-                                          (default: false)
-        {line_width}     (number)         set length of diagnostic entry text
-                                          in Results
+        {namespace}      (number)         limit your diagnostics to a specific
+                                          namespace
 
 
 
@@ -1487,8 +1522,8 @@ builtin.lsp_workspace_diagnostics({opts}) *builtin.lsp_workspace_diagnostics()*
 
 Themes are ways to combine several elements of styling together.
 
-They are helpful for managing the several differnt UI aspects for telescope and
-provide a simple interface for users to get a particular "style" of picker.
+They are helpful for managing the several different UI aspects for telescope
+and provide a simple interface for users to get a particular "style" of picker.
 
 themes.get_dropdown()                                  *themes.get_dropdown()*
     Dropdown style theme.
@@ -1530,6 +1565,22 @@ themes.get_ivy()                                            *themes.get_ivy()*
 
 ================================================================================
                                                               *telescope.layout*
+
+The layout of telescope pickers can be adjusted using the
+|telescope.defaults.layout_strategy| and |telescope.defaults.layout_config|
+options. For example, the following configuration changes the default layout
+strategy and the default size of the picker:
+>
+  require('telescope').setup{
+    defaults = {
+      layout_strategy = 'vertical',
+      layout_config = { height = 0.95 },
+    },
+  }
+<
+
+
+────────────────────────────────────────────────────────────────────────────────
 
 Layout strategies are different functions to position telescope.
 
@@ -1584,10 +1635,16 @@ layout_strategies.horizontal()                *layout_strategies.horizontal()*
     └──────────────────────────────────────────────────┘
 
     `picker.layout_config` shared options:
+      - anchor:
+        - Which edge/corner to pin the picker to
+        - See |resolver.resolve_anchor_pos()|
       - height:
         - How tall to make Telescope's entire layout
         - See |resolver.resolve_height()|
       - mirror: Flip the location of the results/prompt and preview windows
+      - prompt_position:
+        - Where to place prompt window.
+        - Available Values: 'bottom', 'top'
       - scroll_speed: The number of lines to scroll through the previewer
       - width:
         - How wide to make Telescope's entire layout
@@ -1598,9 +1655,6 @@ layout_strategies.horizontal()                *layout_strategies.horizontal()*
       - preview_width:
         - Change the width of Telescope's preview window
         - See |resolver.resolve_width()|
-      - prompt_position:
-        - Where to place prompt window.
-        - Available Values: 'bottom', 'top'
 
 
 layout_strategies.center()                        *layout_strategies.center()*
@@ -1608,6 +1662,9 @@ layout_strategies.center()                        *layout_strategies.center()*
     the middle of the screen. The preview window is then placed in the
     remaining space above. Particularly useful for creating dropdown menus (see
     |telescope.themes| and |themes.get_dropdown()|`).
+
+    Note that the `anchor` option can only pin this layout to the left or right
+    edges.
 
     ┌──────────────────────────────────────────────────┐
     │    ┌────────────────────────────────────────┐    │
@@ -1627,10 +1684,16 @@ layout_strategies.center()                        *layout_strategies.center()*
     └──────────────────────────────────────────────────┘
 
     `picker.layout_config` shared options:
+      - anchor:
+        - Which edge/corner to pin the picker to
+        - See |resolver.resolve_anchor_pos()|
       - height:
         - How tall to make Telescope's entire layout
         - See |resolver.resolve_height()|
       - mirror: Flip the location of the results/prompt and preview windows
+      - prompt_position:
+        - Where to place prompt window.
+        - Available Values: 'bottom', 'top'
       - scroll_speed: The number of lines to scroll through the previewer
       - width:
         - How wide to make Telescope's entire layout
@@ -1685,10 +1748,16 @@ layout_strategies.vertical()                    *layout_strategies.vertical()*
     └──────────────────────────────────────────────────┘
 
     `picker.layout_config` shared options:
+      - anchor:
+        - Which edge/corner to pin the picker to
+        - See |resolver.resolve_anchor_pos()|
       - height:
         - How tall to make Telescope's entire layout
         - See |resolver.resolve_height()|
       - mirror: Flip the location of the results/prompt and preview windows
+      - prompt_position:
+        - Where to place prompt window.
+        - Available Values: 'bottom', 'top'
       - scroll_speed: The number of lines to scroll through the previewer
       - width:
         - How wide to make Telescope's entire layout
@@ -1699,9 +1768,6 @@ layout_strategies.vertical()                    *layout_strategies.vertical()*
       - preview_height:
         - Change the height of Telescope's preview window
         - See |resolver.resolve_height()|
-      - prompt_position:
-        - Where to place prompt window.
-        - Available Values: 'bottom', 'top'
 
 
 layout_strategies.flex()                            *layout_strategies.flex()*
@@ -1712,10 +1778,16 @@ layout_strategies.flex()                            *layout_strategies.flex()*
 
 
     `picker.layout_config` shared options:
+      - anchor:
+        - Which edge/corner to pin the picker to
+        - See |resolver.resolve_anchor_pos()|
       - height:
         - How tall to make Telescope's entire layout
         - See |resolver.resolve_height()|
       - mirror: Flip the location of the results/prompt and preview windows
+      - prompt_position:
+        - Where to place prompt window.
+        - Available Values: 'bottom', 'top'
       - scroll_speed: The number of lines to scroll through the previewer
       - width:
         - How wide to make Telescope's entire layout
@@ -1778,6 +1850,20 @@ resolver.resolve_width()                            *resolver.resolve_width()*
 
     The returned function will have signature: function(self, max_columns,
     max_lines): number
+
+
+
+resolver.resolve_anchor_pos()                  *resolver.resolve_anchor_pos()*
+    Calculates the adjustment required to move the picker from the middle of
+    the screen to an edge or corner.
+    The `anchor` can be any of the following strings:
+      - "", "CENTER", "NW", "N", "NE", "E", "SE", "S", "SW", "W" The anchors
+        have the following meanings:
+      - "" or "CENTER":
+        the picker will remain in the middle of the screen.
+      - Compass directions:
+        the picker will move to the corresponding edge/corner e.g. "NW" -> "top
+        left corner", "E" -> "right edge", "S" -> "bottom edge"
 
 
 
@@ -2112,8 +2198,7 @@ actions.which_key({prompt_bufnr})                        *actions.which_key()*
     Display the keymaps of registered actions similar to which-key.nvim.
 
     - Notes:
-      - The defaults can be overridden via
-        |action_generate.toggle_registered_actions|.
+      - The defaults can be overridden via |action_generate.which_key|.
 
 
     Parameters: ~
@@ -2190,12 +2275,84 @@ action_set.edit({prompt_bufnr}, {command})                 *action_set.edit()*
 
 
 action_set.scroll_previewer({prompt_bufnr}, {direction}) *action_set.scroll_previewer()*
-    Scrolls the previewer up or down
+    Scrolls the previewer up or down. Defaults to a half page scroll, but can
+    be overridden using the `scroll_speed` option in `layout_config`. See
+    |telescope.layout| for more details.
 
 
     Parameters: ~
         {prompt_bufnr} (number)  The prompt bufnr
         {direction}    (number)  The direction of the scrolling
+
+
+action_set.scroll_results({prompt_bufnr}, {direction}) *action_set.scroll_results()*
+    Scrolls the results up or down. Defaults to a half page scroll, but can be
+    overridden using the `scroll_speed` option in `layout_config`. See
+    |telescope.layout| for more details.
+
+
+    Parameters: ~
+        {prompt_bufnr} (number)  The prompt bufnr
+        {direction}    (number)  The direction of the scrolling
+
+
+
+================================================================================
+                                                      *telescope.actions.layout*
+
+The layout actions are actions to be used to change the layout of a picker.
+
+action_layout.toggle_preview({prompt_bufnr})  *action_layout.toggle_preview()*
+    Toggle preview window.
+    - Note: preview window can be toggled even if preview is set to false.
+
+    This action is not mapped by default.
+
+
+    Parameters: ~
+        {prompt_bufnr} (number)  The prompt bufnr
+
+
+action_layout.toggle_prompt_position({prompt_bufnr}) *action_layout.toggle_prompt_position()*
+    Toggles the `prompt_position` option between "top" and "bottom". Checks if
+    `prompt_position` is an option for the current layout.
+
+    This action is not mapped by default.
+
+
+    Parameters: ~
+        {prompt_bufnr} (number)  The prompt bufnr
+
+
+action_layout.toggle_mirror({prompt_bufnr})    *action_layout.toggle_mirror()*
+    Toggles the `mirror` option between `true` and `false`. Checks if `mirror`
+    is an option for the current layout.
+
+    This action is not mapped by default.
+
+
+    Parameters: ~
+        {prompt_bufnr} (number)  The prompt bufnr
+
+
+action_layout.cycle_layout_next({prompt_bufnr}) *action_layout.cycle_layout_next()*
+    Cycles to the next layout in `cycle_layout_list`.
+
+    This action is not mapped by default.
+
+
+    Parameters: ~
+        {prompt_bufnr} (number)  The prompt bufnr
+
+
+action_layout.cycle_layout_prev({prompt_bufnr}) *action_layout.cycle_layout_prev()*
+    Cycles to the previous layout in `cycle_layout_list`.
+
+    This action is not mapped by default.
+
+
+    Parameters: ~
+        {prompt_bufnr} (number)  The prompt bufnr
 
 
 
@@ -2290,7 +2447,7 @@ General usage:
     defaults = {
       mappings = {
         n = {
-          ["?"] = action_generate.toggle_registered_actions {
+          ["?"] = action_generate.which_key {
             name_width = 20, -- typically leads to smaller floats
             max_height = 0.5, -- increase potential maximum height
             seperator = " > ", -- change sep between mode, keybind, and name
@@ -2367,7 +2524,7 @@ work and make it really easy create new previewers.
 
 Furthermore, there are a collection of previewers already defined which can be
 used for every picker, as long as the entries of the picker provide the
-necessary fields. The more important once are
+necessary fields. The more important ones are
   - `previewers.cat`
   - `previewers.vimgrep`
   - `previewers.qflist`
