@@ -16,11 +16,11 @@ local function on_attach(client, bufnum)
 
     nbufmap('K',  '<cmd>lua vim.lsp.buf.hover()<cr>')
 
-    nbufmap('[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
-    nbufmap(']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>')
+    nbufmap('[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+    nbufmap(']g', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 
     nbufmap('<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    nbufmap('<Leader>cd', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>')
+    nbufmap('<Leader>cd', '<cmd>lua vim.diagnostic.open_float()<cr>')
     nbufmap('<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
 
     require('lsp-status').on_attach(client)
