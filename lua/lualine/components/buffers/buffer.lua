@@ -1,4 +1,4 @@
-local highlight = require 'lualine.highlight'
+local highlight = require('lualine.highlight')
 local Buffer = require('lualine.utils.class'):extend()
 
 ---intialize a new buffer from opts
@@ -13,7 +13,7 @@ end
 
 ---setup icons, modified status for buffer
 function Buffer:get_props()
-  self.file = vim.fn.bufname(self.bufnr)
+  self.file = vim.api.nvim_buf_get_name(self.bufnr)
   self.buftype = vim.api.nvim_buf_get_option(self.bufnr, 'buftype')
   self.filetype = vim.api.nvim_buf_get_option(self.bufnr, 'filetype')
   local modified = self.options.show_modified_status and vim.api.nvim_buf_get_option(self.bufnr, 'modified')
@@ -26,13 +26,13 @@ function Buffer:get_props()
     if not status then
       dev, _ = '', ''
     elseif self.filetype == 'TelescopePrompt' then
-      dev, _ = require('nvim-web-devicons').get_icon 'telescope'
+      dev, _ = require('nvim-web-devicons').get_icon('telescope')
     elseif self.filetype == 'fugitive' then
-      dev, _ = require('nvim-web-devicons').get_icon 'git'
+      dev, _ = require('nvim-web-devicons').get_icon('git')
     elseif self.filetype == 'vimwiki' then
-      dev, _ = require('nvim-web-devicons').get_icon 'markdown'
+      dev, _ = require('nvim-web-devicons').get_icon('markdown')
     elseif self.buftype == 'terminal' then
-      dev, _ = require('nvim-web-devicons').get_icon 'zsh'
+      dev, _ = require('nvim-web-devicons').get_icon('zsh')
     elseif vim.fn.isdirectory(self.file) == 1 then
       dev, _ = '', nil
     else
@@ -47,12 +47,23 @@ end
 ---returns rendered buffer
 ---@return string
 function Buffer:render()
-  local name
+  local name = self:name()
+  if self.options.fmt then
+    name = self.options.fmt(name or '')
+  end
+
   if self.ellipse then -- show elipsis
     name = '...'
   else
-    name = string.format(' %s%s%s ', self.icon, self:name(), self.modified_icon)
+    if self.options.mode == 0 then
+      name = string.format('%s%s%s', self.icon, name, self.modified_icon)
+    elseif self.options.mode == 1 then
+      name = string.format('%s %s%s', self.bufnr, self.icon, self.modified_icon)
+    else
+      name = string.format('%s %s%s%s', self.bufnr, self.icon, name, self.modified_icon)
+    end
   end
+  name = Buffer.apply_padding(name, self.options.padding)
   self.len = vim.fn.strchars(name)
 
   -- setup for mouse clicks
@@ -110,6 +121,17 @@ function Buffer:name()
   end
   return self.options.show_filename_only and vim.fn.fnamemodify(self.file, ':t')
     or vim.fn.pathshorten(vim.fn.fnamemodify(self.file, ':p:.'))
+end
+
+---adds spaces to left and right
+function Buffer.apply_padding(str, padding)
+  local l_padding, r_padding = 1, 1
+  if type(padding) == 'number' then
+    l_padding, r_padding = padding, padding
+  elseif type(padding) == 'table' then
+    l_padding, r_padding = padding.left or 0, padding.right or 0
+  end
+  return string.rep(' ', l_padding) .. str .. string.rep(' ', r_padding)
 end
 
 return Buffer

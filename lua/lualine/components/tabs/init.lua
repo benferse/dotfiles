@@ -1,9 +1,9 @@
 -- Copyright (c) 2020-2021 shadmansaleh
 -- MIT license, see LICENSE for more details.
 local require = require('lualine_require').require
-local Tab = require 'lualine.components.tabs.tab'
+local Tab = require('lualine.components.tabs.tab')
 local M = require('lualine.component'):extend()
-local highlight = require 'lualine.highlight'
+local highlight = require('lualine.highlight')
 
 local default_options = {
   max_length = 0,
@@ -57,8 +57,8 @@ end
 function M:update_status()
   local data = {}
   local tabs = {}
-  for t = 1, vim.fn.tabpagenr '$' do
-    tabs[#tabs + 1] = Tab { tabnr = t, options = self.options, highlights = self.highlights }
+  for t = 1, vim.fn.tabpagenr('$') do
+    tabs[#tabs + 1] = Tab({ tabnr = t, options = self.options, highlights = self.highlights })
   end
   -- mark the first, last, current, before current, after current tabpages
   -- for rendering
@@ -93,7 +93,7 @@ function M:update_status()
   -- start drawing from current tab and draw left and right of it until
   -- all tabpages are drawn or max_length has been reached.
   if current_tab == nil then -- maybe redundent code
-    local t = Tab { tabnr = vim.fn.tabpagenr(), options = self.options, highlights = self.highlights }
+    local t = Tab({ tabnr = vim.fn.tabpagenr(), options = self.options, highlights = self.highlights })
     t.current = true
     t.last = true
     data[#data + 1] = t:render()
@@ -147,10 +147,26 @@ function M:update_status()
   return table.concat(data)
 end
 
-vim.cmd [[
+function M:draw()
+  self.status = ''
+  self.applied_separator = ''
+
+  if self.options.cond ~= nil and self.options.cond() ~= true then
+    return self.status
+  end
+  local status = self:update_status()
+  if type(status) == 'string' and #status > 0 then
+    self.status = status
+    self:apply_section_separators()
+    self:apply_separator()
+  end
+  return self.status
+end
+
+vim.cmd([[
   function! LualineSwitchTab(tabnr, mouseclicks, mousebutton, modifiers)
     execute a:tabnr . "tabnext"
   endfunction
-]]
+]])
 
 return M

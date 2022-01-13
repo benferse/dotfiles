@@ -1,13 +1,14 @@
 -- Copyright (c) 2020-2021 shadmansaleh
 -- MIT license, see LICENSE for more details.
 local require = require('lualine_require').require
-local Buffer = require 'lualine.components.buffers.buffer'
+local Buffer = require('lualine.components.buffers.buffer')
 local M = require('lualine.component'):extend()
-local highlight = require 'lualine.highlight'
+local highlight = require('lualine.highlight')
 
 local default_options = {
   show_filename_only = true,
   show_modified_status = true,
+  mode = 0,
   max_length = 0,
   filetype_names = {
     TelescopePrompt = 'Telescope',
@@ -64,12 +65,12 @@ end
 function M:update_status()
   local data = {}
   local buffers = {}
-  for b = 1, vim.fn.bufnr '$' do
+  for b = 1, vim.fn.bufnr('$') do
     if vim.fn.buflisted(b) ~= 0 and vim.api.nvim_buf_get_option(b, 'buftype') ~= 'quickfix' then
-      buffers[#buffers + 1] = Buffer { bufnr = b, options = self.options, highlights = self.highlights }
+      buffers[#buffers + 1] = Buffer({ bufnr = b, options = self.options, highlights = self.highlights })
     end
   end
-  local current_bufnr = vim.fn.bufnr()
+  local current_bufnr = vim.api.nvim_get_current_buf()
   local current = -2
   -- mark the first, last, current, before current, after current buffers
   -- for rendering
@@ -109,7 +110,7 @@ function M:update_status()
   -- start drawing from current buffer and draw left and right of it until
   -- all buffers are drawn or max_length has been reached.
   if current == -2 then
-    local b = Buffer { bufnr = vim.fn.bufnr(), options = self.options, highlights = self.highlights }
+    local b = Buffer({ bufnr = vim.api.nvim_get_current_buf(), options = self.options, highlights = self.highlights })
     b.current = true
     if self.options.self.section < 'lualine_x' then
       b.last = true
@@ -176,10 +177,26 @@ function M:update_status()
   return table.concat(data)
 end
 
-vim.cmd [[
+function M:draw()
+  self.status = ''
+  self.applied_separator = ''
+
+  if self.options.cond ~= nil and self.options.cond() ~= true then
+    return self.status
+  end
+  local status = self:update_status()
+  if type(status) == 'string' and #status > 0 then
+    self.status = status
+    self:apply_section_separators()
+    self:apply_separator()
+  end
+  return self.status
+end
+
+vim.cmd([[
   function! LualineSwitchBuffer(bufnr, mouseclicks, mousebutton, modifiers)
     execute ":buffer " . a:bufnr
   endfunction
-]]
+]])
 
 return M
