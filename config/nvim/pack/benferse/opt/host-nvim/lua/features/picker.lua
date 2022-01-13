@@ -66,7 +66,6 @@ local function setup()
         },
     }
 
-    vim.g.nvim_tree_gitignore = 1
     vim.g.nvim_tree_respect_buf_cwd = 1
 
     -- Autocompletion
@@ -75,6 +74,9 @@ local function setup()
     -- Something about this makes the lua lsp pretty upset
     ---@diagnostic disable-next-line: redundant-parameter
     cmp.setup {
+        git = {
+            ignore = 1,
+        },
         sources = cmp.config.sources {
             { name = 'nvim_lsp' },
             { name = 'vsnip' },

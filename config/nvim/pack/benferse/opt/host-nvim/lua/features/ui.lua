@@ -95,7 +95,7 @@ local function setup()
             lualine_y = {
                 { 'b:gitsigns_head', icon = '', },
                 { 'diff', source = diff_source, icon = '' },
-                { 'diagnostics' },
+                { 'diagnostics', sources = 'nvim' },
             },
         },
     }
