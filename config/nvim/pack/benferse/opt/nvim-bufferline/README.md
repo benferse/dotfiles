@@ -231,7 +231,7 @@ require('bufferline').setup {
       return "("..count..")"
     end,
     -- NOTE: this will be called a lot so don't do any heavy processing here
-    custom_filter = function(buf_number)
+    custom_filter = function(buf_number, buf_numbers)
       -- filter out filetypes you don't want to see
       if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
         return true
@@ -243,6 +243,10 @@ require('bufferline').setup {
       -- filter out based on arbitrary rules
       -- e.g. filter out vim wiki buffer from tabline in your work repo
       if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
+        return true
+      end
+      -- filter out by it's index number in list (don't show first buffer)
+      if buf_numbers[1] ~= buf_number then
         return true
       end
     end,
@@ -319,7 +323,7 @@ end
 </details>
 
 The highlighting for the file name if there is an error can be changed by replacing the highlights for
-see `:h bufferline-lua-highlights`.
+see `:h bufferline-highlights`.
 
 ### Conditional buffer based LSP indicators
 
@@ -655,10 +659,11 @@ to be shown in a list of tables. For example:
 custom_areas = {
   right = function()
     local result = {}
-    local error = vim.lsp.diagnostic.get_count(0, [[Error]])
-    local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
-    local info = vim.lsp.diagnostic.get_count(0, [[Information]])
-    local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+    local seve = vim.diagnostic.severity
+    local error = #vim.diagnostic.get(0, {severity = seve.ERROR})
+    local warning = #vim.diagnostic.get(0, {severity = seve.WARN})
+    local info = #vim.diagnostic.get(0, {severity = seve.INFO})
+    local hint = #vim.diagnostic.get(0, {severity = seve.HINT})
 
     if error ~= 0 then
       table.insert(result, {text = "  " .. error, guifg = "#EC5241"})
