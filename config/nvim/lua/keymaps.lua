@@ -54,11 +54,11 @@ local function setup()
     --
     -- Buffer navigation
     --
-    map('n', '<leader>be', [[<cmd>call host#buffers#new()<cr>]])
-    map('n', '<leader>bn', [[<cmd>call host#buffers#next()<cr>]])
-    map('n', '<leader>bp', [[<cmd>call host#buffers#previous()<cr>]])
-    map('n', '<leader>bd', [[<cmd>call host#buffers#delete()<cr>]])
-    map('n', '<leader>bx', [[<cmd>call host#buffers#really_delete()<cr>]])
+    map('n', '<leader>be', [[<cmd>call host#buffers#new()<cr>]], [[New empty]])
+    map('n', '<leader>bn', [[<cmd>call host#buffers#next()<cr>]], [[Next]])
+    map('n', '<leader>bp', [[<cmd>call host#buffers#previous()<cr>]], [[Previous]])
+    map('n', '<leader>bd', [[<cmd>call host#buffers#delete()<cr>]], [[Delete]])
+    map('n', '<leader>bx', [[<cmd>call host#buffers#really_delete()<cr>]], [[Wipeout]])
 
     --
     -- vim-unimpaired sets these, but we want them to go through our smarts instead
@@ -72,19 +72,19 @@ local function setup()
     --
     -- Fuzzy finder integration
     --
-    map('n', '<leader>fb', [[<cmd>call host#fuzzy#find_buffers()<cr>]])
-    map('n', '<leader>ff', [[<cmd>call host#fuzzy#find_files()<cr>]])
+    map('n', '<leader>fb', [[<cmd>call host#fuzzy#find_buffers()<cr>]], [[Buffers]])
+    map('n', '<leader>ff', [[<cmd>call host#fuzzy#find_files()<cr>]], [[Files]])
 
     --
     -- Traditional find-in-files integration.
     --
-    map('n', '<leader>sf', [[<cmd>call host#search#find_in_files()<cr>]])
-    map('n', '<leader>s.', [[<cmd>call host#search#find_by_word()<cr>]])
+    map('n', '<leader>sf', [[<cmd>call host#search#find_in_files()<cr>]], [[In files]])
+    map('n', '<leader>s.', [[<cmd>call host#search#find_by_word()<cr>]], [[Current word]])
 
     --
     -- Explorer/tree interaction
     --
-    map('n', '<leader>e', [[<cmd>call host#explorer#toggle()<cr>]])
+    map('n', '<leader>e', [[<cmd>call host#explorer#toggle()<cr>]], [[Explorer]])
 
     --
     -- Toggle the help window

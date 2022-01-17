@@ -2,10 +2,6 @@
 -- and other bits for jumping about
 
 local function setup()
-    vim.cmd([[
-        packadd which-key.nvim
-    ]])
-
     local which_key = require('which-key')
     which_key.setup {
         window = {
@@ -19,42 +15,38 @@ local function setup()
         },
     }
 
-    which_key.register  {
-        ["<leader>b"] = {
-            name = "buffers",
-            d = "Hide",
-            e = "Empty",
-            n = "Next",
-            p = "Previous",
-            x = "Wipeout",
-        },
-        ["<leader>f"] = {
-            name = "fuzzy",
-            b = "Buffers",
-            f = "Files",
-            r = "Recent",
-            s = "Projects",
-        },
-        ["<leader>g"] = {
-            name = "git",
-            b = "Blame current line",
-            p = "Preview hunk",
-            r = "Reset hunk",
-            R = "Reset buffer",
-            s = "Stage hunk",
-            S = "Stage buffer",
-            u = "Unstage hunk",
-            U = "Unstage buffer",
-        },
+    which_key.register({
+        ["<leader>b"] = { name = "Buffers" },
+        ["<leader>f"] = { name = "Fuzzy find" },
+        ["<leader>g"] = { name = "Git" },
+        ["<leader>t"] = { name = "Terminals" },
+        --     name = "git",
+        --     b = "Blame current line",
+        --     p = "Preview hunk",
+        --     r = "Reset hunk",
+        --     R = "Reset buffer",
+        --     s = "Stage hunk",
+        --     S = "Stage buffer",
+        --     u = "Unstage hunk",
+        --     U = "Unstage buffer",
+        -- },
         ["<leader>s"] = {
             name = "search",
             f = "In files",
             ["."] = "Current word",
         },
-        ["<leader>t"] = {
-            name = "terminal",
-            g = "git",
+        ["<leader>w"] = {
+            name = "window",
+            c = "Close",
+            h = "Left",
+            j = "Down",
+            k = "Up",
+            l = "Right",
+            o = "Only",
         }
+    })
+
+    which_key.register {
         ["["] = {
             name = "unimpaired",
             ["<C-L>"] = "Location file",

@@ -2,15 +2,13 @@
 -- Small utilities to make common configuration patterns with
 -- the vimscript bridge accessible across modules
 --
-
 local api = vim.api
 local cmd = vim.cmd
+local wk_loaded, wk = pcall(require, 'which-key')
 
 --
--- Creates a key mapping. This is a convenience for calling ':help nvim_set_keymap'.
--- Only global mappings can be set this way - buffer-local mappings use
--- ':help nvim_buf_set_keymap' instead since they need a reference to a specific
--- buffer.
+-- Creates a key mapping. This is a convenience for calling ':help nvim_set_keymap' or
+-- ':help nvim_buf_set_keymap', either directly or via 'which-key'
 --
 -- The arguments are mostly the same as those of nvim_set_keymap, with some
 -- conveniences thrown in.
@@ -20,15 +18,30 @@ local cmd = vim.cmd
 --         (e.g. {'n', 'v', 'o'})
 -- lhs - The keysequence to map. Keycodes (':help keycodes') are expanded as expected.
 -- rhs - The resulting keysequence. Keycodes (':help keycodes') are expanded as expected.
--- opts - Any map arguments to include, except for <buffer>. See ':help map-arguments'
+-- opts - Any map arguments to include, including "name", which is passed to which-key if
+--        that ends up being used. As a shorthand, opts can be a string, and this will be
+--        used as the name directly. See ':help map-arguments'.
 --
 local function map(modes, lhs, rhs, opts)
-    -- Options are, indeed, optional
-    opts = opts or {}
+    local name = ''
 
-    -- Default to a noremap mapping, since that's 99% of what I end up doing anyway.
+    -- If opts is just a string, then use it as the friendly name text
+    if type(opts) == 'string' then
+        name = opts
+        opts = {}
+    else
+        -- Options are, indeed, optional. Name is synthetic and just used
+        -- in case we need both opts and a name for which-key, so extract it
+        -- before passing opts along
+        opts = opts or {}
+        name = opts.name or ''
+        opts.name = nil
+    end
+
+    -- Default to a silent, noremap mapping, since that's 99% of what I end up doing anyway.
     -- You can always pass { noremap = false } in the other 1%
     opts.noremap = opts.noremap == nil and true or opts.noremap
+    opts.silent = opts.silent == nil and true or opts.silent
 
     -- Expand a single argument mode to a table
     if type(modes) == 'string' then
@@ -37,40 +50,22 @@ local function map(modes, lhs, rhs, opts)
 
     -- Call the bridge function to create a mapping for each mode
     for _, mode in ipairs(modes) do
-        api.nvim_set_keymap(mode, lhs, rhs, opts)
-    end
-end
-
---
--- Creates a key mapping. This is a convenience for calling ':help nvim_buf_set_keymap'.
---
--- The arguments are mostly the same as those of nvim_buf_set_keymap, with some
--- conveniences thrown in.
---
--- bufnum - Which buffer to add local mappings for
--- modes - Which mapmode(s) should the mapping be set for. This can either
---         be a single string (e.g. 'n'), or a table to set multiple modes at once
---         (e.g. {'n', 'v', 'o'})
--- lhs - The keysequence to map. Keycodes (':help keycodes') are expanded as expected.
--- rhs - The resulting keysequence. Keycodes (':help keycodes') are expanded as expected.
--- opts - Any map arguments to include, except for <buffer>. See ':help map-arguments'
---
-local function bufmap(bufnum, modes, lhs, rhs, opts)
-    -- Options are, indeed, optional
-    opts = opts or {}
-
-    -- Default to a noremap mapping, since that's 99% of what I end up doing anyway.
-    -- You can always pass { noremap = false } in the other 1%
-    opts.noremap = opts.noremap == nil and true or opts.noremap
-
-    -- Expand a single argument mode to a table
-    if type(modes) == 'string' then
-        modes = {modes}
-    end
-
-    -- Call the bridge function to create a mapping for each mode
-    for _, mode in ipairs(modes) do
-        api.nvim_buf_set_keymap(bufnum, mode, lhs, rhs, opts)
+        if wk_loaded then
+            -- which-key.nvim is available, so let it do the mapping
+            -- while it records the name for navigation help
+            opts.mode = mode
+            wk.register({ [lhs] = { rhs, name }, }, opts)
+        else
+            -- which-key is not available, so call the nvim API directly.
+            -- Figure out if the global or per-buffer function is needed.
+            if opts.buffer == nil then
+                api.nvim_set_keymap(mode, lhs, rhs, opts)
+            else
+                local buffer = opts.buffer
+                opts.buffer = nil
+                api.nvim_buf_set_keymap(buffer, mode, lhs, rhs, opts)
+            end
+        end
     end
 end
 
@@ -106,4 +101,4 @@ local function augroup(name, commands, delete)
     cmd([[augroup END]])
 end
 
-return { augroup = augroup, map = map, bufmap = bufmap }
+return { augroup = augroup, map = map }

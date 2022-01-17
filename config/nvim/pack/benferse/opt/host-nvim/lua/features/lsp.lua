@@ -1,28 +1,34 @@
 -- Language server integration, and all the other bits that
 -- make it feel like magic
 
-local function on_attach(client, bufnum)
+local map = require('utils').map
+
+local function on_attach(client, buffer)
     -- Attach lsp as the omni completion source
-    vim.api.nvim_buf_set_option(bufnum, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(buffer, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local function nbufmap(from, to)
-        require('utils').bufmap(bufnum, 'n', from, to, { silent = true })
-    end
+    local wk = require('which-key')
+    wk.register({
+        ['gd'] = { '<cmd>lua vim.lsp.buf.definition()<cr>', "goto deffff" },
+    }, { buffer = buffer })
 
-    nbufmap('gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
-    nbufmap('gr', '<cmd>lua vim.lsp.buf.references()<cr>')
-    nbufmap('gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-    nbufmap('g=', '<cmd>lua vim.lsp.buf.formatting()<cr>')
-
-    nbufmap('K',  '<cmd>lua vim.lsp.buf.hover()<cr>')
-
-    nbufmap('[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-    nbufmap(']g', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-
-    nbufmap('<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    nbufmap('<Leader>cd', '<cmd>lua vim.diagnostic.open_float()<cr>')
-    nbufmap('<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
-
+    map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = buffer, name = "goto definition" })
+    map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', { buffer = buffer, name = "find references" })
+    map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', { buffer = buffer, name = "signature help" })
+    map('n', 'g=', '<cmd>lua vim.lsp.buf.formatting()<cr>', { buffer = buffer, name = "format document" })
+--     nbufmap('gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+--     nbufmap('gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+--     nbufmap('g=', '<cmd>lua vim.lsp.buf.formatting()<cr>')
+-- 
+--     nbufmap('K',  '<cmd>lua vim.lsp.buf.hover()<cr>')
+-- 
+--     nbufmap('[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+--     nbufmap(']g', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+-- 
+--     nbufmap('<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+--     nbufmap('<Leader>cd', '<cmd>lua vim.diagnostic.open_float()<cr>')
+--     nbufmap('<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
+-- 
     require('lsp-status').on_attach(client)
 end
 
