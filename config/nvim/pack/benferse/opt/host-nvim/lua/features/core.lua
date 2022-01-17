@@ -5,6 +5,7 @@ local function setup()
     vim.cmd([[
         packadd plenary.nvim
         packadd popup.nvim
+        packadd which-key.nvim
     ]])
 end
 

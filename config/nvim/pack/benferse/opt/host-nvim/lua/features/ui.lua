@@ -53,7 +53,7 @@ local function setup()
             command = 'DashboardNewFile',
         },
         section_4 = {
-            description = { ' Source control         :!lazygit' },
+            description = { ' Source control         <SPC> t g' },
             command = 'lua toggle_git_window()',
         },
         section_5 = {

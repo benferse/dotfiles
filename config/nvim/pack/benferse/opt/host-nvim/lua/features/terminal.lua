@@ -44,14 +44,7 @@ local function setup()
         },
     })
 
-    let wk = require("which-key")
-
-    wk.register({
-        't' = {
-            name = 'terminal',
-            g = { '<cmd>lua toggle_git_window()<cr>', 'lazygit' },
-        },
-    }, { prefix = "<leader>" })
+    map('n', '<leader>tg', '<cmd>lua toggle_git_window()<cr>', 'lazygit')
 
 end
 
