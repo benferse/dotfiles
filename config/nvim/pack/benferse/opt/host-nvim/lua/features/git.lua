@@ -1,6 +1,8 @@
 -- Source control, diff and merge tools, and surfacing git
 -- information in the ui
 
+local map = require('utils').map
+
 local function setup()
     vim.cmd([[
         packadd diffview.nvim
@@ -14,23 +16,8 @@ local function setup()
             -- Default keymap options
             noremap = true,
 
-            ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'"},
-            ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'"},
-
-            ['n <leader>gs'] = '<cmd>Gitsigns stage_hunk<CR>',
-            ['v <leader>gs'] = ':Gitsigns stage_hunk<CR>',
-            ['n <leader>gu'] = '<cmd>Gitsigns undo_stage_hunk<CR>',
-            ['n <leader>gr'] = '<cmd>Gitsigns reset_hunk<CR>',
-            ['v <leader>gr'] = ':Gitsigns reset_hunk<CR>',
-            ['n <leader>gR'] = '<cmd>Gitsigns reset_buffer<CR>',
-            ['n <leader>gp'] = '<cmd>Gitsigns preview_hunk<CR>',
-            ['n <leader>gb'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
-            ['n <leader>gS'] = '<cmd>Gitsigns stage_buffer<CR>',
-            ['n <leader>gU'] = '<cmd>Gitsigns reset_buffer_index<CR>',
-
-            -- Text objects
-            ['o ih'] = ':<C-U>Gitsigns select_hunk<CR>',
-            ['x ih'] = ':<C-U>Gitsigns select_hunk<CR>'
+            -- ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'"},
+            -- ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'"},
         },
         preview_config = {
             border = 'rounded',
@@ -43,6 +30,24 @@ local function setup()
             changedelete = { hl = 'GitGutterChange', text = '~' },
         },
     }
+
+    map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>'", { expr = true })
+    map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>'", { expr = true })
+
+    map('nv', '<leader>gr', '<cmd>Gitsigns reset_hunk<cr>', 'Reset hunk')
+    map('nv', '<leader>gs', '<cmd>Gitsigns stage_hunk<cr>', 'Stage hunk')
+
+    map('n', '<leader>gR', '<cmd>Gitsigns reset_buffer<cr>', 'Reset buffer')
+    map('n', '<leader>gS', '<cmd>Gitsigns stage_buffer<cr>', 'Stage buffer')
+
+    map('n', '<leader>gu', '<cmd>Gitsigns undo_stage_hunk<cr>', 'Unstage hunk')
+    map('n', '<leader>gU', '<cmd>Gitsigns reset_buffer_index<cr>', 'Reset buffer from index')
+
+    map('n', '<leader>gp', '<cmd>Gitsigns preview_hunk<cr>', 'Preview hunk')
+    map('n', '<leader>gb', '<cmd>lua require"gitsigns".blame_line{full=true}<cr>', 'Blame line')
+
+    map('o', 'ih', ':<C-U>Gitsigns select_hunk<cr>', 'Hunk')
+    map('x', 'ih', ':<C-U>Gitsigns select_hunk<cr>', 'Hunk')
 end
 
 return { setup = setup }

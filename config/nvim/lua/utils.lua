@@ -42,6 +42,7 @@ local function map(modes, lhs, rhs, opts)
     -- You can always pass { noremap = false } in the other 1%
     opts.noremap = opts.noremap == nil and true or opts.noremap
     opts.silent = opts.silent == nil and true or opts.silent
+    opts.nowait = opts.nowait == nil and true or opts.nowait
 
     -- Expand a single argument mode to a table
     if type(modes) == 'string' then

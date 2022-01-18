@@ -7,28 +7,21 @@ local function on_attach(client, buffer)
     -- Attach lsp as the omni completion source
     vim.api.nvim_buf_set_option(buffer, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local wk = require('which-key')
-    wk.register({
-        ['gd'] = { '<cmd>lua vim.lsp.buf.definition()<cr>', "goto deffff" },
-    }, { buffer = buffer })
+    map('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', { buffer = buffer, name = "Code action"})
+    map('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = buffer, name = "Goto definition"})
+    map('n', '<leader>lf', '<cmd>Telescope diagnostics bufnr=0<cr>', { buffer = buffer, name = "File diagnostics"})
+    map('n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = buffer, name = "Refactor: Rename" })
+    map('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<cr>', { buffer = buffer, name = "Refactor: Rename" })
+    map('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>', { buffer = buffer, name = "Find references" })
+    map('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>', { buffer = buffer, name = "Signature help"})
+    map('n', '<leader>lw', '<cmd>Telescope diagnostics bufnr=0<cr>', { buffer = buffer, name = "Workspace diagnostics"})
+    map('n', '<leader>l=', '<cmd>lua vim.lsp.buf.formatting()<cr>', { buffer = buffer, name = "Workspace diagnostics"})
 
-    map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = buffer, name = "goto definition" })
-    map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', { buffer = buffer, name = "find references" })
-    map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', { buffer = buffer, name = "signature help" })
-    map('n', 'g=', '<cmd>lua vim.lsp.buf.formatting()<cr>', { buffer = buffer, name = "format document" })
---     nbufmap('gr', '<cmd>lua vim.lsp.buf.references()<cr>')
---     nbufmap('gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
---     nbufmap('g=', '<cmd>lua vim.lsp.buf.formatting()<cr>')
--- 
---     nbufmap('K',  '<cmd>lua vim.lsp.buf.hover()<cr>')
--- 
---     nbufmap('[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
---     nbufmap(']g', '<cmd>lua vim.diagnostic.goto_next()<cr>')
--- 
---     nbufmap('<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
---     nbufmap('<Leader>cd', '<cmd>lua vim.diagnostic.open_float()<cr>')
---     nbufmap('<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
--- 
+    map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+
+    map('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>', { buffer = buffer, name = "Diagnostic"})
+    map('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<cr>', { buffer = buffer, name = "Diagnostic"})
+
     require('lsp-status').on_attach(client)
 end
 
@@ -40,52 +33,40 @@ local function get_capabilities()
     return lsp_caps
 end
 
-local function setup_lua()
+local function setup_languages()
     require('nvim-lsp-installer').on_server_ready(function(server)
         local opts = {
             on_attach = on_attach,
             capabilities = get_capabilities(),
         }
 
-        server:setup(opts)
+        if server.name == 'sumneko_lua' then
+            opts.settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { 'vim' },
+                    },
+                    runtime = {
+                        version = 'LuaJIT',
+                        path = vim.split(package.path, ';')
+                    },
+                    workspace = {
+                        library = {
+                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                        }
+                    }
+                }
+            }
+
+            server:setup(opts)
+        elseif server.name == 'rust_analyzer' then
+            require('rust-tools').setup {
+                server = vim.tbl_deep_extend('force', server:get_default_options(), opts)
+            }
+            server:attach_buffers()
+        end
     end)
-    -- local lspconfig = require('lspconfig')
-    -- if lspconfig['lua'] then
-    --     lspconfig['lua'].setup {
-    --         on_attach = on_attach,
-    --         settings = {
-    --             Lua = {
-    --                 diagnostics = {
-    --                     globals = { 'vim' },
-    --                 },
-    --             },
-    --         },
-    --         capabilities = get_capabilities(),
-    --     }
-    -- end
-end
-
-local function setup_rust()
-    -- -- nvim-lspinstall does not support Windows, and it doesn't look like
-    -- -- the author ever will. So for now just assume I've gone through the
-    -- -- work to install rust-analyzer myself there :(
-    -- local cmd = 'rust-analyzer.exe'
-    -- if vim.fn.has('win32') == 0 then
-    --     local server_path = require('lspinstall/util').install_path('rust')
-    --     cmd = server_path .. '/rust-analyzer'
-    -- end
-
-    require('rust-tools').setup {
-        tools = {
-            hover_actions = {
-                border = 'rounded',
-            },
-        },
-        server = {
-            on_attach = on_attach,
-            capabilities = get_capabilities(),
-        },
-    }
 end
 
 local function setup()
@@ -101,9 +82,8 @@ local function setup()
     -- messages
     require('lsp-status').register_progress()
 
-    -- Setup individual language support
-    setup_rust()
-    setup_lua()
+    -- Setup individual language support through the automatic LSP server installer
+    setup_languages()
 end
 
 return { setup = setup }

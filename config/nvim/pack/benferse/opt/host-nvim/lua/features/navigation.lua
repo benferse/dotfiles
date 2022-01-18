@@ -19,6 +19,8 @@ local function setup()
         ["<leader>b"] = { name = "Buffers" },
         ["<leader>f"] = { name = "Fuzzy find" },
         ["<leader>g"] = { name = "Git" },
+        ["<leader>l"] = { name = "LSP" },
+        ["<leader>s"] = { name = "Search" },
         ["<leader>t"] = { name = "Terminals" },
         --     name = "git",
         --     b = "Blame current line",
@@ -30,13 +32,8 @@ local function setup()
         --     u = "Unstage hunk",
         --     U = "Unstage buffer",
         -- },
-        ["<leader>s"] = {
-            name = "search",
-            f = "In files",
-            ["."] = "Current word",
-        },
         ["<leader>w"] = {
-            name = "window",
+            name = "Window",
             c = "Close",
             h = "Left",
             j = "Down",
