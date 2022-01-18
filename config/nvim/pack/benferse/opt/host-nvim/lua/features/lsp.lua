@@ -85,7 +85,6 @@ local function setup()
     vim.cmd([[
         packadd lsp-status.nvim
         packadd nvim-lspconfig
-        packadd nvim-lspinstall
         packadd rust.vim
         packadd rust-tools.nvim
     ]])
@@ -98,7 +97,7 @@ local function setup()
     -- its config to setup nvim-lsp directly, since we need to let
     -- rust-tools do that for rust-analyzer. Instead, we will manipulate
     -- the server paths ourselves using their exported functions.
-    require('lspinstall').setup()
+    --require('lspinstall').setup()
 
     -- Setup individual language support
     setup_rust()
