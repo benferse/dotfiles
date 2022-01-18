@@ -34,6 +34,11 @@ local function setup()
     map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>'", { expr = true })
     map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>'", { expr = true })
 
+    map('n', '<leader>go', '<cmd>Telescope git_status<cr>', 'Browse status')
+    map('n', '<leader>gb', '<cmd>Telescope git_status<cr>', 'Browse branches')
+    map('n', '<leader>gc', '<cmd>Telescope git_status<cr>', 'Browse commits')
+    map('n', '<leader>gd', '<cmd>DiffviewOpen<cr>', 'Diff')
+
     map('nv', '<leader>gr', '<cmd>Gitsigns reset_hunk<cr>', 'Reset hunk')
     map('nv', '<leader>gs', '<cmd>Gitsigns stage_hunk<cr>', 'Stage hunk')
 
