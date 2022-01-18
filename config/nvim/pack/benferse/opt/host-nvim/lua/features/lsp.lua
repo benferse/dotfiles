@@ -41,31 +41,39 @@ local function get_capabilities()
 end
 
 local function setup_lua()
-    local lspconfig = require('lspconfig')
-    if lspconfig['lua'] then
-        lspconfig['lua'].setup {
+    require('nvim-lsp-installer').on_server_ready(function(server)
+        local opts = {
             on_attach = on_attach,
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        globals = { 'vim' },
-                    },
-                },
-            },
             capabilities = get_capabilities(),
         }
-    end
+
+        server:setup(opts)
+    end)
+    -- local lspconfig = require('lspconfig')
+    -- if lspconfig['lua'] then
+    --     lspconfig['lua'].setup {
+    --         on_attach = on_attach,
+    --         settings = {
+    --             Lua = {
+    --                 diagnostics = {
+    --                     globals = { 'vim' },
+    --                 },
+    --             },
+    --         },
+    --         capabilities = get_capabilities(),
+    --     }
+    -- end
 end
 
 local function setup_rust()
-    -- nvim-lspinstall does not support Windows, and it doesn't look like
-    -- the author ever will. So for now just assume I've gone through the
-    -- work to install rust-analyzer myself there :(
-    local cmd = 'rust-analyzer.exe'
-    if vim.fn.has('win32') == 0 then
-        local server_path = require('lspinstall/util').install_path('rust')
-        cmd = server_path .. '/rust-analyzer'
-    end
+    -- -- nvim-lspinstall does not support Windows, and it doesn't look like
+    -- -- the author ever will. So for now just assume I've gone through the
+    -- -- work to install rust-analyzer myself there :(
+    -- local cmd = 'rust-analyzer.exe'
+    -- if vim.fn.has('win32') == 0 then
+    --     local server_path = require('lspinstall/util').install_path('rust')
+    --     cmd = server_path .. '/rust-analyzer'
+    -- end
 
     require('rust-tools').setup {
         tools = {
@@ -74,7 +82,6 @@ local function setup_rust()
             },
         },
         server = {
-            cmd = { cmd },
             on_attach = on_attach,
             capabilities = get_capabilities(),
         },
@@ -85,6 +92,7 @@ local function setup()
     vim.cmd([[
         packadd lsp-status.nvim
         packadd nvim-lspconfig
+        packadd nvim-lsp-installer
         packadd rust.vim
         packadd rust-tools.nvim
     ]])
@@ -92,12 +100,6 @@ local function setup()
     -- Let any attached LSP servers know that we're interested in progress
     -- messages
     require('lsp-status').register_progress()
-
-    -- Load nvim-lspinstall so :LspInstall is available, but don't use
-    -- its config to setup nvim-lsp directly, since we need to let
-    -- rust-tools do that for rust-analyzer. Instead, we will manipulate
-    -- the server paths ourselves using their exported functions.
-    --require('lspinstall').setup()
 
     -- Setup individual language support
     setup_rust()
