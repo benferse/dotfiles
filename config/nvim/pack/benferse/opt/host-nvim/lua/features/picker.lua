@@ -18,6 +18,7 @@ local function setup()
         packadd vim-vsnip
         packadd cmp-vsnip
         packadd telescope.nvim
+        packadd telescope-ui-select.nvim
         packadd nvim-tree.lua
     ]])
 
@@ -42,9 +43,13 @@ local function setup()
                 },
             },
         },
+        extensions = {
+            ['ui-select'] = { require('telescope.themes').get_dropdown { } }
+        }
     }
 
     telescope.load_extension('projects')
+    telescope.load_extension('ui-select')
 
     local map = require('utils').map
 
