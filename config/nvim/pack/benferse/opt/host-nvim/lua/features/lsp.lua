@@ -61,8 +61,14 @@ local function setup_languages()
 
             server:setup(opts)
         elseif server.name == 'rust_analyzer' then
+            local codelldb_path = '/home/benferse/.codelldb/adapter/codelldb'
+            local liblldb_path = '/home/benferse/.codelldb/lldb/lib/liblldb.so'
+
             require('rust-tools').setup {
-                server = vim.tbl_deep_extend('force', server:get_default_options(), opts)
+                server = vim.tbl_deep_extend('force', server:get_default_options(), opts),
+                dap = {
+                    adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
+                }
             }
             server:attach_buffers()
         end
