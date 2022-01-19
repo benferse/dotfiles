@@ -2,9 +2,15 @@
 Extra rust tools for writing applications in neovim using the native lsp.
 This plugin adds extra functionality over rust analyzer.
 
+# _**Recent breaking changes**_
+We no longer use telescope.nvim for Runnables/Debuggables. Instead we
+now use vim.ui.select. Check out 
+[telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
+or [popui.nvim](https://github.com/hood/popui.nvim) for pretty interfaces.
+
 ## Prerequisites
 
-- `neovim 0.5+`
+- `neovim 0.6`
 - `nvim-lspconfig`
 - `rust-analyzer`
 - `dot` from `graphviz` (only for crate graph)
@@ -17,12 +23,8 @@ using `vim-plug`
 Plug 'neovim/nvim-lspconfig'
 Plug 'simrat39/rust-tools.nvim'
 
-" Optional dependencies
-Plug 'nvim-lua/popup.nvim'
+" Debugging
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-" Debugging (needs plenary from above as well)
 Plug 'mfussenegger/nvim-dap'
 ```
 <b>Look at the configuration information below to get started.</b>
@@ -57,6 +59,7 @@ RustStartStandaloneServerForBuffer
 RustDebuggables
 RustViewCrateGraph
 RustReloadWorkspace
+RustSSR
 ```
 
 ## Standalone File Support
@@ -133,6 +136,10 @@ local opts = {
         -- Whether to show hover actions inside the hover window
         -- This overrides the default hover handler 
         hover_with_actions = true,
+
+		-- how to execute terminal commands
+		-- options right now: termopen / quickfix
+		executor = require("rust-tools/executors").termopen,
 
         runnables = {
             -- whether to use telescope for selection menu or not
@@ -220,8 +227,12 @@ local opts = {
 
     -- all the opts to send to nvim-lspconfig
     -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    server = {} -- rust-analyer options
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+	server = {
+		-- standalone file support
+		-- setting it to false may improve startup time
+		standalone = true,
+	}, -- rust-analyer options
 
     -- debugging stuff
     dap = {
@@ -322,6 +333,13 @@ require'rust-tools.parent_module'.parent_module()
 -- Command:
 -- RustJoinLines  
 require'rust-tools.join_lines'.join_lines()
+```
+
+### Structural Search Replace 
+```lua
+-- Command:
+-- RustSSR [query]
+require'rust-tools.ssr'.ssr(query)
 ```
 
 ### View crate graph
