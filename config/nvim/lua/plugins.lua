@@ -3,7 +3,6 @@
 -- and where we are running
 --
 local g = vim.g
-local api = vim.api
 local map = require('utils').map
 
 local function setup()
