@@ -3,7 +3,24 @@
 
 local map = require('utils').map;
 
-local git_window = {}
+local terminals = {}
+
+local function add_terminal(command, name, shortcut)
+     terminals[shortcut] = require('toggleterm.terminal').Terminal:new({
+	    cmd = command,
+	    dir = 'git_dir',
+        direction = 'float',
+    })
+
+    map('n', '<leader>t'..shortcut, '<cmd>lua Terminal_toggle_window("'..shortcut..'")<cr>', name)
+end
+
+function Terminal_toggle_window(shortcut)
+    term = terminals[shortcut]
+    if term ~= nil then
+        term:toggle()
+    end
+end
 
 local function setup()
     vim.cmd([[
@@ -33,23 +50,15 @@ local function setup()
             end
         end,
         close_on_exit = true,
-    }
-
-    git_window = require('toggleterm.terminal').Terminal:new({
-        cmd = 'lazygit',
-        dir = 'git_dir',
-        direction = 'float',
         float_opts = {
             border = 'rounded',
-        },
-    })
+        }
+    }
 
-    map('n', '<leader>tg', '<cmd>lua toggle_git_window()<cr>', 'lazygit')
+    add_terminal('lazygit', 'lazygit', 'g')
+    add_terminal('ranger', 'ranger', 'r')
+    add_terminal('htop', 'htop', 't')
 
-end
-
-function _G.toggle_git_window()
-    git_window:toggle()
 end
 
 return { setup = setup }
