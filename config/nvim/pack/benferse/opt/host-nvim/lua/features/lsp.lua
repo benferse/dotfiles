@@ -67,7 +67,9 @@ local function setup_languages()
             require('rust-tools').setup {
                 server = vim.tbl_deep_extend('force', server:get_default_options(), opts),
                 dap = {
-                    adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
+                    adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = true,
                 }
             }
             server:attach_buffers()
