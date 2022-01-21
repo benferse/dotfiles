@@ -3,6 +3,7 @@ dotfiles
 
 Configuration for the things I use regularly, including:
 
+- [alacritty](https://github.com/alacritty/alacritty)
 - [bash](https://www.gnu.org/software/bash/)
 - [git](https://git-scm.com/)
 - [nvim](https://neovim.io)
