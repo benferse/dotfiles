@@ -3,20 +3,10 @@
 -- and where we are running
 --
 local g = vim.g
+local api = vim.api
 local map = require('utils').map
 
 local function setup()
-    --
-    -- hop.nvim, like easymotion and sneak and friends all in one
-    -- pretty lua bundle
-    --
-    require('hop').setup()
-    map({'n', 'o'}, 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, })<cr>")
-    map({'n', 'o'}, 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, })<cr>")
-
-    map({'n', 'o'}, 's', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, })<cr>")
-    map({'n', 'o'}, 'S', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, })<cr>")
-
     --
     -- Vim better whitespace
     --
