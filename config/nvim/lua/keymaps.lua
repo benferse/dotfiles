@@ -29,6 +29,13 @@ local function setup()
     map('n', '<leader>w', '<C-w>')
 
     --
+    -- Jump directly to a visible window by its window ID
+    --
+    for i=1,9 do
+        map('n', '<leader>'..i, i..'<C-w>w', 'which_key_ignore')
+    end
+
+    --
     -- Use ctrl+[h,j,k,l] to move between windows regardless of current mode.
     --
     map('n', '<C-h>', [[<cmd>call host#windows#left()<cr>]])
