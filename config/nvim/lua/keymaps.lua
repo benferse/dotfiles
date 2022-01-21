@@ -46,10 +46,10 @@ local function setup()
     -- Intentionally not using a <cmd> mapping here because we explicitly
     -- want the mode change
     --
-    map({'i','t'}, '<C-h>', [[<C-\><C-n>:<C-u>call host#windows#left()<cr>]], silent)
-    map({'i','t'}, '<C-j>', [[<C-\><C-n>:<C-u>call host#windows#down()<cr>]], silent)
-    map({'i','t'}, '<C-k>', [[<C-\><C-n>:<C-u>call host#windows#up()<cr>]], silent)
-    map({'i','t'}, '<C-l>', [[<C-\><C-n>:<C-u>call host#windows#right()<cr>]], silent)
+    map({'i', 't'}, '<C-h>', [[<C-\><C-n>:<C-u>call host#windows#left()<cr>]])
+    map({'i', 't'}, '<C-j>', [[<C-\><C-n>:<C-u>call host#windows#down()<cr>]])
+    map({'i', 't'}, '<C-k>', [[<C-\><C-n>:<C-u>call host#windows#up()<cr>]])
+    map({'i', 't'}, '<C-l>', [[<C-\><C-n>:<C-u>call host#windows#right()<cr>]])
 
     --
     -- Buffer navigation
