@@ -55,6 +55,13 @@ local function map(modes, lhs, rhs, opts)
             -- which-key.nvim is available, so let it do the mapping
             -- while it records the name for navigation help
             opts.mode = mode
+
+            -- Make sure that terminal mode mappings get input
+            -- that is preprocessed for terminal codes and keycodes
+            if mode == 't' then
+                rhs = api.nvim_replace_termcodes(rhs, true, true, true)
+            end
+
             wk.register({ [lhs] = { rhs, name }, }, opts)
         else
             -- which-key is not available, so call the nvim API directly.
