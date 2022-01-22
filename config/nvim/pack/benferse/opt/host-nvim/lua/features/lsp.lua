@@ -11,11 +11,11 @@ local function on_attach(client, buffer)
     map('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = buffer, name = "Goto definition"})
     map('n', '<leader>lf', '<cmd>Telescope diagnostics bufnr=0<cr>', { buffer = buffer, name = "File diagnostics"})
     map('n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = buffer, name = "Refactor: Rename" })
-    map('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<cr>', { buffer = buffer, name = "Refactor: Rename" })
+    map('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<cr>', { buffer = buffer, name = "Quickfix diagnostics" })
     map('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>', { buffer = buffer, name = "Find references" })
     map('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>', { buffer = buffer, name = "Signature help"})
-    map('n', '<leader>lw', '<cmd>Telescope diagnostics bufnr=0<cr>', { buffer = buffer, name = "Workspace diagnostics"})
-    map('n', '<leader>l=', '<cmd>lua vim.lsp.buf.formatting()<cr>', { buffer = buffer, name = "Workspace diagnostics"})
+    map('n', '<leader>lw', '<cmd>Telescope diagnostics<cr>', { buffer = buffer, name = "Workspace diagnostics"})
+    map('n', '<leader>l=', '<cmd>lua vim.lsp.buf.formatting()<cr>', { buffer = buffer, name = "Format document"})
 
     map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
@@ -61,8 +61,16 @@ local function setup_languages()
 
             server:setup(opts)
         elseif server.name == 'rust_analyzer' then
+            local codelldb_path = '/home/benferse/.codelldb/adapter/codelldb'
+            local liblldb_path = '/home/benferse/.codelldb/lldb/lib/liblldb.so'
+
             require('rust-tools').setup {
-                server = vim.tbl_deep_extend('force', server:get_default_options(), opts)
+                server = vim.tbl_deep_extend('force', server:get_default_options(), opts),
+                dap = {
+                    adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = true,
+                }
             }
             server:attach_buffers()
         end

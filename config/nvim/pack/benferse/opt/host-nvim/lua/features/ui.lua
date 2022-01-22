@@ -98,6 +98,9 @@ local function setup()
                 { 'diagnostics', source = 'nvim_diagnostic' },
             },
         },
+        inactive_sections = {
+            lualine_a = { window_number },
+        }
     }
 
     require('project_nvim').setup {}

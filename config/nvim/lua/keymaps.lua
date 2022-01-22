@@ -6,12 +6,6 @@ local map = require('utils').map
 
 local function setup()
     --
-    -- Keeps calls to map() a little more terse :) Note that <cmd> mappings
-    -- do not switch modes, so there's no need for <silent>
-    --
-    local silent = { silent = true }
-
-    --
     -- Escape back to normal mode without having to stretch
     --
     map('i', 'jj', '<esc>')
@@ -27,12 +21,19 @@ local function setup()
     -- Use alt-L to clear the highlighting of hlsearch
     -- Courtesy of the inimitable tpope, modified for tmux
     --
-    map('n', '<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]], silent)
+    map('n', '<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]])
 
     --
     -- Window management. Having to hit ctrl-w makes me sad sometimes
     --
     map('n', '<leader>w', '<C-w>')
+
+    --
+    -- Jump directly to a visible window by its window ID
+    --
+    for i=1,9 do
+        map('n', '<leader>'..i, i..'<C-w>w', 'which_key_ignore')
+    end
 
     --
     -- Use ctrl+[h,j,k,l] to move between windows regardless of current mode.
@@ -46,10 +47,10 @@ local function setup()
     -- Intentionally not using a <cmd> mapping here because we explicitly
     -- want the mode change
     --
-    map({'i','t'}, '<C-h>', [[<C-\><C-n>:<C-u>call host#windows#left()<cr>]], silent)
-    map({'i','t'}, '<C-j>', [[<C-\><C-n>:<C-u>call host#windows#down()<cr>]], silent)
-    map({'i','t'}, '<C-k>', [[<C-\><C-n>:<C-u>call host#windows#up()<cr>]], silent)
-    map({'i','t'}, '<C-l>', [[<C-\><C-n>:<C-u>call host#windows#right()<cr>]], silent)
+    map({'i', 't'}, '<C-h>', [[<C-\><C-n>:<C-u>call host#windows#left()<cr>]])
+    map({'i', 't'}, '<C-j>', [[<C-\><C-n>:<C-u>call host#windows#down()<cr>]])
+    map({'i', 't'}, '<C-k>', [[<C-\><C-n>:<C-u>call host#windows#up()<cr>]])
+    map({'i', 't'}, '<C-l>', [[<C-\><C-n>:<C-u>call host#windows#right()<cr>]])
 
     --
     -- Buffer navigation
@@ -89,17 +90,17 @@ local function setup()
     --
     -- Toggle the help window
     --
-    map('n', '<F1>', [[host#help#is_open() ? '<cmd>helpclose<cr>' : '<cmd>Telescope help_tags<cr>']], { silent = true, expr = true })
+    map('n', '<F1>', [[host#help#is_open() ? '<cmd>helpclose<cr>' : '<cmd>Telescope help_tags<cr>']], { expr = true })
 
     --
     -- Recenter on incremental search results
     --
-    map('n', 'n', 'nzz', silent)
-    map('n', 'N', 'Nzz', silent)
-    map('n', '*', '*zz', silent)
-    map('n', '#', '#zz', silent)
-    map('n', 'g*', 'g*zz', silent)
-    map('n', 'g#', 'g#zz', silent)
+    map('n', 'n', 'nzz')
+    map('n', 'N', 'Nzz')
+    map('n', '*', '*zz')
+    map('n', '#', '#zz')
+    map('n', 'g*', 'g*zz', "Next non-word match")
+    map('n', 'g#', 'g#zz', "Previous non-word match")
 end
 
 return { setup = setup }
