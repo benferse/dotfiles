@@ -3,29 +3,25 @@
 -- and where we are running
 --
 local g = vim.g
-local map = require('utils').map
+local utils = require('utils')
 
 local function setup()
     --
-    -- hop.nvim, like easymotion and sneak and friends all in one
-    -- pretty lua bundle
-    --
-    require('hop').setup()
-    map({'n', 'o'}, 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, })<cr>")
-    map({'n', 'o'}, 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, })<cr>")
-
-    map({'n', 'o'}, 's', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, })<cr>")
-    map({'n', 'o'}, 'S', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, })<cr>")
-
-    --
     -- Vim better whitespace
     --
-    g.better_whitespace_enabled = 2
+    g.better_whitespace_enabled = 0
+    g.strip_only_modified_lines = 1
     g.strip_whitelines_at_eof = 1
+    g.strip_whitespace_confirm = 0
     g.show_spaces_that_precede_tabs = 1
 
-    map('n', ']w', ':NextTrailingWhitespace<cr>')
-    map('n', '[w', ':PrevTrailingWhitespace<cr>')
+    utils.map('n', ']w', ':NextTrailingWhitespace<cr>')
+    utils.map('n', '[w', ':PrevTrailingWhitespace<cr>')
+
+    utils.augroup('benferse#trailing_whitespace', {
+        [[FileType c,cpp,json,lua,rust,toml EnableWhitespace]],
+        [[FileType c,cpp,json,lua,rust,toml EnableStripWhitespaceOnSave]]
+    })
 end
 
 return { setup = setup }
