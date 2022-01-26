@@ -53,8 +53,8 @@ local function setup()
 
     local map = require('utils').map
 
-    map('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>')
-    map('n', '<leader>fs', '<cmd>Telescope projects<cr>')
+    map('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>', 'Recent files')
+    map('n', '<leader>fs', '<cmd>Telescope projects<cr>', 'Sessions')
 
     -- nvim-tree, because sometimes you just want a file explorer
 
