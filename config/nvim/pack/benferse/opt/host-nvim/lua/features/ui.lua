@@ -104,6 +104,15 @@ local function setup()
     }
 
     require('project_nvim').setup {}
+
+    -- Use diagnostic sign text that is consistent with the symbols
+    -- in lualine
+    vim.cmd([[
+        sign define DiagnosticSignError text=  texthl=DiagnosticSignError
+        sign define DiagnosticSignWarn text=  texthl=DiagnosticSignWarn
+        sign define DiagnosticSignInfo text=  texthl=DiagnosticSignInfo
+        sign define DiagnosticSignHint text=  texthl=DiagnosticSignHint
+    ]])
 end
 
 return { setup = setup }
