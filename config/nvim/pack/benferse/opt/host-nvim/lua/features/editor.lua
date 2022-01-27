@@ -5,13 +5,10 @@
 local function setup()
     vim.cmd([[
         packadd nvim-autopairs
-        packadd nvim-comment
+        packadd comment.nvim
     ]])
 
-    require('nvim_comment').setup {
-        marker_padding = true,
-        comment_empty = true,
-    }
+    require('Comment').setup()
 
     vim.opt.completeopt = 'menuone,noinsert,noselect'
 
