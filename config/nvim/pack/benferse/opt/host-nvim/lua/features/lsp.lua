@@ -54,7 +54,8 @@ local function setup_languages()
                         library = {
                             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                             [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                        }
+                        },
+                        maxPreload = 2000,
                     }
                 }
             }

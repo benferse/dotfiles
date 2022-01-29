@@ -16,7 +16,7 @@ local function add_terminal(command, name, shortcut)
 end
 
 function Terminal_toggle_window(shortcut)
-    term = terminals[shortcut]
+    local term = terminals[shortcut]
     if term ~= nil then
         term:toggle()
     end
@@ -41,7 +41,7 @@ local function setup()
         start_in_insert = true,
         insert_mappings = false,
         persist_size = true,
-        direction = 'vertical',
+        direction = 'float',
         size = function(term)
             if term.direction == 'horizontal' then
                 return 15
@@ -58,6 +58,10 @@ local function setup()
     add_terminal('lazygit', 'lazygit', 'g')
     add_terminal('ranger', 'ranger', 'r')
     add_terminal('htop', 'htop', 't')
+
+    -- Add an explicit mapping to close a floating terminal
+    -- window quickly
+    map('t', '<C-Space>', '<C-\\><C-N>ZQ')
 
 end
 
