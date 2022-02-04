@@ -54,7 +54,7 @@ local function setup()
         },
         section_4 = {
             description = { ' Source control         <SPC> t g' },
-            command = 'lua toggle_git_window()',
+            command = [[normal 1 tg]],
         },
         section_5 = {
             description = { ' Quit                   :qall<cr>'},
