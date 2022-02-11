@@ -1,6 +1,8 @@
 name: Make Parser Update PR
 
 on:
+  schedule:
+    - cron: '30 6 * * *'
   push:
     branches:
       - master
@@ -16,10 +18,8 @@ jobs:
 
       - name: Prepare
         env:
-          NVIM_TAG: v0.5.1
+          NVIM_TAG: stable
         run: |
-          sudo apt-get update
-          sudo add-apt-repository universe
           wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
           mv ./jq-linux64 /tmp/jq
           chmod +x /tmp/jq
@@ -52,3 +52,4 @@ jobs:
           title: Update lockfile.json
           branch: update-lockfile-pr
           base: ${{ github.head_ref }}
+          draft: true

@@ -6,12 +6,12 @@
 
 (identifier) @variable
 ((identifier) @type
- (#match? @type "^[A-Z]"))
+ (#lua-match? @type "^[A-Z]"))
 (const_item
   name: (identifier) @constant)
 ; Assume all-caps names are constants
 ((identifier) @constant
- (#match? @constant "^[A-Z][A-Z\\d_]*$"))
+ (#lua-match? @constant "^[A-Z][A-Z%d_]*$"))
 
 ; Other identifiers
 
@@ -22,6 +22,20 @@
   (identifier) @field)
 (mod_item
  name: (identifier) @namespace)
+
+(self) @variable.builtin
+
+(lifetime   ["'" (identifier)] @label)
+(loop_label ["'" (identifier)] @label)
+
+
+; Function definitions
+
+(function_item (identifier) @function)
+(function_signature_item (identifier) @function)
+
+(parameter (identifier) @parameter)
+(closure_parameters (_) @parameter)
 
 ; Function calls
 (call_expression
@@ -44,7 +58,7 @@
 
 ; Assume other uppercase names are enum constructors
 ((field_identifier) @constant
- (#match? @constant "^[A-Z]"))
+ (#lua-match? @constant "^[A-Z]"))
 
 (enum_variant
   name: (identifier) @constant)
@@ -62,37 +76,41 @@
   name: (identifier) @namespace))
 ((scoped_identifier
   path: (identifier) @type)
- (#match? @type "^[A-Z]"))
+ (#lua-match? @type "^[A-Z]"))
 ((scoped_identifier
     name: (identifier) @type)
- (#match? @type "^[A-Z]"))
+ (#lua-match? @type "^[A-Z]"))
 
-(crate) @namespace
+[
+  (crate)
+  (super)
+] @namespace
+
 (scoped_use_list
   path: (identifier) @namespace)
 (scoped_use_list
   path: (scoped_identifier
             (identifier) @namespace))
 (use_list (scoped_identifier (identifier) @namespace . (_)))
-(use_list (identifier) @type (#match? @type "^[A-Z]"))
-(use_as_clause alias: (identifier) @type (#match? @type "^[A-Z]"))
+(use_list (identifier) @type (#lua-match? @type "^[A-Z]"))
+(use_as_clause alias: (identifier) @type (#lua-match? @type "^[A-Z]"))
 
 ;; Correct enum constructors
 (call_expression
   function: (scoped_identifier
     "::"
     name: (identifier) @constant)
-  (#match? @constant "^[A-Z]"))
+  (#lua-match? @constant "^[A-Z]"))
 
 ; Assume uppercase names in a match arm are constants.
 ((match_arm
    pattern: (match_pattern (identifier) @constant))
- (#match? @constant "^[A-Z]"))
+ (#lua-match? @constant "^[A-Z]"))
 ((match_arm
    pattern: (match_pattern
      (scoped_identifier
        name: (identifier) @constant)))
- (#match? @constant "^[A-Z]"))
+ (#lua-match? @constant "^[A-Z]"))
 
 ((identifier) @constant.builtin
  (#any-of? @constant.builtin "Some" "None" "Ok" "Err"))
@@ -100,6 +118,7 @@
 ;; Macro definitions
 "$" @function.macro
 (metavariable) @function.macro
+(macro_definition "macro_rules!" @function.macro)
 
 ;; Attribute macros
 (attribute_item (meta_item (identifier) @function.macro))
@@ -120,159 +139,134 @@
 
 
 
-; Function definitions
-
-(function_item (identifier) @function)
-(function_signature_item (identifier) @function)
+;;; Literals
 
 [
-(line_comment)
-(block_comment)
- ] @comment
+  (line_comment)
+  (block_comment)
+] @comment
 
-(parameter (identifier) @parameter)
-(closure_parameters (_) @parameter)
-
-(lifetime (identifier) @label)
-(loop_label (identifier) @label)
-
-(self) @variable.builtin
+(boolean_literal) @boolean
+(integer_literal) @number
+(float_literal) @float
 
 [
- "use"
- "mod"
+  (raw_string_literal)
+  (string_literal)
+] @string
+(escape_sequence) @string.escape
+(char_literal) @character
+
+
+;;; Keywords
+
+[
+  "use"
+  "mod"
 ] @include
+(use_as_clause "as" @include)
 
 [
-"break"
-"const"
-"default"
-"dyn"
-"enum"
-"extern"
-"impl"
-"let"
-"macro_rules!"
-"match"
-"move"
-"pub"
-"ref"
-"static"
-"struct"
-"trait"
-"type"
-"union"
-"unsafe"
-"async"
-"await"
-"where"
-(mutable_specifier)
-(super)
+  "async"
+  "await"
+  "const"
+  "default"
+  "dyn"
+  "enum"
+  "extern"
+  "impl"
+  "let"
+  "match"
+  "move"
+  "pub"
+  "ref"
+  "static"
+  "struct"
+  "trait"
+  "type"
+  "union"
+  "unsafe"
+  "where"
+  (mutable_specifier)
 ] @keyword
 
-"return" @keyword.return
-
 "fn" @keyword.function
+[
+  "return"
+  "yield"
+] @keyword.return
+
+(type_cast_expression "as" @keyword.operator)
 
 (use_list (self) @keyword)
 (scoped_use_list (self) @keyword)
 (scoped_identifier (self) @keyword)
 
 [
-"continue"
-"else"
-"if"
+  "else"
+  "if"
 ] @conditional
 
 [
-"for"
-"in"
-"loop"
-"while"
+  "break"
+  "continue"
+  "for"
+  "in"
+  "loop"
+  "while"
 ] @repeat
 
-[
-(char_literal)
-(string_literal)
-(raw_string_literal)
-] @string
 
-(boolean_literal) @boolean
-(integer_literal) @number
-(float_literal) @float
 
-(escape_sequence) @string.escape
+;;; Operators & Punctuation
 
 [
-  "as"
-] @keyword.operator
-
-[
-"*"
-"'"
-"->"
-"=>"
-"<="
-"="
-"=="
-"!"
-"!="
-"%"
-"%="
-"&"
-"&="
-"&&"
-"|"
-"|="
-"||"
-"^"
-"^="
-"*"
-"*="
-"-"
-"-="
-"+"
-"+="
-"/"
-"/="
-">"
-"<"
-">="
-">>"
-"<<"
-">>="
-"@"
-".."
-"..="
-"?"
+  "!"
+  "!="
+  "%"
+  "%="
+  "&"
+  "&&"
+  "&="
+  "*"
+  "*="
+  "+"
+  "+="
+  "-"
+  "-="
+  "->"
+  ".."
+  "..="
+  "/"
+  "/="
+  "<"
+  "<<"
+  "<<="
+  "<="
+  "="
+  "=="
+  "=>"
+  ">"
+  ">="
+  ">>"
+  ">>="
+  "?"
+  "@"
+  "^"
+  "^="
+  "|"
+  "|="
+  "||"
 ] @operator
 
-[
- "("
- ")"
- "["
- "]"
- "{"
- "}"
-] @punctuation.bracket
+["(" ")" "[" "]" "{" "}"]  @punctuation.bracket
+(closure_parameters "|"    @punctuation.bracket)
+(type_arguments  ["<" ">"] @punctuation.bracket)
+(type_parameters ["<" ">"] @punctuation.bracket)
 
-(closure_parameters "|" @punctuation.bracket)
-
-(type_arguments
-  "<" @punctuation.bracket
-  ">" @punctuation.bracket)
-(type_parameters
-  "<" @punctuation.bracket
-  ">" @punctuation.bracket)
-
-[
-":"
-"::"
-"."
-";"
-","
-] @punctuation.delimiter
+["," "." ":" "::" ";"] @punctuation.delimiter
 
 (attribute_item "#" @punctuation.special)
-(inner_attribute_item ["#" "!"] @punctuation.special)
-(macro_invocation "!" @function.macro) ; don't highlight `!` as an operator here
+(inner_attribute_item ["!" "#"] @punctuation.special)
+(macro_invocation "!" @function.macro)
+(empty_type "!" @type.builtin)
