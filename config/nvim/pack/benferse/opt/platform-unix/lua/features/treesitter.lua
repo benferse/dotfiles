@@ -38,12 +38,12 @@ local function setup()
                     [']['] = [[@class.outer]],
                 },
 
-                goto_prev_start = {
+                goto_previous_start = {
                     ['[m'] = [[@function.outer]],
                     ['[['] = [[@class.outer]],
                 },
 
-                goto_prev_end = {
+                goto_previous_end = {
                     ['[M'] = [[@function.outer]],
                     ['[]'] = [[@class.outer]],
                 },
