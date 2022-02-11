@@ -33,6 +33,17 @@ local function setup()
         }
     })
 
+    which_key.register({
+        ["a"] = {
+            c = "Class/struct (treesitter)",
+            f = "Function/method (treesitter)",
+        },
+        ["i"] = {
+            c = "Class/struct (treesitter)",
+            f = "Function/method (treesitter)",
+        },
+    }, { mode = 'o' })
+
     which_key.register {
         ["["] = {
             name = "unimpaired",
@@ -40,6 +51,8 @@ local function setup()
             ["<C-Q>"] = "Quickfix file",
             ["<C-T>"] = "Preview tag",
             ["<Space>"] = "Blank line above",
+            ["["] = "Class/struct start",
+            ["]"] = "Class/struct end",
             a = "Previous arg",
             A = "First arg",
             b = "Previous buffer",
@@ -85,6 +98,8 @@ local function setup()
             ["<C-Q>"] = "Quickfix file",
             ["<C-T>"] = "Preview tag",
             ["<Space>"] = "Blank line below",
+            ["]"] = "Class/struct start",
+            ["["] = "Class/struct end",
             a = "Next arg",
             A = "Last arg",
             b = "Next buffer",
@@ -125,7 +140,6 @@ local function setup()
             y = "String decode",
         }
     }
-
 end
 
 return { setup = setup }

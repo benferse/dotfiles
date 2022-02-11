@@ -3,17 +3,16 @@ description: Create a report to help us improve
 labels: [ bug ]
 
 body:
-  - type: checkboxes
+  - type: markdown
     attributes:
-      label: Before reporting
-      description: Please do the following steps before reporting an issue.
-      options:
-        - label: I have updated my neovim version to latest _master_
-          required: true
-        - label: I have updated my plugin to the latest version
-          required: true
-        - label: I have run `:TSUpdate`
-          required: true
+      value: |
+        # Before reporting
+        Please do the following steps before reporting an issue.
+
+        - I have updated my neovim version to latest _master_
+        - I have updated my plugin to the latest version
+        - I have run `:TSUpdate`
+        - I have read the [troubleshooting section](https://github.com/nvim-treesitter/nvim-treesitter#troubleshooting)
 
   - type: textarea
     attributes:
@@ -57,4 +56,3 @@ body:
     attributes:
       label: Additional context
       description: Add any context about the problem here.
-

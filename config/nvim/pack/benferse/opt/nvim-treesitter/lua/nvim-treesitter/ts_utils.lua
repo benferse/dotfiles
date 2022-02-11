@@ -21,7 +21,10 @@ function M.get_node_text(node, bufnr)
   if start_row ~= end_row then
     local lines = api.nvim_buf_get_lines(bufnr, start_row, end_row + 1, false)
     lines[1] = string.sub(lines[1], start_col + 1)
-    lines[#lines] = string.sub(lines[#lines], 1, end_col)
+    -- end_row might be just after the last line. In this case the last line is not truncated.
+    if #lines == end_row - start_row + 1 then
+      lines[#lines] = string.sub(lines[#lines], 1, end_col)
+    end
     return lines
   else
     local line = api.nvim_buf_get_lines(bufnr, start_row, start_row + 1, false)[1]
@@ -122,9 +125,16 @@ function M.get_named_children(node)
 end
 
 function M.get_node_at_cursor(winnr)
-  local cursor = api.nvim_win_get_cursor(winnr or 0)
+  winnr = winnr or 0
+  local cursor = api.nvim_win_get_cursor(winnr)
   local cursor_range = { cursor[1] - 1, cursor[2] }
-  local root = M.get_root_for_position(unpack(cursor_range))
+
+  local buf = vim.api.nvim_win_get_buf(winnr)
+  local root_lang_tree = parsers.get_parser(buf)
+  if not root_lang_tree then
+    return
+  end
+  local root = M.get_root_for_position(cursor_range[1], cursor_range[2], root_lang_tree)
 
   if not root then
     return
@@ -321,7 +331,7 @@ function M.swap_nodes(node_or_range1, node_or_range2, bufnr, cursor_to_second)
 
   local edit1 = { range = range1, newText = table.concat(text2, "\n") }
   local edit2 = { range = range2, newText = table.concat(text1, "\n") }
-  vim.lsp.util.apply_text_edits({ edit1, edit2 }, bufnr)
+  vim.lsp.util.apply_text_edits({ edit1, edit2 }, bufnr, "utf-8")
 
   if cursor_to_second then
     utils.set_jump()
@@ -368,19 +378,15 @@ function M.goto_node(node, goto_end, avoid_set_jump)
   if not avoid_set_jump then
     utils.set_jump()
   end
-  local range = { node:range() }
+  local range = { M.get_vim_range { node:range() } }
   local position
   if not goto_end then
     position = { range[1], range[2] }
   else
-    -- ranges are exclusive: -1 character!
-    if range[4] == 0 then
-      position = { range[3] - 1, -1 }
-    else
-      position = { range[3], range[4] - 1 }
-    end
+    position = { range[3], range[4] }
   end
-  api.nvim_win_set_cursor(0, { position[1] + 1, position[2] })
+  -- Position is 1, 0 indexed.
+  api.nvim_win_set_cursor(0, { position[1], position[2] - 1 })
 end
 
 return M

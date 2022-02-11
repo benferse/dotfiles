@@ -36,14 +36,11 @@ The goal of `nvim-treesitter` is both to provide a simple and easy way to use th
 Traditional highlighting (left) vs Treesitter-based highlighting (right).
 More examples can be found in [our gallery](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Gallery).
 
-**Warning: Treesitter and nvim-treesitter highlighting are an experimental feature of nightly versions of Neovim.
-Please consider the experience with this plug-in as experimental until Neovim 0.6 is released!
+**Warning: Treesitter and nvim-treesitter highlighting are an experimental feature of Neovim.
+Please consider the experience with this plug-in as experimental until Tree-Sitter support in Neovim is stable!
+We recommend using the nightly builds of Neovim if possible.
 You can find the current roadmap [here](https://github.com/nvim-treesitter/nvim-treesitter/projects/1).
 The roadmap and all features of this plugin are open to change, and any suggestion will be highly appreciated!**
-
-*If you want to use this plugin with Neovim 0.5, please use the
-0.5-compat branch. Be aware though that most improvements will require
-neovim nightly.*
 
 Nvim-treesitter is based on three interlocking features: [**language parsers**](#language-parsers), [**queries**](#adding-queries), and [**modules**](#available-modules), where *modules* provide features – e.g., highlighting – based on *queries* for syntax objects extracted from a given buffer by *language parsers*.
 Users will generally only need to interact with parsers and modules as explained in the next section.
@@ -66,7 +63,7 @@ For more detailed information on setting these up, see ["Advanced setup"](#advan
 
 ## Requirements
 
-- Neovim [nightly](https://github.com/neovim/neovim#install-from-source)
+- Neovim latest stable version or [nightly](https://github.com/neovim/neovim#install-from-source)
 - `tar` and `curl` in your path (or alternatively `git`)
 - A C compiler in your path and libstdc++ installed ([Windows users please read this!](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support)).
 
@@ -74,10 +71,11 @@ For more detailed information on setting these up, see ["Advanced setup"](#advan
 
 You can install `nvim-treesitter` with your favorite package manager (or using the native `package` feature of vim, see `:h packages`).
 
-E.g., if you are using [vim-plug](https://github.com/junegunn/vim-plug), put this in your `init.vim` file:
+**NOTE: This plugin is only guaranteed to work with specific versions of language parsers** (as specified in the `lockfile.json`). **When upgrading the plugin, you must make sure that all installed parsers are updated to the latest version** via `:TSUpdate`.
+It is strongly recommended to automate this; e.g., if you are using [vim-plug](https://github.com/junegunn/vim-plug), put this in your `init.vim` file:
 
 ```vim
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 ```
 
 For other plugin managers such as `packer.nvim`, see this [Installation page from the wiki](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation) (Note that this page is community maintained).
@@ -94,8 +92,7 @@ This command supports tab expansion.
 You can also get a list of all available languages and their installation status with `:TSInstallInfo`.
 Parsers not on this list can be added manually by following the steps described under ["Adding parsers"](#adding-parsers) below.
 
-If you update `nvim-treesitter` and want to make sure the parser is at the latest compatible version (as specified in `nvim-treesitter`'s `lockfile.json`), use `:TSUpdate {language}`.
-To update all parsers unconditionally, use `:TSUpdate all` or just `:TSUpdate`.
+To make sure a parser is at the latest compatible version (as specified in `nvim-treesitter`'s `lockfile.json`), use `:TSUpdate {language}`. To update all parsers unconditionally, use `:TSUpdate all` or just `:TSUpdate`.
 
 ## Modules
 
@@ -106,11 +103,22 @@ All modules are disabled by default and need to be activated explicitly in your 
 ```vim
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { "javascript" }, -- List of parsers to ignore installing
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained",
+
+  -- Install languages synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- List of parsers to ignore installing
+  ignore_install = { "javascript" },
+
   highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },  -- list of language that will be disabled
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    disable = { "c", "rust" },
+
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -144,13 +152,13 @@ Experimental parsers are parsers that are maintained, but not stable enough for
 daily use yet. They are excluded from automatic installation when
 `ensure_installed` is set to `"maintained"`.
 
-We are looking for maintainers to add more parsers and to write query files for their languages.
+We are looking for maintainers to add more parsers and to write query files for their languages. Check our [tracking issue](https://github.com/nvim-treesitter/nvim-treesitter/issues/2282) for open language requests.
 
 <!--This section of the README is automatically updated by a CI job-->
 <!--parserinfo-->
 - [x] [bash](https://github.com/tree-sitter/tree-sitter-bash) (maintained by @TravonteD)
 - [x] [beancount](https://github.com/polarmutex/tree-sitter-beancount) (maintained by @polarmutex)
-- [x] [bibtex](https://github.com/latex-lsp/tree-sitter-bibtex) (maintained by @theHamsta by asking @clason)
+- [x] [bibtex](https://github.com/latex-lsp/tree-sitter-bibtex) (maintained by @theHamsta, @clason)
 - [x] [c](https://github.com/tree-sitter/tree-sitter-c) (maintained by @vigoux)
 - [x] [c_sharp](https://github.com/tree-sitter/tree-sitter-c-sharp) (maintained by @Luxed)
 - [x] [clojure](https://github.com/sogaiu/tree-sitter-clojure) (maintained by @sogaiu)
@@ -165,24 +173,31 @@ We are looking for maintainers to add more parsers and to write query files for 
 - [x] [devicetree](https://github.com/joelspadin/tree-sitter-devicetree) (maintained by @jedrzejboczar)
 - [x] [dockerfile](https://github.com/camdencheek/tree-sitter-dockerfile) (maintained by @camdencheek)
 - [x] [dot](https://github.com/rydesun/tree-sitter-dot) (maintained by @rydesun)
+- [x] [eex](https://github.com/connorlay/tree-sitter-eex) (maintained by @connorlay)
 - [x] [elixir](https://github.com/elixir-lang/tree-sitter-elixir) (maintained by @jonatanklosko)
 - [ ] [elm](https://github.com/elm-tooling/tree-sitter-elm)
 - [x] [erlang](https://github.com/AbstractMachinesLab/tree-sitter-erlang) (maintained by @ostera)
 - [x] [fennel](https://github.com/travonted/tree-sitter-fennel) (maintained by @TravonteD)
 - [x] [fish](https://github.com/ram02z/tree-sitter-fish) (maintained by @ram02z)
+- [x] [foam](https://github.com/FoamScience/tree-sitter-foam) (experimental, maintained by @FoamScience)
 - [ ] [fortran](https://github.com/stadelmanma/tree-sitter-fortran)
+- [x] [fusion](https://gitlab.com/jirgn/tree-sitter-fusion.git) (maintained by @jirgn)
 - [x] [Godot (gdscript)](https://github.com/PrestonKnopp/tree-sitter-gdscript) (maintained by @Shatur95)
 - [x] [Glimmer and Ember](https://github.com/alexlafroscia/tree-sitter-glimmer) (maintained by @alexlafroscia)
 - [x] [glsl](https://github.com/theHamsta/tree-sitter-glsl) (maintained by @theHamsta)
 - [x] [go](https://github.com/tree-sitter/tree-sitter-go) (maintained by @theHamsta, @WinWisely268)
 - [x] [Godot Resources (gdresource)](https://github.com/PrestonKnopp/tree-sitter-godot-resource) (maintained by @pierpo)
 - [x] [gomod](https://github.com/camdencheek/tree-sitter-go-mod) (maintained by @camdencheek)
+- [x] [gowork](https://github.com/omertuc/tree-sitter-go-work) (maintained by @omertuc)
 - [x] [graphql](https://github.com/bkegley/tree-sitter-graphql) (maintained by @bkegley)
+- [ ] [hack](https://github.com/slackhq/tree-sitter-hack)
 - [ ] [haskell](https://github.com/tree-sitter/tree-sitter-haskell)
 - [x] [hcl](https://github.com/MichaHoffmann/tree-sitter-hcl) (maintained by @MichaHoffmann)
 - [x] [heex](https://github.com/connorlay/tree-sitter-heex) (maintained by @connorlay)
 - [x] [hjson](https://github.com/winston0410/tree-sitter-hjson) (maintained by @winston0410)
+- [x] [hocon](https://github.com/antosha417/tree-sitter-hocon) (maintained by @antosha417)
 - [x] [html](https://github.com/tree-sitter/tree-sitter-html) (maintained by @TravonteD)
+- [x] [http](https://github.com/NTBBloodbath/tree-sitter-http) (maintained by @NTBBloodbath)
 - [x] [java](https://github.com/tree-sitter/tree-sitter-java) (maintained by @p00f)
 - [x] [javascript](https://github.com/tree-sitter/tree-sitter-javascript) (maintained by @steelsojka)
 - [x] [jsdoc](https://github.com/tree-sitter/tree-sitter-jsdoc) (maintained by @steelsojka)
@@ -190,22 +205,31 @@ We are looking for maintainers to add more parsers and to write query files for 
 - [x] [json5](https://github.com/Joakker/tree-sitter-json5) (maintained by @Joakker)
 - [x] [JSON with comments](https://gitlab.com/WhyNotHugo/tree-sitter-jsonc.git) (maintained by @WhyNotHugo)
 - [x] [julia](https://github.com/tree-sitter/tree-sitter-julia) (maintained by @mroavi, @theHamsta)
-- [x] [kotlin](https://github.com/Joakker/tree-sitter-kotlin) (maintained by @Joakker)
-- [x] [latex](https://github.com/latex-lsp/tree-sitter-latex) (maintained by @theHamsta by asking @clason)
+- [x] [kotlin](https://github.com/fwcd/tree-sitter-kotlin) (maintained by @SalBakraa)
+- [x] [latex](https://github.com/latex-lsp/tree-sitter-latex) (maintained by @theHamsta, @clason)
 - [x] [ledger](https://github.com/cbarrete/tree-sitter-ledger) (maintained by @cbarrete)
 - [x] [llvm](https://github.com/benwilliamgraham/tree-sitter-llvm) (maintained by @benwilliamgraham)
-- [x] [lua](https://github.com/nvim-treesitter/tree-sitter-lua) (maintained by @vigoux)
+- [x] [lua](https://github.com/MunifTanjim/tree-sitter-lua) (maintained by @muniftanjim)
+- [x] [make](https://github.com/alemuller/tree-sitter-make) (maintained by @lewis6991)
+- [ ] [markdown](https://github.com/MDeiml/tree-sitter-markdown)
+- [x] [ninja](https://github.com/alemuller/tree-sitter-ninja) (maintained by @alemuller)
 - [x] [nix](https://github.com/cstrahan/tree-sitter-nix) (maintained by @leo60228)
+- [x] [norg](https://github.com/nvim-neorg/tree-sitter-norg) (maintained by @JoeyGrajciar, @vhyrro, @mrossinek)
 - [x] [ocaml](https://github.com/tree-sitter/tree-sitter-ocaml) (maintained by @undu)
 - [x] [ocaml_interface](https://github.com/tree-sitter/tree-sitter-ocaml) (maintained by @undu)
 - [x] [ocamllex](https://github.com/atom-ocaml/tree-sitter-ocamllex) (maintained by @undu)
+- [x] [pascal](https://github.com/Isopod/tree-sitter-pascal.git) (maintained by @isopod)
 - [x] [perl](https://github.com/ganezdragon/tree-sitter-perl) (maintained by @ganezdragon)
 - [x] [php](https://github.com/tree-sitter/tree-sitter-php) (maintained by @tk-shirasaka)
+- [x] [phpdoc](https://github.com/claytonrcarter/tree-sitter-phpdoc) (experimental, maintained by @mikehaertl)
 - [x] [pioasm](https://github.com/leo60228/tree-sitter-pioasm) (maintained by @leo60228)
+- [x] [prisma](https://github.com/victorhqc/tree-sitter-prisma) (maintained by @elianiva)
+- [x] [pug](https://github.com/zealot128/tree-sitter-pug) (maintained by @zealot128)
 - [x] [python](https://github.com/tree-sitter/tree-sitter-python) (maintained by @stsewd, @theHamsta)
 - [x] [ql](https://github.com/tree-sitter/tree-sitter-ql) (maintained by @pwntester)
 - [x] [Tree-sitter query language](https://github.com/nvim-treesitter/tree-sitter-query) (maintained by @steelsojka)
 - [x] [r](https://github.com/r-lib/tree-sitter-r) (maintained by @jimhester)
+- [x] [rasi](https://github.com/Fymyte/tree-sitter-rasi) (maintained by @Fymyte)
 - [x] [regex](https://github.com/tree-sitter/tree-sitter-regex) (maintained by @theHamsta)
 - [x] [rst](https://github.com/stsewd/tree-sitter-rst) (maintained by @stsewd)
 - [x] [ruby](https://github.com/tree-sitter/tree-sitter-ruby) (maintained by @TravonteD)
@@ -216,13 +240,14 @@ We are looking for maintainers to add more parsers and to write query files for 
 - [x] [supercollider](https://github.com/madskjeldgaard/tree-sitter-supercollider) (maintained by @madskjeldgaard)
 - [x] [surface](https://github.com/connorlay/tree-sitter-surface) (maintained by @connorlay)
 - [x] [svelte](https://github.com/Himujjal/tree-sitter-svelte) (maintained by @elianiva)
-- [ ] [swift](https://github.com/tree-sitter/tree-sitter-swift)
+- [ ] [swift](https://github.com/alex-pinkus/tree-sitter-swift)
 - [x] [teal](https://github.com/euclidianAce/tree-sitter-teal) (maintained by @euclidianAce)
-- [x] [tlaplus](https://github.com/tlaplus-community/tree-sitter-tlaplus) (maintained by @ahelwer)
+- [x] [tlaplus](https://github.com/tlaplus-community/tree-sitter-tlaplus) (maintained by @ahelwer, @susliko)
 - [x] [toml](https://github.com/ikatyang/tree-sitter-toml) (maintained by @tk-shirasaka)
 - [x] [tsx](https://github.com/tree-sitter/tree-sitter-typescript) (maintained by @steelsojka)
 - [x] [turtle](https://github.com/BonaBeavis/tree-sitter-turtle) (maintained by @bonabeavis)
 - [x] [typescript](https://github.com/tree-sitter/tree-sitter-typescript) (maintained by @steelsojka)
+- [x] [vala](https://github.com/matbme/tree-sitter-vala) (maintained by @matbme)
 - [x] [verilog](https://github.com/tree-sitter/tree-sitter-verilog) (experimental, maintained by @zegervdv)
 - [x] [vim](https://github.com/vigoux/tree-sitter-viml) (maintained by @vigoux)
 - [x] [vue](https://github.com/ikatyang/tree-sitter-vue) (maintained by @WhyNotHugo)
@@ -324,11 +349,23 @@ local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.zimbu = {
   install_info = {
     url = "~/projects/tree-sitter-zimbu", -- local path or git repo
-    files = {"src/parser.c"}
+    files = {"src/parser.c"},
+    -- optional entries:
+    branch = "main", -- default branch in case of git repo if different from master
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
   },
-  filetype = "zu", -- if filetype does not agrees with parser name
-  used_by = {"bar", "baz"} -- additional filetypes that use this parser
+  filetype = "zu", -- if filetype does not match the parser name
 }
+EOF
+```
+
+If you wish to set a specific parser for a filetype, you should extend the `filetype_to_parsername` table:
+
+```vim
+lua <<EOF
+local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
+ft_to_parser.someft = "python" -- the someft filetype will use the python parser and queries.
 EOF
 ```
 
@@ -346,37 +383,28 @@ See [Neovim's documentation](https://neovim.io/doc/user/filetype.html#new-filety
 If you use a git repository for your parser and want to use a specific version, you can set the `revision` key
 in the `install_info` table for you parser config.
 
-## Update parsers used_by
+## Adding queries
 
-Sometimes needs to use some parser for different filetype.
+Queries are what `nvim-treesitter` uses to extract information from the syntax tree;
+they are located in the `queries/{language}/*` runtime directories (see `:h rtp`),
+like the `queries` folder of this plugin, e.g. `queries/{language}/{locals,highlights,textobjects}.scm`.
+Other modules may require additional queries such as `folding.scm`. You can find a 
+list of all supported capture names in [CONTRIBUTING.md](https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#parser-configurations).
 
-Add the following snippet to your `init.vim`:
+All queries found in the runtime directories will be combined.
+By convention, if you want to write a query, use the `queries/` directory,
+but if you want to extend a query use the `after/queries/` directory.
+
+If you want to completely override a query, you can use `:h set_query()`.
+For example, to override the `injections` queries from `c` with your own:
 
 ```vim
 lua <<EOF
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.typescript.used_by = "javascriptflow"
+require("vim.treesitter.query").set_query("c", "injections", "(comment) @comment")
 EOF
 ```
 
-## Adding queries
-
-Queries are what `nvim-treesitter` uses to extract information from the syntax tree; they are
-located in the `queries/{language}/*` runtime directories (like the `queries` folder of this plugin), e.g., `queries/{language}/{locals,highlights,textobjects}.scm`.
-Other modules may require additional queries such as `folding.scm`.
-
-`nvim-treesitter` considers queries as any runtime file (see `:h rtp`), i.e.,
-
-- if the file is in any `after/queries/` folder, then it will be used to extend the already defined
-  queries.
-- Otherwise, it will be used as a base to define the query, the first query found (with the highest
-  priority) will be the only one to be used.
-
-This hybrid approach is the most standard way; in this case
-
-- if you want to rewrite (or write) a query, don't use `after/queries`;
-- if you want to override a part of a query (only one match for example), use the `after/queries`
-  directory.
+Note: when using `set_query`, all queries in the runtime directories will be ignored.
 
 ## Adding modules
 
@@ -456,7 +484,7 @@ In that case, feel free to [open an issue here](https://github.com/nvim-treesitt
 
 #### I get `module 'vim.treesitter.query' not found`
 
-Make sure you have the latest nightly version of Neovim.
+Make sure you have the latest version of Neovim.
 
 #### I get `Error detected while processing .../plugin/nvim-treesitter.vim` every time I open Neovim
 
@@ -464,6 +492,17 @@ This is probably due to a change in a parser's grammar or its queries.
 Try updating the parser that you suspect has changed (`:TSUpdate {language}`) or all of them (`:TSUpdate`).
 If the error persists after updating all parsers,
 please [open an issue](https://github.com/nvim-treesitter/nvim-treesitter/issues/new/choose).
+
+#### I get `query error: invalid node type at position`
+
+This could be due a query file outside this plugin using outdated nodes,
+or due to an outdated parser.
+
+- Make sure you have the parsers up to date with `:TSUpdate`
+- Make sure you don't have more than one `parser` runtime directory.
+  You can execute this command `:echo nvim_get_runtime_file('parser', v:true)` to find all runtime directories.
+  If you get more than one path, remove the ones that are outside this plugin (`nvim-treesitter` directory),
+  so the correct version of the parser is used.
 
 #### I experience weird highlighting issues similar to [#78](https://github.com/nvim-treesitter/nvim-treesitter/issues/78)
 
@@ -507,4 +546,19 @@ or you can configure git via `.gitconfig` and use git instead of curl
 
 ```lua
 require("nvim-treesitter.install").prefer_git = true
+```
+
+#### I want to use a mirror instead of "https://github.com/"
+
+In your Lua config:
+
+```lua
+for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
+  config.install_info.url = config.install_info.url:gsub("https://github.com/", "something else")
+end
+
+require'nvim-treesitter.configs'.setup {
+    --
+    --
+}
 ```
