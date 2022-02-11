@@ -136,12 +136,6 @@ function M.get_at_path(tbl, path)
   return result
 end
 
--- Prints a warning message
--- @param text the text message
-function M.print_warning(text)
-  api.nvim_command(string.format([[echohl WarningMsg | echo "%s" | echohl None]], text))
-end
-
 function M.set_jump()
   vim.cmd "normal! m'"
 end
@@ -191,6 +185,15 @@ end
 
 function M.to_func(a)
   return type(a) == "function" and a or M.constant(a)
+end
+
+function M.ts_cli_version()
+  if fn.executable "tree-sitter" == 1 then
+    local handle = io.popen "tree-sitter  -V"
+    local result = handle:read "*a"
+    handle:close()
+    return vim.split(result, "\n")[1]:match "[^tree%psitter ].*"
+  end
 end
 
 return M

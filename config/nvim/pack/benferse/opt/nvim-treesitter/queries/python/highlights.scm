@@ -9,12 +9,12 @@
 
 ;; Identifier naming conventions
 ((identifier) @type
- (#match? @type "^[A-Z].*[a-z]"))
+ (#lua-match? @type "^[A-Z].*[a-z]"))
 ((identifier) @constant
- (#match? @constant "^[A-Z][A-Z_0-9]*$"))
+ (#lua-match? @constant "^[A-Z][A-Z_0-9]*$"))
 
 ((identifier) @constant.builtin
- (#match? @constant.builtin "^__[a-zA-Z0-9_]*__$"))
+ (#lua-match? @constant.builtin "^__[a-zA-Z0-9_]*__$"))
 
 ((identifier) @constant.builtin
  (#any-of? @constant.builtin
@@ -64,18 +64,18 @@
 
 ((call
    function: (identifier) @constructor)
- (#match? @constructor "^[A-Z]"))
+ (#lua-match? @constructor "^[A-Z]"))
 
 ((call
   function: (attribute
               attribute: (identifier) @constructor))
- (#match? @constructor "^[A-Z]"))
+ (#lua-match? @constructor "^[A-Z]"))
 
 ;; Builtin functions
 
 ((call
   function: (identifier) @function.builtin)
- (any-of? @function.builtin
+ (#any-of? @function.builtin
           "abs" "all" "any" "ascii" "bin" "bool" "breakpoint" "bytearray" "bytes" "callable" "chr" "classmethod"
           "compile" "complex" "delattr" "dict" "dir" "divmod" "enumerate" "eval" "exec" "filter" "float" "format"
           "frozenset" "getattr" "globals" "hasattr" "hash" "help" "hex" "id" "input" "int" "isinstance" "issubclass"
@@ -133,7 +133,7 @@
 (none) @constant.builtin
 [(true) (false)] @boolean
 ((identifier) @variable.builtin
- (#match? @variable.builtin "^self$"))
+ (#eq? @variable.builtin "self"))
 
 (integer) @number
 (float) @float
@@ -230,7 +230,7 @@
 ["from" "import"] @include
 (aliased_import "as" @include)
 
-["if" "elif" "else"] @conditional
+["if" "elif" "else" "match" "case"] @conditional
 
 ["for" "while" "break" "continue"] @repeat
 
@@ -240,7 +240,7 @@
   "{" @punctuation.special
   "}" @punctuation.special)
 
-["," "." ":" (ellipsis)] @punctuation.delimiter
+["," "." ":" ";" (ellipsis)] @punctuation.delimiter
 
 ;; Class definitions
 
@@ -275,12 +275,15 @@
       name: (identifier) @constructor)))
  (#any-of? @constructor "__new__" "__init__"))
 
-; First parameter of a method is self or cls.
+; First parameter of a classmethod is cls.
 ((class_definition
   body: (block
-          (function_definition
-            parameters: (parameters . (identifier) @variable.builtin))))
- (#any-of? @variable.builtin "self" "obj" "class"))
+          (decorated_definition
+            (decorator (identifier) @_decorator)
+            definition: (function_definition
+              parameters: (parameters . (identifier) @variable.builtin)))))
+ (#eq? @variable.builtin "cls")
+ (#eq? @_decorator "classmethod"))
 
 ;; Error
 (ERROR) @error

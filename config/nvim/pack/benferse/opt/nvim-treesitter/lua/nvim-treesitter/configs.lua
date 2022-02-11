@@ -10,6 +10,7 @@ local M = {}
 
 local config = {
   modules = {},
+  sync_install = false,
   ensure_installed = {},
   ignore_install = {},
   update_strategy = "lockfile",
@@ -22,15 +23,15 @@ local builtin_modules = {
   highlight = {
     module_path = "nvim-treesitter.highlight",
     enable = false,
-    disable = { "markdown" }, -- FIXME(vigoux): markdown highlighting breaks everything for now
     custom_captures = {},
-    is_supported = queries.has_highlights,
+    is_supported = function(lang)
+      return queries.has_highlights(lang)
+    end,
     additional_vim_regex_highlighting = false,
   },
   incremental_selection = {
     module_path = "nvim-treesitter.incremental_selection",
     enable = false,
-    disable = {},
     keymaps = {
       init_selection = "gnn",
       node_incremental = "grn",
@@ -44,7 +45,6 @@ local builtin_modules = {
   indent = {
     module_path = "nvim-treesitter.indent",
     enable = false,
-    disable = {},
     is_supported = queries.has_indents,
   },
 }
@@ -71,8 +71,8 @@ end
 -- @param bufnr buffer number, defaults to current buffer
 -- @param lang language, defaults to current language
 local function enable_module(mod, bufnr, lang)
-  local bufnr = bufnr or api.nvim_get_current_buf()
-  local lang = lang or parsers.get_buf_lang(bufnr)
+  bufnr = bufnr or api.nvim_get_current_buf()
+  lang = lang or parsers.get_buf_lang(bufnr)
   M.attach_module(mod, bufnr, lang)
 end
 
@@ -112,7 +112,7 @@ end
 -- @param mod path to module
 -- @param bufnr buffer number, defaults to current buffer
 local function disable_module(mod, bufnr)
-  local bufnr = bufnr or api.nvim_get_current_buf()
+  bufnr = bufnr or api.nvim_get_current_buf()
   M.detach_module(mod, bufnr)
 end
 
@@ -152,8 +152,8 @@ end
 -- @param bufnr buffer number, defaults to current buffer
 -- @param lang language, defaults to current language
 local function toggle_module(mod, bufnr, lang)
-  local bufnr = bufnr or api.nvim_get_current_buf()
-  local lang = lang or parsers.get_buf_lang(bufnr)
+  bufnr = bufnr or api.nvim_get_current_buf()
+  lang = lang or parsers.get_buf_lang(bufnr)
 
   if attached_buffers_by_module.has(mod, bufnr) then
     disable_module(mod, bufnr)
@@ -182,7 +182,7 @@ end
 -- @param root root configuration table to start at
 -- @param path prefix path
 local function recurse_modules(accumulator, root, path)
-  local root = root or config.modules
+  root = root or config.modules
 
   for name, module in pairs(root) do
     local new_path = path and (path .. "." .. name) or name
@@ -334,8 +334,9 @@ M.commands = {
 }
 
 -- @param mod: module (string)
--- @param ft: filetype (string)
-function M.is_enabled(mod, lang)
+-- @param lang: the language of the buffer (string)
+-- @param bufnr: the bufnr (number)
+function M.is_enabled(mod, lang, bufnr)
   if not parsers.list[lang] or not parsers.has_parser(lang) then
     return false
   end
@@ -349,9 +350,17 @@ function M.is_enabled(mod, lang)
     return false
   end
 
-  for _, parser in pairs(module_config.disable) do
-    if lang == parser then
+  local disable = module_config.disable
+  if type(disable) == "function" then
+    if disable(lang, bufnr) then
       return false
+    end
+  elseif type(disable) == "table" then
+    -- Otherwise it's a list of languages
+    for _, parser in pairs(disable) do
+      if lang == parser then
+        return false
+      end
     end
   end
 
@@ -366,7 +375,11 @@ function M.setup(user_data)
 
   local ensure_installed = user_data.ensure_installed or {}
   if #ensure_installed > 0 then
-    require("nvim-treesitter.install").ensure_installed(ensure_installed)
+    if user_data.sync_install then
+      require("nvim-treesitter.install").ensure_installed_sync(ensure_installed)
+    else
+      require("nvim-treesitter.install").ensure_installed(ensure_installed)
+    end
   end
 
   config.modules.ensure_installed = nil
@@ -436,11 +449,11 @@ end
 -- @param bufnr the bufnr
 -- @param lang the language of the buffer
 function M.attach_module(mod_name, bufnr, lang)
-  local bufnr = bufnr or api.nvim_get_current_buf()
-  local lang = lang or parsers.get_buf_lang(bufnr)
+  bufnr = bufnr or api.nvim_get_current_buf()
+  lang = lang or parsers.get_buf_lang(bufnr)
   local resolved_mod = resolve_module(mod_name)
 
-  if resolved_mod and not attached_buffers_by_module.has(mod_name, bufnr) and M.is_enabled(mod_name, lang) then
+  if resolved_mod and not attached_buffers_by_module.has(mod_name, bufnr) and M.is_enabled(mod_name, lang, bufnr) then
     attached_buffers_by_module.set(mod_name, bufnr, true)
     resolved_mod.attach(bufnr, lang)
   end
@@ -451,7 +464,7 @@ end
 -- @param bufnr the bufnr
 function M.detach_module(mod_name, bufnr)
   local resolved_mod = resolve_module(mod_name)
-  local bufnr = bufnr or api.nvim_get_current_buf()
+  bufnr = bufnr or api.nvim_get_current_buf()
 
   if resolved_mod and attached_buffers_by_module.has(mod_name, bufnr) then
     attached_buffers_by_module.remove(mod_name, bufnr)

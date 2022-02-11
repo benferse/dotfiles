@@ -71,7 +71,9 @@
 ; Constants
 ;----------
 
-[(boolean) (unit)] @constant
+(unit) @constant.builtin
+
+(boolean) @boolean
 
 [(number) (signed_number)] @number
 
@@ -86,7 +88,7 @@
 [
   (conversion_specification)
   (pretty_printing_indication)
-] @punctuation.special
+] @string.special
 
 ; Keywords
 ;---------
