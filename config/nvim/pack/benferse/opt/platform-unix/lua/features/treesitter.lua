@@ -3,6 +3,7 @@
 local function setup()
     vim.cmd([[
         packadd nvim-treesitter
+        packadd nvim-treesitter-textobjects
     ]])
 
     require('nvim-treesitter.configs').setup {
