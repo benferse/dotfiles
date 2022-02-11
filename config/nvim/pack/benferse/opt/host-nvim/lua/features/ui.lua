@@ -22,6 +22,7 @@ local function setup()
         packadd lualine-lsp-progress
         packadd lualine.nvim
         packadd nvim-bufferline
+        packadd nvim-pqf
         packadd project.nvim
     ]])
 
@@ -102,6 +103,8 @@ local function setup()
             lualine_a = { window_number },
         }
     }
+
+    require('pqf').setup {}
 
     require('project_nvim').setup {}
 
