@@ -31,3 +31,9 @@
 
 [core]
 	editor = nvr --remote-wait-silent
+{{ if eq .chezmoi.os "windows" }}
+    sshcommand = plink -agent
+
+[gpg]
+    program = "c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe"
+{{ end }}

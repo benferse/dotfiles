@@ -1,0 +1,6 @@
+*.md
+setup.*
+
+{{- if (or (ne .chezmoi.os "linux") (not (.chezmoi.kernel.osrelease | lower | contains "microsoft"))) }}
+.wslprofile.d
+{{- end }}
