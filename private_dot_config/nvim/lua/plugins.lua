@@ -64,7 +64,41 @@ return packer.startup(function(use)
     -- Eye candy
     --
     use { 'arcticicestudio/nord-vim' }
-    use { 'kyazdani42/nvim-web-devicons' }
+
+    --
+    -- UI chrome, window dressing, and the stuff that makes our
+    -- experiences more IDE-y
+    --
+    use {
+        'akinsho/bufferline.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+    }
+
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {
+            'kyazdani42/nvim-web-devicons',
+            'arkav/lualine-lsp-progress',
+        },
+    }
+
+    use { 'hrsh7th/nvim-cmp' }
+    use {
+        'hrsh7th/cmp-nvim-lsp',
+        requires = {
+            'hrsh7th/nvim-cmp',
+            'neovim/nvim-lspconfig',
+        },
+    }
+
+    use { 'hrsh7th/vim-vsnip' }
+    use {
+        'hrsh7th/cmp-vsnip',
+        requires = {
+            'hrsh7th/vim-vsnip',
+            'hrsh7th/nvim-cmp',
+        },
+    }
 
     --
     -- Terminal helpers, embedded or external navigation
@@ -81,6 +115,8 @@ return packer.startup(function(use)
     -- Telescope and its fuzzy friends
     --
     use { 'nvim-telescope/telescope.nvim' }
+    use { 'nvim-telescope/telescope-ui-select.nvim' }
+    use { 'ahmedkhalf/project.nvim' }
 
     --
     -- Git, source control, diff/merge
@@ -92,6 +128,29 @@ return packer.startup(function(use)
     --
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+
+    --
+    -- Language Server Protocol support, as well as support for
+    -- various programming environments and debuggers
+    --
+    use { 'neovim/nvim-lspconfig' }
+    use { 'williamboman/nvim-lsp-installer' }
+    use { 'nvim-lua/lsp-status.nvim' }
+
+    use {
+        'simrat39/rust-tools.nvim',
+        requires = 'neovim/nvim-lspconfig',
+    }
+
+    use {
+        'mfussenegger/nvim-dap',
+        requires = 'nvim-lua/plenary.nvim',
+    }
+
+    use {
+        'rcarriga/nvim-dap-ui',
+        requires = 'mfussenegger/nvim-dap',
+    }
 
     --
     -- Automatic configuration after bootstrapping

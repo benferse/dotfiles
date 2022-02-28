@@ -1,20 +1,23 @@
 -- Setup mapx here so that it's available with our chosen
--- options before the rest of the scripts in `plugin` run
-local m = require('mapx').setup { global = true, whichkey = true }
+-- options before the rest of the scripts in `plugin` run.
+local is_ok, m = pcall(require, 'mapx')
+if not is_ok then
+    return
+end
+
+m.setup { global = true, whichkey = true }
 
 -- Escape back to normal mode without having to stretch
-imap({'jj', 'jk', 'kj'}, '<esc>')
+m.imap({'jj', 'jk', 'kj'}, '<esc>')
 
 -- This is honestly life changing, can't believe I lived
 -- for over forty years without this
-nnoremap(';', [[<cmd>up<cr>]])
+m.nnoremap(';', [[<cmd>up<cr>]])
 
-----
 ---- Use alt-L to clear the highlighting of hlsearch
 ---- Courtesy of the inimitable tpope, modified for tmux
-----
---map('n', '<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]])
---
+m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]])
+
 ----
 ---- Window management. Having to hit ctrl-w makes me sad sometimes
 ----

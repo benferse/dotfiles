@@ -4,7 +4,7 @@ if not is_ok then
 end
 
 require('toggleterm').setup {
-    open_mapping = [[<C-\>]],
+    open_mapping = [[<C-Space>]],
     hide_numbers = true,
     shade_terminals = true,
     start_in_insert = true,

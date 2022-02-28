@@ -49,6 +49,7 @@ set.shortmess = set.shortmess + 'ci'
 
 set.scrolloff = 1
 set.sidescrolloff = 5
+set.completeopt = 'menuone,noinsert,noselect'
 
 set.autowrite = true
 
