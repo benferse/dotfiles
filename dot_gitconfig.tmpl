@@ -1,9 +1,6 @@
 [alias]
     tree = log --color --graph --pretty=format:'%Cred%h%Creset (%G?) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
-[credential]
-    helper = manager
-
 [diff]
     tool = bc3
 
@@ -16,23 +13,20 @@
 [mergetool]
     prompt = false
 
-[url "https://github.com/"]
-    insteadOf = gh:
-
-[url "https://gist.github.com/"]
-    insteadOf = gist:
-
 [user]
     email = ben@bu.edu
     name = Ben Fersenheim
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [core]
-	editor = nvr --remote-wait-silent
+    editor = nvr --remote-wait-silent
 {{ if eq .chezmoi.os "windows" }}
     sshcommand = plink -agent
+
+[credential]
+    helper = manager
 
 [gpg]
     program = "c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe"
