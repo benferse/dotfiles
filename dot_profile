@@ -10,7 +10,7 @@ fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/.local/bin ] ; then
-    export PATH="~/.local/bin:$PATH"
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # if cargo is installed, then add its environment to the path
