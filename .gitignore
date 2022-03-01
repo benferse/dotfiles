@@ -29,4 +29,4 @@
  # End of https://www.gitignore.io/api/vim
 
  # Don't commit local packer cache
- private_dot_config/nvim/plugins/packer_compiled.lua
+ private_dot_config/nvim/plugin/packer_compiled.lua
