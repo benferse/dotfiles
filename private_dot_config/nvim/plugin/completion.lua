@@ -13,7 +13,7 @@ local function feedkey(key, mode)
     vim.api.nvim_feedkeys(x, mode, true)
 end
 
-cmp.setup {
+local config = {
     git = {
         ignore = 1,
     },
@@ -61,3 +61,12 @@ cmp.setup {
         end, { "i", "s" }),
     }
 }
+
+local has_lspkind, lspkind = pcall(require, 'lspkind')
+if has_lspkind then
+    config['formatting'] = {
+        format = lspkind.cmp_format({})
+    }
+end
+
+cmp.setup(config)

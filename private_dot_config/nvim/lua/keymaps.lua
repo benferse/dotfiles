@@ -23,6 +23,7 @@ m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'
 
 local host = require('host')
 
+-- Buffer navigation and management
 m.nname(    '<leader>b',              'Buffers')
 m.nnoremap( '<leader>be',             host.buffers.new,           [[New empty buffer]])
 m.nnoremap({'<leader>bf',      '[B'}, host.buffers.first,         [[First buffer]])
@@ -36,6 +37,31 @@ m.nnoremap( '<leader>bx',             host.buffers.really_delete, [[Wipeout buff
 m.nname(   '<leader>f',  'Fuzzy')
 m.nnoremap('<leader>fb', host.fuzzy.buffers, [[Find buffer]])
 m.nnoremap('<leader>ff', host.fuzzy.files,   [[Find files]])
+
+-- Git
+m.nname(   '<leader>g', 'Git')
+m.nnoremap('<leader>gc', '<cmd>Telescope git_commits<cr>',  'Browse commits')
+m.nnoremap('<leader>go', '<cmd>Telescope git_status<cr>',   'Browse pending')
+
+m.nnoremap('<leader>gr', '<cmd>Gitsigns reset_hunk<cr>', 'Reset hunk')
+m.vnoremap('<leader>gr', '<cmd>Gitsigns reset_hunk<cr>', 'Reset hunk')
+m.nnoremap('<leader>gs', '<cmd>Gitsigns stage_hunk<cr>', 'Stage hunk')
+m.vnoremap('<leader>gs', '<cmd>Gitsigns stage_hunk<cr>', 'Stage hunk')
+
+m.nnoremap('<leader>gR', '<cmd>Gitsigns reset_buffer<cr>', 'Reset buffer')
+m.nnoremap('<leader>gS', '<cmd>Gitsigns stage_buffer<cr>', 'Stage buffer')
+
+m.nnoremap('<leader>gu', '<cmd>Gitsigns undo_stage_hunk<cr>',    'Unstage hunk')
+m.nnoremap('<leader>gU', '<cmd>Gitsigns reset_buffer_index<cr>', 'Reset buffer from index')
+
+m.nnoremap('<leader>gp', '<cmd>Gitsigns preview_hunk<cr>', 'Preview hunk')
+m.nnoremap('<leader>gb', '<cmd>lua require("gitsigns").blame_line{full=true}<cr>', 'Blame line')
+
+m.nnoremap(']c', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>']], { expr = true })
+m.nnoremap('[c', [[&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>']], { expr = true })
+
+m.onoremap('ih', ':<C-U>Gitsigns select_hunk<cr>', 'Hunk')
+m.xnoremap('ih', ':<C-U>Gitsigns select_hunk<cr>', 'Hunk')
 
 -- LSP integration. The lsp module will also add several per-buffer
 -- mappings for individual LSP server capabilities, but the ones here
@@ -83,6 +109,14 @@ m.tnoremap('<C-l>', [[<C-\><C-n>:<C-u>lua require('host').windows.right()<cr>]])
 -- Toggle the help window. If it's not open, we get a finder.
 -- If it is, then we close it.
 m.nmap('<F1>', host.help.toggle)
+
+-- Debugging
+m.nnoremap('<F5>',    [[<cmd>lua require('dap').continue()<cr>]])
+m.nnoremap('<F9>',    [[<cmd>lua require('dap').toggle_breakpoint()<cr>]])
+m.nnoremap('<S-F9>',  [[<cmd>lua require('dap').set_breakpoint(vim.fn.input("Condition: "))<cr>]])
+m.nnoremap('<F10>',   [[<cmd>lua require('dap').step_over()<cr>]])
+m.nnoremap('<F11>',   [[<cmd>lua require('dap').step_into()<cr>]])
+m.nnoremap('<S-F11>', [[<cmd>lua require('dap').step_out()<cr>]])
 
 -- Recenter on incremental search results
 m.nnoremap('n', 'nzz')

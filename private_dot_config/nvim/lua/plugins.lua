@@ -100,6 +100,8 @@ return packer.startup(function(use)
         },
     }
 
+    use { 'onsails/lspkind-nvim' }
+
     --
     -- Terminal helpers, embedded or external navigation
     --
