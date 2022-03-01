@@ -3,7 +3,7 @@ if not is_ok then
     return
 end
 
-require('toggleterm').setup {
+toggleterm.setup {
     open_mapping = [[<C-Space>]],
     hide_numbers = true,
     shade_terminals = true,
@@ -23,30 +23,3 @@ require('toggleterm').setup {
         border = 'rounded',
     }
 }
-
-local terminals = {}
-
-local function add_terminal(command, name, shortcut)
-     terminals[shortcut] = require('toggleterm.terminal').Terminal:new({
-	    cmd = command,
-	    dir = 'git_dir',
-        direction = 'float',
-    })
-
-    --map('n', '<leader>t'..shortcut, '<cmd>lua Terminal_toggle_window("'..shortcut..'")<cr>', name)
-end
-
-function Terminal_toggle_window(shortcut)
-    local term = terminals[shortcut]
-    if term ~= nil then
-        term:toggle()
-    end
-end
-
-add_terminal('lazygit', 'lazygit', 'g')
-add_terminal('ranger', 'ranger', 'r')
-add_terminal('htop', 'htop', 't')
-
--- Add an explicit mapping to close a floating terminal
--- window quickly
---map('t', '<C-Space>', '<C-\\><C-N>ZQ')

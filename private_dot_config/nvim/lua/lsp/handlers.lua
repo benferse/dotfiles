@@ -1,5 +1,9 @@
 local M = {}
 
+local has_lsp_status, lsp_status = pcall(require, 'lsp-status')
+local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+local has_mapx, mapx = pcall(require, 'mapx')
+
 M.setup = function()
     local signs = {
         { name = 'DiagnosticSignError', text = '' },
@@ -39,35 +43,64 @@ M.setup = function()
 end
 
 local function get_capabilities()
-    local vim_caps = vim.lsp.protocol.make_client_capabilities()
-    local lsp_caps = vim.tbl_extend('keep', vim_caps, require('lsp-status').capabilities)
+    local caps = vim.lsp.protocol.make_client_capabilities()
 
-    return lsp_caps
+    if has_cmp then
+        caps = cmp_nvim_lsp.update_capabilities(caps)
+    end
+
+    if has_lsp_status then
+        caps = vim.tbl_extend('keep', caps, lsp_status.capabilities)
+    end
+
+    return caps
+end
+
+local function add_lsp_keymap(bufnr, from, to, label)
+    if has_mapx then
+        local opts = { buffer = bufnr, label = label, silent = true }
+        mapx.nnoremap(from, to, opts)
+    end
+end
+
+local function add_lsp_keymaps(bufnr)
+    -- Add buffer specific keymaps
+    add_lsp_keymap(bufnr, ']g', '<cmd>lua vim.diagnostic.goto_next()<cr>', 'Next diagnostic')
+    add_lsp_keymap(bufnr, '[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>', 'Previous diagnostic')
+
+    add_lsp_keymap(bufnr, '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code action')
+    add_lsp_keymap(bufnr, '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>', 'Goto definition')
+    add_lsp_keymap(bufnr, '<leader>lf', '<cmd>Telescope diagnostics bufnr=0<cr>', 'File diagnostics')
+    add_lsp_keymap(bufnr, '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Refactor: rename')
+    add_lsp_keymap(bufnr, '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>', 'Find references')
+    add_lsp_keymap(bufnr, '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>', 'Signature help')
 end
 
 M.on_attach = function(client, bufnr)
     -- Attach lsp as the omni completion source for this buffer
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- Add buffer specific keymaps
-    local opts = { silent = true, buffer = bufnr }
-    nnoremap('K', [[<cmd>lua vim.lsp.buf.hover()<cr>]], opts)
+    add_lsp_keymaps(bufnr)
 
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-      ]],
-      false
-    )
-  end
+    -- Set autocommands conditional on server_capabilities
+    if client.resolved_capabilities.document_highlight then
+        vim.api.nvim_exec(
+        [[
+            augroup lsp_document_highlight
+            autocmd! * <buffer>
+            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+            augroup END
+        ]],
+            false
+        )
+    end
 
-    require('lsp-status').on_attach(client)
+    if has_lsp_status then
+        client = lsp_status.on_attach(client)
+    end
+
+    return client
 end
 
 M.capabilities = get_capabilities()
