@@ -24,6 +24,12 @@ g.mapleader = [[ ]]
 g.maplocalleader = [[,]]
 
 --
+-- Load the host module first, so any host-specific functionality
+-- is available to the rest of config
+--
+require('host').setup()
+
+--
 -- Load the remainder of my settings and configuration. These should be reasonably
 -- independent
 --

@@ -10,6 +10,9 @@ m.setup { global = true, whichkey = true }
 -- Escape back to normal mode without having to stretch
 m.imap({'jj', 'jk', 'kj'}, '<esc>')
 
+m.nnoremap('j', [[v:count ? 'j' : 'gj']], 'expr')
+m.nnoremap('k', [[v:count ? 'k' : 'gk']], 'expr')
+
 -- This is honestly life changing, can't believe I lived
 -- for over forty years without this
 m.nnoremap(';', [[<cmd>up<cr>]])
@@ -18,11 +21,39 @@ m.nnoremap(';', [[<cmd>up<cr>]])
 ---- Courtesy of the inimitable tpope, modified for tmux
 m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]])
 
-----
----- Window management. Having to hit ctrl-w makes me sad sometimes
-----
---map('n', '<leader>w', '<C-w>')
+local host = require('host')
+
+m.nname(    '<leader>b',              'Buffers')
+m.nnoremap( '<leader>be',             host.buffers.new,           [[New empty buffer]])
+m.nnoremap({'<leader>bn', 'L', ']b'}, host.buffers.next,          [[Next buffer]])
+m.nnoremap({'<leader>bp', 'H', '[b'}, host.buffers.previous,      [[Previous buffer]])
+m.nnoremap( '<leader>bd',             host.buffers.delete,        [[Delete buffer]])
+m.nnoremap( '<leader>bx',             host.buffers.really_delete, [[Wipeout buffer]])
+
 --
+-- Fuzzy finder integration
+--
+m.nname(   '<leader>f',  'Fuzzy')
+m.nnoremap('<leader>fb', host.fuzzy.buffers, [[Find buffer]])
+m.nnoremap('<leader>ff', host.fuzzy.files,   [[Find files]])
+
+--
+-- Traditional find-in-files integration.
+--
+m.nname('<leader>s', 'Search')
+m.nnoremap('<leader>sf', host.search.in_files, [[In files]])
+m.nnoremap('<leader>s.', host.search.by_word,  [[Current word]])
+
+--
+-- Window management. Having to hit ctrl-w makes me sad sometimes
+-- (okay, most of the time)
+--
+m.nname('<leader>w', 'Windows')
+m.nnoremap({'<leader>wh', '<C-h>'}, host.windows.left,  [[Move cursor left]])
+m.nnoremap({'<leader>wj', '<C-j>'}, host.windows.down,  [[Move cursor down]])
+m.nnoremap({'<leader>wk', '<C-k>'}, host.windows.up,    [[Move cursor up]])
+m.nnoremap({'<leader>wl', '<C-l>'}, host.windows.right, [[Move cursor right]])
+
 ----
 ---- Jump directly to a visible window by its window ID
 ----
@@ -48,15 +79,6 @@ m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'
 --map({'i', 't'}, '<C-l>', [[<C-\><C-n>:<C-u>call host#windows#right()<cr>]])
 --
 ----
----- Buffer navigation
-----
---map('n', '<leader>be', [[<cmd>call host#buffers#new()<cr>]], [[New empty]])
---map('n', '<leader>bn', [[<cmd>call host#buffers#next()<cr>]], [[Next]])
---map('n', '<leader>bp', [[<cmd>call host#buffers#previous()<cr>]], [[Previous]])
---map('n', '<leader>bd', [[<cmd>call host#buffers#delete()<cr>]], [[Delete]])
---map('n', '<leader>bx', [[<cmd>call host#buffers#really_delete()<cr>]], [[Wipeout]])
---
-----
 ---- vim-unimpaired sets these, but we want them to go through our smarts instead
 ---- for vscode support
 ----
@@ -65,17 +87,7 @@ m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'
 --map('n', ']B', [[<cmd>call host#buffers#last()<cr>]])
 --map('n', '[B', [[<cmd>call host#buffers#first()<cr>]])
 --
-----
----- Fuzzy finder integration
-----
---map('n', '<leader>fb', [[<cmd>call host#fuzzy#find_buffers()<cr>]], [[Buffers]])
---map('n', '<leader>ff', [[<cmd>call host#fuzzy#find_files()<cr>]], [[Files]])
 --
-----
----- Traditional find-in-files integration.
-----
---map('n', '<leader>sf', [[<cmd>call host#search#find_in_files()<cr>]], [[In files]])
---map('n', '<leader>s.', [[<cmd>call host#search#find_by_word()<cr>]], [[Current word]])
 --
 ----
 ---- Explorer/tree interaction
@@ -85,7 +97,7 @@ m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'
 ----
 ---- Toggle the help window
 ----
---map('n', '<F1>', [[host#help#is_open() ? '<cmd>helpclose<cr>' : '<cmd>Telescope help_tags<cr>']], { expr = true })
+m.nmap('<F1>', host.help.toggle)
 --
 ----
 ---- Recenter on incremental search results
