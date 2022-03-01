@@ -1,6 +1,8 @@
 *.md
 setup.*
 
+/.local/bin/**
+
 {{- if (or (ne .chezmoi.os "linux") (not (.chezmoi.kernel.osrelease | lower | contains "microsoft"))) }}
 .wslprofile.d
 {{- end }}
