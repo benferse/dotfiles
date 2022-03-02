@@ -19,7 +19,7 @@ m.nnoremap(';', [[<cmd>up<cr>]])
 
 ---- Use alt-L to clear the highlighting of hlsearch
 ---- Courtesy of the inimitable tpope, modified for tmux
-m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]])
+m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]], { silent = true })
 
 local host = require('host')
 
@@ -105,6 +105,29 @@ m.tnoremap('<C-h>', [[<C-\><C-n>:<C-u>lua require('host').windows.left()<cr>]])
 m.tnoremap('<C-j>', [[<C-\><C-n>:<C-u>lua require('host').windows.down()<cr>]])
 m.tnoremap('<C-k>', [[<C-\><C-n>:<C-u>lua require('host').windows.up()<cr>]])
 m.tnoremap('<C-l>', [[<C-\><C-n>:<C-u>lua require('host').windows.right()<cr>]])
+
+-- Combined quickfix/location/trouble list and navigation
+m.nname('<leader>x', 'Trouble')
+m.nnoremap('<leader>xx', [[<cmd>TroubleToggle<cr>]],                       [[Toggle open/close]])
+m.nnoremap('<leader>xd', [[<cmd>TroubleToggle document_diagnostics<cr>]],  [[Document diagnostics]])
+m.nnoremap('<leader>xl', [[<cmd>TroubleToggle loclist<cr>]],               [[Location list]])
+m.nnoremap('<leader>xq', [[<cmd>TroubleToggle quickfix<cr>]],              [[Quickfix list]])
+m.nnoremap('<leader>xr', [[<cmd>TroubleToggle lsp_references<cr>]],        [[LSP references]])
+m.nnoremap('<leader>xt', [[<cmd>TodoTrouble<cr>]],                         [[To-dos]])
+m.nnoremap('<leader>xw', [[<cmd>TroubleToggle workspace_diagnostics<cr>]], [[Workspace diagnostics]])
+
+m.nnoremap(']x', [[<cmd>lua require('trouble').next({skip_groups = true, jump = true})]], [[Next trouble]])
+m.nnoremap('[x', [[<cmd>lua require('trouble').previous({skip_groups = true, jump = true})]], [[Previous trouble]])
+
+m.nnoremap(']q', [[<cmd>cnext<cr>]], [[Next quickfix]])
+m.nnoremap('[q', [[<cmd>cprev<cr>]], [[Previous quickfix]])
+m.nnoremap(']Q', [[<cmd>clast<cr>]], [[Next quickfix]])
+m.nnoremap('[Q', [[<cmd>cclose<cr>]], [[Previous quickfix]])
+
+m.nnoremap(']l', [[<cmd>lnext<cr>]], [[Next location]])
+m.nnoremap('[l', [[<cmd>lprev<cr>]], [[Previous location]])
+m.noremap(']l', [[<cmd>lnext<cr>]], [[Next location]])
+m.nnoremap('[l', [[<cmd>lprev<cr>]], [[Previous location]])
 
 -- Toggle the help window. If it's not open, we get a finder.
 -- If it is, then we close it.

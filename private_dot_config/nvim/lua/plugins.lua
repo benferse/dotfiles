@@ -102,6 +102,22 @@ return packer.startup(function(use)
 
     use { 'onsails/lspkind-nvim' }
 
+    use {
+        'folke/trouble.nvim',
+        requires = {
+            'kyazdani42/nvim-web-devicons',
+        }
+    }
+
+    use {
+        'folke/todo-comments.nvim',
+        requires = {
+            'kyazdani42/nvim-web-devicons',
+            'nvim-lua/plenary.nvim',
+            'folke/trouble.nvim',
+        }
+    }
+
     --
     -- Terminal helpers, embedded or external navigation
     --
