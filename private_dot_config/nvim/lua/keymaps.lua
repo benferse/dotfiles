@@ -78,6 +78,7 @@ m.nnoremap('<leader>s.', host.search.by_word,  [[Current word]])
 
 -- What other IDEs might call views / panels / etc.
 m.name(    '<leader>v', 'View')
+m.nnoremap('<leader>vb', host.views.debugger, [[Debugging]])
 m.nnoremap('<leader>ve', host.views.explorer, [[File explorer]])
 m.nnoremap('<leader>vg', host.views.git,      [[Git]])
 m.nnoremap('<leader>vp', host.views.profiler, [[System info]])

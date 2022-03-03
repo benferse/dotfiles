@@ -1,6 +1,8 @@
 local M = {}
 
 local has_toggleterm, tt = pcall(require, 'toggleterm.terminal')
+local has_dap_ui, dapui = pcall(require, 'dapui')
+
 local terminals = {}
 
 local function toggle(cmd)
@@ -33,6 +35,10 @@ end
 
 M.profiler = function()
     toggle('htop')
+end
+
+M.debugger = function()
+    if has_dap_ui then dapui.toggle() end
 end
 
 return M

@@ -10,14 +10,24 @@ end
 
 dapui.setup()
 
-dap.listeners.after.event_initialized['dapui_config'] = function()
+dap.listeners.after.event_initialized['dapui'] = function()
     dapui.open()
 end
 
-dap.listeners.after.event_terminated['dapui_config'] = function()
+dap.listeners.after.event_terminated['dapui'] = function()
+    print('why wont you closeee')
     dapui.close()
 end
 
-dap.listeners.after.event_exited['dapui_config'] = function()
+dap.listeners.after.event_exited['dapui'] = function()
+    print('why wont you closeee')
     dapui.close()
 end
+
+dap.defaults.fallback.terminal_win_cmd = [[belowright new +let\ b:dap_terminal\ =\ 1]]
+vim.cmd [[
+    augroup dap_terminal_autoclose
+        au!
+        au TermClose * try | call nvim_buf_get_var(eval(expand('<abuf>')), 'dap_terminal') | exec 'bd! ' . expand('<abuf>') | catch | endtry
+    augroup END
+]]
