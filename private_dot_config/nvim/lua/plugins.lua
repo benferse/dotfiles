@@ -118,6 +118,8 @@ return packer.startup(function(use)
         }
     }
 
+    use { 'rcarriga/nvim-notify' }
+
     --
     -- Terminal helpers, embedded or external navigation
     --
