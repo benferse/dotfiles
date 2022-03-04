@@ -116,8 +116,8 @@ m.nnoremap('<leader>xr', [[<cmd>TroubleToggle lsp_references<cr>]],        [[LSP
 m.nnoremap('<leader>xt', [[<cmd>TodoTrouble<cr>]],                         [[To-dos]])
 m.nnoremap('<leader>xw', [[<cmd>TroubleToggle workspace_diagnostics<cr>]], [[Workspace diagnostics]])
 
-m.nnoremap(']x', [[<cmd>lua require('trouble').next({skip_groups = true, jump = true})]], [[Next trouble]])
-m.nnoremap('[x', [[<cmd>lua require('trouble').previous({skip_groups = true, jump = true})]], [[Previous trouble]])
+m.nnoremap(']x', [[<cmd>lua require('trouble').next({skip_groups = true, jump = true})<cr>]], [[Next trouble]])
+m.nnoremap('[x', [[<cmd>lua require('trouble').previous({skip_groups = true, jump = true})<cr>]], [[Previous trouble]])
 
 m.nnoremap(']q', [[<cmd>cnext<cr>]], [[Next quickfix]])
 m.nnoremap('[q', [[<cmd>cprev<cr>]], [[Previous quickfix]])
