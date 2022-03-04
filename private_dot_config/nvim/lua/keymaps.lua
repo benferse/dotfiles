@@ -122,12 +122,12 @@ m.nnoremap('[x', [[<cmd>lua require('trouble').previous({skip_groups = true, jum
 m.nnoremap(']q', [[<cmd>cnext<cr>]], [[Next quickfix]])
 m.nnoremap('[q', [[<cmd>cprev<cr>]], [[Previous quickfix]])
 m.nnoremap(']Q', [[<cmd>clast<cr>]], [[Next quickfix]])
-m.nnoremap('[Q', [[<cmd>cclose<cr>]], [[Previous quickfix]])
+m.nnoremap('[Q', [[<cmd>cfirst<cr>]], [[Previous quickfix]])
 
 m.nnoremap(']l', [[<cmd>lnext<cr>]], [[Next location]])
 m.nnoremap('[l', [[<cmd>lprev<cr>]], [[Previous location]])
-m.noremap(']l', [[<cmd>lnext<cr>]], [[Next location]])
-m.nnoremap('[l', [[<cmd>lprev<cr>]], [[Previous location]])
+m.noremap(']L', [[<cmd>llast<cr>]], [[Next location]])
+m.nnoremap('[L', [[<cmd>lfirst<cr>]], [[Previous location]])
 
 -- Toggle the help window. If it's not open, we get a finder.
 -- If it is, then we close it.
