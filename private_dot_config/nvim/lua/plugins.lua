@@ -64,6 +64,8 @@ return packer.startup(function(use)
     -- Eye candy
     --
     use { 'arcticicestudio/nord-vim' }
+    use { 'kyazdani42/nvim-web-devicons' }
+    use { 'goolord/alpha-nvim' }
 
     --
     -- UI chrome, window dressing, and the stuff that makes our
@@ -119,6 +121,7 @@ return packer.startup(function(use)
     }
 
     use { 'rcarriga/nvim-notify' }
+    use { 'windwp/nvim-autopairs' }
 
     --
     -- Terminal helpers, embedded or external navigation
