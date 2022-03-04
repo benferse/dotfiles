@@ -3,6 +3,8 @@ setup.*
 
 /.local/bin/**
 
+.config/nvim/plugin/packer_compiled.lua
+
 {{- if (or (ne .chezmoi.os "linux") (not (.chezmoi.kernel.osrelease | lower | contains "microsoft"))) }}
 .wslprofile.d
 {{- end }}
