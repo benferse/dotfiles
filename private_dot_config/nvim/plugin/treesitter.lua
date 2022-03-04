@@ -2,7 +2,10 @@ require('nvim-treesitter.configs').setup {
     ensure_installed = { 'c', 'cpp', 'json', 'lua', 'rust', 'toml', 'vim' },
     highlight = { enable = true, },
     incremental_selection = { enable = true, },
-    indent = { enable = true, },
+
+    -- Treesitter indent isn't quite mature enough. Rely on
+    -- language plugins instead for now
+    indent = { enable = false, },
 
     -- Syntax aware text objects
     textobjects = {

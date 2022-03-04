@@ -162,6 +162,8 @@ return packer.startup(function(use)
         requires = 'neovim/nvim-lspconfig',
     }
 
+    use { 'rust-lang/rust.vim' }
+
     use {
         'mfussenegger/nvim-dap',
         requires = 'nvim-lua/plenary.nvim',
