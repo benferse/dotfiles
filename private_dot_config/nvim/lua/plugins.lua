@@ -133,6 +133,7 @@ return packer.startup(function(use)
     --
     use { 'folke/which-key.nvim' }
     use { 'b0o/mapx.nvim' }
+    use { 'famiu/bufdelete.nvim' }
 
     --
     -- Telescope and its fuzzy friends
@@ -159,6 +160,8 @@ return packer.startup(function(use)
     use { 'neovim/nvim-lspconfig' }
     use { 'williamboman/nvim-lsp-installer' }
     use { 'nvim-lua/lsp-status.nvim' }
+
+    use { 'simrat39/symbols-outline.nvim' }
 
     use {
         'simrat39/rust-tools.nvim',

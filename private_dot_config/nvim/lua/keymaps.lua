@@ -19,7 +19,7 @@ m.nnoremap(';', [[<cmd>up<cr>]])
 
 ---- Use alt-L to clear the highlighting of hlsearch
 ---- Courtesy of the inimitable tpope, modified for tmux
-m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]], { silent = true })
+m.nnoremap('<A-l>', [[:<C-u>nohlsearch<Bar>mes clear<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]], { silent = true })
 
 local host = require('host')
 
@@ -35,8 +35,10 @@ m.nnoremap( '<leader>bx',             host.buffers.really_delete, [[Wipeout buff
 
 -- Fuzzy finder integration
 m.nname(   '<leader>f',  'Fuzzy')
-m.nnoremap('<leader>fb', host.fuzzy.buffers, [[Find buffer]])
-m.nnoremap('<leader>ff', host.fuzzy.files,   [[Find files]])
+m.nnoremap('<leader>fb', host.fuzzy.buffers,  [[Find buffer]])
+m.nnoremap('<leader>ff', host.fuzzy.files,    [[Find files]])
+m.nnoremap('<leader>fp', host.fuzzy.projects, [[Find projects]])
+m.nnoremap('<leader>fr', host.fuzzy.recent,   [[Find recent files]])
 
 -- Git
 m.nname(   '<leader>g', 'Git')
@@ -57,8 +59,8 @@ m.nnoremap('<leader>gU', '<cmd>Gitsigns reset_buffer_index<cr>', 'Reset buffer f
 m.nnoremap('<leader>gp', '<cmd>Gitsigns preview_hunk<cr>', 'Preview hunk')
 m.nnoremap('<leader>gb', '<cmd>lua require("gitsigns").blame_line{full=true}<cr>', 'Blame line')
 
-m.nnoremap(']c', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>']], { expr = true })
-m.nnoremap('[c', [[&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>']], { expr = true })
+m.nnoremap(']c', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>']], { expr = true, label = 'Next hunk' })
+m.nnoremap('[c', [[&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>']], { expr = true, label = 'Previous hunk' })
 
 m.onoremap('ih', ':<C-U>Gitsigns select_hunk<cr>', 'Hunk')
 m.xnoremap('ih', ':<C-U>Gitsigns select_hunk<cr>', 'Hunk')
@@ -81,6 +83,7 @@ m.name(    '<leader>v', 'View')
 m.nnoremap('<leader>vb', host.views.debugger, [[Debugging]])
 m.nnoremap('<leader>ve', host.views.explorer, [[File explorer]])
 m.nnoremap('<leader>vg', host.views.git,      [[Git]])
+m.nnoremap('<leader>vs', host.views.symbols,  [[Symbol outline]])
 m.nnoremap('<leader>vp', host.views.profiler, [[System info]])
 
 -- Window management. Having to hit ctrl-w makes me sad sometimes
@@ -90,6 +93,9 @@ m.nnoremap({'<leader>wh', '<C-h>'}, host.windows.left,  [[Move cursor left]])
 m.nnoremap({'<leader>wj', '<C-j>'}, host.windows.down,  [[Move cursor down]])
 m.nnoremap({'<leader>wk', '<C-k>'}, host.windows.up,    [[Move cursor up]])
 m.nnoremap({'<leader>wl', '<C-l>'}, host.windows.right, [[Move cursor right]])
+
+m.nnoremap('<leader>wc', host.windows.close, [[Close this window]])
+m.nnoremap('<leader>wo', host.windows.only,  [[Close other windows]])
 
 -- Jump to a window by its ID (which is always in the status line <3)
 for i=1,9 do
