@@ -28,5 +28,5 @@ export SSH_AUTH_SOCK=`gpgconf --list-dirs agent-ssh-socket`
 # if we have neovim and neovim-remote, set up a known
 # socket for the server to listen on
 if [ -x ~/.local/bin/nvim -a -x ~/.local/bin/nvr ] ; then
-    export NVIM_LISTEN_ADDRESS=@neovim-remote
+    export NVIM_LISTEN_ADDRESS=${XDG_RUNTIME_DIR}/nvim.sock
 fi

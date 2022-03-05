@@ -10,8 +10,7 @@ local fn = vim.fn
 local packer_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(packer_path)) > 0 then
     PACKER_BOOTSTRAP = fn.system {
-        'git',
-        'clone',
+        'git', 'clone',
         '--depth',
         '1',
         'https://github.com/wbthomason/packer.nvim',
@@ -122,6 +121,7 @@ return packer.startup(function(use)
 
     use { 'rcarriga/nvim-notify' }
     use { 'windwp/nvim-autopairs' }
+    use { 'numToStr/Comment.nvim' }
 
     --
     -- Terminal helpers, embedded or external navigation

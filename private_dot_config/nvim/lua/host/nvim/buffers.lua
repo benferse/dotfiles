@@ -11,6 +11,9 @@ M.first = function() if any_listed() then vim.cmd('bfirst') end end
 M.last = function() if any_listed() then vim.cmd('blast') end end
 M.delete = function() vim.cmd('bdelete') end
 M.really_delete = function() vim.cmd('bdelete!') end
-M.new = function() vim.cmd('enew') end
+M.new = function() vim.cmd([[
+    enew
+    startinsert
+]]) end
 
 return M
