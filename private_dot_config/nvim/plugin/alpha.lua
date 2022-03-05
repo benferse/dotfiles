@@ -15,13 +15,13 @@ dashboard.section.buttons.val = {
 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
 
-local function fortune()
-    local handle = io.popen('fortune')
-    local text = handle:read('*a')
-    handle:close()
-    return text
-end
+-- local function fortune()
+--     local handle = io.popen('fortune')
+--     local text = handle:read('*a')
+--     handle:close()
+--     return text
+-- end
 
-dashboard.section.footer.val = fortune()
+-- dashboard.section.footer.val = fortune()
 
 alpha.setup(dashboard.opts)
