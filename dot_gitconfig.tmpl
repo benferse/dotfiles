@@ -14,11 +14,18 @@
     prompt = false
 
 [user]
+{{- if eq .chezmoi.hostname "eurydice" }}
+    email = benferse@microsoft.com
+{{- else }}
     email = ben@bu.edu
+{{- end }}
     name = Ben Fersenheim
 
 [init]
     defaultBranch = main
+
+[pull]
+    rebase = true
 
 [core]
     editor = nvr --remote-wait-silent
