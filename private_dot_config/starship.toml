@@ -2,8 +2,8 @@ format = "$env_var$username$hostname$directory$git_branch$git_commit$git_state$g
 command_timeout = 1000
 
 [character]
-success_symbol = "[➜](bold fg:#a3be8c)"
-error_symbol = "[✗](bold fg:#bf616a)"
+success_symbol = "[●](bold fg:#a3be8c)"
+error_symbol = "[●](bold fg:#bf616a)"
 
 [cmd_duration]
 style = "fg:#ebcb8e"
