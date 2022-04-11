@@ -4,7 +4,7 @@ if not is_ok then
 end
 
 toggleterm.setup {
-    open_mapping = [[<C-Space>]],
+    open_mapping = [[<M-S-`>]],
     hide_numbers = true,
     shade_terminals = true,
     start_in_insert = true,
