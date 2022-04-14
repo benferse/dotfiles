@@ -65,6 +65,7 @@ return packer.startup(function(use)
     use { 'arcticicestudio/nord-vim' }
     use { 'kyazdani42/nvim-web-devicons' }
     use { 'goolord/alpha-nvim' }
+    use { 'sunjon/shade.nvim' }
 
     --
     -- UI chrome, window dressing, and the stuff that makes our
@@ -72,6 +73,7 @@ return packer.startup(function(use)
     --
     use {
         'akinsho/bufferline.nvim',
+        branch = 'main',
         requires = 'kyazdani42/nvim-web-devicons',
     }
 
@@ -122,16 +124,20 @@ return packer.startup(function(use)
     use { 'rcarriga/nvim-notify' }
     use { 'windwp/nvim-autopairs' }
     use { 'numToStr/Comment.nvim' }
+    use { 'ur4ltz/surround.nvim' }
 
     --
     -- Terminal helpers, embedded or external navigation
     --
-    use { 'akinsho/toggleterm.nvim' }
+    use {
+        'akinsho/toggleterm.nvim',
+        branch = 'main',
+    }
 
     --
     -- Keymappings and keyboard navigation goodies
     --
-    use { 'folke/which-key.nvim' }
+    use { 'benferse/which-key.nvim' }
     use { 'b0o/mapx.nvim' }
     use { 'famiu/bufdelete.nvim' }
 

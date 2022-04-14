@@ -18,21 +18,3 @@ vim.cmd [[
         set background=dark
     endtry
 ]]
-
---
--- Use custom diagnostic sign text and highlights that are consistent with other
--- plugins in our current theme
---
-vim.cmd [[
-    highlight! default link DiagnosticError LspDiagnosticsDefaultError
-    highlight! default link DiagnosticHint LspDiagnosticsDefaultHint
-    highlight! default link DiagnosticInfo LspDiagnosticsDefaultInformation
-    highlight! default link DiagnosticInformation LspDiagnosticsDefaultInformation
-    highlight! default link DiagnosticWarn LspDiagnosticsDefaultWarning
-    highlight! default link DiagnosticWarning LspDiagnosticsDefaultWarning
-
-    highlight! default link DiagnosticUnderlineError LspDiagnosticsUnderlineError
-    highlight! default link DiagnosticUnderlineHint LspDiagnosticsUnderlineHint
-    highlight! default link DiagnosticUnderlineInfo LspDiagnosticsUnderlineInformation
-    highlight! default link DiagnosticUnderlineWarn LspDiagnosticsUnderlineWarning
-]]

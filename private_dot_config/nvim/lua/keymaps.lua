@@ -136,6 +136,24 @@ m.nnoremap('[l', [[<cmd>lprev<cr>]], [[Previous location]])
 m.noremap(']L', [[<cmd>llast<cr>]], [[Last location]])
 m.nnoremap('[L', [[<cmd>lfirst<cr>]], [[First location]])
 
+-- Goto
+m.nnoremap('ge', 'G', [[Goto the end of the file]])
+m.nnoremap('gh', '0', [[Goto the beginning of the line]])
+m.nnoremap('gl', '$', [[Goto the end of the line]])
+m.nnoremap('gs', '^', [[Goto the start of the line]])
+m.nnoremap('gt', 'H', [[Goto the top of the screen]])
+m.nnoremap('gm', 'M', [[Goto the middle of the screen]])
+m.nnoremap('gb', 'L', [[Goto the bottom of the screen]])
+m.nnoremap('gn', host.buffers.next, [[Goto the next buffer]])
+m.nnoremap('gp', host.buffers.previous, [[Goto the previous buffer]])
+m.nnoremap('g.', '`.', [[Goto last modified location]])
+
+-- Mark/surround/sandwich
+m.nnoremap('ma', [[<Plug>SurroundAddNormal]], "Add surrounding...")
+m.nnoremap('md', [[<Plug>SurroundDelete]], "Delete surrounding...")
+m.nnoremap('mr', [[<Plug>SurroundReplace]], "Replace surrounding...")
+m.xnoremap('m',  [[<Plug>SurroundAddVisual]], "Surround selection")
+
 -- Toggle the help window. If it's not open, we get a finder.
 -- If it is, then we close it.
 m.nmap('<F1>', host.help.toggle)
