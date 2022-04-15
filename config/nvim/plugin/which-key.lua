@@ -4,6 +4,9 @@ if not is_ok then
 end
 
 which_key.setup {
+    plugins = {
+        marks = true,
+    },
     window = {
         align = 'right',
         border = 'rounded',
