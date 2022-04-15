@@ -24,8 +24,8 @@ g.mapleader = [[ ]]
 g.maplocalleader = [[,]]
 
 --
--- Before anything else, load configuration that is specific to the host
--- that we're running in (nvim, nvim-qt, vscode, etc.)
+-- Load the host module first, so any host-specific functionality
+-- is available to the rest of config
 --
 require('host').setup()
 
@@ -33,6 +33,9 @@ require('host').setup()
 -- Load the remainder of my settings and configuration. These should be reasonably
 -- independent
 --
-require('settings').setup()
-require('plugins').setup()
-require('keymaps').setup()
+require('settings')
+require('plugins')
+require('keymaps')
+require('theme')
+require('remoting')
+require('lsp')

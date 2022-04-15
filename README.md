@@ -12,3 +12,5 @@ Configuration for the things I use regularly, including:
 - [vscode](https://code.visualstudio.com)
 - [Powershell Core](https://github.com/powershell/powershell)
 - [Windows Terminal](https://github.com/microsoft/terminal)
+
+Currently managed by [chezmoi](https://chezmoi.io)
