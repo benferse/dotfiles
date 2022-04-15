@@ -173,3 +173,5 @@ m.nnoremap('*', '*zz')
 m.nnoremap('#', '#zz')
 m.nnoremap('g*', 'g*zz', "Next non-word match")
 m.nnoremap('g#', 'g#zz', "Previous non-word match")
+
+m.nnoremap([[']], [[`]])
