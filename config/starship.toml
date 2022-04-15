@@ -1,0 +1,35 @@
+format = "$env_var$username$hostname$directory$git_branch$git_commit$git_state$git_status$package$dotnet$nodejs$rust$custom$cmd_duration$line_break$jobs$battery$time$status$character"
+command_timeout = 1000
+
+[character]
+success_symbol = "[●](bold fg:#a3be8c)"
+error_symbol = "[●](bold fg:#bf616a)"
+
+[cmd_duration]
+style = "fg:#ebcb8e"
+
+[directory]
+style = "bold fg:#81a1c1"
+
+[git_branch]
+style = "fg:#b48ead"
+
+[git_state]
+style = "fg:#ebcb8b"
+
+[git_status]
+style = "fg:#bf616a"
+
+[hostname]
+ssh_only = false
+style = "bold fg:#5e81ac"
+
+[username]
+style_root = "bold fg:#bf616a"
+format = "[$user]($style)@"
+
+[env_var]
+variable = "OS_GLYPH"
+default = ""
+style = "bold white"
+format = '[$env_value]($style) '

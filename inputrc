@@ -1,0 +1,20 @@
+# Use vi-style keybindings and input wherever readline
+# is used.
+set editing-mode vi
+
+# Change the caret depending on the mode - a vertical bar
+# for insert mode and a blinking block for command.
+set vi-ins-mode-string \1\e[5 q\2
+set vi-cmd-mode-string \1\e[1 q\2
+set show-mode-in-prompt on
+
+
+$if mode=vi
+set keymap vi-insert
+"jj": vi-movement-mode
+"jk": vi-movement-mode
+"kj": vi-movement-mode
+$endif
+
+# No thank you very much
+set bell-style none

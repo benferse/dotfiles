@@ -1,0 +1,24 @@
+# Use the gpg-agent to serve up auth keys, but if this looks like WSL
+# then try to tunnel to Window's agent (since we can't access the
+# YubiKey directly)
+if [ -f /proc/sys/kernel/osrelease ] && grep -q -s -i -e 'wsl\|microsoft' /proc/sys/kernel/osrelease; then
+    # Remove the standard SSH socket, and replace it with a tunnel to pageant
+    export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh}"
+    ss -a | grep -q $SSH_AUTH_SOCK
+    if [ $? -ne 0 ]; then
+        rm -f $SSH_AUTH_SOCK
+        setsid nohup socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:$HOME/.ssh/wsl2-ssh-pageant.exe &>/dev/null &
+    fi
+
+    # Remove the standard GPG socket, and replace it with a tunnel to pageant
+    export GPG_AGENT_SOCK="${GPG_AGENT_SOCK:-$XDG_RUNTIME_DIR/gnupg/S.gpg-agent}"
+    export GPG_EXTRA_SOCK="${GPG_EXTRA_SOCK:-$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.extra}"
+    ss -a | grep -q $GPG_AGENT_SOCK
+    if [ $? -ne 0 ]; then
+        rm -f $GPG_AGENT_SOCK $GPG_EXTRA_SOCK
+        setsid nohup socat UNIX-LISTEN:$GPG_AGENT_SOCK,fork       EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent" &>/dev/null &
+        setsid nohup socat UNIX-LISTEN:$GPG_EXTRA_SOCK,fork EXEC:"$HOME/.ssh/wsl2-ssh-pageant.exe --gpg S.gpg-agent.extra" &>/dev/null &
+    fi
+fi
+
+# vim: ft=bash
