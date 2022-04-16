@@ -18,3 +18,9 @@ vim.cmd [[
         set background=dark
     endtry
 ]]
+
+vim.cmd [[
+    highlight default GitGutterAdd ctermfg=2 guifg=#A3BE8C
+    highlight default GitGutterChange ctermfg=3 guifg=#EBCB8B
+    highlight default GitGutterDelete ctermfg=1 guifg=#BF616A
+]]
