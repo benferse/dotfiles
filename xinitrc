@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Set various default programs
+export TERMINAL='st -e scroll'
+export WEBBROWSER='/usr/bin/microsoft-edge --force-device-scale-factor=2'
+
 # Load any host specific modifications first
 if [ -f ~/.xinitrc.local ]; then
     . ~/.xinitrc.local

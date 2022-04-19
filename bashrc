@@ -31,9 +31,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
 # import personal aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -52,9 +49,6 @@ fi
 
 # use vi mode for readline
 set -o vi
-
-# use neovim remote as our editor
-export EDITOR='nvr -s --remote-wait-silent'
 
 # blast off
 if [ -x ~/.local/bin/starship ]; then
