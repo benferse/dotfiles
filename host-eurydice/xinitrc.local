@@ -7,3 +7,5 @@ export GDK_DPI_SCALE=2
 
 # Local our local resources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+
+dwmblocks &
