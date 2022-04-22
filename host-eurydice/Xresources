@@ -1,9 +1,9 @@
 ! dwm settings
 dwm.borderpx: 1
 dwm.font: Iosevka:Regular:pixelsize=36:autohint=true:antialias=true
-dwm.gappih: 10
-dwm.gappiv: 10
-dwm.gappoh: 10
-dwm.gappov: 10
+dwm.gappih: 20
+dwm.gappiv: 20
+dwm.gappoh: 20
+dwm.gappov: 20
 dwm.selbordercolor: #d08770
 dwm.vertpadbar: 10
