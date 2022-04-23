@@ -5,5 +5,7 @@ dwm.gappih: 20
 dwm.gappiv: 20
 dwm.gappoh: 20
 dwm.gappov: 20
-dwm.selbordercolor: #d08770
+dwm.selbordercolor: #5e81ac
+dwm.selbgcolor: #5e81ac
+dwm.selfgcolor: #eceff4
 dwm.vertpadbar: 10
