@@ -1,0 +1,3 @@
+DOTFILES_DIRS="$HOME/.dotfiles $/.dotfiles-local"
+EXCLUDES="*.md LICENSE"
+SYMLINK_DIRS="config/nvim"
