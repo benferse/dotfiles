@@ -11,7 +11,7 @@ if have_command nvr; then
 fi
 
 if have_command st; then
-    export TERMINAL='st -e scroll'
+    export TERMINAL='st'
 fi
 
 if have_command microsoft-edge; then
