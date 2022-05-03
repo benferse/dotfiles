@@ -1,5 +1,6 @@
 ! dwm - window manager settings
 dwm.borderpx: 1
+dwm.dmenufont: monospace:Regular:pixelsize=36:autohint=true:antialias=true
 dwm.font: monospace:Regular:pixelsize=36:autohint=true:antialias=true
 dwm.gappih: 10
 dwm.gappiv: 10
