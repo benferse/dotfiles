@@ -4,6 +4,3 @@
 xrandr --dpi 192
 export GDK_SCALE=1
 export GDK_DPI_SCALE=2
-
-# Local our local resources
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources

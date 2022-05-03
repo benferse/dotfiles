@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Inject any preferences into the resource manager
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+
 # Set various default programs
 export TERMINAL='st'
 export WEBBROWSER='/usr/bin/microsoft-edge --force-device-scale-factor=2'
