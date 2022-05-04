@@ -27,6 +27,19 @@ dwm.selbgcolor: #4c566a
 dwm.selfgcolor: #eceff4
 dwm.selbordercolor: #d08770
 
+! Per tag colors
+dwm.tagsel0fg: #aebe8c
+dwm.tagsel0bg: #4c566a
+
+dwm.tagsel1fg: #5e81ac
+dwm.tagsel1bg: #4c566a
+
+dwm.tagsel2fg: #d08770
+dwm.tagsel2bg: #4c566a
+
+dwm.tagsel3fg: #b48ead
+dwm.tagsel3bg: #4c566a
+
 ! st - terminal emulator settings
 st.chscale: 1.2
 st.cwscale: 1.0
