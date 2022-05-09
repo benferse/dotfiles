@@ -1,4 +1,4 @@
-format = '┌$username $hostname $git_branch $git_commit$git_state$git_status$package$dotnet$nodejs$rust$custom$line_break└$status\[$directory\] $character'
+format = '┌$username$sudo$hostname$git_branch $git_commit$git_state$git_status$package$dotnet$nodejs$rust$custom$line_break└$status\[$directory\] $character'
 command_timeout = 1000
 
 [character]
@@ -35,7 +35,7 @@ format = '([\[$all_status$ahead_behind\]]($style) )'
 [hostname]
 ssh_only = false
 style = 'bold fg:#5e81ac'
-format = '[ $hostname]($style)'
+format = '[ $hostname]($style) '
 
 [package]
 style = 'bold fg:#e5e9f0'
@@ -48,7 +48,13 @@ style = 'bold fg:#d08770'
 symbol = ' '
 format = '[$symbol($version )]($style)'
 
+[sudo]
+disabled = false
+format = '[with $symbol]($style) '
+style = 'bold yellow'
+symbol = ''
+
 [username]
 show_always = true
 style_root = 'bold fg:#bf616a'
-format = '[  $user]($style)'
+format = '[  $user]($style) '
