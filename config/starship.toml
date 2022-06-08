@@ -1,4 +1,4 @@
-format = '┌$username$sudo$hostname$git_branch $git_commit$git_state$git_status$package$dotnet$nodejs$rust$custom$line_break└$status\[$directory\] $character'
+format = '┌$username$sudo$hostname$git_branch $git_commit$git_state$git_status$package$rust$custom$line_break└$status\[$directory\] $character'
 command_timeout = 1000
 
 [character]
