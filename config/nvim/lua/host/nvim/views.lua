@@ -2,7 +2,6 @@ local M = {}
 
 local has_toggleterm, tt = pcall(require, 'toggleterm.terminal')
 local has_dap_ui, dapui = pcall(require, 'dapui')
-local has_outline, outline = pcall(require, 'symbols-outline')
 
 local terminals = {}
 
@@ -40,10 +39,6 @@ end
 
 M.debugger = function()
     if has_dap_ui then dapui.toggle() end
-end
-
-M.symbols = function()
-    if has_outline then outline.toggle_outline() end
 end
 
 return M
