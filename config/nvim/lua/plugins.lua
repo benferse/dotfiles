@@ -187,6 +187,44 @@ return packer.startup(function(use)
     }
 
     --
+    -- Markdown support
+    --
+    use {
+        'preservim/vim-markdown',
+        ft = { 'markdown' },
+    }
+
+    use {
+        'preservim/vim-pencil',
+        ft = { 'markdown' },
+        config = function()
+            vim.cmd([[
+                augroup Pencil
+                    autocmd!
+                    autocmd FileType markdown,mkd call pencil#init({"wrap": "soft"})
+                    autocmd BufEnter *.md,*.mkd SoftPencil
+                    autocmd BufEnter text call pencil#init()
+                augroup END
+            ]])
+        end
+    }
+
+    use {
+        'dhruvasagar/vim-table-mode',
+        ft ={ 'markdown' },
+        config = function()
+            vim.g.table_mode_corner = '|'
+            vim.cmd([[
+                augroup TableMode
+                    autocmd!
+                    autocmd FileType markdown,mkd call pencil#init({"wrap": "soft"})
+                    autocmd BufEnter *.md,*.mkd call pencil#init({"wrap": "soft"})
+                augroup END
+            ]])
+        end
+    }
+
+    --
     -- Automatic configuration after bootstrapping
     --
     if PACKER_BOOTSTRAP then
