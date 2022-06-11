@@ -62,7 +62,10 @@ return packer.startup(function(use)
     --
     -- Eye candy
     --
-    use { 'arcticicestudio/nord-vim' }
+    use {
+        'arcticicestudio/nord-vim',
+        branch = 'main',
+    }
     use { 'kyazdani42/nvim-web-devicons' }
     use { 'goolord/alpha-nvim' }
     use { 'sunjon/shade.nvim' }
@@ -121,7 +124,6 @@ return packer.startup(function(use)
         }
     }
 
-    use { 'rcarriga/nvim-notify' }
     use { 'windwp/nvim-autopairs' }
     use { 'numToStr/Comment.nvim' }
     use { 'ur4ltz/surround.nvim' }
@@ -166,8 +168,6 @@ return packer.startup(function(use)
     use { 'neovim/nvim-lspconfig' }
     use { 'williamboman/nvim-lsp-installer' }
     use { 'nvim-lua/lsp-status.nvim' }
-
-    use { 'simrat39/symbols-outline.nvim' }
 
     use {
         'simrat39/rust-tools.nvim',
