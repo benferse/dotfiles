@@ -1,3 +1,4 @@
 # Lua/luarocks content
 luac.out
 *.src.rock
+packer_compiled.lua
