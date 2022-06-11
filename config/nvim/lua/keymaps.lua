@@ -83,7 +83,6 @@ m.name(    '<leader>v', 'View')
 m.nnoremap('<leader>vb', host.views.debugger, [[Debugging]])
 m.nnoremap('<leader>ve', host.views.explorer, [[File explorer]])
 m.nnoremap('<leader>vg', host.views.git,      [[Git]])
-m.nnoremap('<leader>vs', host.views.symbols,  [[Symbol outline]])
 m.nnoremap('<leader>vp', host.views.profiler, [[System info]])
 
 -- Window management. Having to hit ctrl-w makes me sad sometimes

@@ -42,8 +42,4 @@ M.debugger = function()
     if has_dap_ui then dapui.toggle() end
 end
 
-M.symbols = function()
-    if has_outline then outline.toggle_outline() end
-end
-
 return M
