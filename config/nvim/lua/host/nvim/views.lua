@@ -33,6 +33,10 @@ M.explorer = function()
     toggle('ranger')
 end
 
+M.markdown = function()
+    toggle('mdless '..vim.fn.expand('%:p'))
+end
+
 M.profiler = function()
     toggle('htop')
 end
