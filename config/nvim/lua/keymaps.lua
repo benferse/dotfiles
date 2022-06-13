@@ -84,6 +84,7 @@ m.nnoremap('<leader>vb', host.views.debugger, [[Debugging]])
 m.nnoremap('<leader>ve', host.views.explorer, [[File explorer]])
 m.nnoremap('<leader>vg', host.views.git,      [[Git]])
 m.nnoremap('<leader>vp', host.views.profiler, [[System info]])
+m.nnoremap('<leader>vm', host.views.markdown, [[Markdown preview]])
 
 -- Window management. Having to hit ctrl-w makes me sad sometimes
 -- (okay, most of the time)

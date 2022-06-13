@@ -192,6 +192,10 @@ return packer.startup(function(use)
     use {
         'preservim/vim-markdown',
         ft = { 'markdown' },
+        config = function()
+            vim.g.vim_markdown_follow_anchor = 1
+            vim.g.vim_markdown_math = 1
+        end
     }
 
     use {
@@ -202,8 +206,8 @@ return packer.startup(function(use)
                 augroup Pencil
                     autocmd!
                     autocmd FileType markdown,mkd call pencil#init({"wrap": "soft"})
-                    autocmd BufEnter *.md,*.mkd SoftPencil
-                    autocmd BufEnter text call pencil#init()
+                    autocmd BufEnter *.md,*.mkd   SoftPencil
+                    autocmd BufEnter text         call pencil#init()
                 augroup END
             ]])
         end
@@ -211,17 +215,15 @@ return packer.startup(function(use)
 
     use {
         'dhruvasagar/vim-table-mode',
-        ft ={ 'markdown' },
+        ft = { 'markdown' },
         config = function()
             vim.g.table_mode_corner = '|'
-            vim.cmd([[
-                augroup TableMode
-                    autocmd!
-                    autocmd FileType markdown,mkd call pencil#init({"wrap": "soft"})
-                    autocmd BufEnter *.md,*.mkd call pencil#init({"wrap": "soft"})
-                augroup END
-            ]])
         end
+    }
+
+    use {
+        'euclio/vim-markdown-composer',
+        run = 'cargo build --release --locked',
     }
 
     --
