@@ -227,6 +227,44 @@ return packer.startup(function(use)
     }
 
     --
+    -- Playing with NeoTree
+    --
+    use {
+        'nvim-neo-tree/neo-tree.nvim',
+        branch = 'v2.x',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'kyazdani42/nvim-web-devicons',
+            'muniftanjim/nui.nvim',
+        },
+        config = function()
+            vim.g.neo_tree_remove_legacy_commands = 1
+
+            require('neo-tree').setup {
+                close_if_last_window = false,
+                popup_border_style = 'rounded',
+                enable_git_status = true,
+                enable_diagnostics = true,
+                default_component_configs = {
+                    indent = {
+                        indent_size = 2,
+                        padding = 1,
+                    },
+                    name = {
+                        use_git_status_colors = true,
+                    },
+                },
+                window = {
+                    position = 'left',
+                },
+                filesystem = {
+                    follow_current_file = true,
+                }
+            }
+        end
+    }
+
+    --
     -- Automatic configuration after bootstrapping
     --
     if PACKER_BOOTSTRAP then
