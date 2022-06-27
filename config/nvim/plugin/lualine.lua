@@ -3,6 +3,16 @@ if not is_ok then
     return
 end
 
+local has_navic, navic = pcall(require, 'nvim-navic')
+
+local function breadcrumbs()
+    if has_navic and navic.is_available() then
+        return navic.get_location()
+    end
+
+    return [[]]
+end
+
 local function window_number()
     return vim.api.nvim_win_get_number(0)
 end
@@ -30,6 +40,9 @@ lualine.setup {
         lualine_a = { window_number, 'mode', },
         lualine_b = {
             { 'filename', icon = '', },
+        },
+        lualine_c = {
+            { breadcrumbs, },
         },
         lualine_x = {},
         lualine_y = {

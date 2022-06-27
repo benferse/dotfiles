@@ -179,6 +179,10 @@ return packer.startup(function(use)
             require('fidget').setup()
         end
     }
+    use {
+        'smiteshp/nvim-navic',
+        requires = 'neovim/nvim-lspconfig',
+    }
 
     use {
         'simrat39/rust-tools.nvim',
