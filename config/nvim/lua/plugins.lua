@@ -69,6 +69,12 @@ return packer.startup(function(use)
     use { 'kyazdani42/nvim-web-devicons' }
     use { 'goolord/alpha-nvim' }
     use { 'sunjon/shade.nvim' }
+    use {
+        'folke/twilight.nvim',
+        config = function()
+            require('twilight').setup()
+        end
+    }
 
     --
     -- UI chrome, window dressing, and the stuff that makes our
