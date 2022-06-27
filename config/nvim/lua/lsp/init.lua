@@ -7,6 +7,5 @@ if not is_ok then
     return
 end
 
-require('lsp.status')
 require('lsp.handlers').setup()
 require('lsp.installer')

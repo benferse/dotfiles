@@ -1,6 +1,5 @@
 local M = {}
 
-local has_lsp_status, lsp_status = pcall(require, 'lsp-status')
 local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 local has_mapx, mapx = pcall(require, 'mapx')
 
@@ -49,10 +48,6 @@ local function get_capabilities()
         caps = cmp_nvim_lsp.update_capabilities(caps)
     end
 
-    if has_lsp_status then
-        caps = vim.tbl_extend('keep', caps, lsp_status.capabilities)
-    end
-
     return caps
 end
 
@@ -94,10 +89,6 @@ M.on_attach = function(client, bufnr)
         ]],
             false
         )
-    end
-
-    if has_lsp_status then
-        client = lsp_status.on_attach(client)
     end
 
     return client
