@@ -53,5 +53,14 @@ require('nvim-treesitter.configs').setup {
                 ['<leader>lc'] = [[@class.outer]],
             }
         }
+    },
+    textsubjects = {
+        enable = true,
+        prev_selection = ',',
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            ['a;'] = 'textsubjects-container-outer',
+            ['i;'] = 'textsubjects-container-inner',
+        }
     }
 }
