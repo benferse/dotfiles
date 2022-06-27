@@ -264,6 +264,17 @@ return packer.startup(function(use)
         end
     }
 
+    use {
+        'stevearc/aerial.nvim',
+        config = function()
+            require('aerial').setup {
+                close_behavior = 'auto',
+                default_direction = 'prefer_right',
+                min_width = 0.2
+            }
+        end
+    }
+
     --
     -- Automatic configuration after bootstrapping
     --

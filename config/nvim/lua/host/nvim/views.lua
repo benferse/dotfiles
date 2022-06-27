@@ -45,4 +45,8 @@ M.debugger = function()
     if has_dap_ui then dapui.toggle() end
 end
 
+M.symbols = function()
+    vim.cmd [[AerialToggle! right]]
+end
+
 return M
