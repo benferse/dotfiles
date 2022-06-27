@@ -85,6 +85,7 @@ m.nnoremap('<leader>ve', host.views.explorer, [[File explorer]])
 m.nnoremap('<leader>vg', host.views.git,      [[Git]])
 m.nnoremap('<leader>vp', host.views.profiler, [[System info]])
 m.nnoremap('<leader>vm', host.views.markdown, [[Markdown preview]])
+m.nnoremap('<leader>vs', host.views.symbols,  [[Symbol outline]])
 
 -- Window management. Having to hit ctrl-w makes me sad sometimes
 -- (okay, most of the time)
@@ -135,6 +136,10 @@ m.nnoremap(']l', [[<cmd>lnext<cr>]], [[Next location]])
 m.nnoremap('[l', [[<cmd>lprev<cr>]], [[Previous location]])
 m.noremap(']L', [[<cmd>llast<cr>]], [[Last location]])
 m.nnoremap('[L', [[<cmd>lfirst<cr>]], [[First location]])
+
+-- Symbol navigation
+m.nnoremap(']a', [[<cmd>AerialNext]], [[Next symbol]])
+m.nnoremap('[a', [[<cmd>AerialPrev]], [[Previous symbol]])
 
 -- Goto
 m.nnoremap('ge', 'G', [[Goto the end of the file]])
