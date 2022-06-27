@@ -1,5 +1,6 @@
 local M = {}
 
+local has_navic, navic = pcall(require, 'nvim-navic');
 local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 local has_mapx, mapx = pcall(require, 'mapx')
 
@@ -89,6 +90,11 @@ M.on_attach = function(client, bufnr)
         ]],
             false
         )
+    end
+
+    -- Make breadcrumbs if available
+    if has_navic then
+        navic.attach(client, bufnr)
     end
 
     return client
