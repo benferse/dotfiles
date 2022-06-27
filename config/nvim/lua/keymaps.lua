@@ -138,8 +138,8 @@ m.noremap(']L', [[<cmd>llast<cr>]], [[Last location]])
 m.nnoremap('[L', [[<cmd>lfirst<cr>]], [[First location]])
 
 -- Symbol navigation
-m.nnoremap(']a', [[<cmd>AerialNext]], [[Next symbol]])
-m.nnoremap('[a', [[<cmd>AerialPrev]], [[Previous symbol]])
+m.nnoremap(']a', [[<cmd>AerialNext<cr>]], [[Next symbol]])
+m.nnoremap('[a', [[<cmd>AerialPrev<cr>]], [[Previous symbol]])
 
 -- Goto
 m.nnoremap('ge', 'G', [[Goto the end of the file]])

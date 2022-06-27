@@ -90,7 +90,6 @@ return packer.startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = {
             'kyazdani42/nvim-web-devicons',
-            'arkav/lualine-lsp-progress',
         },
     }
 
@@ -174,7 +173,12 @@ return packer.startup(function(use)
     --
     use { 'neovim/nvim-lspconfig' }
     use { 'williamboman/nvim-lsp-installer' }
-    use { 'nvim-lua/lsp-status.nvim' }
+    use {
+        'j-hui/fidget.nvim',
+        config = function()
+            require('fidget').setup()
+        end
+    }
 
     use {
         'simrat39/rust-tools.nvim',

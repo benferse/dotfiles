@@ -31,14 +31,6 @@ lualine.setup {
         lualine_b = {
             { 'filename', icon = '', },
         },
-        lualine_c = {
-            {
-                'lsp_progress',
-                fmt = function(data) return string.sub(data, 1, vim.o.columns / 2) end,
-                display_components = { 'spinner', { 'title', 'percentage', 'message' }},
-                spinner_symbols = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
-            },
-        },
         lualine_x = {},
         lualine_y = {
             { 'b:gitsigns_head', icon = '', },
