@@ -47,6 +47,7 @@ if ! shopt -oq posix; then
 fi
 
 # use vi mode for readline
+export INPUTRC=/home/benferse/.config/readline/inputrc
 set -o vi
 
 # blast off

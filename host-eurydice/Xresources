@@ -1,3 +1,6 @@
+! libxft scaling
+! Xft.dpi: 192
+
 ! dwm - window manager settings
 ! Width of the border around windows
 dwm.borderpx: 1
