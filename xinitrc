@@ -4,7 +4,7 @@
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
 # Set various default programs
-export TERMINAL='st'
+export TERMINAL='kitty'
 export WEBBROWSER='/usr/bin/microsoft-edge --force-device-scale-factor=2'
 
 # Load any host specific modifications first
@@ -19,15 +19,19 @@ setxkbmap -option caps:ctrl_modifier
 picom &
 
 # Wallpaper
-feh --no-fehbg --bg-scale ~/.local/share/backgrounds/ninja_cat_at_night.jpg &
+feh --no-fehbg --bg-scale ~/.local/share/backgrounds/nord_mountains.png &
 
 # Status bar
 # TODO Work in progress
-ingot &
+# ingot &
+polybar &
 
 # Notifications
 # TODO Work in progress as well
 dunst &
 
+# Input
+sxhkd &
+
 # Start dwm
-exec dwm
+exec bspwm
