@@ -1,0 +1,28 @@
+#! /usr/bin/env bash 
+
+# Hotkeys / input / shortcuts
+pgrep -x sxhkd >/dev/null || sxhkd &
+
+# Background
+feh --no-fehbg --bg-scale ~/.local/share/backgrounds/nord_mountains.png &
+
+# Compositor
+picom -f &
+
+# Bars/panels
+killall -q polybar
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+polybar -q main &
+
+# Configure window manager
+bspc monitor -d 1 2 3 4 5 6
+
+bspc config border_width         2
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc rule -a firefox desktop='^2'
+bspc rule -a microsoft-edge desktop='^3'
