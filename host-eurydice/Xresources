@@ -6,8 +6,8 @@
 dwm.borderpx: 1
 
 ! Fonts
-dwm.dmenufont: monospace:Regular:pixelsize=36:autohint=true:antialias=true
-dwm.font: monospace:Regular:pixelsize=36:autohint=true:antialias=true
+dwm.dmenufont: monospace:Regular:pixelsize=24:autohint=true:antialias=true
+dwm.font: monospace:Regular:pixelsize=24:autohint=true:antialias=true
 
 ! Gaps between tiled windows
 dwm.gappih: 10
@@ -15,8 +15,7 @@ dwm.gappiv: 10
 dwm.gappoh: 10
 dwm.gappov: 10
 
-! Padding for status bar elements
-dwm.horizpadbar: 20
+! Padding for status bar elements dwm.horizpadbar: 20
 dwm.vertpadbar: 5
 
 ! Colors

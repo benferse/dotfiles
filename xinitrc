@@ -15,23 +15,5 @@ fi
 # Control keys? In my caps lock? It's more likely than you'd think
 setxkbmap -option caps:ctrl_modifier
 
-# Compositor
-picom &
-
-# Wallpaper
-feh --no-fehbg --bg-scale ~/.local/share/backgrounds/nord_mountains.png &
-
-# Status bar
-# TODO Work in progress
-# ingot &
-polybar &
-
-# Notifications
-# TODO Work in progress as well
-dunst &
-
-# Input
-sxhkd &
-
-# Start dwm
+# Start window manager. Other components are started there.
 exec bspwm
