@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	kitty
+	kitty -o font_size=24
 
 # program launcher
 super + @space

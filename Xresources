@@ -1,0 +1,5 @@
+#include ".Xresources.d/host"
+#include ".Xresources.d/nord-theme"
+
+#include ".Xresources.d/dwm"
+#include ".Xresources.d/st"
