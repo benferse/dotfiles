@@ -1,0 +1,6 @@
+! st - terminal emulator settings
+st.chscale: 1.2
+st.cwscale: 1.0
+st.font: monospace:Regular:pixelsize=36:autohint=true:antialias:true
+
+! vim:ft=xdefaults

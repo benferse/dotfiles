@@ -1,0 +1,33 @@
+! Xresources that define the colors for the Nord
+! theme (https://nordtheme.com)
+
+! Polar Night palette - darker colors commonly used
+! for base elements like backgrounds in dark ambiance
+! designs, or text colors in bright ambiance designs
+nord.0 = #2e3440
+nord.1 = #3b4252
+nord.2 = #434c5e
+nord.3 = #4c566a
+
+! Snow Storm palette - bright colors commonly used for
+! text/fg colors in darm ambiance designs, or base UI
+! elements in bright ambiance designs
+nord.4 = #d8dee9
+nord.5 = #e5e9f0
+nord.6 = #eceff4
+
+! Frost palette - bluish colors commonly used for primary UI
+! component and text highlighting for essential elements
+nord.7 = #8fbcbb
+nord.8 = #88c0d0
+nord.9 = #81a1c1
+nord.10 = #5e81ac
+
+! Aurora palette - colorful components used for flavor
+nord.11 = #bf616a
+nord.12 = #d08770
+nord.13 = #ebcb8b
+nord.14 = #a3be8c
+nord.15 = #b48ead
+
+! vim:ft=xdefaults
