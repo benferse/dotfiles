@@ -1,8 +1,0 @@
-! dwm settings
-dwm.borderpx: 1
-dwm.font: monospace:Regular:pixelsize=36:autohint=true:antialias=true
-dwm.gappih: 10
-dwm.gappiv: 10
-dwm.gappoh: 10
-dwm.gappov: 10
-dwm.selbordercolor: #d08770
