@@ -15,6 +15,15 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 #
+# Volume control via pulseaudio
+#
+XF86Audio{Raise,Lower}Volume
+    pactl set-sink-volume @DEFAULT_SINK@ {+5%,-5%}
+
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+#
 # bspwm hotkeys
 #
 
