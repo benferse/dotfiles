@@ -8,6 +8,8 @@ if have_command nvr; then
     export EDITOR='nvr -s --remote-wait-silent'
     export GIT_EDITOR='nvr -s --remote-wait-silent'
     export NVIM_LISTEN_ADDRESS=${XDG_RUNTIME_DIR}/nvim.sock
+else
+    export EDITOR='nvim'
 fi
 
 if have_command st; then
@@ -17,3 +19,5 @@ fi
 if have_command microsoft-edge; then
     export WEBBROWSER='microsoft-edge --force-device-scale-factor=2'
 fi
+
+export HOSTNAME
