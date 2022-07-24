@@ -4,7 +4,7 @@
 pgrep -x sxhkd >/dev/null || sxhkd &
 
 # Background
-feh --no-fehbg --bg-scale ~/.local/share/backgrounds/nord_mountains.png &
+feh --no-fehbg --bg-scale ~/.local/share/backgrounds/nord_day.jpg &
 
 # Compositor
 picom -f &
