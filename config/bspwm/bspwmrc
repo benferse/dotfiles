@@ -1,5 +1,8 @@
 #! /usr/bin/env bash 
 
+# Xsettings
+xsettingsd &
+
 # Hotkeys / input / shortcuts
 pgrep -x sxhkd >/dev/null || sxhkd &
 
