@@ -18,10 +18,10 @@ super + Escape
 # Volume control via pulseaudio
 #
 XF86Audio{Raise,Lower}Volume
-    pactl set-sink-volume @DEFAULT_SINK@ {+5%,-5%}
+    polybar-msg action '#pulseaudio.{inc,dec}'
 
 XF86AudioMute
-    pactl set-sink-mute @DEFAULT_SINK@ toggle
+    polybar-msg action '#pulseaudio.toggle'
 
 #
 # bspwm hotkeys
