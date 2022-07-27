@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-    dmenu_run -c -bw 5 -l 20 -m 0 -nb '#3b4252' -nf '#d8dee9' -sb '#d08770' -sf '#eceff4'
+    rofi -show drun -theme launcher
 
 # make sxhkd reload its configuration files:
 super + Escape
