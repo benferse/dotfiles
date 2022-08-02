@@ -48,12 +48,6 @@ style = 'bold fg:#d08770'
 symbol = ' '
 format = '[$symbol($version )]($style)'
 
-[sudo]
-disabled = false
-format = '[with $symbol]($style) '
-style = 'bold yellow'
-symbol = ''
-
 [username]
 show_always = true
 style_root = 'bold fg:#bf616a'
