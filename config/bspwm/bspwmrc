@@ -29,3 +29,4 @@ bspc config gapless_monocle      true
 
 bspc rule -a firefox desktop='^2'
 bspc rule -a microsoft-edge desktop='^3'
+bspc rule -a obs desktop='^6'
