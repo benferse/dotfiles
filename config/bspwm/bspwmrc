@@ -6,6 +6,9 @@ xsettingsd &
 # Hotkeys / input / shortcuts
 pgrep -x sxhkd >/dev/null || sxhkd &
 
+# Music server
+pgrep -x mopidy >/dev/null || mopidy &
+
 # Background
 feh --no-fehbg --bg-scale ~/.local/share/backgrounds/nord_day.jpg &
 
@@ -28,5 +31,5 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 bspc rule -a firefox desktop='^2'
-bspc rule -a microsoft-edge desktop='^3'
+bspc rule -a Microsoft-edge desktop='^3'
 bspc rule -a obs desktop='^6'
