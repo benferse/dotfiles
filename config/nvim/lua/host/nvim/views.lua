@@ -38,7 +38,7 @@ M.markdown = function()
 end
 
 M.profiler = function()
-    toggle('htop')
+    toggle('btop')
 end
 
 M.debugger = function()
