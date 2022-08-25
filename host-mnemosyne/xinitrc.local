@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Scaling for 4K Lenovo panel
+xrandr --dpi 192
+export GDK_SCALE=1
+export GDK_DPI_SCALE=2
