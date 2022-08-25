@@ -3,7 +3,7 @@ super + Return
 	kitty -o font_size=24
 
 # program launcher
-super + @space
+super + space
     rofi -show drun -theme launcher
 
 # window switcher
