@@ -59,8 +59,8 @@ m.nnoremap('<leader>gU', '<cmd>Gitsigns reset_buffer_index<cr>', 'Reset buffer f
 m.nnoremap('<leader>gp', '<cmd>Gitsigns preview_hunk<cr>', 'Preview hunk')
 m.nnoremap('<leader>gb', '<cmd>lua require("gitsigns").blame_line{full=true}<cr>', 'Blame line')
 
-m.nnoremap(']c', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>']], { expr = true, label = 'Next hunk' })
-m.nnoremap('[c', [[&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>']], { expr = true, label = 'Previous hunk' })
+m.nnoremap(']h', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>']], { expr = true, label = 'Next hunk' })
+m.nnoremap('[h', [[&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>']], { expr = true, label = 'Previous hunk' })
 
 m.onoremap('ih', ':<C-U>Gitsigns select_hunk<cr>', 'Hunk')
 m.xnoremap('ih', ':<C-U>Gitsigns select_hunk<cr>', 'Hunk')
