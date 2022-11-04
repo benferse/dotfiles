@@ -20,6 +20,7 @@ local config = {
     sources = cmp.config.sources {
         { name = 'nvim_lsp' },
         { name = 'vsnip' },
+        { name = 'nvim_lsp_signature_help' },
     },
     snippet = {
         expand = function(args)

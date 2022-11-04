@@ -46,7 +46,7 @@ local function get_capabilities()
     local caps = vim.lsp.protocol.make_client_capabilities()
 
     if has_cmp then
-        caps = cmp_nvim_lsp.update_capabilities(caps)
+        caps = cmp_nvim_lsp.default_capabilities()
     end
 
     return caps
