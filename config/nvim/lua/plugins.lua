@@ -101,6 +101,12 @@ return packer.startup(function(use)
             'neovim/nvim-lspconfig',
         },
     }
+    use {
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        requires = {
+            'hrsh7th/nvim-cmp',
+        },
+    }
 
     use { 'hrsh7th/vim-vsnip' }
     use {
@@ -234,11 +240,6 @@ return packer.startup(function(use)
         config = function()
             vim.g.table_mode_corner = '|'
         end
-    }
-
-    use {
-        'euclio/vim-markdown-composer',
-        run = 'cargo build --release --locked',
     }
 
     --
