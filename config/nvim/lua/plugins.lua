@@ -284,8 +284,10 @@ return packer.startup(function(use)
         'stevearc/aerial.nvim',
         config = function()
             require('aerial').setup {
-                default_direction = 'prefer_right',
-                min_width = 0.2
+                layout = {
+                    default_direction = 'prefer_right',
+                    min_width = 0.2,
+                },
             }
         end
     }
