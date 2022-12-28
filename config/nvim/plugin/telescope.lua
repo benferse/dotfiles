@@ -1,7 +1,12 @@
--- Telescope for fuzzy finding all the things
+local is_ok, telescope = pcall(require, 'telescope')
+if not is_ok then
+    return
+end
 
-local telescope = require('telescope')
-local actions = require('telescope.actions')
+local is_ok, actions = pcall(require, 'telescope.actions')
+if not is_ok then
+    return
+end
 
 local has_trouble, trouble = pcall(require, 'trouble.providers.telescope')
 

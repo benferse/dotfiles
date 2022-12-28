@@ -3,7 +3,10 @@ if not is_ok then
     return
 end
 
-local dashboard = require('alpha.themes.dashboard')
+local is_ok, dashboard = pcall(require, 'alpha.themes.dashboard')
+if not is_ok then
+    return
+end
 
 dashboard.section.buttons.val = {
 	dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
@@ -14,14 +17,5 @@ dashboard.section.buttons.val = {
 	dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
-
--- local function fortune()
---     local handle = io.popen('fortune')
---     local text = handle:read('*a')
---     handle:close()
---     return text
--- end
-
--- dashboard.section.footer.val = fortune()
 
 alpha.setup(dashboard.opts)
