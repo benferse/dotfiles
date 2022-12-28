@@ -27,7 +27,7 @@ g.maplocalleader = [[,]]
 -- Load the host module first, so any host-specific functionality
 -- is available to the rest of config
 --
-require('host').setup()
+-- require('host').setup()
 
 --
 -- Load the remainder of my settings and configuration. These should be reasonably
@@ -35,7 +35,7 @@ require('host').setup()
 --
 require('settings')
 --require('plugins')
-require('keymaps')
-require('theme')
-require('remoting')
-require('lsp')
+--require('keymaps')
+--require('theme')
+--require('remoting')
+--require('lsp')
