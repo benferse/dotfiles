@@ -34,7 +34,7 @@ require('host').setup()
 -- independent
 --
 require('settings')
-require('plugins')
+--require('plugins')
 require('keymaps')
 require('theme')
 require('remoting')

@@ -1,4 +1,9 @@
-require('nvim-treesitter.configs').setup {
+local is_ok, ts = pcall(require, 'nvim-treesitter.configs')
+if not is_ok then
+    return
+end
+
+ts.setup {
     ensure_installed = { 'c', 'cpp', 'json', 'lua', 'rust', 'toml', 'vim' },
     highlight = { enable = true, },
     incremental_selection = { enable = true, },
