@@ -15,27 +15,12 @@
 -- bridge, and ':help lua-vim-variables' for the other predefined global tables
 -- (like 'b:', 'w:', etc.)
 --
-local g = vim.g
 
 --
 -- mapleader needs to be set before anything uses it
 --
-g.mapleader = [[ ]]
-g.maplocalleader = [[,]]
+vim.g.mapleader = [[ ]]
+vim.g.maplocalleader = [[,]]
 
---
--- Load the host module first, so any host-specific functionality
--- is available to the rest of config
---
--- require('host').setup()
-
---
--- Load the remainder of my settings and configuration. These should be reasonably
--- independent
---
-require('settings')
---require('plugins')
---require('keymaps')
---require('theme')
---require('remoting')
---require('lsp')
+require('config.settings')
+require('config.lazy')
