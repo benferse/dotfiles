@@ -25,6 +25,7 @@ return {
 
     "folke/twilight.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "famiu/bufdelete.nvim",
 
     {
         "numtostr/comment.nvim",

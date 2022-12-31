@@ -22,5 +22,8 @@
 vim.g.mapleader = [[ ]]
 vim.g.maplocalleader = [[,]]
 
+require('host').setup()
+
 require('config.settings')
 require('config.lazy')
+require('config.keymaps')
