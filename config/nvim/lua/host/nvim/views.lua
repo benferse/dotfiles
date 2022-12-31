@@ -30,7 +30,7 @@ M.git = function()
 end
 
 M.explorer = function()
-    vim.cmd [[ Neotree position=left toggle=true reveal=true source=filesystem]]
+    vim.cmd [[Neotree position=left toggle=true reveal=true source=filesystem]]
 end
 
 M.markdown = function()

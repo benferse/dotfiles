@@ -14,6 +14,7 @@ return {
                 "bash",
                 "c",
                 "cpp",
+                "help",
                 "lua",
                 "rust",
                 "toml",

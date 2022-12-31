@@ -29,9 +29,4 @@ function M.config()
     })
 end
 
-function M.init()
-    vim.keymap.set("n", "<leader>bp", "<cmd>:BufferLineCyclePrev<cr>", { desc = "Previous buffer" })
-    vim.keymap.set("n", "<leader>bn", "<cmd>:BufferLineCycleNext<cr>", { desc = "Next buffer" })
-end
-
 return M
