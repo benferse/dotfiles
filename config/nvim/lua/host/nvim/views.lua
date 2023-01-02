@@ -1,27 +1,24 @@
 local M = {}
 
-local has_toggleterm, tt = pcall(require, 'toggleterm.terminal')
 local has_dap_ui, dapui = pcall(require, 'dapui')
 
 local terminals = {}
 
 local function toggle(cmd)
-    if has_toggleterm then
-        local term = terminals[cmd]
+    local term = terminals[cmd]
 
-        if term == nil then
-            term = tt.Terminal:new({
-                cmd = cmd,
-                dir = 'git_dir',
-                direction = 'float',
-            })
+    if term == nil then
+        term = require("toggleterm.terminal").Terminal:new({
+            cmd = cmd,
+            dir = 'git_dir',
+            direction = 'float',
+        })
 
-            terminals[cmd] = term
-        end
+        terminals[cmd] = term
+    end
 
-        if term ~= nil then
-            term:toggle()
-        end
+    if term ~= nil then
+        term:toggle()
     end
 end
 
