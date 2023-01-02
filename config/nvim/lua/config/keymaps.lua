@@ -13,19 +13,19 @@ local keymaps = {
     ["<leader>"] = {
         b = {
             name = "+Buffers",
-            d = { function() require("host").buffers.delete() end, [[Delete buffer]] },
-            e = { function() require("host").buffers.new() end, [[New empty buffer]] },
-            f = { function() require("host").buffers.first() end, [[First buffer]] },
-            l = { function() require("host").buffers.last() end, [[Last buffer]] },
-            n = { function() require("host").buffers.next() end, [[Next buffer]] },
-            p = { function() require("host").buffers.previous() end, [[Previous buffer]] },
-            x = { function() require("host").buffers.really_delete() end, "Wipeout buffer" },
+            d = { host.buffers.delete, [[Delete buffer]] },
+            e = { host.buffers.new, [[New empty buffer]] },
+            f = { host.buffers.first, [[First buffer]] },
+            l = { host.buffers.last, [[Last buffer]] },
+            n = { host.buffers.next, [[Next buffer]] },
+            p = { host.buffers.previous, [[Previous buffer]] },
+            x = { host.buffers.really_delete, [[Wipeout buffer]] },
         },
         f = {
             name = "+Fuzzy",
-            b = { function() require("host").fuzzy.buffers() end, [[Find buffer]] },
-            f = { function() require("host").fuzzy.files() end, [[Find files]] },
-            r = { function() require("host").fuzzy.recent() end, [[Find recent files]] },
+            b = { host.fuzzy.buffers, [[Find buffer]] },
+            f = { host.fuzzy.files, [[Find files]] },
+            r = { host.fuzzy.recent, [[Find recent files]] },
         },
         l = {
             name = "+LSP",
@@ -56,6 +56,20 @@ local keymaps = {
             o = { host.windows.only,  [[Close other window]] },
         },
     },
+    ["["] = {
+        name = "+Previous",
+        b = { host.buffers.previous, [[Previous buffer]] },
+        B = { host.buffers.first, [[First buffer]] },
+        x = { function() require("trouble").previous({skip_groups = true, jump = true}) end, [[Previous trouble]] },
+        X = { function() require("trouble").first({skip_groups = true, jump = true}) end, [[First trouble]] },
+    },
+    ["]"] = {
+        name = "+Next",
+        b = { host.buffers.next, [[Next buffer]] },
+        B = { host.buffers.last, [[Last buffer]] },
+        x = { function() require("trouble").next({skip_groups = true, jump = true}) end, [[Next trouble]] },
+        X = { function() require("trouble").last({skip_groups = true, jump = true}) end, [[Last trouble]] },
+    },
 }
 
 wk.register(keymaps)
@@ -67,3 +81,5 @@ vim.keymap.set("n", ";", [[<cmd>up<cr>]])
 
 vim.keymap.set("n", "<F1>", require("host").help.toggle)
 
+vim.keymap.set("n", "H", host.buffers.previous)
+vim.keymap.set("n", "L", host.buffers.next)
