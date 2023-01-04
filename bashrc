@@ -53,6 +53,8 @@ set -o vi
 # blast off
 if [ -x ~/.local/bin/starship ]; then
     eval "$(~/.local/bin/starship init bash)"
+elif [ -x ~/.cargo/bin/starship ]; then
+    eval "$(~/.cargo/bin/starship init bash)"
 fi
 
 # BEGIN_KITTY_SHELL_INTEGRATION

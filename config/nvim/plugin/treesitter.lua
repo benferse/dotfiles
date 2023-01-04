@@ -5,55 +5,55 @@ require('nvim-treesitter.configs').setup {
 
     -- Treesitter indent isn't quite mature enough. Rely on
     -- language plugins instead for now
-    indent = { enable = false, },
+    -- indent = { enable = false, },
 
     -- Syntax aware text objects
-    textobjects = {
-        select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-                ['ac'] = [[@class.outer]],
-                ['ic'] = [[@class.inner]],
-                ['af'] = [[@function.outer]],
-                ['if'] = [[@function.inner]],
-                ['aa'] = [[@parameter.outer]],
-                ['ia'] = [[@parameter.inner]],
-            }
-        },
-        move = {
-            enable = true,
-            set_jumps = true,
-
-            goto_next_start = {
-                [']m'] = [[@function.outer]],
-                [']]'] = [[@class.outer]],
-            },
-
-            goto_next_end = {
-                [']M'] = [[@function.outer]],
-                [']['] = [[@class.outer]],
-            },
-
-            goto_previous_start = {
-                ['[m'] = [[@function.outer]],
-                ['[['] = [[@class.outer]],
-            },
-
-            goto_previous_end = {
-                ['[M'] = [[@function.outer]],
-                ['[]'] = [[@class.outer]],
-            },
-        },
-        lsp_interop = {
-            enable = true,
-            border = 'none',
-            peek_definition_code = {
-                ['<leader>lp'] = [[@function.outer]],
-                ['<leader>lc'] = [[@class.outer]],
-            }
-        }
-    },
+    -- textobjects = {
+    --     -- select = {
+    --     --     enable = true,
+    --     --     lookahead = true,
+    --     --     keymaps = {
+    --     --         -- ['ac'] = [[@class.outer]],
+    --     --         -- ['ic'] = [[@class.inner]],
+    --     --         ['af'] = [[@function.outer]],
+    --     --         ['if'] = [[@function.inner]],
+    --     --         ['aa'] = [[@parameter.outer]],
+    --     --         ['ia'] = [[@parameter.inner]],
+    --     --     }
+    --     -- },
+    --     -- move = {
+    --     --     enable = true,
+    --     --     set_jumps = true,
+    --     --
+    --     --     goto_next_start = {
+    --     --         [']m'] = [[@function.outer]],
+    --     --         [']]'] = [[@class.outer]],
+    --     --     },
+    --     --
+    --     --     goto_next_end = {
+    --     --         [']M'] = [[@function.outer]],
+    --     --         [']['] = [[@class.outer]],
+    --     --     },
+    --     --
+    --     --     goto_previous_start = {
+    --     --         ['[m'] = [[@function.outer]],
+    --     --         ['[['] = [[@class.outer]],
+    --     --     },
+    --     --
+    --     --     goto_previous_end = {
+    --     --         ['[M'] = [[@function.outer]],
+    --     --         ['[]'] = [[@class.outer]],
+    --     --     },
+    --     -- },
+    --     -- lsp_interop = {
+    --     --     enable = true,
+    --     --     border = 'none',
+    --     --     peek_definition_code = {
+    --     --         ['<leader>lp'] = [[@function.outer]],
+    --     --         ['<leader>lc'] = [[@class.outer]],
+    --     --     }
+    --     -- }
+    -- },
     textsubjects = {
         enable = true,
         prev_selection = ',',
