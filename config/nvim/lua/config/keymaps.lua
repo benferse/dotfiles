@@ -77,7 +77,17 @@ local keymaps = {
             ["8"] = { "8<C-w>w", [[Goto window 8]] },
             ["9"] = { "9<C-w>w", [[Goto window 9]] },
         },
-    },
+        x = {
+            name = "+Trouble / Quickfix / Loclist",
+            d = { [[<cmd>TroubleToggle document_diagnostics<cr>]], [[Diagnostics (document)]] },
+            l = { [[<cmd>TroubleToggle loclist<cr>]], [[Loclist]] },
+            q = { [[<cmd>TroubleToggle quickfix<cr>]], [[Quickfix]] },
+            r = { [[<cmd>TroubleRefresh<cr>]], [[Refresh...]] },
+            t = { [[<cmd>Trouble todo<cr>]], [[To-do]] },
+            w = { [[<cmd>TroubleToggle workspace_diagnostics<cr>]], [[Diagnostics (workspace)]] },
+            x = { [[<cmd>TroubleToggle<cr>]], [[Toggle]] },
+        },
+   },
     ["["] = {
         name = "+Previous",
         b = { host.buffers.previous, [[Previous buffer]] },
