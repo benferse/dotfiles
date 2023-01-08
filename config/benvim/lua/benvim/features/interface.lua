@@ -32,8 +32,8 @@ return {
             { "<leader>bn", "<cmd>BufferLineCycleNext<cr>", { desc = "Buffer" } },
             { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>", { desc = "Buffer" } },
 
-            { "H", "<cmd>BufferLineCycleNext<cr>", { desc = "Buffer" } },
-            { "L", "<cmd>BufferLineCyclePrev<cr>", { desc = "Buffer" } },
+            { "H", "<cmd>BufferLineCyclePrev<cr>", { desc = "Buffer" } },
+            { "L", "<cmd>BufferLineCycleNext<cr>", { desc = "Buffer" } },
         },
     },
     -- Status line

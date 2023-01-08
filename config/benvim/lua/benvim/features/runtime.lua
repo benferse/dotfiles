@@ -40,6 +40,8 @@ return {
                 ["z"] = "+Junk drawer",
                 ["]"] = "+Next",
                 ["["] = "+Previous",
+                ["<leader>"] = "More...",
+                ["<localleader>"] = "More...",
                 ["<leader>b"] = "+Buffer",
                 ["<leader>f"] = "+File",
                 ["<leader>g"] = "+Git",
