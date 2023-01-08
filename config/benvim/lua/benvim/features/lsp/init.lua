@@ -8,6 +8,7 @@ return {
             "hrsh7th/cmp-nvim-lsp",
         },
         servers = {
+            clangd = {},
             rust_analyzer = {},
             sumneko_lua = {
                 settings = {
@@ -65,10 +66,12 @@ return {
             { "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" } },
         },
         ensure_installed = {
+            "clangd",
             "lua-language-server",
             "rust-analyzer",
             "rustfmt",
             "shellcheck",
+            "shfmt",
             "stylua",
         },
         config = function(plugin)
@@ -82,4 +85,21 @@ return {
             end
         end,
     },
+    {
+        "simrat39/rust-tools.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        ft = "rust",
+        opts = {
+            tools = {
+                inlay_hints = {
+                    auto = true,
+                },
+            },
+        },
+        keys = {
+            { "<localleader>c", "<cmd>RustOpenCargo<cr>", { desc = "Rust: Open Cargo.toml" } },
+        },
+    }
 }
