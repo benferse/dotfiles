@@ -53,6 +53,7 @@ vim.api.nvim_create_autocmd({"FileType"}, {
         "man",
         "notify",
         "lspinfo",
+        "spectre_panel",
     },
     callback = function(event)
         -- Unlist the buffer, and add a silent mapping to close this window
