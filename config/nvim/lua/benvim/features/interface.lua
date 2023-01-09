@@ -10,7 +10,7 @@ return {
     {
         "akinsho/bufferline.nvim",
         event = "BufAdd",
-        config = {
+        opts = {
             options = {
                 diagnostics = "nvim_lsp",
                 enforce_regular_tabs = true,
@@ -68,7 +68,7 @@ return {
         keys = {
             { "<leader>nd", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Clear notifications" },
         },
-        config = {
+        opts = {
             timeout = 3000,
             max_height = function()
                 return math.floor(vim.o.lines * 0.75)
@@ -82,7 +82,7 @@ return {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
-        config = {
+        opts = {
             cmdline = {
                 enabled = true,
                 view = "cmdline_popup",

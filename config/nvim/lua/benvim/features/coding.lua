@@ -2,7 +2,7 @@ return {
     -- Git integration in the editor
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
-    config = {
+    opts = {
         signs = {
             add = { text = "▎" },
             change = { text = "▎" },

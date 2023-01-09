@@ -28,7 +28,7 @@ return {
             { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "In current buffer" },
             { "<leader>sf", telescope_from_root("live_grep"), desc = "In files (root)" },
         },
-        config = {
+        opts = {
             defaults = {
                 prompt_prefix = " ",
                 selection_caret = " ",

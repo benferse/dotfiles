@@ -17,7 +17,7 @@ return {
         init = function()
             vim.g.neo_tree_remove_legacy_commands = 1
         end,
-        config = {
+        opts = {
             filesystem = {
                 follow_current_file = true,
                 hijack_netrw_behavior = "open_current",
@@ -33,7 +33,7 @@ return {
     {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle", },
-        config = { use_diagnostic_signs = true },
+        opts = { use_diagnostic_signs = true },
         keys = {
             { "<leader>vx", "<cmd>TroubleToggle<cr>", desc = "Toggle trouble view" },
             { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document diagnostics" },
@@ -46,7 +46,6 @@ return {
         "folke/todo-comments.nvim",
         cmd = { "TodoTrouble", "TodoTelescope" },
         event = "BufReadPost",
-        config = true,
         keys = {
             { "]t", function() require("todo-comments").jump_next() end, desc = "Todo comment" },
             { "[t", function() require("todo-comments").jump_prev() end, desc = "Todo comment" },

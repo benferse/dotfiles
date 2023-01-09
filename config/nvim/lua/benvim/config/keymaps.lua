@@ -57,11 +57,15 @@ vim.keymap.set({"i", "t"}, "<C-l>", [[<C-\><C-n>:<C-u>wincmd l<cr>]])
 -- b - Buffers
 -- g - Git
 -- h - Help
+-- q - Quit / Save / Restore sessions
 -- w - Window navigation
 -- x - Trouble / quickfix / location list
 vim.keymap.set("n", "<leader>be", "<cmd>enew<cr>", { desc = "New" })
 
 vim.keymap.set("n", "<leader>hq", "<cmd>helpclose<cr>", { desc = "Close help window" })
+
+vim.keymap.set("n", "<leader>qX", "<cmd>qall<cr>", { desc = "Quit without saving" })
+vim.keymap.set("n", "<leader>qW", "<cmd>xall<cr>", { desc = "Save all and quit" })
 
 vim.keymap.set("n", "<leader>wh", "<cmd>wincmd h<cr>", { desc = "Go left" })
 vim.keymap.set("n", "<leader>wj", "<cmd>wincmd j<cr>", { desc = "Go down" })
@@ -70,7 +74,6 @@ vim.keymap.set("n", "<leader>wl", "<cmd>wincmd l<cr>", { desc = "Go right" })
 
 vim.keymap.set("n", "<leader>wc", "<C-w>c", { desc = "Close" })
 vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Only" })
-
 
 -- Mappings that start with [ and ] generally come in pairs and involve next/prev or fwd/back
 -- navigations that come in pairs, a la vim-unimpaired, etc.
