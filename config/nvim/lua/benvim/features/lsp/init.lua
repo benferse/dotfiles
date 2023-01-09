@@ -6,6 +6,7 @@ return {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
+            "smiteshp/nvim-navic",
         },
         servers = {
             clangd = {},
@@ -29,6 +30,10 @@ return {
                     local bufnr = args.buf
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
                     require("benvim.features.lsp.keymaps").on_attach(client, bufnr)
+
+                    if client.server_capabilities.documentSymbolProvider then
+                        require("nvim-navic").attach(client, bufnr)
+                    end
                 end,
             })
 
