@@ -40,7 +40,10 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
-        config = function(plugin)
+        dependencies = {
+            "smiteshp/nvim-navic",
+        },
+        config = function()
             require("lualine").setup({
                 extensions = {
                     "quickfix",
@@ -50,9 +53,14 @@ return {
                     theme = "auto",
                 },
                 sections = {
-                    lualine_a = { window_number, 'mode' },
-                    lualine_b = { 'filename' },
-                    lualine_c = {},
+                    lualine_a = { window_number, "mode" },
+                    lualine_b = { "branch" },
+                    lualine_c = {
+                        { "diagnostics" },
+                        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+                        { "filename", path = 1 },
+                        { require("nvim-navic").get_location, require("nvim-navic").is_available },
+                    },
                     lualine_x = {},
                     lualine_y = {},
                 },
@@ -78,7 +86,21 @@ return {
             end,
         },
     },
-    -- Prettier replacements for vim.ui.select, vim.ui.input, messages, etc
+    -- Prettier vim.ui.select and vim.ui.input
+    {
+        "stevearc/dressing.nvim",
+        init = function()
+            vim.ui.select = function(...)
+                require("lazy").load({ plugins = { "dressing.nvim" }})
+                return vim.ui.select(...)
+            end
+            vim.ui.input = function(...)
+                require("lazy").load({ plugins = { "dressing.nvim" }})
+                return vim.ui.input(...)
+            end
+        end,
+    },
+    -- Prettier replacements for cmdline, notifications, and messages
     {
         "folke/noice.nvim",
         event = "VeryLazy",

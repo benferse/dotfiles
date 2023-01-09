@@ -67,5 +67,19 @@ return {
             end
             leap.add_default_mappings(true)
         end,
-    }
+    },
+    {
+        "echasnovski/mini.surround",
+        keys = { "," },
+        opts = {
+            mappings = {
+                add = ',a',
+                delete = ',d',
+                replace = ',r',
+            },
+        },
+        config = function(_, opts)
+            require("mini.surround").setup(opts)
+        end,
+    },
 }
