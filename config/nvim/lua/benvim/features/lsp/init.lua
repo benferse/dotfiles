@@ -65,22 +65,22 @@ return {
         keys = {
             { "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" } },
         },
-        ensure_installed = {
-            "clangd",
-            "lua-language-server",
-            "rust-analyzer",
-            "rustfmt",
-            "shellcheck",
-            "shfmt",
-            "stylua",
-        },
-        config = function(plugin)
-            require("mason").setup()
+        config = function()
+            require("mason").setup({})
             local reg = require("mason-registry")
-            for _, tool in ipairs(plugin.ensure_installed) do
+            local ensure_installed = {
+                "clangd",
+                "lua-language-server",
+                "rust-analyzer",
+                "rustfmt",
+                "shellcheck",
+                "shfmt",
+                "stylua",
+            }
+            for _, tool in ipairs(ensure_installed) do
                 local p = reg.get_package(tool)
                 if not p:is_installed() then
-                    p.install()
+                    p:install()
                 end
             end
         end,
@@ -98,8 +98,5 @@ return {
                 },
             },
         },
-        keys = {
-            { "<localleader>c", "<cmd>RustOpenCargo<cr>", { desc = "Rust: Open Cargo.toml" } },
-        },
-    }
+    },
 }

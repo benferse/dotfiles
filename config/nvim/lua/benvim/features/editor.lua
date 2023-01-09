@@ -3,7 +3,7 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "BufReadPre",
-        config = {
+        opts = {
             char = "│",
             filetype_exclude = { "help", "neo-tree", "Trouble", "lazy" },
             show_trailing_blankline_indent = false,

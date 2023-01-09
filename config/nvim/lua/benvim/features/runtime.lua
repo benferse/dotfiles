@@ -48,6 +48,7 @@ return {
                 ["<leader>h"] = "+Help",
                 ["<leader>l"] = "+Lazy",
                 ["<leader>n"] = "+Notifications",
+                ["<leader>q"] = "+Quit",
                 ["<leader>s"] = "+Search",
                 ["<leader>v"] = "+View",
                 ["<leader>w"] = "+Window",
