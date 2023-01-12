@@ -46,10 +46,11 @@ return {
                 ["<leader>f"] = "+File",
                 ["<leader>g"] = "+Git",
                 ["<leader>h"] = "+Help",
-                ["<leader>l"] = "+Lazy",
+                ["<leader>l"] = "Lazy",
                 ["<leader>n"] = "+Notifications",
                 ["<leader>q"] = "+Quit",
                 ["<leader>s"] = "+Search",
+                ["<leader>t"] = "+Toggle",
                 ["<leader>v"] = "+View",
                 ["<leader>w"] = "+Window",
             })
