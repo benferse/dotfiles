@@ -82,4 +82,31 @@ return {
             require("mini.surround").setup(opts)
         end,
     },
+    {
+        "folke/twilight.nvim",
+        event = "VeryLazy",
+        config = true,
+        keys = {
+            { "<leader>tw", "<cmd>Twilight<cr>", "Twilight" },
+        },
+    },
+    {
+        "folke/zen-mode.nvim",
+        cmd = { "ZenMode" },
+        opts = {
+            window = {
+                width = .75,
+            },
+            plugins = {
+                twilight = true,
+                kitty = {
+                    enabled = true,
+                    font = "+4",
+                },
+            },
+        },
+        keys = {
+            { "<leader>tz", "<cmd>ZenMode<cr>", "Zen mode" },
+        },
+    }
 }
