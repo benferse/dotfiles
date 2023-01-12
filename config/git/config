@@ -22,12 +22,3 @@
     tree = log --color --graph --pretty=format:'%Cred%h%Creset (%G?) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [credential "https://gitlab.freedesktop.org"]
 	provider = generic
-[credential "azrepos:org/msazure"]
-	azureAuthority = https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47
-	username = benferse@microsoft.com
-[credential "azrepos:org/mscodehub"]
-	azureAuthority = https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47
-	username = benferse@microsoft.com
-[credential "azrepos:org/office"]
-	azureAuthority = https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47
-	username = benferse@microsoft.com
