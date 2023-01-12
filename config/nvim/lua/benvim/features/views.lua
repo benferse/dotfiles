@@ -53,4 +53,15 @@ return {
             { "<leader>xt", "<cmd>TroubleToggle todo<cr>", desc = "Todo comments" },
         },
     },
+    -- Document outline, drawing from multiple context-sensitive sources
+    {
+        "stevearc/aerial.nvim",
+        cmd = { "AerialNext", "AerialPrev", "AerialToggle" },
+        config = true,
+        keys = {
+            { "]a", "<cmd>AerialNext<cr>", "Symbol (Aerial)" },
+            { "[a", "<cmd>AerialPrev<cr>", "Symbol (Aerial)" },
+            { "<leader>vs", "<cmd>AerialToggle!<cr>", "Symbols / outline" },
+        }
+    },
 }

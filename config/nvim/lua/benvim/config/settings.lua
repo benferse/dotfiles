@@ -1,10 +1,6 @@
 -- This file is loaded by the "configuration" plugin spec
 
 local set = vim.opt
-local g = vim.g
-
-g.mapleader = " "
-g.maplocalleader = [[\]]
 
 -- Note that the lua bridge only exposes a single boolean for each
 -- value, instead of separate X and noX values. So instead of setting

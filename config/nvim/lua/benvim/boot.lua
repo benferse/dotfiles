@@ -14,6 +14,11 @@ end
 
 vim.opt.runtimepath:prepend(plugin_mgr)
 
+-- Make sure these are set before initializing lazy, so plugin-local
+-- keymaps can use them
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
 -- Direct the plugin manager to the spec that contains our plugins
 -- and their config. Plugins are collected into logic "features" to
 -- keep related things together and prevent a lot of overhead due to
