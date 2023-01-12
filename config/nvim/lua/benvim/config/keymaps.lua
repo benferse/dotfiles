@@ -74,6 +74,7 @@ vim.keymap.set("n", "<leader>wl", "<cmd>wincmd l<cr>", { desc = "Go right" })
 
 vim.keymap.set("n", "<leader>wc", "<C-w>c", { desc = "Close" })
 vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Only" })
+vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Quit" })
 
 -- Mappings that start with [ and ] generally come in pairs and involve next/prev or fwd/back
 -- navigations that come in pairs, a la vim-unimpaired, etc.
