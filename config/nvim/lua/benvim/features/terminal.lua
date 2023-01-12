@@ -20,6 +20,7 @@ end
 return {
     {
         "akinsho/toggleterm.nvim",
+        event = "VeryLazy",
         opts = {
             open_mapping = [[`]],
             hide_numbers = true,
