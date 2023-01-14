@@ -35,6 +35,10 @@ return {
         cmd = { "Trouble", "TroubleToggle", },
         opts = { use_diagnostic_signs = true },
         keys = {
+            { "]x", function() require("trouble").next({ skip_groups = true, jump = true }) end, "Trouble" },
+            { "[x", function() require("trouble").previous({ skip_groups = true, jump = true }) end, "Trouble" },
+            { "]X", function() require("trouble").last({ skip_groups = true, jump = true }) end, "Trouble" },
+            { "[X", function() require("trouble").first({ skip_groups = true, jump = true }) end, "Trouble" },
             { "<leader>vx", "<cmd>TroubleToggle<cr>", desc = "Toggle trouble view" },
             { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document diagnostics" },
             { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
@@ -46,6 +50,7 @@ return {
         "folke/todo-comments.nvim",
         cmd = { "TodoTrouble", "TodoTelescope" },
         event = "BufReadPost",
+        config = true,
         keys = {
             { "]t", function() require("todo-comments").jump_next() end, desc = "Todo comment" },
             { "[t", function() require("todo-comments").jump_prev() end, desc = "Todo comment" },
