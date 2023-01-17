@@ -42,8 +42,8 @@ return {
             },
         },
         keys = {
-            { "<leader>vg", function() toggle("lazygit") end, { desc = "lazygit" }},
-            { "<leader>vp", function() toggle("btop") end, { desck = "Profiler (btop)" }}
+            { "<leader>vg", function() toggle("lazygit") end, desc = "lazygit" },
+            { "<leader>vp", function() toggle("btop") end, desc = "Profiler (btop)" },
         }
     }
 }

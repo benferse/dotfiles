@@ -54,8 +54,8 @@ return {
         keys = {
             { "]t", function() require("todo-comments").jump_next() end, desc = "Todo comment" },
             { "[t", function() require("todo-comments").jump_prev() end, desc = "Todo comment" },
-            { "<leader>xs", "<cmd>TodoTelescope<cr>", desc = "Todo comments" },
-            { "<leader>xt", "<cmd>TroubleToggle todo<cr>", desc = "Todo comments" },
+            { "<leader>xs", "<cmd>TodoTelescope<cr>", desc = "Telescope: Todo comments" },
+            { "<leader>xt", "<cmd>TroubleToggle todo<cr>", desc = "Trouble: Todo comments" },
         },
     },
     -- Document outline, drawing from multiple context-sensitive sources
@@ -64,9 +64,9 @@ return {
         cmd = { "AerialNext", "AerialPrev", "AerialToggle" },
         config = true,
         keys = {
-            { "]a", "<cmd>AerialNext<cr>", "Symbol (Aerial)" },
-            { "[a", "<cmd>AerialPrev<cr>", "Symbol (Aerial)" },
-            { "<leader>vs", "<cmd>AerialToggle!<cr>", "Symbols / outline" },
+            { "]a", "<cmd>AerialNext<cr>", desc = "Symbol (Aerial)" },
+            { "[a", "<cmd>AerialPrev<cr>", desc = "Symbol (Aerial)" },
+            { "<leader>vs", "<cmd>AerialToggle!<cr>", desc = "Symbols " },
         }
     },
 }

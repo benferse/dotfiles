@@ -73,7 +73,7 @@ return {
         "williamboman/mason.nvim",
         cmd = "Mason",
         keys = {
-            { "<leader>cm", "<cmd>Mason<cr>", "Mason" },
+            { "<leader>um", "<cmd>Mason<cr>", desc = "LSPs/Formatters (Mason)" },
         },
         config = function()
             require("mason").setup({})
