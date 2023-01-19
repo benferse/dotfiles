@@ -13,6 +13,10 @@ return {
     -- Standard icon pack
     "nvim-tree/nvim-web-devicons",
 
+    -- Neovim plugin/extension development, which is also quite nice for editing
+    -- our own config
+    "folke/neodev.nvim",
+
     -- which-key is loaded here so we can have a single place to define all
     -- of the key group names
     {

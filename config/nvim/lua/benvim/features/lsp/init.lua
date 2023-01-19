@@ -3,6 +3,7 @@ return {
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
         dependencies = {
+            "folke/neodev.nvim",
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
@@ -25,6 +26,8 @@ return {
             },
         },
         config = function(plugin)
+            require("neodev").setup()
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local bufnr = args.buf
@@ -52,21 +55,6 @@ return {
             vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "" })
             vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
             vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "" })
-        end,
-    },
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        event = "BufReadPre",
-        dependencies = {
-            "williamboman/mason.nvim",
-        },
-        config = function()
-            local nls = require("null-ls")
-            nls.setup({
-                sources = {
-                    nls.builtins.formatting.stylua,
-                },
-            })
         end,
     },
     {
