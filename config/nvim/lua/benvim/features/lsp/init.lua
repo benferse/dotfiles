@@ -11,19 +11,8 @@ return {
         },
         servers = {
             clangd = {},
-            rust_analyzer = {},
-            sumneko_lua = {
-                settings = {
-                    Lua = {
-                        workspace = {
-                            checkThirdParty = false,
-                        },
-                        completion = {
-                            callSnippet = "Replace",
-                        },
-                    },
-                },
-            },
+            rust_analyzer = require("benvim.features.lsp.rust_analyzer.settings"),
+            sumneko_lua = require("benvim.features.lsp.sumneko_lua.settings"),
         },
         config = function(plugin)
             require("neodev").setup()
