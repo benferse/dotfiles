@@ -6,8 +6,8 @@
 vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave", "WinEnter"}, {
     pattern = "*",
     callback = function()
-        if vim.opt.number and vim.fn.mode() ~= "i" then
-            vim.opt.relativenumber = true
+        if vim.o.number and vim.fn.mode() ~= "i" then
+            vim.o.relativenumber = true
         end
     end,
 })
@@ -15,8 +15,8 @@ vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave", "WinEnter
 vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter", "WinLeave"}, {
     pattern = "*",
     callback = function()
-        if vim.opt.number then
-            vim.opt.relativenumber = false
+        if vim.o.number then
+            vim.o.relativenumber = false
         end
     end,
 })
