@@ -13,7 +13,7 @@
 [fetch]
     prune = true
 [include]
-    path = config.local
+    path = ~/.config/git/config.local
 [core]
     autocrlf = input
     excludesfile = ~/.gitignore
