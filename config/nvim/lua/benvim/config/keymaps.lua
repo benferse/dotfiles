@@ -10,8 +10,8 @@ vim.keymap.set("i", "jj", "<esc>")
 -- Always prefer display lines over text lines when moving up and down, unless
 -- we're given a count of lines (which probably means you're navigating using
 -- the number line
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set({"n", "v"}, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({"n", "v"}, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Undo breakpoints for code editing. Insert logical places to "undo" to within a single
 -- line
@@ -28,6 +28,10 @@ vim.keymap.set("n", ";", "<cmd>up<cr>")
 vim.keymap.set({"n", "x", "o"}, "n", "'Nn'[v:searchforward]", { expr = true })
 vim.keymap.set({"n", "x", "o"}, "N", "'nN'[v:searchforward]", { expr = true })
 
+-- Clear search highlighting with Alt-L
+-- Courtesy of the inimitable tpope
+vim.keymap.set("n", "<A-l>", [[:<C-u>nohlsearch<Bar>mes clear<Bar><C-R>=has('diff')?'diffupdate':'mode'<cr><cr>]], { silent = true })
+
 -- Don't lose the selection when shifting left or right.
 -- See https://github.com/mhinz/vim-galore#dont-lose-selection-when-shifting-sidewards
 vim.keymap.set("v", "<", "<gv")
@@ -40,7 +44,7 @@ vim.keymap.set({"i", "n"}, "<S-Right>", "<cmd>vertical resize +2<cr>")
 vim.keymap.set({"i", "n"}, "<S-Left>", "<cmd>vertical resize -2<cr>")
 
 -- Navigate using CTRL-hjkl, pretty much regardless of mode. Note that insert and terminal
--- mode mappings intentionally do not use <cmd> because we want the mode change
+-- mode mappings intentionally do not use <cmd> because we *want* the mode change
 vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>")
 vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>")
 vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>")
@@ -54,10 +58,17 @@ vim.keymap.set({"i", "t"}, "<C-l>", [[<C-\><C-n>:<C-u>wincmd l<cr>]])
 -- Leader-based mappings follow spacevim/etc. style conventions, where the first character
 -- after <leader> is generally collection of related commands:
 --
+-- <Tab> - Tabs
 -- b - Buffers
+-- c - Code
+-- f - Files / fuzzy
 -- g - Git
 -- h - Help
+-- n - Notifications / messages
 -- q - Quit / Save / Restore sessions
+-- t - Toggle settings on / off
+-- u - Plugins / extensions / updates
+-- v - Views
 -- w - Window navigation
 -- x - Trouble / quickfix / location list
 vim.keymap.set("n", "<leader>be", "<cmd>enew<cr>", { desc = "New" })
@@ -76,5 +87,21 @@ vim.keymap.set("n", "<leader>wc", "<C-w>c", { desc = "Close" })
 vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Only" })
 vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Quit" })
 
+vim.keymap.set("n", "<leader><Tab>e", "<cmd>tabnew<cr>", { desc = "New" })
+vim.keymap.set("n", "<leader><Tab>n", "gt", { desc = "Next" })
+vim.keymap.set("n", "<leader><Tab>p", "gT", { desc = "Prev" })
+vim.keymap.set("n", "<leader><Tab>q", "<cmd>tabclose<cr>", { desc = "Close" })
+
+for i = 1, 9, 1 do
+    vim.keymap.set("n", "<leader>"..i, i.."<C-w>w", { desc = "Goto window "..i })
+end
+
 -- Mappings that start with [ and ] generally come in pairs and involve next/prev or fwd/back
 -- navigations that come in pairs, a la vim-unimpaired, etc.
+vim.keymap.set({"n", "v"}, "]<Tab>", "gt")
+vim.keymap.set({"n", "v"}, "[<Tab>", "gT")
+
+-- [c and ]c move between diff chunks in diffmode, but wouldn't it be nice if
+-- they also worked for git diffs in non-diff mode so a diff is a diff? I agree.
+vim.keymap.set("n", "]c", [[&diff ? ']c' : ']h']], { expr = true, desc = 'Difference', remap = true })
+vim.keymap.set("n", "[c", [[&diff ? '[c' : '[h']], { expr = true, desc = 'Difference', remap = true })

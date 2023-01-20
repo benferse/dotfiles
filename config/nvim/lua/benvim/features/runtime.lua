@@ -59,6 +59,7 @@ return {
                 ["<leader>v"] = "+View",
                 ["<leader>w"] = "+Window",
                 ["<leader>x"] = "+Issues",
+                ["<leader><Tab>"] = "+Tabs",
             })
         end,
     },
