@@ -15,12 +15,17 @@ return {
                 diagnostics = "nvim_lsp",
                 enforce_regular_tabs = true,
                 separator_style = "slant",
-                offset = {
+                offsets = {
                     {
                         filetype = "neo-tree",
                         text = "File explorer",
                         highlight = "Directory",
                         text_align = "left",
+                    },
+                    {
+                        filetype = "aerial",
+                        text = "Outline",
+                        text_align = "right",
                     },
                 },
             },
@@ -42,10 +47,13 @@ return {
         event = "VeryLazy",
         dependencies = {
             "smiteshp/nvim-navic",
+            "nvim-tree/nvim-web-devicons",
         },
         config = function()
             require("lualine").setup({
                 extensions = {
+                    "aerial",
+                    "neo-tree",
                     "quickfix",
                     "toggleterm",
                 },
@@ -56,13 +64,14 @@ return {
                     lualine_a = { window_number, "mode" },
                     lualine_b = { "branch" },
                     lualine_c = {
-                        { "diagnostics" },
                         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
                         { "filename", path = 1 },
                         { require("nvim-navic").get_location, require("nvim-navic").is_available },
                     },
                     lualine_x = {},
-                    lualine_y = {},
+                    lualine_y = {
+                        { "diagnostics" },
+                    },
                 },
                 inactive_sections = {
                     lualine_a = { window_number },
