@@ -5,7 +5,7 @@ return {
         event = "BufReadPre",
         opts = {
             char = "│",
-            filetype_exclude = { "help", "neo-tree", "Trouble", "lazy" },
+            filetype_exclude = { "alpha", "help", "neo-tree", "Trouble", "lazy" },
             show_trailing_blankline_indent = false,
             show_current_context = false,
         },
@@ -17,7 +17,7 @@ return {
         event = "BufReadPre",
         config = function()
             vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "help", "neo-tree", "Trouble", "lazy", "mason" },
+                pattern = { "alpha", "help", "neo-tree", "Trouble", "lazy", "mason" },
                 callback = function()
                     vim.b.miniindentscope_disable = true
                 end,

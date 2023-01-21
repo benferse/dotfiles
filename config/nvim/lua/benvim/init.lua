@@ -41,27 +41,4 @@ function M.get_root()
   return root
 end
 
--- Known terminals
-local terminals = {}
-
-function M.toggle_terminal(cmd)
-    local has_toggleterm, tt = pcall(require, "toggleterm.terminal")
-    if has_toggleterm then
-        local term = terminals[cmd]
-        if term == nil then
-            term = tt.Terminal:new({
-                cmd = cmd,
-                dir = 'git_dir',
-                direction = 'float',
-            })
-
-            terminals[cmd] = term
-        end
-
-        if term ~= nil then
-            term:toggle()
-        end
-    end
-end
-
 return M

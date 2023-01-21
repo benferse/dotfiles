@@ -17,6 +17,9 @@ return {
     -- our own config
     "folke/neodev.nvim",
 
+    -- Empower `.` to repeat more than just built in commands
+    "tpope/vim-repeat",
+
     -- which-key is loaded here so we can have a single place to define all
     -- of the key group names
     {

@@ -14,7 +14,7 @@ return {
             options = {
                 diagnostics = "nvim_lsp",
                 enforce_regular_tabs = true,
-                separator_style = "slant",
+                separator_style = "thin",
                 offsets = {
                     {
                         filetype = "neo-tree",
@@ -58,6 +58,16 @@ return {
                     "toggleterm",
                 },
                 options = {
+                    disabled_filetypes = {
+                        statusline = {
+                            "alpha",
+                        },
+                        winbar = {
+                            "alpha",
+                            "neo-tree",
+                            "aerial",
+                        },
+                    },
                     theme = "auto",
                 },
                 sections = {
@@ -66,7 +76,6 @@ return {
                     lualine_c = {
                         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
                         { "filename", path = 1 },
-                        { require("nvim-navic").get_location, require("nvim-navic").is_available },
                     },
                     lualine_x = {},
                     lualine_y = {
@@ -75,6 +84,22 @@ return {
                 },
                 inactive_sections = {
                     lualine_a = { window_number },
+                },
+                winbar = {
+                    lualine_a = {
+                        { "fileformat", icon_only = true },
+                    },
+                    lualine_c = {
+                        { require("nvim-navic").get_location, require("nvim-navic").is_available },
+                    },
+                },
+                inactive_winbar = {
+                    lualine_a = {
+                        { "fileformat", icon_only = true },
+                    },
+                    lualine_c = {
+                        { require("nvim-navic").get_location, require("nvim-navic").is_available },
+                    },
                 },
             })
         end,
@@ -143,12 +168,76 @@ return {
         },
         event = "VimEnter",
         opts = function()
-            local dashboard = require("alpha.themes.startify")
-            dashboard.section.header.val = ""
-            return dashboard
+            local dashboard = require("alpha.themes.dashboard")
+            local theta = require("alpha.themes.theta")
+            local v = vim.version() or { major = 0, minor = 0, patch = 0 }
+
+            return {
+                layout = {
+                    { type = "padding", val = 2 },
+                    {
+                        type = "text",
+                        val = "benvim v2023 / neovim " .. v.major .. "." .. v.minor .. "." .. v.patch,
+                        opts = { position = "center", hl = "Type" }
+                    },
+                    { type = "padding", val = 2 },
+                    {
+                        type = "group",
+                        val = {
+                            {
+                                type = "text",
+                                val = "recent files",
+                                opts = {
+                                    hl = "SpecialComment",
+                                    shrink_margin = false,
+                                    position = "center",
+                                },
+                            },
+                            { type = "padding", val = 1, },
+                            {
+                                type = "group",
+                                val = function()
+                                    return { theta.mru(0, vim.fn.getcwd()) }
+                                end,
+                                opts = { shrink_margin = false },
+                            },
+                        },
+                    },
+                    { type = "padding", val = 2 },
+                    {
+                        type = "group",
+                        val = {
+                            { type = "text", val = "shortcuts", opts = { hl = "SpecialComment", position = "center" } },
+                            { type = "padding", val = 1 },
+                            dashboard.button("SPC b e", "New file", "<cmd>enew<cr>"),
+                            dashboard.button("SPC f f", "Choose file"),
+                            dashboard.button("SPC f p", "Choose project"),
+                            dashboard.button("SPC u l", "Update plugins"),
+                            dashboard.button("SPC q q", "Quit", "<cmd>qa<cr>"),
+                        },
+                        position = "center",
+                    },
+                    { type = "padding", val = 2 },
+                    footer = {
+                        type = "text",
+                        val = "⚡ benvim: loading plugins",
+                        opts = { position = "center" },
+                    },
+                },
+            }
         end,
-        config = function(_, dashboard)
-            require("alpha").setup(dashboard.opts)
+        config = function(_, opts)
+            require("alpha").setup(opts)
+
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "VeryLazy",
+                callback = function()
+                    local stats = require("lazy").stats()
+                    local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+                    opts.layout.footer.val = "⚡ benvim: loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+                    pcall(vim.cmd.AlphaRedraw)
+                end,
+            })
         end,
     },
 }
