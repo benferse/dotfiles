@@ -75,8 +75,8 @@ vim.keymap.set("n", "<leader>be", "<cmd>enew<cr>", { desc = "New" })
 
 vim.keymap.set("n", "<leader>hq", "<cmd>helpclose<cr>", { desc = "Close help window" })
 
-vim.keymap.set("n", "<leader>qX", "<cmd>qall<cr>", { desc = "Quit without saving" })
-vim.keymap.set("n", "<leader>qW", "<cmd>xall<cr>", { desc = "Save all and quit" })
+vim.keymap.set("n", "<leader>qq", "<cmd>qall<cr>", { desc = "Quit without saving" })
+vim.keymap.set("n", "<leader>qw", "<cmd>xall<cr>", { desc = "Save all and quit" })
 
 vim.keymap.set("n", "<leader>wh", "<cmd>wincmd h<cr>", { desc = "Go left" })
 vim.keymap.set("n", "<leader>wj", "<cmd>wincmd j<cr>", { desc = "Go down" })
