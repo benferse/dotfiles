@@ -48,10 +48,11 @@ vim.api.nvim_create_autocmd({"FocusGained", "TermClose", "TermLeave"}, {
 -- Close some transient / popup windows with `q` based on the filetype
 vim.api.nvim_create_autocmd({"FileType"}, {
     pattern = {
-        "qf",
+        "checkhealth",
         "help",
         "man",
         "notify",
+        "qf",
         "lspinfo",
         "spectre_panel",
     },
