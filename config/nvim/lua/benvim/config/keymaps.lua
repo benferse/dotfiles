@@ -78,6 +78,8 @@ vim.keymap.set("n", "<leader>hq", "<cmd>helpclose<cr>", { desc = "Close help win
 vim.keymap.set("n", "<leader>qq", "<cmd>qall<cr>", { desc = "Quit without saving" })
 vim.keymap.set("n", "<leader>qw", "<cmd>xall<cr>", { desc = "Save all and quit" })
 
+vim.keymap.set("n", "<leader>uh", "<cmd>checkhealth<cr>", { desc = ":checkhealth"})
+
 vim.keymap.set("n", "<leader>wh", "<cmd>wincmd h<cr>", { desc = "Go left" })
 vim.keymap.set("n", "<leader>wj", "<cmd>wincmd j<cr>", { desc = "Go down" })
 vim.keymap.set("n", "<leader>wk", "<cmd>wincmd k<cr>", { desc = "Go up" })
