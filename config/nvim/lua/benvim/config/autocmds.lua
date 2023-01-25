@@ -59,6 +59,8 @@ vim.api.nvim_create_autocmd({"FileType"}, {
     callback = function(event)
         -- Unlist the buffer, and add a silent mapping to close this window
         vim.bo[event.buf].buflisted = false
+
+        -- For filetypes that also open a new window, close the window too
         vim.keymap.set("n", "q", [[<cmd>close<cr>]], { buffer = event.buf, silent = true })
     end,
 })
