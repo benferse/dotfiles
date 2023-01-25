@@ -23,14 +23,17 @@ return {
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
                     require("benvim.features.lsp.keymaps").on_attach(client, bufnr)
 
+                    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+                    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+                    vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+
                     if client.server_capabilities.documentSymbolProvider then
                         require("nvim-navic").attach(client, bufnr)
                     end
                 end,
             })
 
-            local default_caps =
-            require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+            local default_caps = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
             require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(plugin.servers) })
             require("mason-lspconfig").setup_handlers({
                 function(server)
