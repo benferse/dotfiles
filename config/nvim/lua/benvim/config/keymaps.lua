@@ -37,6 +37,11 @@ vim.keymap.set("n", "<A-l>", [[:<C-u>nohlsearch<Bar>mes clear<Bar><C-R>=has('dif
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
+-- Insert blank lines above / below the current position, accepting a count,
+-- and leaving the cursor where it is
+vim.keymap.set({"n", "v"}, "gO", "<cmd>call append(line('.') - 1, repeat([''], v:count1))<cr>", { desc = "Blank line(s) above" })
+vim.keymap.set({"n", "v"}, "go", "<cmd>call append(line('.'), repeat([''], v:count1))<cr>", { desc = "Blank line(s) below" })
+
 -- Resize the current window using Shift+Arrow keys
 vim.keymap.set({"i", "n"}, "<S-Up>", "<cmd>resize +2<cr>")
 vim.keymap.set({"i", "n"}, "<S-Down>", "<cmd>resize -2<cr>")
