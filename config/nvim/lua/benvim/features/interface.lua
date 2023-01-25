@@ -143,6 +143,13 @@ return {
                 enabled = true,
                 view = "cmdline_popup",
             },
+            lsp = {
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
+            },
             messages = {
                 enabled = true,
                 view = "notify",
@@ -155,10 +162,18 @@ return {
                 enabled = true,
                 backend = "nui",
             },
+            presets = {
+                lsp_doc_border = true,
+            },
             notify = {
                 enabled = true,
                 view = "notify",
             },
+        },
+        keys = {
+            { "<C-f>", function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end, silent = true, expr = true },
+            { "<C-b>", function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end, silent = true, expr = true },
+            { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect cmdline" },
         },
     },
     {

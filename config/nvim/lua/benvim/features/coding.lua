@@ -20,12 +20,14 @@ return {
                 map("n", "]h", "<cmd>Gitsigns next_hunk<cr>", "Git hunk")
                 map("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", "Git hunk")
 
+                map({"n", "v"}, "<leader>gb", "<cmd>Gitsigns blame_line<cr>", "Blame line")
                 map({"n", "v"}, "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", "Stage hunk")
                 map({"n", "v"}, "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", "Reset hunk")
                 map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo stage hunk")
 
                 map("n", "<leader>gS", "<cmd>Gitsigns stage_buffer<cr>", "Stage buffer")
                 map("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", "Stage buffer")
+
 
                 map({"o", "x"}, "ih", "<cmd>Gitsigns select_hunk<cr>", "Git hunk")
             end,

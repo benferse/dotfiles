@@ -12,7 +12,11 @@ return {
                     "bash",
                     "help",
                     "lua",
+                    "markdown",
+                    "markdown_inline",
+                    "regex",
                     "rust",
+                    "vim",
                 },
                 highlight = {
                     enable = true,
