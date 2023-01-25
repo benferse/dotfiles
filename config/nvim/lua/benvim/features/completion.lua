@@ -37,15 +37,24 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-emoji",
             "L3MON4D3/LuaSnip",
+            "onsails/lspkind.nvim",
             "saadparwaiz1/cmp_luasnip",
         },
         config = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
+            local lspkind = require("lspkind")
 
             cmp.setup({
                 completion = {
                     completeopt = "menu,menuone,noinsert",
+                },
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = "symbol_text",
+                        maxwidth = 70,
+                        ellipsis_char = "...",
+                    }),
                 },
                 snippet = {
                     expand = function(args)
