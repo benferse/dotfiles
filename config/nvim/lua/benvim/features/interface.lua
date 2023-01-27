@@ -73,10 +73,7 @@ return {
                 sections = {
                     lualine_a = { window_number, "mode" },
                     lualine_b = { "branch" },
-                    lualine_c = {
-                        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-                        { "filename", path = 1 },
-                    },
+                    lualine_c = { { require("nvim-navic").get_location, require("nvim-navic").is_available }, },
                     lualine_x = {},
                     lualine_y = {
                         { "diagnostics" },
@@ -85,22 +82,22 @@ return {
                 inactive_sections = {
                     lualine_a = { window_number },
                 },
-                winbar = {
-                    lualine_a = {
-                        { "fileformat", icon_only = true },
-                    },
-                    lualine_c = {
-                        { require("nvim-navic").get_location, require("nvim-navic").is_available },
-                    },
-                },
-                inactive_winbar = {
-                    lualine_a = {
-                        { "fileformat", icon_only = true },
-                    },
-                    lualine_c = {
-                        { require("nvim-navic").get_location, require("nvim-navic").is_available },
-                    },
-                },
+                -- winbar = {
+                --     lualine_a = {
+                --         { "fileformat", icon_only = true },
+                --     },
+                --     lualine_c = {
+                --         { require("nvim-navic").get_location, require("nvim-navic").is_available },
+                --     },
+                -- },
+                -- inactive_winbar = {
+                --     lualine_a = {
+                --         { "fileformat", icon_only = true },
+                --     },
+                --     lualine_c = {
+                --         { require("nvim-navic").get_location, require("nvim-navic").is_available },
+                --     },
+                -- },
             })
         end,
     },
@@ -163,6 +160,20 @@ return {
                 backend = "nui",
             },
             presets = {
+                command_palette = {
+                    views = {
+                        cmdline_popup = {
+                            position = {
+                                row = 10,
+                            },
+                        },
+                        popupmenu = {
+                            position = {
+                                row = 13,
+                            },
+                        },
+                    },
+                },
                 lsp_doc_border = true,
             },
             notify = {

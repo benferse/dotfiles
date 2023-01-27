@@ -17,6 +17,7 @@ return {
                     spacing = 4,
                     prefix = "●",
                 },
+
                 severity_sort = true,
             },
             servers = {
