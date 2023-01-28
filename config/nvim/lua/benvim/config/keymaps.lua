@@ -42,6 +42,14 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set({"n", "v"}, "gO", "<cmd>call append(line('.') - 1, repeat([''], v:count1))<cr>", { desc = "Blank line(s) above" })
 vim.keymap.set({"n", "v"}, "go", "<cmd>call append(line('.'), repeat([''], v:count1))<cr>", { desc = "Blank line(s) below" })
 
+-- Move lines up or down
+vim.keymap.set("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
+vim.keymap.set("v", "<A-j>", ":m '>.+1<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<cr>==", { desc = "Move down" })
+vim.keymap.set("v", "<A-k>", ":m '>.-2<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move down" })
+
 -- Resize the current window using Shift+Arrow keys
 vim.keymap.set({"i", "n"}, "<S-Up>", "<cmd>resize +2<cr>")
 vim.keymap.set({"i", "n"}, "<S-Down>", "<cmd>resize -2<cr>")
@@ -71,6 +79,7 @@ vim.keymap.set({"i", "t"}, "<C-l>", [[<C-\><C-n>:<C-u>wincmd l<cr>]])
 -- h - Help
 -- n - Notifications / messages
 -- q - Quit / Save / Restore sessions
+-- s - Search / replace
 -- t - Toggle settings on / off
 -- u - Plugins / extensions / updates
 -- v - Views
@@ -83,7 +92,11 @@ vim.keymap.set("n", "<leader>hq", "<cmd>helpclose<cr>", { desc = "Close help win
 vim.keymap.set("n", "<leader>qq", "<cmd>qall<cr>", { desc = "Quit without saving" })
 vim.keymap.set("n", "<leader>qw", "<cmd>xall<cr>", { desc = "Save all and quit" })
 
-vim.keymap.set("n", "<leader>uh", "<cmd>checkhealth<cr>", { desc = ":checkhealth"})
+vim.keymap.set("n", "<leader>uh", "<cmd>checkhealth<cr>", { desc = "Health checks" })
+
+if vim.fn.has("nvim-0.9.0") == 1 then
+    vim.keymap.set("n", "<leader>ui", vim.show_pos, { desc = "Inspect"} )
+end
 
 vim.keymap.set("n", "<leader>wh", "<cmd>wincmd h<cr>", { desc = "Go left" })
 vim.keymap.set("n", "<leader>wj", "<cmd>wincmd j<cr>", { desc = "Go down" })

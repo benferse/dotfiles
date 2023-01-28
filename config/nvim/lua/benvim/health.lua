@@ -2,10 +2,10 @@ local M = {}
 
 function M.check()
     vim.health.report_start("benvim")
-    if vim.fn.has("nvim-0.8.2") then
-        vim.health.report_ok("Using Neovim >= 0.8.2")
+    if vim.fn.has("nvim-0.8.0") then
+        vim.health.report_ok("Using Neovim >= 0.8.0")
     else
-        vim.health.report_warn("This has only been tested with Neovim 0.8.2 and above!")
+        vim.health.report_warn("This has only been tested with Neovim 0.8 and above!")
     end
 
     for _, cmd in ipairs({ "git", "rg", "fd", "lazygit", "btop" }) do
