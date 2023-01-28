@@ -23,7 +23,7 @@ return {
     -- which-key is loaded here so we can have a single place to define all
     -- of the key group names
     {
-        "folke/which-key.nvim",
+        "benferse/which-key.nvim",
         event = "VeryLazy",
         config = function()
             local wk = require("which-key")
@@ -39,6 +39,15 @@ return {
                 disable = {
                     buftypes = {},
                     filetypes = { "TelescopePrompt", "neo-tree" },
+                },
+                window = {
+                    align = "right",
+                    position = "bottom",
+                    border = "rounded",
+                    width = function() return math.floor(vim.o.columns * 0.4) end,
+                },
+                layout = {
+                    height = { min = 99 },
                 },
             })
             wk.register({

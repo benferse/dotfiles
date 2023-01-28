@@ -93,6 +93,7 @@ return {
     {
         "folke/zen-mode.nvim",
         cmd = { "ZenMode" },
+        event = "VeryLazy",
         opts = {
             window = {
                 width = .75,
