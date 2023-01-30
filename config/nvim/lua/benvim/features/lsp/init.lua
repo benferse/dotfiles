@@ -98,6 +98,11 @@ return {
                 "shfmt",
                 "stylua",
             },
+            ui = {
+                border = "rounded",
+                height = 0.8,
+                width = 0.8,
+            },
         },
         config = function(_, opts)
             require("mason").setup(opts)
