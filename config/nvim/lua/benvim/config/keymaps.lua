@@ -44,10 +44,10 @@ vim.keymap.set({"n", "v"}, "go", "<cmd>call append(line('.'), repeat([''], v:cou
 
 -- Move lines up or down
 vim.keymap.set("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
-vim.keymap.set("v", "<A-j>", ":m '>.+1<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
 vim.keymap.set("n", "<A-k>", ":m .-2<cr>==", { desc = "Move down" })
-vim.keymap.set("v", "<A-k>", ":m '>.-2<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move down" })
 vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move down" })
 
 -- Resize the current window using Shift+Arrow keys
