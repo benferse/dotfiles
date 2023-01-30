@@ -49,6 +49,9 @@ require("lazy").setup({
             },
         },
     },
+    ui = {
+        border = "rounded",
+    },
 })
 
 vim.keymap.set("n", "<leader>ul", "<cmd>:Lazy<cr>", { desc = "Plugins (Lazy)"})
