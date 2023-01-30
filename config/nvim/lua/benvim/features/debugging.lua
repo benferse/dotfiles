@@ -9,6 +9,16 @@ return {
             { "<F11>", function() require("dap").step_into() end, desc = "Step into" },
             { "<S-F11>", function() require("dap").step_out() end, desc = "Step out" },
         },
+        config = function()
+            -- Hide the REPL buffer from the active list. I only really want to see it when toggling
+            -- dap-ui anyway
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "dap-repl",
+                callback = function(args)
+                    vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
+                end,
+            })
+        end,
     },
     {
         "rcarriga/nvim-dap-ui",

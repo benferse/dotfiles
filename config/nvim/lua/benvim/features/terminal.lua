@@ -34,11 +34,15 @@ return {
                     return 15
                 elseif term.direction == 'vertical' then
                     return vim.o.columns * 0.4
+                elseif term.direction == 'float' then
+                    return nil
                 end
             end,
             close_on_exit = true,
             float_opts = {
                 border = 'rounded',
+                height = function() return math.floor(vim.o.lines * 0.8) end,
+                width = function() return math.ceil(vim.o.columns * 0.8) end,
             },
         },
         keys = {
