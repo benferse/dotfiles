@@ -139,6 +139,7 @@ return {
             local liblldb_path = mason_path .. "packages/codelldb/extension/lldb/lib/liblldb.so"
 
             opts.dap.adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+            opts.tools.executor = require("rust-tools.executors").toggleterm
 
             require("rust-tools").setup(opts)
         end,
