@@ -2,9 +2,9 @@ format = '┌$username$sudo$hostname$git_branch $git_commit$git_state$git_status
 command_timeout = 1000
 
 [character]
-success_symbol = '[](bold fg:#a3be8c)'
-error_symbol = '[](bold fg:#bf616a)'
-vicmd_symbol = '[](bold fg:#eceff4)'
+success_symbol = '[](bold green)'
+error_symbol = '[](bold red)'
+vimcmd_symbol = '[](bold green)'
 
 [cmd_duration]
 style = 'fg:#ebcb8e'

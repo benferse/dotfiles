@@ -61,7 +61,8 @@ return {
 
             -- Mason will take care of LSP setup; all we need to do it make any tweaks to
             -- capabilities that we'd like to see
-            local default_caps = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+            local default_caps =
+            require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
             require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(opts.servers) })
             require("mason-lspconfig").setup_handlers({
                 function(server)
@@ -83,7 +84,7 @@ return {
     },
     {
         "williamboman/mason.nvim",
-        cmd = "Mason",
+        lazy = false,
         keys = {
             { "<leader>um", "<cmd>Mason<cr>", desc = "LSPs/Formatters (Mason)" },
         },
@@ -97,6 +98,7 @@ return {
                 "shellcheck",
                 "shfmt",
                 "stylua",
+                "taplo",
             },
             ui = {
                 border = "rounded",
@@ -106,6 +108,9 @@ return {
         },
         config = function(_, opts)
             require("mason").setup(opts)
+
+            -- Mason doesn't presently do automatic installs of any packages, so we simulate that
+            -- ourselves when loading the plugin
             local reg = require("mason-registry")
             for _, tool in ipairs(opts.ensure_installed) do
                 local p = reg.get_package(tool)
@@ -113,6 +118,29 @@ return {
                     p:install()
                 end
             end
+        end,
+    },
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        lazy = false,
+        config = function()
+            local nls = require("null-ls")
+
+            nls.setup({
+                sources = {
+                    nls.builtins.code_actions.gitsigns,
+                    nls.builtins.code_actions.shellcheck,
+                    nls.builtins.formatting.rustfmt.with({
+                        extra_args = { "--edition=2021" },
+                    }),
+                    nls.builtins.formatting.shfmt,
+                    nls.builtins.formatting.stylua,
+                    nls.builtins.formatting.taplo,
+                },
+            })
         end,
     },
     {
