@@ -6,42 +6,7 @@ local function window_number()
 end
 
 return {
-    -- Bufferline
-    -- {
-    --     "akinsho/bufferline.nvim",
-    --     event = "BufAdd",
-    --     opts = {
-    --         options = {
-    --             diagnostics = "nvim_lsp",
-    --             enforce_regular_tabs = true,
-    --             separator_style = "thin",
-    --             offsets = {
-    --                 {
-    --                     filetype = "neo-tree",
-    --                     text = "File explorer",
-    --                     highlight = "Directory",
-    --                     text_align = "left",
-    --                 },
-    --                 {
-    --                     filetype = "aerial",
-    --                     text = "Outline",
-    --                     text_align = "right",
-    --                 },
-    --             },
-    --         },
-    --     },
-    --     keys = {
-    --         { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
-    --         { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
-    --
-    --         { "<leader>bn", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
-    --         { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
-    --
-    --         { "H", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
-    --         { "L", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
-    --     },
-    -- },
-    -- Status line
+    -- Status line, tab line, winbar
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
@@ -52,10 +17,18 @@ return {
         config = function()
             require("lualine").setup({
                 extensions = {
-                    "aerial",
-                    "neo-tree",
                     "quickfix",
                     "toggleterm",
+                    {
+                        winbar = {
+                            lualine_a = {
+                                { window_number },
+                            },
+                        },
+                        filetypes = {
+                            "neo-tree",
+                        },
+                    },
                 },
                 options = {
                     disabled_filetypes = {
@@ -65,24 +38,25 @@ return {
                         winbar = {
                             "alpha",
                             "checkhealth",
-                            "help",
-                            "neo-tree",
-                            "aerial",
-                            "Trouble",
-                            "spectre_panel",
-                            "qf",
                         },
                     },
                     globalstatus = true,
                     theme = "auto",
                 },
                 sections = {
-                    lualine_a = { window_number, "mode" },
+                    lualine_a = { "mode" },
                     lualine_b = { "branch" },
-                    lualine_c = {},
+                    lualine_c = {
+                        { require("nvim-navic").get_location, require("nvim-navic").is_available },
+                    },
                     lualine_x = {},
                     lualine_y = {
-                        { "diagnostics" },
+                        {
+                            "diagnostics",
+                            sources = {
+                                "nvim_workspace_diagnostic",
+                            },
+                        },
                     },
                     lualine_z = {
                         { "tabs" },
@@ -93,11 +67,18 @@ return {
                 },
                 winbar = {
                     lualine_a = {
+                        { window_number },
                         { "filetype", icon_only = true, component_separators = { left = "", right = "", }, },
                         { "filename" },
                     },
-                    lualine_c = {
-                        -- { require("nvim-navic").get_location, should_show_location },
+                    lualine_y = {
+        
+                        {
+                            "diagnostics",
+                            sources = {
+                                "nvim_diagnostic",
+                            },
+                        },
                     },
                     lualine_z = {
                         { "location" },
@@ -105,11 +86,11 @@ return {
                 },
                 inactive_winbar = {
                     lualine_a = {
+                        { window_number },
+                    },
+                    lualine_b = {
                         { "filetype", icon_only = true, component_separators = { left = "", right = "", }, },
                         { "filename" },
-                    },
-                    lualine_c = {
-                        -- { require("nvim-navic").get_location, should_show_location },
                     },
                     lualine_z = {
                         { "location" },
