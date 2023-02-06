@@ -3,6 +3,9 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+        },
         build = ":TSUpdate",
         event = "BufReadPost",
         config = function()
@@ -40,44 +43,21 @@ return {
             })
         end,
     },
-    -- Additional text objects based on treesitter syntax elements
     {
-        "echasnovski/mini.ai",
+        "nvim-treesitter/nvim-treesitter-context",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
-            "nvim-treesitter/nvim-treesitter-textobjects",
         },
         event = "BufEnter",
-        opts = {
-            mappings = {
-                goto_left = "[g",
-                goto_right = "]g",
-            },
-            n_lines = 10000,
-            search_method = "cover",
-        },
         config = function(_, opts)
-            local ai = require("mini.ai")
-            local ts = ai.gen_spec.treesitter
+            require("treesitter-context").setup(opts)
 
-            opts.custom_textobjects = {
-                F = ts({
-                    a = "@function.outer",
-                    i = "@function.inner",
-                }),
-                o = ts({
-                    a = {
-                        "@conditional.outer",
-                        "@loop.outer",
-                    },
-                    i = {
-                        "@conditional.inner",
-                        "@loop.inner",
-                    },
-                }),
-            }
-
-            ai.setup(opts)
+            vim.cmd [[
+                highlight link TreesitterContext PmenuSel
+            ]]
         end,
-    }
+        keys = {
+            { "<leader>tc", "<cmd>TSContextToggle<cr>", "Treesitter context" },
+        },
+    },
 }

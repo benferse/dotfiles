@@ -6,41 +6,41 @@ local function window_number()
 end
 
 return {
-    -- Bufferline / winline
-    {
-        "akinsho/bufferline.nvim",
-        event = "BufAdd",
-        opts = {
-            options = {
-                diagnostics = "nvim_lsp",
-                enforce_regular_tabs = true,
-                separator_style = "thin",
-                offsets = {
-                    {
-                        filetype = "neo-tree",
-                        text = "File explorer",
-                        highlight = "Directory",
-                        text_align = "left",
-                    },
-                    {
-                        filetype = "aerial",
-                        text = "Outline",
-                        text_align = "right",
-                    },
-                },
-            },
-        },
-        keys = {
-            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
-            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
-
-            { "<leader>bn", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
-            { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
-
-            { "H", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
-            { "L", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
-        },
-    },
+    -- Bufferline
+    -- {
+    --     "akinsho/bufferline.nvim",
+    --     event = "BufAdd",
+    --     opts = {
+    --         options = {
+    --             diagnostics = "nvim_lsp",
+    --             enforce_regular_tabs = true,
+    --             separator_style = "thin",
+    --             offsets = {
+    --                 {
+    --                     filetype = "neo-tree",
+    --                     text = "File explorer",
+    --                     highlight = "Directory",
+    --                     text_align = "left",
+    --                 },
+    --                 {
+    --                     filetype = "aerial",
+    --                     text = "Outline",
+    --                     text_align = "right",
+    --                 },
+    --             },
+    --         },
+    --     },
+    --     keys = {
+    --         { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
+    --         { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
+    --
+    --         { "<leader>bn", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
+    --         { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
+    --
+    --         { "H", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
+    --         { "L", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
+    --     },
+    -- },
     -- Status line
     {
         "nvim-lualine/lualine.nvim",
@@ -64,40 +64,57 @@ return {
                         },
                         winbar = {
                             "alpha",
+                            "checkhealth",
+                            "help",
                             "neo-tree",
                             "aerial",
+                            "Trouble",
+                            "spectre_panel",
+                            "qf",
                         },
                     },
+                    globalstatus = true,
                     theme = "auto",
                 },
                 sections = {
                     lualine_a = { window_number, "mode" },
                     lualine_b = { "branch" },
-                    lualine_c = { { require("nvim-navic").get_location, require("nvim-navic").is_available }, },
+                    lualine_c = {},
                     lualine_x = {},
                     lualine_y = {
                         { "diagnostics" },
+                    },
+                    lualine_z = {
+                        { "tabs" },
                     },
                 },
                 inactive_sections = {
                     lualine_a = { window_number },
                 },
-                -- winbar = {
-                --     lualine_a = {
-                --         { "fileformat", icon_only = true },
-                --     },
-                --     lualine_c = {
-                --         { require("nvim-navic").get_location, require("nvim-navic").is_available },
-                --     },
-                -- },
-                -- inactive_winbar = {
-                --     lualine_a = {
-                --         { "fileformat", icon_only = true },
-                --     },
-                --     lualine_c = {
-                --         { require("nvim-navic").get_location, require("nvim-navic").is_available },
-                --     },
-                -- },
+                winbar = {
+                    lualine_a = {
+                        { "filetype", icon_only = true, component_separators = { left = "", right = "", }, },
+                        { "filename" },
+                    },
+                    lualine_c = {
+                        -- { require("nvim-navic").get_location, should_show_location },
+                    },
+                    lualine_z = {
+                        { "location" },
+                    },
+                },
+                inactive_winbar = {
+                    lualine_a = {
+                        { "filetype", icon_only = true, component_separators = { left = "", right = "", }, },
+                        { "filename" },
+                    },
+                    lualine_c = {
+                        -- { require("nvim-navic").get_location, should_show_location },
+                    },
+                    lualine_z = {
+                        { "location" },
+                    },
+                },
             })
         end,
     },

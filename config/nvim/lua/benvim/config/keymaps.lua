@@ -42,6 +42,10 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set({"n", "v"}, "gO", "<cmd>call append(line('.') - 1, repeat([''], v:count1))<cr>", { desc = "Blank line(s) above" })
 vim.keymap.set({"n", "v"}, "go", "<cmd>call append(line('.'), repeat([''], v:count1))<cr>", { desc = "Blank line(s) below" })
 
+-- While already in insert mode, move to the end of the next line and continue editing,
+-- which comes up more often than you'd think
+vim.keymap.set("i", "<S-CR>", "<C-O><cmd>normal 2g_A<cr>")
+
 -- Move lines up or down
 vim.keymap.set("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
