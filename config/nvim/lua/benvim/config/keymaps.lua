@@ -90,6 +90,8 @@ vim.keymap.set({"i", "t"}, "<C-l>", [[<C-\><C-n>:<C-u>wincmd l<cr>]])
 -- w - Window navigation
 -- x - Trouble / quickfix / location list
 vim.keymap.set("n", "<leader>be", "<cmd>enew<cr>", { desc = "New" })
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bprev<cr>", { desc = "Prev" })
 
 vim.keymap.set("n", "<leader>hq", "<cmd>helpclose<cr>", { desc = "Close help window" })
 
@@ -124,6 +126,9 @@ end
 -- navigations that come in pairs, a la vim-unimpaired, etc.
 vim.keymap.set({"n", "v"}, "]<Tab>", "gt")
 vim.keymap.set({"n", "v"}, "[<Tab>", "gT")
+
+vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next" })
+vim.keymap.set("n", "[b", "<cmd>bprev<cr>", { desc = "Prev" })
 
 -- [c and ]c move between diff chunks in diffmode, but wouldn't it be nice if
 -- they also worked for git diffs in non-diff mode so a diff is a diff? I agree.
