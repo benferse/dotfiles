@@ -111,6 +111,8 @@ vim.keymap.set("n", "<leader>wl", "<cmd>wincmd l<cr>", { desc = "Go right" })
 
 vim.keymap.set("n", "<leader>wc", "<C-w>c", { desc = "Close" })
 vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Only" })
+vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split (horizontal)"})
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split (vertical)"})
 vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Quit" })
 
 vim.keymap.set("n", "<leader><Tab>e", "<cmd>tabnew<cr>", { desc = "New" })
