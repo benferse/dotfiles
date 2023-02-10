@@ -8,6 +8,7 @@ return {
     checkOnSave = true,
     check = {
         command = "clippy",
+        extraArgs = { "--offline", "--color=never", },
     },
     diagnostics = {
         enable = true,

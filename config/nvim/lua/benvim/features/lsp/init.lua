@@ -152,6 +152,11 @@ return {
         },
         ft = "rust",
         opts = {
+            server = {
+                settings = {
+                    ["rust-analyzer"] = require("benvim.features.lsp.rust_analyzer.settings"),
+                },
+            },
             tools = {
                 inlay_hints = {
                     auto = true,
