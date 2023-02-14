@@ -5,43 +5,57 @@ local function window_number()
     return vim.api.nvim_win_get_number(0)
 end
 
-return {
-    -- Bufferline / winline
-    {
-        "akinsho/bufferline.nvim",
-        event = "BufAdd",
-        opts = {
-            options = {
-                diagnostics = "nvim_lsp",
-                enforce_regular_tabs = true,
-                separator_style = "thin",
-                offsets = {
-                    {
-                        filetype = "neo-tree",
-                        text = "File explorer",
-                        highlight = "Directory",
-                        text_align = "left",
-                    },
-                    {
-                        filetype = "aerial",
-                        text = "Outline",
-                        text_align = "right",
-                    },
+local function fixed_ft_extension(title, ft)
+    return {
+        winbar = {
+            lualine_a = { { window_number } },
+            lualine_b = { {
+                function()
+                    return title
+                end,
+            } },
+        },
+        filetypes = { ft },
+    }
+end
+
+local function help_extension()
+    return {
+        winbar = {
+            lualine_a = { { window_number } },
+            lualine_b = {
+                {
+                    function()
+                        return "Help file:"
+                    end,
+                    padding = { left = 1, right = 0 },
+                    component_separators = { left = "", right = "" },
                 },
+                { "filename", file_status = false },
             },
         },
-        keys = {
-            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
-            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
+        filetypes = { "help" },
+    }
+end
 
-            { "<leader>bn", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
-            { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
-
-            { "H", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer" },
-            { "L", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer" },
+local function man_extension()
+    return {
+        winbar = {
+            lualine_a = { { window_number } },
+            lualine_b = { {
+                function()
+                    return "Man page:"
+                end,
+                padding = { left = 1, right = 0 },
+                component_separators = { left = "", right = "" },
+            }, { "filename", file_status = false } },
         },
-    },
-    -- Status line
+        filetypes = { "man" },
+    }
+end
+
+return {
+    -- Status line, tab line, winbar
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
@@ -52,10 +66,18 @@ return {
         config = function()
             require("lualine").setup({
                 extensions = {
-                    "aerial",
-                    "neo-tree",
                     "quickfix",
                     "toggleterm",
+                    fixed_ft_extension("File explorer", "neo-tree"),
+                    fixed_ft_extension("Symbols", "aerial"),
+                    fixed_ft_extension("Scopes", "dapui_scopes"),
+                    fixed_ft_extension("Breakpoints", "dapui_breakpoints"),
+                    fixed_ft_extension("Watches", "dapui_watches"),
+                    fixed_ft_extension("Stacks", "dapui_stacks"),
+                    fixed_ft_extension("Console", "dapui_console"),
+                    fixed_ft_extension("REPL", "dap-repl"),
+                    help_extension(),
+                    man_extension(),
                 },
                 options = {
                     disabled_filetypes = {
@@ -64,40 +86,65 @@ return {
                         },
                         winbar = {
                             "alpha",
-                            "neo-tree",
-                            "aerial",
+                            "checkhealth",
                         },
                     },
+                    globalstatus = true,
                     theme = "auto",
                 },
                 sections = {
-                    lualine_a = { window_number, "mode" },
+                    lualine_a = { "mode" },
                     lualine_b = { "branch" },
-                    lualine_c = { { require("nvim-navic").get_location, require("nvim-navic").is_available }, },
+                    lualine_c = {
+                        { require("nvim-navic").get_location, require("nvim-navic").is_available },
+                    },
                     lualine_x = {},
                     lualine_y = {
-                        { "diagnostics" },
+                        {
+                            "diagnostics",
+                            sources = {
+                                "nvim_workspace_diagnostic",
+                            },
+                        },
+                    },
+                    lualine_z = {
+                        { "tabs" },
                     },
                 },
                 inactive_sections = {
                     lualine_a = { window_number },
                 },
-                -- winbar = {
-                --     lualine_a = {
-                --         { "fileformat", icon_only = true },
-                --     },
-                --     lualine_c = {
-                --         { require("nvim-navic").get_location, require("nvim-navic").is_available },
-                --     },
-                -- },
-                -- inactive_winbar = {
-                --     lualine_a = {
-                --         { "fileformat", icon_only = true },
-                --     },
-                --     lualine_c = {
-                --         { require("nvim-navic").get_location, require("nvim-navic").is_available },
-                --     },
-                -- },
+                winbar = {
+                    lualine_a = {
+                        { window_number },
+                        { "filetype",   icon_only = true, component_separators = { left = "", right = "" } },
+                        { "filename" },
+                    },
+                    lualine_y = {
+
+                        {
+                            "diagnostics",
+                            sources = {
+                                "nvim_diagnostic",
+                            },
+                        },
+                    },
+                    lualine_z = {
+                        { "location" },
+                    },
+                },
+                inactive_winbar = {
+                    lualine_a = {
+                        { window_number },
+                    },
+                    lualine_b = {
+                        { "filetype", icon_only = true, component_separators = { left = "", right = "" } },
+                        { "filename" },
+                    },
+                    lualine_z = {
+                        { "location" },
+                    },
+                },
             })
         end,
     },
@@ -105,7 +152,13 @@ return {
     {
         "rcarriga/nvim-notify",
         keys = {
-            { "<leader>nd", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Clear notifications" },
+            {
+                "<leader>nd",
+                function()
+                    require("notify").dismiss({ silent = true, pending = true })
+                end,
+                desc = "Clear notifications",
+            },
         },
         opts = {
             timeout = 3000,
@@ -124,14 +177,14 @@ return {
             -- We are setting this twice, but that is indeed the point
             ---@diagnostic disable-next-line duplicate-set-field
             vim.ui.select = function(...)
-                require("lazy").load({ plugins = { "dressing.nvim" }})
+                require("lazy").load({ plugins = { "dressing.nvim" } })
                 return vim.ui.select(...)
             end
 
             -- We are setting this twice, but that is indeed the point
             ---@diagnostic disable-next-line duplicate-set-field
             vim.ui.input = function(...)
-                require("lazy").load({ plugins = { "dressing.nvim" }})
+                require("lazy").load({ plugins = { "dressing.nvim" } })
                 return vim.ui.input(...)
             end
         end,
@@ -187,9 +240,34 @@ return {
             },
         },
         keys = {
-            { "<C-f>", function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end, silent = true, expr = true },
-            { "<C-b>", function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end, silent = true, expr = true },
-            { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect cmdline" },
+            {
+                "<C-f>",
+                function()
+                    if not require("noice.lsp").scroll(4) then
+                        return "<C-f>"
+                    end
+                end,
+                silent = true,
+                expr = true,
+            },
+            {
+                "<C-b>",
+                function()
+                    if not require("noice.lsp").scroll( -4) then
+                        return "<C-b>"
+                    end
+                end,
+                silent = true,
+                expr = true,
+            },
+            {
+                "<S-Enter>",
+                function()
+                    require("noice").redirect(vim.fn.getcmdline())
+                end,
+                mode = "c",
+                desc = "Redirect cmdline",
+            },
         },
     },
     {
@@ -209,7 +287,7 @@ return {
                     {
                         type = "text",
                         val = "benvim v2023 / neovim " .. v.major .. "." .. v.minor .. "." .. v.patch,
-                        opts = { position = "center", hl = "Type" }
+                        opts = { position = "center", hl = "Type" },
                     },
                     { type = "padding", val = 2 },
                     {
@@ -224,7 +302,7 @@ return {
                                     position = "center",
                                 },
                             },
-                            { type = "padding", val = 1, },
+                            { type = "padding", val = 1 },
                             {
                                 type = "group",
                                 val = function()
@@ -238,7 +316,11 @@ return {
                     {
                         type = "group",
                         val = {
-                            { type = "text", val = "shortcuts", opts = { hl = "SpecialComment", position = "center" } },
+                            {
+                                type = "text",
+                                val = "shortcuts",
+                                opts = { hl = "SpecialComment", position = "center" },
+                            },
                             { type = "padding", val = 1 },
                             dashboard.button("SPC b e", "New file", "<cmd>enew<cr>"),
                             dashboard.button("SPC f f", "Choose file"),
