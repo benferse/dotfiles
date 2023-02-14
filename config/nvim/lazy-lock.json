@@ -52,3 +52,4 @@
   "vim-repeat": { "branch": "master", "commit": "8106e142dfdc278ff3eaaadd7b362ad7949d4357" },
   "which-key.nvim": { "branch": "main", "commit": "815ebad01c01315a20e66e43884703c7f0f7672f" },
   "zen-mode.nvim": { "branch": "main", "commit": "4bd28fb3a44317c6258cebc7d92243d4b11dfe2c" }
+}
