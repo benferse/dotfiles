@@ -42,6 +42,10 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set({"n", "v"}, "gO", "<cmd>call append(line('.') - 1, repeat([''], v:count1))<cr>", { desc = "Blank line(s) above" })
 vim.keymap.set({"n", "v"}, "go", "<cmd>call append(line('.'), repeat([''], v:count1))<cr>", { desc = "Blank line(s) below" })
 
+-- While already in insert mode, move to the end of the next line and continue editing,
+-- which comes up more often than you'd think
+vim.keymap.set("i", "<S-CR>", "<C-O><cmd>normal 2g_A<cr>")
+
 -- Move lines up or down
 vim.keymap.set("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
@@ -86,6 +90,8 @@ vim.keymap.set({"i", "t"}, "<C-l>", [[<C-\><C-n>:<C-u>wincmd l<cr>]])
 -- w - Window navigation
 -- x - Trouble / quickfix / location list
 vim.keymap.set("n", "<leader>be", "<cmd>enew<cr>", { desc = "New" })
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bprev<cr>", { desc = "Prev" })
 
 vim.keymap.set("n", "<leader>hq", "<cmd>helpclose<cr>", { desc = "Close help window" })
 
@@ -105,6 +111,8 @@ vim.keymap.set("n", "<leader>wl", "<cmd>wincmd l<cr>", { desc = "Go right" })
 
 vim.keymap.set("n", "<leader>wc", "<C-w>c", { desc = "Close" })
 vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Only" })
+vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split (horizontal)"})
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split (vertical)"})
 vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Quit" })
 
 vim.keymap.set("n", "<leader><Tab>e", "<cmd>tabnew<cr>", { desc = "New" })
@@ -120,6 +128,9 @@ end
 -- navigations that come in pairs, a la vim-unimpaired, etc.
 vim.keymap.set({"n", "v"}, "]<Tab>", "gt")
 vim.keymap.set({"n", "v"}, "[<Tab>", "gT")
+
+vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next" })
+vim.keymap.set("n", "[b", "<cmd>bprev<cr>", { desc = "Prev" })
 
 -- [c and ]c move between diff chunks in diffmode, but wouldn't it be nice if
 -- they also worked for git diffs in non-diff mode so a diff is a diff? I agree.

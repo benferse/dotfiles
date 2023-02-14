@@ -1,6 +1,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        branch = "master",
         event = "BufReadPre",
         dependencies = {
             "folke/neodev.nvim",
@@ -23,7 +24,7 @@ return {
             servers = {
                 clangd = {},
                 rust_analyzer = require("benvim.features.lsp.rust_analyzer.settings"),
-                sumneko_lua = require("benvim.features.lsp.sumneko_lua.settings"),
+                lua_ls = require("benvim.features.lsp.lua_ls.settings"),
             },
         },
         config = function(_, opts)
@@ -62,7 +63,7 @@ return {
             -- Mason will take care of LSP setup; all we need to do it make any tweaks to
             -- capabilities that we'd like to see
             local default_caps =
-            require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+                require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
             require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(opts.servers) })
             require("mason-lspconfig").setup_handlers({
                 function(server)
@@ -152,6 +153,11 @@ return {
         },
         ft = "rust",
         opts = {
+            server = {
+                settings = {
+                    ["rust-analyzer"] = require("benvim.features.lsp.rust_analyzer.settings"),
+                },
+            },
             tools = {
                 inlay_hints = {
                     auto = true,
