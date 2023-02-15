@@ -136,3 +136,16 @@ vim.keymap.set("n", "[b", "<cmd>bprev<cr>", { desc = "Prev" })
 -- they also worked for git diffs in non-diff mode so a diff is a diff? I agree.
 vim.keymap.set("n", "]c", [[&diff ? ']c' : ']h']], { expr = true, desc = 'Difference', remap = true })
 vim.keymap.set("n", "[c", [[&diff ? '[c' : '[h']], { expr = true, desc = 'Difference', remap = true })
+
+-- Custom textobjects for the entire document (mnemonic "an everything" :))
+local function entire_buffer_textobj()
+    local mode = vim.api.nvim_get_mode().mode
+    local is_visual = string.lower(string.sub(mode, 1, 1)) == "v"
+
+    vim.fn.execute("normal! m`")
+    vim.fn.execute("keepjumps normal! gg0")
+    vim.fn.execute("normal! " .. (is_visual and "o" or "V"))
+    vim.fn.execute("keepjumps normal! G$")
+end
+
+vim.keymap.set({"o", "x"}, "ae", entire_buffer_textobj, { desc = "Entire buffer"})

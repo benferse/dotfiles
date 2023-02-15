@@ -22,7 +22,7 @@ return {
         "akinsho/toggleterm.nvim",
         event = "VeryLazy",
         opts = {
-            open_mapping = [[`]],
+            open_mapping = [[\]],
             hide_numbers = true,
             shade_terminals = true,
             start_in_insert = true,
