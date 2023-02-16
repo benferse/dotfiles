@@ -137,6 +137,10 @@ vim.keymap.set("n", "[b", "<cmd>bprev<cr>", { desc = "Prev" })
 vim.keymap.set("n", "]c", [[&diff ? ']c' : ']h']], { expr = true, desc = 'Difference', remap = true })
 vim.keymap.set("n", "[c", [[&diff ? '[c' : '[h']], { expr = true, desc = 'Difference', remap = true })
 
+-- Add empty lines below/above the cursor
+vim.keymap.set("n", "]<space>", "go", { desc = "Blank lines below", remap = true})
+vim.keymap.set("n", "[<space>", "gO", { desc = "Blank lines below", remap = true})
+
 -- Custom textobjects for the entire document (mnemonic "an everything" :))
 local function entire_buffer_textobj()
     local mode = vim.api.nvim_get_mode().mode
