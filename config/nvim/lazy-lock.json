@@ -18,7 +18,7 @@
   "lspkind.nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },
   "lualine.nvim": { "branch": "master", "commit": "e99d733e0213ceb8f548ae6551b04ae32e590c80" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "93e58e100f37ef4fb0f897deeed20599dae9d128" },
-  "mason.nvim": { "branch": "main", "commit": "63ccfe5dd1a9afd16d9d3cdcf0aa59403eef5ef7" },
+  "mason.nvim": { "branch": "main", "commit": "fecabaff94c34bf8ed9c3b2a45d42a5906ea251c" },
   "mini.bufremove": { "branch": "main", "commit": "351d18d596f7eac4589b67b4b87ed1708c545dd3" },
   "mini.indentscope": { "branch": "main", "commit": "d3e907b13298b0fc60db289fb804be7e9c561922" },
   "mini.pairs": { "branch": "main", "commit": "4ebc1ff8d77fe75e8f219432302800ca29e17614" },
@@ -52,3 +52,4 @@
   "vim-repeat": { "branch": "master", "commit": "8106e142dfdc278ff3eaaadd7b362ad7949d4357" },
   "which-key.nvim": { "branch": "main", "commit": "815ebad01c01315a20e66e43884703c7f0f7672f" },
   "zen-mode.nvim": { "branch": "main", "commit": "4bd28fb3a44317c6258cebc7d92243d4b11dfe2c" }
+}
