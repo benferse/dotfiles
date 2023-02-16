@@ -126,8 +126,8 @@ end
 
 -- Mappings that start with [ and ] generally come in pairs and involve next/prev or fwd/back
 -- navigations that come in pairs, a la vim-unimpaired, etc.
-vim.keymap.set({"n", "v"}, "]<Tab>", "gt")
-vim.keymap.set({"n", "v"}, "[<Tab>", "gT")
+vim.keymap.set({"n", "v"}, "]<Tab>", "gt", { desc = "Tab page" })
+vim.keymap.set({"n", "v"}, "[<Tab>", "gT", { desc = "Tab page" })
 
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next" })
 vim.keymap.set("n", "[b", "<cmd>bprev<cr>", { desc = "Prev" })
@@ -137,9 +137,21 @@ vim.keymap.set("n", "[b", "<cmd>bprev<cr>", { desc = "Prev" })
 vim.keymap.set("n", "]c", [[&diff ? ']c' : ']h']], { expr = true, desc = 'Difference', remap = true })
 vim.keymap.set("n", "[c", [[&diff ? '[c' : '[h']], { expr = true, desc = 'Difference', remap = true })
 
+-- Location list navigation
+vim.keymap.set("n", "]l", "<cmd>lnext<cr>", { desc = "Next location" })
+vim.keymap.set("n", "[l", "<cmd>lprev<cr>", { desc = "Prev location" })
+vim.keymap.set("n", "]L", "<cmd>llast<cr>", { desc = "Last location" })
+vim.keymap.set("n", "[L", "<cmd>lfirst<cr>", { desc = "First location" })
+
+-- Quickfix list navigation
+vim.keymap.set("n", "]q", "<cmd>cnext<cr>", { desc = "Next quickfix" })
+vim.keymap.set("n", "[q", "<cmd>cprev<cr>", { desc = "Prev quickfix" })
+vim.keymap.set("n", "]q", "<cmd>clast<cr>", { desc = "Last quickfix" })
+vim.keymap.set("n", "[q", "<cmd>cfirst<cr>", { desc = "First quickfix" })
+
 -- Add empty lines below/above the cursor
-vim.keymap.set("n", "]<space>", "go", { desc = "Blank lines below", remap = true})
-vim.keymap.set("n", "[<space>", "gO", { desc = "Blank lines below", remap = true})
+vim.keymap.set("n", "]<Space>", "go", { desc = "Blank lines below", remap = true})
+vim.keymap.set("n", "[<Space>", "gO", { desc = "Blank lines below", remap = true})
 
 -- Custom textobjects for the entire document (mnemonic "an everything" :))
 local function entire_buffer_textobj()
