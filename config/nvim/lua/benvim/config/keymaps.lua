@@ -150,7 +150,7 @@ local function toggle_loclist()
         end
     end
 
-    vim.cmd[[horizontal lopen]]
+    local _, _ = pcall(vim.cmd, "horizontal lopen")
 end
 
 vim.keymap.set("n", "<leader>xl", toggle_loclist, { desc = "Location list" })
