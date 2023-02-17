@@ -191,8 +191,8 @@ vim.keymap.set("n", "[L", "<cmd>lfirst<cr>", { desc = "First location" })
 -- Quickfix list navigation
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>", { desc = "Next quickfix" })
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>", { desc = "Prev quickfix" })
-vim.keymap.set("n", "]q", "<cmd>clast<cr>", { desc = "Last quickfix" })
-vim.keymap.set("n", "[q", "<cmd>cfirst<cr>", { desc = "First quickfix" })
+vim.keymap.set("n", "]Q", "<cmd>clast<cr>", { desc = "Last quickfix" })
+vim.keymap.set("n", "[Q", "<cmd>cfirst<cr>", { desc = "First quickfix" })
 
 -- Insert blank lines above / below the current position, accepting a count,
 -- and leaving the cursor where it is
