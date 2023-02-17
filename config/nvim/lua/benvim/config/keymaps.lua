@@ -125,6 +125,36 @@ vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split (horizontal)" })
 vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split (vertical)" })
 vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Quit" })
 
+local function toggle_qf()
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        for _, win_info in ipairs(vim.fn.getwininfo(win)) do
+            if win_info.quickfix == 1 then
+                vim.cmd[[close]]
+                return
+            end
+        end
+    end
+
+    vim.cmd[[botright copen]]
+end
+
+vim.keymap.set("n", "<leader>xq", toggle_qf, { desc = "Quickfix" })
+
+local function toggle_loclist()
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        for _, win_info in ipairs(vim.fn.getwininfo(win)) do
+            if win_info.loclist == 1 then
+                vim.cmd[[lclose]]
+                return
+            end
+        end
+    end
+
+    vim.cmd[[horizontal lopen]]
+end
+
+vim.keymap.set("n", "<leader>xl", toggle_loclist, { desc = "Location list" })
+
 vim.keymap.set("n", "<leader><Tab>e", "<cmd>tabnew<cr>", { desc = "New" })
 vim.keymap.set("n", "<leader><Tab>n", "gt", { desc = "Next" })
 vim.keymap.set("n", "<leader><Tab>p", "gT", { desc = "Prev" })
