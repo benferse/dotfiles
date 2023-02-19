@@ -16,50 +16,17 @@ local M = {}
 function M.on_attach(client, bufnr)
     -- General mappings, available regardless of which capabilities the
     -- language server provides
-    map(bufnr, "n", "<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
-    map(bufnr, "n", "<leader>cl", "LspInfo", "Provider info")
+    map(bufnr, "n", "gd", vim.lsp.buf.definition, "Definition")
+    map(bufnr, "n", "gr", vim.lsp.buf.references, "References")
 
-    map(bufnr, "n", "gd", "Telescope lsp_definitions", "Definition")
-    map(bufnr, "n", "gr", "Telescope lsp_references", "References")
+    -- Replace the default `keywordprg` handling with LSP hover
+    map(bufnr, "n", "K", vim.lsp.buf.hover, "Hover/doc")
 
-    map(bufnr, "n", "K", vim.lsp.buf.hover, "LSP: Hover/doc")
-
-    map(bufnr, "n", "]d", vim.diagnostic.goto_next, "Diagnostic")
-    map(bufnr, "n", "[d", vim.diagnostic.goto_prev, "Diagnostic")
-    map(bufnr, "n", "]e", function()
-        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["ERROR"] })
-    end, "Error")
-    map(bufnr, "n", "[e", function()
-        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["ERROR"] })
-    end, "Error")
-    map(bufnr, "n", "]w", function()
-        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["WARNING"] })
-    end, "Warning")
-    map(bufnr, "n", "[w", function()
-        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["WARNING"] })
-    end, "Warning")
-
-    -- Capability-specific mappings
-    local caps = client.server_capabilities
-
-    if caps["signatureHelpProvider"] then
+    -- Capability-specific mappings. signature_help() raises an error if the
+    -- server doesn't support the capability, so we only conditionally enable this
+    -- mapping
+    if client.server_capabilities["signatureHelpProvider"] then
         map(bufnr, "n", "gK", vim.lsp.buf.signature_help, "Signature help")
-    end
-
-    if caps["codeActionProvider"] then
-        map(bufnr, { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
-    end
-
-    if caps["documentFormattingProvider"] then
-        map(bufnr, "n", "<leader>cf", vim.lsp.buf.format, "Format document")
-    end
-
-    if caps["documentRangeFormattingProvider"] then
-        map(bufnr, "v", "<leader>cf", vim.lsp.buf.format, "Format selection")
-    end
-
-    if caps["renameProvider"] then
-        map(bufnr, "n", "<leader>cr", vim.lsp.buf.rename, "Rename")
     end
 
     -- If there is an LSP specific module, load it and let it do its thing as well

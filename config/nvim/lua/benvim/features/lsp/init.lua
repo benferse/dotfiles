@@ -13,12 +13,14 @@ return {
         opts = {
             diagnostics = {
                 underline = true,
-                update_in_insert = true,
+                update_in_insert = false,
                 virtual_text = {
                     spacing = 4,
                     prefix = "●",
                 },
-
+                float = {
+                    border = "rounded",
+                },
                 severity_sort = true,
             },
             servers = {
