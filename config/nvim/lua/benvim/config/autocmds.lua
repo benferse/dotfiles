@@ -3,7 +3,7 @@
 -- Use hybrid numbering, but toggle between that and absolute
 -- numbering on insert or leaving a window. I think this covers
 -- all of the cases correctly...
-vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave", "WinEnter"}, {
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
     pattern = "*",
     callback = function()
         if vim.o.number and vim.fn.mode() ~= "i" then
@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave", "WinEnter
     end,
 })
 
-vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter", "WinLeave"}, {
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
     pattern = "*",
     callback = function()
         if vim.o.number then
@@ -41,12 +41,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Check if a file needs to be reloaded due to an external change
-vim.api.nvim_create_autocmd({"FocusGained", "TermClose", "TermLeave"}, {
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
     command = "checktime",
 })
 
 -- Close some transient / popup windows with `q` based on the filetype
-vim.api.nvim_create_autocmd({"FileType"}, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = {
         "checkhealth",
         "help",
