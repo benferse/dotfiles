@@ -147,7 +147,8 @@ vim.keymap.set("n", "[b", "<cmd>bprev<cr>", { desc = "Prev" })
 vim.keymap.set("n", "]c", [[&diff ? ']c' : ']h']], { expr = true, desc = "Difference", remap = true })
 vim.keymap.set("n", "[c", [[&diff ? '[c' : '[h']], { expr = true, desc = "Difference", remap = true })
 
--- Jump to diagnostic locations
+-- Jump to diagnostic locations. Using the new vim diagnostics API, so this is not
+-- necessarily LSP-driven
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Diagnostic" })
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Diagnostic" })
 
