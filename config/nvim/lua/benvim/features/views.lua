@@ -25,6 +25,7 @@ return {
             window = {
                 mappings = {
                     ["<space>"] = false,
+                    ["P"] = { "toggle_preview", config = { use_float = true } }
                 },
             },
         },
