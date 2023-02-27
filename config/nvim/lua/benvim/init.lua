@@ -56,7 +56,7 @@ function M.get_root()
                 or client.config.root_dir and { client.config.root_dir }
                 or {}
             for _, p in ipairs(paths) do
-                local r = vim.loop.fs_realpath(p)
+                local r = vim.loop.fs_realpath(p) or ""
                 if path:find(r, 1, true) then
                     roots[#roots + 1] = r
                 end
