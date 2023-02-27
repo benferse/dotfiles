@@ -70,7 +70,7 @@ return {
             require("mason-lspconfig").setup_handlers({
                 function(server)
                     local server_opts = opts.servers[server] or {}
-                    server_opts.capabilities = default_caps
+                    server_opts.capabilities = vim.tbl_deep_extend("keep", server_opts.capabilities or {}, default_caps)
                     require("lspconfig")[server].setup(server_opts)
                 end,
             })
