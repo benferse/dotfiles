@@ -24,7 +24,6 @@ return {
                 severity_sort = true,
             },
             servers = {
-                clangd = {},
                 rust_analyzer = require("benvim.features.lsp.rust_analyzer.settings"),
                 lua_ls = require("benvim.features.lsp.lua_ls.settings"),
             },
@@ -70,7 +69,7 @@ return {
             require("mason-lspconfig").setup_handlers({
                 function(server)
                     local server_opts = opts.servers[server] or {}
-                    server_opts.capabilities = vim.tbl_deep_extend("keep", server_opts.capabilities or {}, default_caps)
+                    server_opts.capabilities = default_caps
                     require("lspconfig")[server].setup(server_opts)
                 end,
             })
@@ -93,7 +92,6 @@ return {
         },
         opts = {
             ensure_installed = {
-                "clangd",
                 "codelldb",
                 "lua-language-server",
                 "rust-analyzer",
