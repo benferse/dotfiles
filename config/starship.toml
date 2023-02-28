@@ -23,6 +23,7 @@ commit_hash_length = 6
 format = '[\( $hash$tag\)]($style) '
 style = 'bold green'
 only_detached = true
+tag_symbol = '  '
 
 [git_state]
 style = 'fg:#ebcb8b'
