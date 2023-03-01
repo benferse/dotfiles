@@ -46,9 +46,7 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# use vi mode for readline
 export INPUTRC=/home/benferse/.config/readline/inputrc
-set -o vi
 
 # blast off
 if [ -x ~/.local/bin/starship ]; then
