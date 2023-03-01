@@ -1,15 +1,5 @@
-[credential]
-    azreposCredentialType = oauth
-    credentialStore = secretservice
-    helper = /usr/local/share/gcm-core/git-credential-manager-core
-[credential "azrepos:org/msazure"]
-	azureAuthority = https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47
-	username = benferse@microsoft.com
-[credential "azrepos:org/mscodehub"]
-	azureAuthority = https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47
-	username = benferse@microsoft.com
-[credential "https://dev.azure.com"]
-    useHttpPath = true
 [user]
     name = Ben Fersenheim
     email = benferse@microsoft.com
+[url "mscodehub@vs-ssh.visualstudio.com:v3/mscodehub/Rust/oss.crates.io-index"]
+    insteadOf = https://mscodehub.visualstudio.com/Rust/_git/oss.crates.io-index
