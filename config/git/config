@@ -8,8 +8,6 @@
     ui = auto
 [rebase]
     autosquash = true
-[merge]
-    ff = only
 [fetch]
     prune = true
 [include]
