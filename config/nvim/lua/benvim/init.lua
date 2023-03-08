@@ -2,6 +2,26 @@ local M = {}
 
 M.root_patterns = { ".git" }
 
+-- Check whether the current position is inside a given syntax highlight group
+function M.is_in_syntax_group(group)
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    if vim.api.nvim_get_mode().mode == "i" then
+        col = col - 1
+    end
+
+    for _, syn_id in ipairs(vim.fn.synstack(row, col)) do
+        syn_id = vim.fn.synIDtrans(syn_id)
+        local g = vim.fn.synIDattr(syn_id, "name")
+        if type(group) == "string" and g == group then
+            return true
+        elseif type(group) == "table" and vim.tbl_contains(group, g) then
+            return true
+        end
+    end
+
+    return false
+end
+
 -- Check whether the current position is inside a given treesitter capture context.
 -- Note that this returns the leaf (most specific context), so it's best used for
 -- contexts that don't contain other contexts

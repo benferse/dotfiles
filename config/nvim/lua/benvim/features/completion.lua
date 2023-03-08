@@ -51,12 +51,11 @@ return {
                 enabled = function()
                     -- Disable auto-completion when inside a comment (but leave command mode
                     -- completion enabled)
-                    local context = require("cmp.config.context")
                     if vim.api.nvim_get_mode().mode == "c" then
                         return true
                     else
-                        return not context.in_treesitter_capture("comment")
-                            and not context.in_syntax_group("Comment")
+                        local context = require("benvim")
+                        return not context.is_in_ts_capture("comment") and not context.is_in_syntax_group("Comment")
                     end
                 end,
                 completion = {
