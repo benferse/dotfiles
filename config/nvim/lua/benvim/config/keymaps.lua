@@ -21,7 +21,7 @@ vim.keymap.set("i", ";", ";<C-g>u")
 
 -- This is honestly life changing. I can't believe I lived
 -- for over forty years without this
-vim.keymap.set("n", ";", "<cmd>up<cr>")
+vim.keymap.set("n", ";", "<cmd>silent up<cr>")
 
 -- Use n and N to consistently move forward and backward, regardless of whether you used / or
 -- ? to initiate the search. See https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
@@ -150,7 +150,7 @@ local function toggle_loclist()
         end
     end
 
-    local _, _ = pcall(vim.cmd, "horizontal lopen")
+    vim.cmd[[silent! horizontal lopen]]
 end
 
 vim.keymap.set("n", "<leader>xl", toggle_loclist, { desc = "Location list" })
