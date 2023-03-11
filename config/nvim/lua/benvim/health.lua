@@ -12,7 +12,7 @@ function M.check()
         if vim.fn.executable(cmd) == 1 then
             local h = io.popen(cmd .. " --version")
             if h ~= nil then
-                local v = h:read "*l"
+                local v = h:read("*l")
                 h:close()
                 vim.health.report_ok(("`%s --version` returns: %s"):format(cmd, v))
             else

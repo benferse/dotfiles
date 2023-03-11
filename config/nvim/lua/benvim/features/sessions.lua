@@ -17,7 +17,13 @@ return {
             require("telescope").load_extension("projects")
         end,
         keys = {
-            { "<leader>fp", function() require("telescope").extensions.projects.projects{} end, desc = "Projects" },
+            {
+                "<leader>fp",
+                function()
+                    require("telescope").extensions.projects.projects({})
+                end,
+                desc = "Projects",
+            },
         },
     },
 }

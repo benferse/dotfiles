@@ -15,18 +15,15 @@ return {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
         keys = {
-            { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-            { "<leader>ff", telescope_from_root("find_files"), desc = "Find files" },
-            { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
-
-            { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Search commits" },
-            { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Pending changes" },
-
-            { "<leader>hh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-            { "<leader>hm", "<cmd>Telescope man_pages<cr>", desc = "Man pages" },
-
+            { "<leader>fb", "<cmd>Telescope buffers<cr>",                   desc = "Buffers" },
+            { "<leader>ff", telescope_from_root("find_files"),              desc = "Find files" },
+            { "<leader>fr", "<cmd>Telescope oldfiles<cr>",                  desc = "Recent files" },
+            { "<leader>gc", "<cmd>Telescope git_commits<cr>",               desc = "Search commits" },
+            { "<leader>gs", "<cmd>Telescope git_status<cr>",                desc = "Pending changes" },
+            { "<leader>hh", "<cmd>Telescope help_tags<cr>",                 desc = "Help tags" },
+            { "<leader>hm", "<cmd>Telescope man_pages<cr>",                 desc = "Man pages" },
             { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "In current buffer" },
-            { "<leader>sf", telescope_from_root("live_grep"), desc = "In files (root)" },
+            { "<leader>sf", telescope_from_root("live_grep"),               desc = "In files (root)" },
         },
         opts = {
             defaults = {
@@ -35,9 +32,15 @@ return {
                 winblend = 10,
                 mappings = {
                     i = {
-                        ["<esc>"] = function(...) require("telescope.actions").close(...) end,
-                        ['jj'] = function(...) require("telescope.actions").close(...) end,
-                        ['kj'] = function(...) require("telescope.actions").close(...) end,
+                        ["<esc>"] = function(...)
+                            require("telescope.actions").close(...)
+                        end,
+                        ["jj"] = function(...)
+                            require("telescope.actions").close(...)
+                        end,
+                        ["kj"] = function(...)
+                            require("telescope.actions").close(...)
+                        end,
                     },
                 },
             },
@@ -47,7 +50,13 @@ return {
     {
         "windwp/nvim-spectre",
         keys = {
-            { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+            {
+                "<leader>sr",
+                function()
+                    require("spectre").open()
+                end,
+                desc = "Replace in files (Spectre)",
+            },
         },
     },
 }

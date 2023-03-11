@@ -44,14 +44,16 @@ return {
                     align = "right",
                     position = "bottom",
                     border = "rounded",
-                    width = function() return math.floor(vim.o.columns * 0.4) end,
+                    width = function()
+                        return math.floor(vim.o.columns * 0.4)
+                    end,
                 },
                 layout = {
                     height = { min = 99 },
                 },
             })
             wk.register({
-                mode = {"n", "v"},
+                mode = { "n", "v" },
                 ["g"] = "+Goto",
                 ["z"] = "+Junk drawer",
                 ["]"] = "+Next",
