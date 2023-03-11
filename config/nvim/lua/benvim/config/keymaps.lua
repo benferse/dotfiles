@@ -129,13 +129,13 @@ local function toggle_qf()
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
         for _, win_info in ipairs(vim.fn.getwininfo(win)) do
             if win_info.quickfix == 1 then
-                vim.cmd[[close]]
+                vim.cmd([[close]])
                 return
             end
         end
     end
 
-    vim.cmd[[botright copen]]
+    vim.cmd([[botright copen]])
 end
 
 vim.keymap.set("n", "<leader>xq", toggle_qf, { desc = "Quickfix" })
@@ -144,13 +144,13 @@ local function toggle_loclist()
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
         for _, win_info in ipairs(vim.fn.getwininfo(win)) do
             if win_info.loclist == 1 then
-                vim.cmd[[lclose]]
+                vim.cmd([[lclose]])
                 return
             end
         end
     end
 
-    vim.cmd[[silent! horizontal lopen]]
+    vim.cmd([[silent! horizontal lopen]])
 end
 
 vim.keymap.set("n", "<leader>xl", toggle_loclist, { desc = "Location list" })

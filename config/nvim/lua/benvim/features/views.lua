@@ -12,7 +12,13 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         keys = {
-            { "<leader>ve", function() require("neo-tree.command").execute( { toggle = true, dir = require("benvim").get_root() } ) end, desc = "Explorer" },
+            {
+                "<leader>ve",
+                function()
+                    require("neo-tree.command").execute({ toggle = true, dir = require("benvim").get_root() })
+                end,
+                desc = "Explorer",
+            },
         },
         init = function()
             vim.g.neo_tree_remove_legacy_commands = 1
@@ -25,7 +31,7 @@ return {
             window = {
                 mappings = {
                     ["<space>"] = false,
-                    ["P"] = { "toggle_preview", config = { use_float = true } }
+                    ["P"] = { "toggle_preview", config = { use_float = true } },
                 },
             },
         },
@@ -33,17 +39,41 @@ return {
     -- Folke's improved quickfix / loclist / generic list of navigable diagnostic-like things
     {
         "folke/trouble.nvim",
-        cmd = { "Trouble", "TroubleToggle", },
+        cmd = { "Trouble", "TroubleToggle" },
         opts = { use_diagnostic_signs = true },
         keys = {
-            { "]x", function() require("trouble").next({ skip_groups = true, jump = true }) end, desc = "Trouble" },
-            { "[x", function() require("trouble").previous({ skip_groups = true, jump = true }) end, desc = "Trouble" },
-            { "]X", function() require("trouble").last({ skip_groups = true, jump = true }) end, desc = "Trouble" },
-            { "[X", function() require("trouble").first({ skip_groups = true, jump = true }) end, desc = "Trouble" },
-            { "<leader>vx", "<cmd>TroubleToggle<cr>", desc = "Trouble" },
-            { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document diagnostics" },
+            {
+                "]x",
+                function()
+                    require("trouble").next({ skip_groups = true, jump = true })
+                end,
+                desc = "Trouble",
+            },
+            {
+                "[x",
+                function()
+                    require("trouble").previous({ skip_groups = true, jump = true })
+                end,
+                desc = "Trouble",
+            },
+            {
+                "]X",
+                function()
+                    require("trouble").last({ skip_groups = true, jump = true })
+                end,
+                desc = "Trouble",
+            },
+            {
+                "[X",
+                function()
+                    require("trouble").first({ skip_groups = true, jump = true })
+                end,
+                desc = "Trouble",
+            },
+            { "<leader>vx", "<cmd>TroubleToggle<cr>",                       desc = "Trouble" },
+            { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document diagnostics" },
             { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
-            { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Open/Close" },
+            { "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "Open/Close" },
         },
     },
     -- Tracking the location of TODO/BUG/README/FIX etc. style comments across the project
@@ -53,9 +83,21 @@ return {
         event = "BufReadPost",
         config = true,
         keys = {
-            { "]t", function() require("todo-comments").jump_next() end, desc = "Todo comment" },
-            { "[t", function() require("todo-comments").jump_prev() end, desc = "Todo comment" },
-            { "<leader>xs", "<cmd>TodoTelescope<cr>", desc = "Telescope: Todo comments" },
+            {
+                "]t",
+                function()
+                    require("todo-comments").jump_next()
+                end,
+                desc = "Todo comment",
+            },
+            {
+                "[t",
+                function()
+                    require("todo-comments").jump_prev()
+                end,
+                desc = "Todo comment",
+            },
+            { "<leader>xs", "<cmd>TodoTelescope<cr>",      desc = "Telescope: Todo comments" },
             { "<leader>xt", "<cmd>TroubleToggle todo<cr>", desc = "Trouble: Todo comments" },
         },
     },
@@ -65,9 +107,9 @@ return {
         cmd = { "AerialNext", "AerialPrev", "AerialToggle" },
         config = true,
         keys = {
-            { "]a", "<cmd>AerialNext<cr>", desc = "Symbol (Aerial)" },
-            { "[a", "<cmd>AerialPrev<cr>", desc = "Symbol (Aerial)" },
+            { "]a",         "<cmd>AerialNext<cr>",    desc = "Symbol (Aerial)" },
+            { "[a",         "<cmd>AerialPrev<cr>",    desc = "Symbol (Aerial)" },
             { "<leader>vs", "<cmd>AerialToggle!<cr>", desc = "Symbols " },
-        }
+        },
     },
 }

@@ -36,16 +36,40 @@ return {
             require("illuminate").configure({ delay = 200 })
         end,
         keys = {
-            { "]]", function() require("illuminate").goto_next_reference(true) end, desc = "Highlighted word" },
-            { "[[", function() require("illuminate").goto_prev_reference(true) end, desc = "Highlighted word" },
+            {
+                "]]",
+                function()
+                    require("illuminate").goto_next_reference(true)
+                end,
+                desc = "Highlighted word",
+            },
+            {
+                "[[",
+                function()
+                    require("illuminate").goto_prev_reference(true)
+                end,
+                desc = "Highlighted word",
+            },
         },
     },
     -- Smart buffer remove without messing with window layouts
     {
         "echasnovski/mini.bufremove",
         keys = {
-            { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete" },
-            { "<leader>bx", function() require("mini.bufremove").delete(0, true) end, desc = "Force delete" },
+            {
+                "<leader>bd",
+                function()
+                    require("mini.bufremove").delete(0, false)
+                end,
+                desc = "Delete",
+            },
+            {
+                "<leader>bx",
+                function()
+                    require("mini.bufremove").delete(0, true)
+                end,
+                desc = "Force delete",
+            },
         },
     },
     -- Navigation
@@ -73,9 +97,9 @@ return {
         keys = { "," },
         opts = {
             mappings = {
-                add = ',a',
-                delete = ',d',
-                replace = ',r',
+                add = ",a",
+                delete = ",d",
+                replace = ",r",
             },
         },
         config = function(_, opts)
@@ -96,7 +120,7 @@ return {
         event = "VeryLazy",
         opts = {
             window = {
-                width = .75,
+                width = 0.75,
             },
             plugins = {
                 twilight = true,
@@ -109,5 +133,5 @@ return {
         keys = {
             { "<leader>tz", "<cmd>ZenMode<cr>", "Zen mode" },
         },
-    }
+    },
 }

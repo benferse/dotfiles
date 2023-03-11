@@ -9,11 +9,13 @@ local function fixed_ft_extension(title, ft)
     return {
         winbar = {
             lualine_a = { { window_number } },
-            lualine_b = { {
-                function()
-                    return title
-                end,
-            } },
+            lualine_b = {
+                {
+                    function()
+                        return title
+                    end,
+                },
+            },
         },
         filetypes = { ft },
     }
@@ -42,13 +44,16 @@ local function man_extension()
     return {
         winbar = {
             lualine_a = { { window_number } },
-            lualine_b = { {
-                function()
-                    return "Man page:"
-                end,
-                padding = { left = 1, right = 0 },
-                component_separators = { left = "", right = "" },
-            }, { "filename", file_status = false } },
+            lualine_b = {
+                {
+                    function()
+                        return "Man page:"
+                    end,
+                    padding = { left = 1, right = 0 },
+                    component_separators = { left = "", right = "" },
+                },
+                { "filename", file_status = false },
+            },
         },
         filetypes = { "man" },
     }
@@ -253,7 +258,7 @@ return {
             {
                 "<C-b>",
                 function()
-                    if not require("noice.lsp").scroll( -4) then
+                    if not require("noice.lsp").scroll(-4) then
                         return "<C-b>"
                     end
                 end,

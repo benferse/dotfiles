@@ -5,8 +5,8 @@ local function toggle(name, cmd)
     if term == nil then
         term = require("toggleterm.terminal").Terminal:new({
             cmd = cmd or name,
-            dir = 'git_dir',
-            direction = 'float',
+            dir = "git_dir",
+            direction = "float",
         })
 
         terminals[name] = term
@@ -28,26 +28,42 @@ return {
             start_in_insert = true,
             insert_mappings = false,
             persist_size = true,
-            direction = 'float',
+            direction = "float",
             size = function(term)
-                if term.direction == 'horizontal' then
+                if term.direction == "horizontal" then
                     return 15
-                elseif term.direction == 'vertical' then
+                elseif term.direction == "vertical" then
                     return vim.o.columns * 0.4
-                elseif term.direction == 'float' then
+                elseif term.direction == "float" then
                     return nil
                 end
             end,
             close_on_exit = true,
             float_opts = {
-                border = 'rounded',
-                height = function() return math.floor(vim.o.lines * 0.8) end,
-                width = function() return math.ceil(vim.o.columns * 0.8) end,
+                border = "rounded",
+                height = function()
+                    return math.floor(vim.o.lines * 0.8)
+                end,
+                width = function()
+                    return math.ceil(vim.o.columns * 0.8)
+                end,
             },
         },
         keys = {
-            { "<leader>vg", function() toggle("lazygit") end, desc = "lazygit" },
-            { "<leader>vp", function() toggle("btop") end, desc = "Profiler (btop)" },
-        }
-    }
+            {
+                "<leader>vg",
+                function()
+                    toggle("lazygit")
+                end,
+                desc = "lazygit",
+            },
+            {
+                "<leader>vp",
+                function()
+                    toggle("btop")
+                end,
+                desc = "Profiler (btop)",
+            },
+        },
+    },
 }

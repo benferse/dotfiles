@@ -49,9 +49,9 @@ return {
         config = function(_, opts)
             require("treesitter-context").setup(opts)
 
-            vim.cmd [[
+            vim.cmd([[
                 highlight link TreesitterContext PmenuSel
-            ]]
+            ]])
         end,
         keys = {
             { "<leader>tc", "<cmd>TSContextToggle<cr>", "Treesitter context" },
