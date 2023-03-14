@@ -105,11 +105,49 @@ return {
     {
         "stevearc/aerial.nvim",
         cmd = { "AerialNext", "AerialPrev", "AerialToggle" },
-        config = true,
+        opts = {
+            attach_mode = "global",
+            backends = { "lsp", "treesitter", "markdown", "man" },
+            layout = { min_width = 28 },
+            show_guides = true,
+            filter_kind = false,
+            guides = {
+                mid_item = "├ ",
+                last_item = "└ ",
+                nested_top = "│ ",
+                whitespace = "  ",
+            },
+        },
         keys = {
-            { "]a",         "<cmd>AerialNext<cr>",    desc = "Symbol (Aerial)" },
-            { "[a",         "<cmd>AerialPrev<cr>",    desc = "Symbol (Aerial)" },
-            { "<leader>vs", "<cmd>AerialToggle!<cr>", desc = "Symbols " },
+            {
+                "]y",
+                function()
+                    require("aerial").next()
+                end,
+                desc = "Symbol",
+            },
+            {
+                "[y",
+                function()
+                    require("aerial").prev()
+                end,
+                desc = "Symbol",
+            },
+            {
+                "]Y",
+                function()
+                    require("aerial").next_up()
+                end,
+                desc = "Symbol",
+            },
+            {
+                "[Y",
+                function()
+                    require("aerial").prev_up()
+                end,
+                desc = "Symbol",
+            },
+            { "<leader>vs", "<cmd>AerialToggle!<cr>", desc = "Symbols" },
         },
     },
 }
