@@ -2,8 +2,8 @@ format = '┌$username$sudo$hostname$git_branch $git_commit$git_state$git_status
 command_timeout = 1000
 
 [character]
-success_symbol = '[\$](bold green)'
-error_symbol = '[\$](bold red)'
+success_symbol = '[](bold green)'
+error_symbol = '[](bold red)'
 vimcmd_symbol = '[](bold green)'
 
 [cmd_duration]
@@ -11,7 +11,7 @@ style = 'fg:#ebcb8e'
 
 [directory]
 style = 'bold fg:#81a1c1'
-format = '[$path]($style)[$read_only]($read_only_style)'
+format = '[  $path]($style)[$read_only]($read_only_style)'
 read_only = ''
 
 [git_branch]
@@ -52,4 +52,4 @@ format = '[$symbol($version )]($style)'
 [username]
 show_always = true
 style_root = 'bold fg:#bf616a'
-format = '[ $user]($style) '
+format = '[  $user]($style) '
