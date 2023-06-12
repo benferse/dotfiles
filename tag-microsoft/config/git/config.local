@@ -1,5 +1,3 @@
 [user]
     name = Ben Fersenheim
     email = benferse@microsoft.com
-[url "mscodehub@vs-ssh.visualstudio.com:v3/mscodehub/Rust/oss.crates.io-index"]
-    insteadOf = https://mscodehub.visualstudio.com/Rust/_git/oss.crates.io-index

@@ -48,13 +48,20 @@ fi
 
 export INPUTRC=/home/benferse/.config/readline/inputrc
 
-# blast off
-if [ -x ~/.local/bin/starship ]; then
-    eval "$(~/.local/bin/starship init bash)"
-elif [ -x ~/.cargo/bin/starship ]; then
-    eval "$(~/.cargo/bin/starship init bash)"
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
+# Starship integration
+if [ -x "$(command -v starship)" ];  then
+    eval "$(starship init bash)"
 fi
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
+
+# direnv integration
+if [ -x "$(command -v direnv)" ]; then
+    eval "$(direnv hook bash)"
+fi
