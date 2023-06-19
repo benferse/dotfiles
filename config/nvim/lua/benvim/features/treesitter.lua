@@ -10,7 +10,6 @@ return {
                 sync_install = false,
                 ensure_installed = {
                     "bash",
-                    "help",
                     "lua",
                     "markdown",
                     "markdown_inline",
