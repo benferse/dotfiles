@@ -2,8 +2,8 @@ local M = {}
 
 function M.check()
     vim.health.report_start("benvim")
-    if vim.fn.has("nvim-0.8.0") then
-        vim.health.report_ok("Using Neovim >= 0.8.0")
+    if vim.fn.has("nvim-0.9.0") then
+        vim.health.report_ok("Using Neovim >= 0.9.0")
     else
         vim.health.report_warn("This has only been tested with Neovim 0.8 and above!")
     end
