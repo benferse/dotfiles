@@ -21,6 +21,14 @@ return {
     {
         "akinsho/toggleterm.nvim",
         event = "VeryLazy",
+        -- opts = {
+        --     open_mapping = [[<C-\>]],
+        --     hide_numbers = true,
+        --     shade_terminals = true,
+        --     start_in_insert = true,
+        --     insert_mappings = false,
+        --     close_on_exit = true,
+        -- }
         opts = {
             open_mapping = [[<C-\>]],
             hide_numbers = true,
@@ -28,7 +36,7 @@ return {
             start_in_insert = true,
             insert_mappings = false,
             persist_size = true,
-            direction = "float",
+            -- direction = "float",
             size = function(term)
                 if term.direction == "horizontal" then
                     return 15

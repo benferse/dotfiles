@@ -3,6 +3,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "master",
         build = ":TSUpdate",
         event = "BufReadPost",
         config = function()
