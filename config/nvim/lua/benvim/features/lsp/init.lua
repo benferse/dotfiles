@@ -95,7 +95,6 @@ return {
                 "codelldb",
                 "lua-language-server",
                 "rust-analyzer",
-                "rustfmt",
                 "shellcheck",
                 "shfmt",
                 "stylua",
