@@ -20,3 +20,5 @@ fi
 for p in ~/.profile.d/*.sh; do
     . "$p"
 done
+
+. "$HOME/.cargo/env"
