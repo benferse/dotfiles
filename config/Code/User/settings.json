@@ -1,0 +1,41 @@
+{
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Nord",
+
+    // Git settings
+    "git.allowForcePush": true,
+    "git.allowNoVerifyCommit": true,
+    "git.alwaysShowStagedChangesResourceGroup": true,
+    "git.branchPrefix": "benferse/",
+    "git.branchProtection": [
+        "develop"
+    ],
+    "git.branchRandomName.enable": true,
+    "git.fetchOnPull": true,
+    "git.followTagsWhenSync": true,
+    "git.pruneOnFetch": true,
+    "git.terminalGitEditor": true,
+
+    // VSCodeVim settings
+    "vim.camelCaseMotion.enable": true,
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.cursorStylePerMode.replace": "underline",
+    "vim.cursorStylePerMode.visual": "block-outline",
+    "vim.cursorStylePerMode.visualblock": "block-outline",
+    "vim.cursorStylePerMode.visualline": "block-outline",
+    "vim.easymotion": true,
+    "vim.foldfix": true,
+    "vim.hlsearch": true,
+    "vim.leader": " ",
+    "vim.replaceWithRegister": true,
+    "vim.showMarksInGutter": true,
+    "vim.smartRelativeLine": true,
+    "vim.sneakReplacesF": true,
+    "vim.sneak": true,
+    "vim.sneakUseIgnorecaseAndSmartcase": true,
+    "vim.targets.enable": true,
+    "vim.textwidth": 100,
+    "vim.useSystemClipboard": true,
+}
