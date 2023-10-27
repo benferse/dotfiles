@@ -1,8 +1,8 @@
 {
     "accessibility.dimUnfocused.enabled": true,
+    "editor.fontSize": 16,
     "editor.formatOnPaste": true,
     "editor.formatOnSaveMode": "modificationsIfAvailable",
-    "editor.formatOnSave": true,
     "editor.lineHeight": 1.5,
     "editor.minimap.enabled": false,
     "editor.unfoldOnClickAfterEndOfLine": true,
@@ -28,6 +28,7 @@
     "http.experimental.systemCertificatesV2": true,
     "problems.showCurrentInStatus": true,
     "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.rust.analyzerTargetDir": true,
     "scm.alwaysShowRepositories": true,
     "scm.experimental.showSyncView": true,
     "search.smartCase": true,
@@ -62,9 +63,61 @@
         "mainThreadWebview-markdown.preview": true
     },
     "workbench.editor.openPositioning": "first",
-    "workbench.editor.showTabs": false,
     "workbench.settings.useSplitJSON": true,
     "workbench.tree.renderIndentGuides": "always",
     "workbench.view.alwaysShowHeaderActions": true,
-    "rust-analyzer.rust.analyzerTargetDir": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [ "j", "j" ],
+            "after": [ "<Esc>" ]
+        },
+        {
+            "before": [ "k", "j" ],
+            "after": [ "<Esc>" ]
+        }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [ "H" ],
+            "commands": [
+                "workbench.action.previousEditor"
+            ]
+        },
+        {
+            "before": [ "L" ],
+            "commands": [
+                "workbench.action.nextEditor"
+            ]
+        },
+        {
+            "before": [ "<leader>", "f", "f" ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": [ "<leader>", "v", "e" ],
+            "commands": [
+                "workbench.view.explorer"
+            ]
+        },
+        {
+            "before": [ "<leader>", "v", "g" ],
+            "commands": [
+                "workbench.view.scm"
+            ]
+        },
+        {
+            "before": [ "<leader>", ":"],
+            "commands": [
+                "workbench.action.showCommands"
+            ],
+        },
+        {
+            "before": [ ";" ],
+            "commands": [
+                "workbench.action.files.save"
+            ],
+        }
+    ],
 }
