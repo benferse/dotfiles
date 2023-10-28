@@ -15,7 +15,7 @@ return {
     {
         "echasnovski/mini.indentscope",
         version = false, -- wait till new 0.7.0 release to put it back on semver
-        event = "BufReadPre",
+        event = "BufEnter",
         config = function()
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = { "alpha", "help", "neo-tree", "Trouble", "lazy", "mason" },
