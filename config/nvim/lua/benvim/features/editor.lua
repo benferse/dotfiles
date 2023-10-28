@@ -3,11 +3,12 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "BufReadPre",
+        main = "ibl",
         opts = {
-            char = "│",
-            filetype_exclude = { "alpha", "help", "neo-tree", "Trouble", "lazy", "mason" },
-            show_trailing_blankline_indent = false,
-            show_current_context = false,
+            indent = { char = "│" },
+            exclude = {
+                buftypes = { "alpha", "help", "neo-tree", "Trouble", "lazy", "mason" },
+            },
         },
     },
     -- active indent guide and indent text objects
