@@ -387,6 +387,7 @@ return {
                             dashboard.button("SPC f f", "Choose file"),
                             dashboard.button("SPC f p", "Choose project"),
                             dashboard.button("SPC u l", "Update plugins"),
+                            dashboard.button("SPC u m", "Update external tools"),
                             dashboard.button("SPC q q", "Quit", "<cmd>qa<cr>"),
                         },
                         position = "center",
