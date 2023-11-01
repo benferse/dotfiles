@@ -65,6 +65,7 @@ return {
                 ["<leader>f"] = "+File",
                 ["<leader>g"] = "+Git",
                 ["<leader>h"] = "+Help",
+                ["<leader>l"] = "+LSP",
                 ["<leader>n"] = "+Notifications",
                 ["<leader>q"] = "+Quit",
                 ["<leader>s"] = "+Search",

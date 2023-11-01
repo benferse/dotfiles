@@ -129,4 +129,17 @@ return {
             { "<leader>tz", "<cmd>ZenMode<cr>", "Zen mode" },
         },
     },
+    {
+        "gbprod/substitute.nvim",
+        event = "VeryLazy",
+        keys = {
+            {
+                "gr",
+                function()
+                    require("substitute").operator()
+                end,
+                desc = "Replace with register",
+            }
+        }
+    }
 }
