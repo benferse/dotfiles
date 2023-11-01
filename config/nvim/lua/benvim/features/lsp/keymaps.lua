@@ -16,8 +16,8 @@ local M = {}
 function M.on_attach(client, bufnr)
     -- General mappings, available regardless of which capabilities the
     -- language server provides
-    map(bufnr, "n", "gd", vim.lsp.buf.definition, "Definition")
-    map(bufnr, "n", "gr", vim.lsp.buf.references, "References")
+    map(bufnr, "n", "<leader>ld", vim.lsp.buf.definition, "Definition")
+    map(bufnr, "n", "<leader>lr", vim.lsp.buf.references, "References")
 
     -- Replace the default `keywordprg` handling with LSP hover
     map(bufnr, "n", "K", vim.lsp.buf.hover, "Hover/doc")
