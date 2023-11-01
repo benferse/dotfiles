@@ -94,18 +94,12 @@ return {
         end,
     },
     {
-        "echasnovski/mini.surround",
-        keys = { "," },
-        opts = {
-            mappings = {
-                add = ",a",
-                delete = ",d",
-                replace = ",r",
-            },
-        },
-        config = function(_, opts)
-            require("mini.surround").setup(opts)
-        end,
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup()
+        end
     },
     {
         "folke/twilight.nvim",
