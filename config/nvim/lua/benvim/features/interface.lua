@@ -166,6 +166,12 @@ return {
                             sources = {
                                 "nvim_workspace_diagnostic",
                             },
+                            symbols = {
+                                error = "",
+                                warn = "",
+                                info = "",
+                                hint = "",
+                            },
                         },
                     },
                     lualine_z = {
@@ -187,6 +193,12 @@ return {
                             "diagnostics",
                             sources = {
                                 "nvim_diagnostic",
+                            },
+                            symbols = {
+                                error = "",
+                                warn = "",
+                                info = "",
+                                hint = "",
                             },
                         },
                     },
