@@ -49,20 +49,27 @@ return {
                 untracked = { text = "▎" },
             },
             on_attach = function(bufnr)
+                local gs = package.loaded.gitsigns
+
                 local function map(mode, lhs, rhs, desc)
                     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
                 end
 
-                map("n", "]h", "<cmd>Gitsigns next_hunk<cr>", "Git hunk")
-                map("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", "Git hunk")
+                map("n", "]h", gs.next_hunk, "Git hunk")
+                map("n", "[h", gs.prev_hunk, "Git hunk")
 
-                map({ "n", "v" }, "<leader>gb", "<cmd>Gitsigns blame_line<cr>", "Blame line")
-                map({ "n", "v" }, "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", "Stage hunk")
-                map({ "n", "v" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", "Reset hunk")
-                map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo stage hunk")
+                map({ "n", "v" }, "<leader>gb", function() gs.blame_line { full = true, } end, "Blame line")
+                map("n", "<leader>gp", gs.preview_hunk, "Preview hunk")
 
-                map("n", "<leader>gS", "<cmd>Gitsigns stage_buffer<cr>", "Stage buffer")
-                map("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", "Stage buffer")
+                map({ "n", "v" }, "<leader>gs", function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, "Stage hunk")
+                map({ "n", "v" }, "<leader>gr", function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, "Reset hunk")
+                map("n", "<leader>gu", gs.undo_stage_hunk, "Undo stage hunk")
+
+                map("n", "<leader>gS", gs.stage_buffer, "Stage buffer")
+                map("n", "<leader>gR", gs.reset_buffer, "Reset buffer")
+
+                map("n", "<leader>tb", gs.toggle_current_line_blame, "git blame")
+                map("n", "<leader>td", gs.toggle_deleted, "git deleted")
 
                 map({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", "Git hunk")
             end,
