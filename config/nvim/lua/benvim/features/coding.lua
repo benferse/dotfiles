@@ -79,25 +79,23 @@ return {
     {
         "numToStr/Comment.nvim",
         event = "BufEnter",
-        config = function()
-            require("Comment").setup({
-                padding = true,
-                sticky = true,
-                toggler = {
-                    line = "gcc",
-                    block = "gbc",
-                },
-                opleader = {
-                    line = "gc",
-                    block = "gb",
-                },
-                extra = {
-                    above = "gcO",
-                    below = "gco",
-                    eol = "gcA",
-                },
-            })
-        end,
+        opts = {
+            padding = true,
+            sticky = true,
+            toggler = {
+                line = "gcc",
+                block = "gbc",
+            },
+            opleader = {
+                line = "gc",
+                block = "gb",
+            },
+            extra = {
+                above = "gcO",
+                below = "gco",
+                eol = "gcA",
+            },
+        },
         keys = {
             { "gc", commented_lines_textobject, silent = true, mode = "o", desc = "Commented lines" },
         },

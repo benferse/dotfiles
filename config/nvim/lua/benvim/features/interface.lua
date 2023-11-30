@@ -73,10 +73,22 @@ return {
                 {
                     ft = "toggleterm",
                     size = { height = 0.4 },
-                    filter = function(buf, win)
+                    filter = function(_, win)
                         return vim.api.nvim_win_get_config(win).relative == ""
                     end,
-                }
+                },
+                {
+                    ft = "help",
+                    size = { height = 0.4 },
+                    filter = function(buf, _)
+                        return vim.bo[buf].buftype == "help"
+                    end,
+                },
+                {
+                    ft = "qf",
+                    title = "QuickFix",
+                },
+                "Trouble",
             },
             left = {
                 -- Neo-tree filesystem always takes half the screen height
@@ -106,13 +118,17 @@ return {
                     pinned = true,
                     open = "Neotree position=top buffers",
                 },
-                {
-                    ft = "Outline",
-                    pinned = true,
-                    open = "SymbolsOutlineOpen",
-                },
                 -- any other neo-tree windows
                 "neo-tree",
+            },
+            right = {
+                {
+                    title = "Outline",
+                    ft = "aerial",
+                }
+            },
+            animate = {
+                enabled = false,
             },
         }
     },
@@ -166,6 +182,12 @@ return {
                             sources = {
                                 "nvim_workspace_diagnostic",
                             },
+                            symbols = {
+                                error = " ",
+                                warn = " ",
+                                info = " ",
+                                hint = " ",
+                            },
                         },
                     },
                     lualine_z = {
@@ -187,6 +209,12 @@ return {
                             "diagnostics",
                             sources = {
                                 "nvim_diagnostic",
+                            },
+                            symbols = {
+                                error = " ",
+                                warn = " ",
+                                info = " ",
+                                hint = " ",
                             },
                         },
                     },
