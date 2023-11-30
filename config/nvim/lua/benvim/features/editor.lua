@@ -141,5 +141,12 @@ return {
                 desc = "Replace with register",
             }
         }
+    },
+    {
+        "abecodes/tabout.nvim",
+        event = "VeryLazy",
+        opts = {
+            completion = true,
+        }
     }
 }
