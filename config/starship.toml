@@ -36,11 +36,11 @@ format = '([\[$all_status$ahead_behind\]]($style) )'
 [hostname]
 ssh_only = false
 style = 'bold fg:#5e81ac'
-format = '[ $hostname]($style) '
+format = '[󰇅 $hostname]($style) '
 
 [package]
 style = 'bold fg:#e5e9f0'
-symbol = '  '
+symbol = '  '
 format = '[$symbol$version]($style) '
 version_format = '$raw'
 

@@ -28,6 +28,16 @@ return {
                 follow_current_file = true,
                 hijack_netrw_behavior = "open_current",
             },
+            renderer = {
+                icons = {
+                    glyphs = {
+                        git = {
+                            unstaged = "X",
+                            untracked = "Z",
+                        },
+                    },
+                },
+            },
             window = {
                 mappings = {
                     ["<space>"] = false,
