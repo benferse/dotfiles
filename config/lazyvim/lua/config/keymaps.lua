@@ -20,8 +20,8 @@ vim.keymap.set("i", ";", ";<C-g>u")
 vim.keymap.set("n", ";", "<cmd>silent up<cr>")
 
 -- While already in insert mode, move to the end of the next line and continue editing,
--- or open a new like and continue editing, both of which come up more often than you'd think
-vim.keymap.set("i", "<M-CR>", "<C-O><cmd>normal 2g_A<cr>")
+-- or open a new line and continue editing, both of which come up more often than you'd think
+vim.keymap.set("i", "<M-CR>", "<C-O>2g_<C-O>A")
 vim.keymap.set("i", "<S-CR>", "<cmd>normal! O<cr>")
 vim.keymap.set("i", "<C-CR>", "<cmd>normal! o<cr>")
 
