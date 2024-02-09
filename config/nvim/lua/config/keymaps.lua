@@ -38,6 +38,14 @@ vim.keymap.set("i", "<M-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move down" })
 vim.keymap.set({ "n", "v" }, "]<Tab>", "gt", { desc = "Tab page" })
 vim.keymap.set({ "n", "v" }, "[<Tab>", "gT", { desc = "Tab page" })
 
+-- Additional mappings for <leader>w for window management, keeping with the overall
+-- pattern that <leader>wX is equivalent to <C-W>X
+vim.keymap.set("n", "<leader>wh", "<C-W>h", { desc = "Left window" })
+vim.keymap.set("n", "<leader>wj", "<C-W>j", { desc = "Lower window" })
+vim.keymap.set("n", "<leader>wk", "<C-W>k", { desc = "Upper window" })
+vim.keymap.set("n", "<leader>wl", "<C-W>l", { desc = "Right window" })
+vim.keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Only this window" })
+
 -- ]c and [c move between diff chunks in diffmode, while ]h and [h move between git hunks in
 -- non-diff mode. Those are close enough operations; wouldn't it be nice if they were consistent?
 -- I agree.
