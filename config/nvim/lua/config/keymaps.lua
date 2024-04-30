@@ -25,6 +25,10 @@ vim.keymap.set("i", "<M-CR>", "<C-O>2g_<C-O>A")
 vim.keymap.set("i", "<S-CR>", "<cmd>normal! O<cr>")
 vim.keymap.set("i", "<C-CR>", "<cmd>normal! o<cr>")
 
+-- Switch buffers with H and L (where did this go?)
+vim.keymap.set("n", "H", "<cmd>bprev<cr>")
+vim.keymap.set("n", "L", "<cmd>bnext<cr>")
+
 -- Move lines up or down
 vim.keymap.set("n", "<M-j>", ":m .+1<cr>==", { desc = "Move down" })
 vim.keymap.set("v", "<M-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
