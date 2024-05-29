@@ -126,5 +126,7 @@
     "git.autofetch": true,
     "editor.fontFamily": "'Zed Mono', 'Droid Sans Mono', 'monospace', monospace",
     "vscode-neovim.neovimExecutablePaths.linux": "/home/benferse/.local/bin/nvim",
-    "workbench.editor.showTabs": "none",
+    "workbench.editor.showTabs": "single",
+    "azure.authenticationLibrary": "MSAL",
+    "vim.highlightedyank.enable": true
 }
