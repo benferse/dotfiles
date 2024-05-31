@@ -59,8 +59,16 @@ vim.keymap.set("n", "[h", [[&diff ? '[c' : '[h']], { expr = true, desc = "Differ
 vim.keymap.set("n", "]Q", "<cmd>clast<cr>", { desc = "Last trouble/quickfix item" })
 vim.keymap.set("n", "[Q", "<cmd>cfirst<cr>", { desc = "First trouble/quickfix item" })
 
-vim.keymap.set("n", "[y", "<cmd>AerialPrev<cr>", { desc = "Symbol (Aerial)" })
-vim.keymap.set("n", "]y", "<cmd>AerialNext<cr>", { desc = "Symbol (Aerial)" })
+vim.keymap.set("n", "[y", function()
+  local trouble = require("trouble")
+  trouble.prev("symbols")
+  trouble.jump("symbols")
+end, { desc = "Symbol (Trouble)" })
+vim.keymap.set("n", "]y", function()
+  local trouble = require("trouble")
+  trouble.next("symbols")
+  trouble.jump("symbols")
+end, { desc = "Symbol (Trouble)" })
 
 -- Custom textobjects for the entire document (mnemonic "an everything" :))
 local function entire_buffer_textobj()
