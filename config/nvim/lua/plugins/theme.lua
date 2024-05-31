@@ -1,7 +1,8 @@
 return {
   -- Nord color scheme
   {
-    "nordtheme/vim",
+    "benferse/nordtheme-vim",
+    dev = true,
     lazy = false,
     priority = 1000,
     config = function()
