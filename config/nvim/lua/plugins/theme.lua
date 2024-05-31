@@ -36,4 +36,27 @@ return {
       }
     end,
   },
+
+  -- I like edgy.nvim for the auto placement, but not so much all the
+  -- other embellishments :)
+  {
+    "folke/edgy.nvim",
+    opts = {
+      left = {
+        {
+          title = "Explorer",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "filesystem"
+          end,
+        },
+      },
+      animate = {
+        enabled = false,
+      },
+      wo = {
+        winbar = false,
+      },
+    },
+  },
 }
