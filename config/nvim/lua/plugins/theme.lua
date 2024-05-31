@@ -59,4 +59,14 @@ return {
       },
     },
   },
+
+  -- Use a border to get some differentiation for popup doc windows
+  {
+    "folke/noice.nvim",
+    opts = {
+      presets = {
+        lsp_doc_border = true,
+      },
+    },
+  },
 }
