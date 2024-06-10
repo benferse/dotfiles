@@ -128,5 +128,6 @@
     "vscode-neovim.neovimExecutablePaths.linux": "/home/benferse/.local/bin/nvim",
     "workbench.editor.showTabs": "single",
     "azure.authenticationLibrary": "MSAL",
-    "vim.highlightedyank.enable": true
+    "vim.highlightedyank.enable": true,
+    "git.confirmSync": false
 }
