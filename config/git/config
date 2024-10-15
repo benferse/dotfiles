@@ -1,5 +1,7 @@
 [init]
   defaultBranch = main
+[commit]
+  gpgsign = true
 [pull]
   rebase = true
 [push]
