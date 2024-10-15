@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-    *) return;;
+  *i*) ;;
+  *) return ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -29,7 +29,7 @@ shopt -s globstar
 
 # import personal aliases
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 # colored GCC warnings and errors
@@ -39,22 +39,22 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
-    fi
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
 
 export INPUTRC=/home/benferse/.config/readline/inputrc
 
 if [ -f "$HOME/.cargo/env" ]; then
-    . "$HOME/.cargo/env"
+  . "$HOME/.cargo/env"
 fi
 
 # Starship integration
-if [ -x "$(command -v starship)" ];  then
-    eval "$(starship init bash)"
+if [ -x "$(command -v starship)" ]; then
+  eval "$(starship init bash)"
 fi
 
 # BEGIN_KITTY_SHELL_INTEGRATION
@@ -63,5 +63,8 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integr
 
 # direnv integration
 if [ -x "$(command -v direnv)" ]; then
-    eval "$(direnv hook bash)"
+  eval "$(direnv hook bash)"
 fi
+
+# Ubuntu + GNOME + Wayland == sad
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
