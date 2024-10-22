@@ -54,12 +54,6 @@ end
 
 return {
   {
-    "L3MON4D3/LuaSnip",
-    keys = function()
-      return {}
-    end,
-  },
-  {
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
       local has_words_before = function()
