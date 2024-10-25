@@ -1,0 +1,5 @@
+DOTFILES_DIRS="$HOME/.dotfiles $/.dotfiles-local"
+EXCLUDES="README.md SECURITY.md LICENSE.md"
+SYMLINK_DIRS="config/nvim"
+TAGS="microsoft"
+
