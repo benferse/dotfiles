@@ -1,0 +1,5 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+export LANG=en_US.UTF-8
+export PATH=${HOME}/src/edge/depot_tools:${HOME}/src/edge/depot_tools/scripts:$PATH
+export GOMACLIENTDIR=${HOME}/src/edge/depot_tools/.cipd_bin
