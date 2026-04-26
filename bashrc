@@ -68,3 +68,17 @@ fi
 
 # Ubuntu + GNOME + Wayland == sad
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
+# BEGIN Agency MANAGED BLOCK
+if [[ ":${PATH}:" != *":/home/benferse/.config/agency/CurrentVersion:"* ]]; then
+    export PATH="/home/benferse/.config/agency/CurrentVersion:${PATH}"
+fi
+# END Agency MANAGED BLOCK
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "/home/benferse/.cargo/env"
+
+# Intune AI Bootstrap ACP launcher
+[ -f "/home/benferse/.copilot/acp-profile.sh" ] && source "/home/benferse/.copilot/acp-profile.sh"
