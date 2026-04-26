@@ -22,4 +22,3 @@ for p in ~/.profile.d/*.sh; do
 done
 
 . "$HOME/.cargo/env"
-. "/home/benferse/.cargo/env"
