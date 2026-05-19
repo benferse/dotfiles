@@ -1,0 +1,109 @@
+# Interactive shell config shared between bash and zsh.
+# Sourced by: bashrc, zshrc
+#
+# Rules:
+#   - Exported env vars → ~/.profile (or profile.d/)
+#   - Interactive, shell-agnostic config → here
+#   - Shell-specific options → guarded blocks below
+
+# If not running interactively, don't do anything
+case $- in
+  *i*) ;;
+  *) return ;;
+esac
+
+# Detect which shell is running
+if [ -n "$BASH_VERSION" ]; then
+  _shell=bash
+elif [ -n "$ZSH_VERSION" ]; then
+  _shell=zsh
+fi
+
+# --- Shell-specific options and history ---
+
+if [ "$_shell" = "bash" ]; then
+  HISTCONTROL=ignoreboth
+  shopt -s histappend
+  HISTFILE=~/.cache/bash-history
+  HISTSIZE=1000
+  HISTFILESIZE=2000
+  shopt -s checkwinsize
+  shopt -s globstar
+  export INPUTRC=~/.config/readline/inputrc
+elif [ "$_shell" = "zsh" ]; then
+  setopt APPEND_HISTORY
+  setopt HIST_IGNORE_DUPS
+  setopt HIST_IGNORE_SPACE
+  HISTFILE=~/.cache/zsh-history
+  HISTSIZE=1000
+  SAVEHIST=2000
+fi
+
+# --- Completion ---
+
+if [ "$_shell" = "bash" ]; then
+  if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+      . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+      . /etc/bash_completion
+    fi
+  fi
+elif [ "$_shell" = "zsh" ]; then
+  autoload -Uz compinit
+  compinit
+fi
+
+# --- Aliases ---
+
+if command -v dircolors >/dev/null 2>&1; then
+  test -r ~/.config/dircolors && eval "$(dircolors -b ~/.config/dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias dir='dir --color=auto'
+  alias vdir='vdir --color=auto'
+else
+  export CLICOLOR=1
+fi
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# --- Exported env (interactive-session-specific) ---
+
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# --- Tool integrations ---
+
+# make less more friendly for non-text input files
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Starship prompt
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init $_shell)"
+fi
+
+# Kitty terminal integration
+if [ -n "$KITTY_INSTALLATION_DIR" ] && [ -e "$KITTY_INSTALLATION_DIR/shell-integration/$_shell/kitty.$_shell" ]; then
+  . "$KITTY_INSTALLATION_DIR/shell-integration/$_shell/kitty.$_shell"
+fi
+
+# direnv
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook $_shell)"
+fi
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if [ "$_shell" = "bash" ] && [ -s "$NVM_DIR/bash_completion" ]; then
+  . "$NVM_DIR/bash_completion"
+fi
+
+# Copilot ACP launcher
+[ -f "$HOME/.copilot/acp-profile.sh" ] && . "$HOME/.copilot/acp-profile.sh"
+
+# Windows Terminal integration
+if command -v wt >/dev/null 2>&1; then
+  eval "$(command wt config shell init $_shell)"
+fi
