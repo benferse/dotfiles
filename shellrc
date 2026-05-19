@@ -103,7 +103,7 @@ fi
 # Copilot ACP launcher
 [ -f "$HOME/.copilot/acp-profile.sh" ] && . "$HOME/.copilot/acp-profile.sh"
 
-# Windows Terminal integration
+# Worktrunk integration
 if command -v wt >/dev/null 2>&1; then
   eval "$(command wt config shell init $_shell)"
 fi
