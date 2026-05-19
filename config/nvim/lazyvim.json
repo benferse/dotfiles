@@ -1,5 +1,6 @@
 {
   "extras": [
+    "lazyvim.plugins.extras.ai.copilot",
     "lazyvim.plugins.extras.coding.luasnip",
     "lazyvim.plugins.extras.coding.mini-surround",
     "lazyvim.plugins.extras.coding.yanky",
@@ -16,8 +17,9 @@
     "lazyvim.plugins.extras.ui.edgy",
     "lazyvim.plugins.extras.vscode"
   ],
+  "install_version": 7,
   "news": {
-    "NEWS.md": "7107"
+    "NEWS.md": "11866"
   },
-  "version": 7
+  "version": 8
 }
