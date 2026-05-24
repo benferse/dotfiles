@@ -1,0 +1,6 @@
+[dotfiles]
+source = "dotfiles/"
+target = "~"
+
+[dotfiles.platforms.macos]
+"gnupg/gpg-agent.conf" = "dotfiles/platforms/macos/gnupg/gpg-agent.conf"
